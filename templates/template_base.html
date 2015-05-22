@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <!--<link type="text/css" rel="stylesheet" href="{{STATIC_URL}}libs/materialize/css/materialize.min.css"  media="screen,projection"/>-->
+	
+		 <!-- Compiled and minified CSS -->
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+
+		 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+		<title></title>
+	</head>
+	<body class="container">
+		<nav>
+		    <div class="nav-wrapper">
+		      <a href="#" class="brand-logo">Logo</a>
+		      
+		    	{% include 'login.html' %}
+		    </div>
+		  </nav>
+
+		{% block contenido %}
+				
+		{% endblock %}
+		<footer class="page-footer">
+			<div class="container">
+				<div class="footer-copyright">
+            		<div class="container">
+            			footer
+            			<a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            		</div>
+          		</div>
+			</div>
+		</footer>
+	
+
+
+
+	<!--<script src="{{STATIC_URL}}libs/jquery/jquery.min.js" ></script>
+	<script src="{{STATIC_URL}}libs/materialize/js/materialize.js" ></script>-->
+
+	<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+	<!-- Compiled and minified JavaScript -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+	</body>
+</html>
