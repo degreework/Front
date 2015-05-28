@@ -65,17 +65,20 @@ function create_form(url, form)
 		var container = document.createElement("div");
 
 		$.each(fields, function(key, value) {
-  			//console.log( this )
+
+  			console.log( 'hola' )
+  			
   			var field_div = document.createElement("div");
+  			field_div.className = 'form-group';
+
   			var row_div = document.createElement("div");
-  			field_div.className = 'input-field col s12'
-  			row_div.className = "row";
+  			row_div.className = 'col-md-8';
 
   			//create a input
   			var input = document.createElement("input");
 
   			// set the CSS class
-			input.className = "validate";
+			input.className = "form-control";
 
 			//set max length to input
 			input.maxLength = value.max_length;
@@ -94,7 +97,7 @@ function create_form(url, form)
 			else if('choice' == value.type)
 			{
 				input = document.createElement("select");
-				input.className = "browser-default";
+				input.className = "form-control";
 
 				//create default option
 				var option = document.createElement("option");
@@ -111,7 +114,7 @@ function create_form(url, form)
 					option.value =  value.choices[i].value;
 					option.textContent = value.choices[i].display_name;
 					input.add(option);					
-				};
+				}
 			}
 			else
 			{
@@ -131,7 +134,7 @@ function create_form(url, form)
 
 			//set name to input
 			input.name = key;
-
+			input.placeholder = key;
 /*
 			//if field is required
 			if (value.required) {
@@ -139,14 +142,14 @@ function create_form(url, form)
 			};
 */
 			//creat label for input
-			var label = document.createElement("label");
+			//var label = document.createElement("label");
 			//set text to label
-			label.appendChild(document.createTextNode(value.label));
+			//label.appendChild(document.createTextNode(value.label));
 
 			//append input to div
 			field_div.appendChild(input);
 			//append input to div
-			field_div.appendChild(label);
+			//field_div.appendChild(label);
 			//append to row
 			row_div.appendChild(field_div);
 
