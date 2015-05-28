@@ -14,6 +14,7 @@ function login(form, url)
 
 		console.log(response)
 		$.cookie("Token", response.access_token);
+		getCurrentUser();
 		isAutenticated();
 
 	})
