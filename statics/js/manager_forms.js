@@ -134,7 +134,7 @@ function create_form(url, form)
 
 			//set name to input
 			input.name = key;
-			input.placeholder = key;
+			input.placeholder = value.label;
 /*
 			//if field is required
 			if (value.required) {

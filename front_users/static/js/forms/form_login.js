@@ -13,6 +13,9 @@ function login(form, url)
 		*/
 
 		console.log(response)
+		$.cookie("Token", response.access_token);
+		isAutenticated();
+
 	})
 	.fail(function(error){		
 		console.log(error);
@@ -65,4 +68,19 @@ function login(form, url)
 		console.log("always");
 	});
 
+}
+
+
+function get_account_info(access_token)
+{
+	$.ajax( {
+    	url: 'http://127.0.0.1:8080/API/users/1/',
+    	type: 'GET',
+   		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", "Bearer " + access_token );
+    	}
+	})
+	.done(function(response){
+		console.log(response);
+	});
 }
