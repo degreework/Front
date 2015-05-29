@@ -1,27 +1,34 @@
+{% load staticfiles %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock head %}
+
+
+<!-- template if not autheticated -->
 <form class="form-inline pull-right" id="form_login">
-	<div class="form-group form-group-sm">
-    	<input type="email" name="username" class="form-control input-sm"  placeholder="e-mail">
+	<div class="form-group form-group-sm 
+  ">
+    	<input type="email" name="username" class="form-control "  placeholder="E-mail">
   	</div>
 
   	<div class="form-group form-group-sm">
-    	<input type="password" name="password" class="form-control input-sm" placeholder="Contraseña">
+    	<input type="password" name="password" class="form-control " placeholder="Contraseña">
   	</div>
   	<button type="submit" class="btn btn-default btn-sm ">Iniciar sesión</button>
   	<br>
   	<a href="/recoverPassword">Olvidaste tu contraseña</a>
 </form>
 
-<div class="dropdown  pull-right" id="user_resume" hidden>
- <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
- 	<span class="glyphicon glyphicon-user "></span>
- 	user name
- 	<span class="caret"></span>
+<!-- template autheticated -->
+<div class="dropdown  pull-right" id="user_resume">
+ <button class="dropdown-toggle resume_name" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
  </button>
-
+<span class="glyphicon glyphicon-menu-down"></span>
  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile">Perfil</a></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/settings">Ajustes</a></li>
     <li role="presentation" class="divider"></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Salir</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="button_logout">Salir</a></li>
   </ul>
 </div>
