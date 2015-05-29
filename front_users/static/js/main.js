@@ -8,7 +8,6 @@ var main = function(){
 	create_form(url_register, form_register);
 	form_register.submit(function (e) {
 		e.preventDefault();
-		console.log(form_register.serialize());
 		register(form_register, url_register);
 	})
 
@@ -28,7 +27,6 @@ var main = function(){
 		deautenticateUser();
 	});
 
-	$('[data-toggle="popover"]').popover();
 };
 
 

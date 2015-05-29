@@ -114,9 +114,16 @@ function create_form(url, form)
 					input.add(option);					
 				}
 			}
+			else if('image upload' == value.type)
+			{
+				input.type = 'file';
+				//set max length to input
+				input.maxLength = 100
+			}
 			else
 			{
-				input.type = value.type;	
+				input.type = value.type;
+				
 			}
 
 

@@ -18,6 +18,13 @@ function showLoginForm()
 	$("#form_login").show();
 }
 
+function showLoginForm()
+{
+	$('#form_login').trigger("reset");
+	$("#user_resume").hide();
+	$("#form_login").show();
+}
+
 function isAutenticated()
 {
 	if($.cookie("username"))
@@ -48,6 +55,7 @@ function getCurrentUser () {
 			console.log(response);
 			$.cookie.json = true;
 			$.cookie("username", response, {path: '/'});
+
 			showCurrentUser();
 
 		})
@@ -111,6 +119,7 @@ function deautenticateUser () {
 			$.removeCookie("Token", {path: '/'});
 			showLoginForm();
 			$(location).attr('href',"/");  
+
 		})
 		.fail(function(error){		
 			console.log(error);
