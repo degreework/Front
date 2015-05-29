@@ -1,0 +1,49 @@
+/*Template base*/
+
+body{
+	font-family: 'OpenSans-Regular.ttf'
+}
+
+
+.page-header{
+	background-color: #D51B23;
+    color:  white;
+    margin-top: 0;
+    height: 100px;	
+}
+
+/*elementos page header*/
+.page-header a{
+	text-decoration: none;
+    color:white;	
+}
+
+.container-header{
+	padding-top: 15px
+}
+
+
+.footer
+{
+	background-color: #D51B23;
+    color:  white;
+    margin-top: 50px;
+    margin-bottom: 0;
+    height: 77px;
+}
+
+.footer .container{
+	background-color: #7F1015;
+	text-align: center;
+	
+}
+
+.capacity{
+	min-height: 400px;
+	margin: 0 0 3% 0;
+}
+
+hr{
+	border-color: #ccc;
+}
+
