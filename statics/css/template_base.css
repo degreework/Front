@@ -1,5 +1,10 @@
 /*Template base*/
 
+body{
+	font-family: 'OpenSans-Regular.ttf'
+}
+
+
 .page-header{
 	background-color: #D51B23;
     color:  white;
@@ -15,10 +20,6 @@
 
 .container-header{
 	padding-top: 15px
-}
-
-.singin{
-	margin-top: 24px;
 }
 
 
@@ -38,10 +39,6 @@
 .capacity{
 	min-height: 400px;
 	margin: 0 0 3% 0;
-}
-
-.recoveryPassword{
-	text-align: center;
 }
 
 hr{

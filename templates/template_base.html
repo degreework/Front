@@ -5,11 +5,17 @@
 		{% load staticfiles %}
 		<link type="text/css" rel="stylesheet" href="{% static  'libs/bootstrap/css/bootstrap.min.css' %}"  media="screen,projection"/>
 
-		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<link rel="stylesheet" href="{% static 'css/template_base.css' %}">
+		{% block head %}			
+		{% endblock head %}
 	
 		 <!-- CDN 
   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" media="screen,projection">
+
+  		
 		-->
+
+		<link rel="stylesheet" href="{% static 'libs/fonts/OpenSans-Regular.ttf' %}">
 
 		<meta charset='utf-8'>
 		<!--mobile-->
@@ -39,7 +45,7 @@
 		
 		<footer class="footer">
     		<div class="container">
-    			footer
+    			Universidad del Valle sede Tuluá
     		</div>
 		</footer>
 	
@@ -51,6 +57,8 @@
 	<script src="{% static 'libs/jquery/jquery.min.js' %}" ></script>
 	<script src="{% static 'libs/jquery/jquery.cookie.js' %}" ></script>
 	<script src="{% static 'libs/bootstrap/js/bootstrap.js' %}" ></script>
+	<script src="{% static 'libs/bootstrap-notify/bootstrap-notify.min.js' %}" ></script>
+	
 
 	<!-- scripts de nostros -->	
 	<script src="{% static 'js/account/session_manager.js' %}" ></script>

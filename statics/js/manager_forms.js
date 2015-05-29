@@ -65,8 +65,6 @@ function create_form(url, form)
 		var container = document.createElement("div");
 
 		$.each(fields, function(key, value) {
-
-  			console.log( 'hola' )
   			
   			var field_div = document.createElement("div");
   			field_div.className = 'form-group';

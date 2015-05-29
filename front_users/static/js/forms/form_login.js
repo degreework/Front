@@ -1,5 +1,6 @@
 function login(form, url)
 {
+	console.log("login()");
 	data = form.serialize();
 
 	$.ajax({
@@ -13,7 +14,8 @@ function login(form, url)
 		*/
 
 		console.log(response)
-		$.cookie("Token", response.access_token);
+		$.cookie.json = true;
+		$.cookie("Token", response, {path: '/' });
 		getCurrentUser();
 		isAutenticated();
 
@@ -74,6 +76,7 @@ function login(form, url)
 
 function get_account_info(access_token)
 {
+	console.log("get_account_info()");
 	$.ajax( {
     	url: 'http://127.0.0.1:8080/API/users/1/',
     	type: 'GET',

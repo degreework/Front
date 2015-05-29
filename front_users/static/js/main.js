@@ -19,6 +19,14 @@ var main = function(){
 		console.log(form_login.serialize());
 		login(form_login, 'http://127.0.0.1:8080/API/auth/token/');
 	})
+
+
+	//action event to logout
+
+	$("#button_logout").click(function(e){
+		e.preventDefault();
+		deautenticateUser();
+	});
 };
 
 
