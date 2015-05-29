@@ -1,7 +1,8 @@
 function login(form, url)
 {
-	console.log("login()");
 	data = form.serialize();
+	//remove all errors from before
+	remove_all_errors(data);
 
 	$.ajax({
 		type: 'POST',
@@ -12,8 +13,6 @@ function login(form, url)
 		/*
 		Login succesful, then do anything
 		*/
-
-		console.log(response)
 		$.cookie.json = true;
 		$.cookie("Token", response, {path: '/' });
 		getCurrentUser();
@@ -35,7 +34,7 @@ function login(form, url)
 			div = document.createElement("div");
 			
 			//set id to div
-			div.id = "error_login";
+			div.id = "error_username";
 			
 			//set class to div
 			//div.className = 
