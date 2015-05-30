@@ -22,10 +22,14 @@
 
 <!-- template autheticated -->
 <div class="dropdown  pull-right" id="user_resume">
- <button class="dropdown-toggle resume_name" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
- </button>
-<span class="glyphicon glyphicon-menu-down"></span>
- <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    <img class="pic_profile .img-responsive img-circle" src="">
+    <span class="resume_name"></span>
+    <span class="glyphicon glyphicon-menu-down"></span>
+  </div>
+  
+  <!--items del dropdown -->
+  <ul class="dropdown-menu arrow-top" role="menu" aria-labelledby="dropdownMenu1">
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile">Perfil</a></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/settings">Ajustes</a></li>
     <li role="presentation" class="divider"></li>

@@ -35,7 +35,7 @@
 				</div>
 			</div>
 		</header>
-
+		{% include 'modules.html' %}
 		<div class="container">
 		  		{% block contenido %}
 				
@@ -67,6 +67,7 @@
 	<script src="{% static 'js/forms/form_register.js' %}" ></script>
 	<script src="{% static 'js/forms/form_login.js' %}" ></script>
 	<script src="{% static 'js/forms/form_settings.js' %}" ></script>			
+	<script src="{% static 'js/modules.js' %}" ></script>			
 	<script src="{% static 'js/main.js' %}" ></script>
 	
 	{% block scripts %}
