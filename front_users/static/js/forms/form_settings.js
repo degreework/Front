@@ -1,37 +1,32 @@
 function info_user_settings()
 {
 	
-
+	console.log("Info load")
 	$.ajax({
 		type: 'GET',
-		url: "http://127.0.0.1:8080/API/users/"+jQuery.parseJSON($.cookie("username")).id+'/',
+		url: "http://127.0.0.1:8080/API/users/"+jQuery.parseJSON($.cookie("username")).id,
 		beforeSend : function( xhr ) {
 	        	xhr.setRequestHeader( "Authorization", $.cookie("Token").token_type +" "+ $.cookie("Token").access_token );
 	    	}
 
 	})
 	.done(function(response){
-		
-		$('#id_password').remove();	
 		//fill the information of user in the input 
-		$.each(response, function(key, value) {			
+		$.each(response, function(key, value) {	
+			//$('#id_'+key).attr('placeholder', $('#id_'+key).attr('placeholder') +': '+value);
+			$('#id_'+key).attr('value', value);
 
-			$('#id_'+key).attr('placeholder', $('#id_'+key).attr('placeholder') +': '+value);
-
-			if('id_'+key === 'id_plan'){
+			if(key === 'plan'){
 				$('#id_'+key).val(value); 			
 			}
-
 		});
-
-
 	})
 	.fail(function(error){		
 		console.log(error);
 		//if status ==0  -> can't connect to server
 		if(0 === error.status)
 		{
-			console.log("can't connect to server")
+			Error.server_not_found();
 		}
 
 		//if BAD REQUEST -> show error response in fields form
@@ -78,4 +73,3 @@ function info_user_settings()
 	});
 
 }
-

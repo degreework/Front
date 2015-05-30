@@ -5,7 +5,7 @@ var main = function(){
 
 	//form register
 	form_register = $("#form_register");
-	create_form(url_register, form_register);
+	create_form(url_register, form_register, 'OPTIONS');
 	form_register.submit(function (e) {
 		e.preventDefault();
 		register(form_register, url_register);
@@ -26,6 +26,8 @@ var main = function(){
 		e.preventDefault();
 		deautenticateUser();
 	});
+
+
 
 };
 

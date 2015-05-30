@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>				 
@@ -6,7 +5,6 @@
 		<link type="text/css" rel="stylesheet" href="{% static  'libs/bootstrap/css/bootstrap.min.css' %}"  media="screen,projection"/>
 
 		<link rel="stylesheet" href="{% static 'css/template_base.css' %}">
-		<link rel="stylesheet" href="{% static 'libs/jquery/loadingbar.css' %}">
 		{% block head %}			
 		{% endblock head %}
 	
@@ -15,7 +13,7 @@
 
   		
 		-->
-		<link rel="stylesheet" href="{% static 'libs/fonts/OpenSans-Regular.ttf' %}">
+		<link href="{% static 'libs/fonts/OpenSans-Regular.ttf' %}">
 
 
 		<meta charset='utf-8'>
@@ -59,9 +57,11 @@
 	<script src="{% static 'libs/jquery/jquery.cookie.js' %}" ></script>
 	<script src="{% static 'libs/bootstrap/js/bootstrap.js' %}" ></script>
 	<script src="{% static 'libs/bootstrap-notify/bootstrap-notify.min.js' %}" ></script>
-    <script type="text/javascript" src="{% static 'libs/jquery/jquery.loadingbar.min.js' %}"></script>
 
 	<!-- scripts de nostros -->	
+	<script src="{% static 'js/Notify.js' %}" ></script>
+	<script src="{% static 'js/Error.js' %}" ></script>
+	<script src="{% static 'js/services/UserServices.js' %}" ></script>
 	<script src="{% static 'js/account/session_manager.js' %}" ></script>
 	<script src="{% static 'js/manager_forms.js' %}" ></script>
 	<script src="{% static 'js/forms/form_register.js' %}" ></script>

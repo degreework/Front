@@ -5,7 +5,7 @@
 		<hr>
 		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-4">
 		
-			<form class="form-horizontal" id="form_register" type="POST">
+			<form class="form-horizontal" id="form_update_user">
       
         		<button class="btn btn-default" type="submit" name="action">Guardar Cambios</button>
      			<a class="pull-right" href="/changePassword">Cambiar contraseña</a>
@@ -14,11 +14,20 @@
 	</div>
 {% endblock %}
 {% block scripts %}
-	<script type="text/javascript">
-	
-		$('document').ready(function() {
-			info_user_settings();	
+<script type="text/javascript">
+	$('document').ready(function() {
+
+		url_update_user = "http://127.0.0.1:8080/API/users/"+jQuery.parseJSON($.cookie("username")).id;
+		//form update user
+		form_update_user = $("#form_update_user");
+		create_form(url_update_user, form_update_user, 'PUT');
+		form_update_user.submit(function (e) {
+			e.preventDefault();
+			UserService.update_user(url_update_user, form_update_user);
 		});
+
+		info_user_settings();
+	});
 
 	</script>
 {% endblock scripts %}
