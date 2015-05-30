@@ -1,23 +1,29 @@
-function login(form, url)
+function info_user_settings()
 {
-	console.log("login()");
-	data = form.serialize();
-	//remove all errors from before
-	remove_all_errors(data);
+	
 
 	$.ajax({
-		type: 'POST',
-		url: url,
-		data: 'grant_type=password&'+data+'&client_id=W768A6yDuxGU8nEQ3iXOvghKxFfUGOWbHPWGHXQw&client_secret=LHrwNGN13ISnvXpQAn4YW5K5eWqzasICAwsGExdT5rmFTuAAsdpC0sH2JUbuAV3Am5U8zBHWRRYDyY1Vi4yQfILTugxCdrbitubEkyVuPU0bYNbknN8WUETNqkeaCixi',
+		type: 'GET',
+		url: "http://127.0.0.1:8080/API/users/"+jQuery.parseJSON($.cookie("username")).id+'/',
+		beforeSend : function( xhr ) {
+	        	xhr.setRequestHeader( "Authorization", $.cookie("Token").token_type +" "+ $.cookie("Token").access_token );
+	    	}
+
 	})
 	.done(function(response){
-		/*
-		Login succesful, then do anything
-		*/
-		$.cookie.json = true;
-		$.cookie("Token", response, {path: '/' });
-		getCurrentUser();
-		isAutenticated();
+		
+		$('#id_password').remove();	
+		//fill the information of user in the input 
+		$.each(response, function(key, value) {			
+
+			$('#id_'+key).attr('placeholder', $('#id_'+key).attr('placeholder') +': '+value);
+
+			if('id_'+key === 'id_plan'){
+				$('#id_'+key).val(value); 			
+			}
+
+		});
+
 
 	})
 	.fail(function(error){		
@@ -35,7 +41,7 @@ function login(form, url)
 			div = document.createElement("div");
 			
 			//set id to div
-			div.id = "error_username";
+			div.id = "error_login";
 			
 			//set class to div
 			//div.className = 
@@ -73,18 +79,3 @@ function login(form, url)
 
 }
 
-
-function get_account_info(access_token)
-{
-	console.log("get_account_info()");
-	$.ajax( {
-    	url: 'http://127.0.0.1:8080/API/users/1/',
-    	type: 'GET',
-   		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", "Bearer " + access_token );
-    	}
-	})
-	.done(function(response){
-		console.log(response);
-	});
-}

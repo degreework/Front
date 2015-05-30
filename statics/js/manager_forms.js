@@ -25,7 +25,7 @@ function show_errors (data, response) {
 		msg = response[field];
 
 		//if there is any message for this field
-		if(undefined != msg)
+		if(undefined !== msg)
 		{		
 
 			//create new div for error message
@@ -44,7 +44,7 @@ function show_errors (data, response) {
 			$("#id_"+field).parent().prepend(div);
 		}
 		
-	};
+	}
 }
 
 

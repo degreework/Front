@@ -6,7 +6,16 @@ function showCurrentUser()
 	//....
 	//
 	//$("#")$.cookie("username");
+
 	$("#user_resume").show();	
+	$(".resume_name").text(""+jQuery.parseJSON($.cookie("username")).first_name+' '+jQuery.parseJSON($.cookie("username")).last_name);	
+}
+
+function showLoginForm()
+{
+	$('#form_login').trigger("reset");
+	$("#user_resume").hide();
+	$("#form_login").show();
 }
 
 function showLoginForm()
@@ -28,6 +37,7 @@ function isAutenticated()
 	}
 }
 
+// trae la informacion  (id, nicname, foto, nombre, apellido) de dropdowm
 function getCurrentUser () {
 
 		$.ajax({
@@ -42,8 +52,10 @@ function getCurrentUser () {
 			Login succesful, then do anything
 			*/
 
-			console.log(response)
-			$.cookie("username", response, {path: '/'})
+			console.log(response);
+			$.cookie.json = true;
+			$.cookie("username", response, {path: '/'});
+
 			showCurrentUser();
 
 		})
@@ -106,6 +118,7 @@ function deautenticateUser () {
 			$.removeCookie("username", {path: '/'});
 			$.removeCookie("Token", {path: '/'});
 			showLoginForm();
+			$(location).attr('href',"/");  
 
 		})
 		.fail(function(error){		

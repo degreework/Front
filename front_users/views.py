@@ -7,17 +7,13 @@ from django.template.context import RequestContext
 def index(request):
     return render_to_response('index.html', context_instance=RequestContext(request))
 
-"""
-def login(request):
-    return render_to_response('login.html', context_instance=RequestContext(request))
-
-
-def register(request):
-    return render_to_response('register.html', context_instance=RequestContext(request))
-"""
 
 def recoverPassword(request):
     return render_to_response('recoverPassword.html', context_instance=RequestContext(request))
+
+
+def changePassword(request):
+    return render_to_response('changePassword.html', context_instance=RequestContext(request))
 
 
 def profile(request):

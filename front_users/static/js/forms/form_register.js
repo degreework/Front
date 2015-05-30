@@ -44,6 +44,7 @@ function register(form, url)
 				type: 'danger',
 				offset: 100,
 			});
+
 		}
 
 		//if BAD REQUEST -> show error response in fields form

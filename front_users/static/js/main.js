@@ -27,7 +27,6 @@ var main = function(){
 		deautenticateUser();
 	});
 
-	
 };
 
 

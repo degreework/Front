@@ -4,6 +4,9 @@
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock head %}
 
+
+<!-- template if not autheticated -->
+
 <form class="form-inline pull-right" id="form_login">
 	<div class="form-group form-group-sm 
   ">
@@ -18,13 +21,11 @@
   	<a href="/recoverPassword">Olvidaste tu contraseña</a>
 </form>
 
+<!-- template autheticated -->
 <div class="dropdown  pull-right" id="user_resume">
- <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
- 	<span class="glyphicon glyphicon-user "></span>
- 	user name
- 	<span class="caret"></span>
+ <button class="dropdown-toggle resume_name" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
  </button>
-
+<span class="glyphicon glyphicon-menu-down"></span>
  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile">Perfil</a></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/settings">Ajustes</a></li>

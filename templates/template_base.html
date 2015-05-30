@@ -15,8 +15,8 @@
 
   		
 		-->
+		<link rel="stylesheet" href="{% static 'libs/fonts/OpenSans-Regular.ttf' %}">
 
-		<link href="{% static 'libs/fonts/OpenSans-Regular.ttf' %}">
 
 		<meta charset='utf-8'>
 		<!--mobile-->
@@ -66,6 +66,10 @@
 	<script src="{% static 'js/manager_forms.js' %}" ></script>
 	<script src="{% static 'js/forms/form_register.js' %}" ></script>
 	<script src="{% static 'js/forms/form_login.js' %}" ></script>
+	<script src="{% static 'js/forms/form_settings.js' %}" ></script>			
 	<script src="{% static 'js/main.js' %}" ></script>
+	
+	{% block scripts %}
+	{% endblock scripts %}
 	</body>
 </html>

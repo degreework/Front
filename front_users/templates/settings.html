@@ -1,6 +1,24 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
 	<div class="row capacity">
-		Ajustes :)
+		<h2>Ajustes</h2>
+		<hr>
+		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-4">
+		
+			<form class="form-horizontal" id="form_register" type="POST">
+      
+        		<button class="btn btn-default" type="submit" name="action">Guardar Cambios</button>
+     			<a class="pull-right" href="/changePassword">Cambiar contraseña</a>
+      		</form>	
+		</div>
 	</div>
 {% endblock %}
+{% block scripts %}
+	<script type="text/javascript">
+	
+		$('document').ready(function() {
+			info_user_settings();	
+		});
+
+	</script>
+{% endblock scripts %}
