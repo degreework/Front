@@ -128,6 +128,7 @@ function create_form(url, form, method)
 				input.type = 'file';
 				//set max length to input
 				input.maxLength = null
+				input.className = null;
 			}
 			else if('boolean' == value.type)
 			{

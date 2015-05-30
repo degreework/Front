@@ -17,7 +17,7 @@
 <script type="text/javascript">
 	$('document').ready(function() {
 
-		url_update_user = "http://127.0.0.1:8080/API/users/"+jQuery.parseJSON($.cookie("username")).id;
+		url_update_user = "http://127.0.0.1:8080/API/users/"+JSON.parse($.session.get('user')).id;
 		//form update user
 		form_update_user = $("#form_update_user");
 		create_form(url_update_user, form_update_user, 'PUT');

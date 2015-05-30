@@ -4,7 +4,7 @@ function info_user_settings()
 	console.log("Info load")
 	$.ajax({
 		type: 'GET',
-		url: "http://127.0.0.1:8080/API/users/"+jQuery.parseJSON($.cookie("username")).id,
+		url: "http://127.0.0.1:8080/API/users/"+JSON.parse($.session.get('user')).id,
 		beforeSend : function( xhr ) {
 	        	xhr.setRequestHeader( "Authorization", $.cookie("Token").token_type +" "+ $.cookie("Token").access_token );
 	    	}

@@ -1,5 +1,5 @@
 var main = function(){
-	isAutenticated();
+	UserView.showCurrentUser();
 	url_register = 'http://127.0.0.1:8080/API/users/';
 
 
@@ -24,7 +24,8 @@ var main = function(){
 
 	$("#button_logout").click(function(e){
 		e.preventDefault();
-		deautenticateUser();
+		UserService.deauthenticate("http://127.0.0.1:8080/API/auth/revoke_token/");
+		UserView.showCurrentUser();
 	});
 
 };

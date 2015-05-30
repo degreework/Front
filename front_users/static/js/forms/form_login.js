@@ -16,9 +16,8 @@ function login(form, url)
 		*/
 		$.cookie.json = true;
 		$.cookie("Token", response, {path: '/' });
-		getCurrentUser();
-		isAutenticated();
-
+		UserService.get_mini_user("http://127.0.0.1:8080/API/users/me");
+		UserView.showCurrentUser();
 	})
 	.fail(function(error){		
 		console.log(error);
