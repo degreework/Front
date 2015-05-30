@@ -49,7 +49,7 @@ function show_errors (data, response) {
 
 
 
-function create_form(url, form)
+function create_form(url, form, method)
 {
 	
 	$.ajax({
@@ -60,7 +60,16 @@ function create_form(url, form)
 		/*
 		Create form
 		*/
-		fields = response.actions.POST;
+
+		if ('PUT' == method)
+		{
+			fields = response.actions.PUT;
+		}
+		else if ('OPTIONS' == method)
+		{
+			fields = response.actions.POST;
+		};
+		
 
 		var container = document.createElement("div");
 
@@ -118,8 +127,13 @@ function create_form(url, form)
 			{
 				input.type = 'file';
 				//set max length to input
-				input.maxLength = 100;
-				input.className = "";
+				input.maxLength = null
+			}
+			else if('boolean' == value.type)
+			{
+				input.type = 'checkbox';
+				//set max length to input
+				input.maxLength = 100
 			}
 			else
 			{

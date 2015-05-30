@@ -64,7 +64,7 @@ function getCurrentUser () {
 			//if status ==0  -> can't connect to server
 			if(0 == error.status)
 			{
-				console.log("can't connect to server")
+				Error.server_not_found();
 			}
 
 			//if BAD REQUEST -> show error response in fields form
@@ -126,7 +126,7 @@ function deautenticateUser () {
 			//if status ==0  -> can't connect to server
 			if(0 == error.status)
 			{
-				console.log("can't connect to server")
+				Error.server_not_found();
 			}
 
 			//if BAD REQUEST -> show error response in fields form

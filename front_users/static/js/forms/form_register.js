@@ -18,15 +18,7 @@ function register(form, url)
 		Register succesful, then do anything
 		*/
 		form.trigger("reset");
-		$.notify({
-				title: "OK:",
-				message: "Se ha creado el usuario"
-			},{
-				// settings
-				type: 'success',
-				offset: 100,
-		});
-
+		Notify.show_success("OK", "Has sido registrado");
 	})
 	.fail(function(error){		
 		console.log(error);
@@ -34,28 +26,20 @@ function register(form, url)
 		//if status ==0  -> can't connect to server
 		if(0 == error.status)
 		{
-			console.log("can't connect to server")
-			
-			$.notify({
-				title: "Error:",
-				message: "No se pudo conectar con el servidor"
-			},{
-				// settings
-				type: 'danger',
-				offset: 100,
-			});
-
+			Notify.show_error("SERVER", "No se pudo encontrar el servidor");		
 		}
 
 		//if BAD REQUEST -> show error response in fields form
 		if(400 == error.status)
 		{
 			show_errors(formSerialized, error.responseJSON);
+			Notify.show_error("DATOS", "Los datos ingresados están incompletos");
 		}
 		//if INTERNAL SERVER ERROR
 		if(500 == error.status)
 		{
 			//if url is incorret
+			Notify.show_error("SERVER", "Server internal error");
 		}
 	})
 	.always(function(){
