@@ -9,8 +9,9 @@ function showCurrentUser()
 	$("#introduction").hide();
 	$("#register").hide();
 	$("#user_resume").show();
-	$(".modules").show();
-	$(".pic_profile").attr("src","uploads/photos/"+jQuery.parseJSON($.cookie("username")).id);
+
+	console.log(jQuery.parseJSON($.cookie("username")).thumb);
+	$(".pic_profile").attr("src",'http://127.0.0.1:8080'+jQuery.parseJSON($.cookie("username")).thumb);
 	$(".resume_name").text(""+jQuery.parseJSON($.cookie("username")).first_name+' '+jQuery.parseJSON($.cookie("username")).last_name);	
 	$(".resume_profile").text(""+jQuery.parseJSON($.cookie("username")).first_name+' '+jQuery.parseJSON($.cookie("username")).last_name);	
 }
@@ -21,7 +22,6 @@ function showLoginForm()
 	$('#form_login').trigger("reset");
 	$("#user_resume").hide();
 	$("#form_login").show();
-	$(".modules").hide();
 
 }
 
