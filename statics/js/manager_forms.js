@@ -118,7 +118,8 @@ function create_form(url, form)
 			{
 				input.type = 'file';
 				//set max length to input
-				input.maxLength = 100
+				input.maxLength = 100;
+				input.className = "";
 			}
 			else
 			{

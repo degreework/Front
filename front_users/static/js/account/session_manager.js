@@ -6,23 +6,23 @@ function showCurrentUser()
 	//....
 	//
 	//$("#")$.cookie("username");
-
-	$("#user_resume").show();	
+	$("#introduction").hide();
+	$("#register").hide();
+	$("#user_resume").show();
+	$(".modules").show();
+	$(".pic_profile").attr("src","uploads/photos/"+jQuery.parseJSON($.cookie("username")).id);
 	$(".resume_name").text(""+jQuery.parseJSON($.cookie("username")).first_name+' '+jQuery.parseJSON($.cookie("username")).last_name);	
+	$(".resume_profile").text(""+jQuery.parseJSON($.cookie("username")).first_name+' '+jQuery.parseJSON($.cookie("username")).last_name);	
 }
+
 
 function showLoginForm()
 {
 	$('#form_login').trigger("reset");
 	$("#user_resume").hide();
 	$("#form_login").show();
-}
+	$(".modules").hide();
 
-function showLoginForm()
-{
-	$('#form_login').trigger("reset");
-	$("#user_resume").hide();
-	$("#form_login").show();
 }
 
 function isAutenticated()

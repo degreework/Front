@@ -27,7 +27,10 @@ var main = function(){
 		deautenticateUser();
 	});
 
+
+	//activate popover
+	$('[data-toggle="popover"]').popover({trigger: 'hover'});
 };
 
-
+	
 $(document).ready(main);

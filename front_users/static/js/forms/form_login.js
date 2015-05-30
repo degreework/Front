@@ -73,7 +73,7 @@ function login(form, url)
 
 }
 
-
+/*
 function get_account_info(access_token)
 {
 	console.log("get_account_info()");
@@ -87,4 +87,4 @@ function get_account_info(access_token)
 	.done(function(response){
 		console.log(response);
 	});
-}
+}*/
