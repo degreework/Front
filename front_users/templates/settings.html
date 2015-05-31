@@ -17,13 +17,13 @@
 <script type="text/javascript">
 	$('document').ready(function() {
 
-		url_update_user = "http://127.0.0.1:8080/API/users/"+JSON.parse($.session.get('user')).id;
+		url_update = URL_UPDATE_USER+JSON.parse($.session.get('user')).id;
 		//form update user
 		form_update_user = $("#form_update_user");
-		create_form(url_update_user, form_update_user, 'PUT');
+		create_form(url_update, form_update_user, 'PUT');
 		form_update_user.submit(function (e) {
 			e.preventDefault();
-			UserService.update_user(url_update_user, form_update_user);
+			UserService.update_user(url_update, form_update_user);
 		});
 
 		info_user_settings();

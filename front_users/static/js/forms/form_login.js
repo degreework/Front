@@ -1,6 +1,5 @@
 function login(form, url)
 {
-	console.log("login()");
 	data = form.serialize();
 	//remove all errors from before
 	remove_all_errors(data);
@@ -8,7 +7,7 @@ function login(form, url)
 	$.ajax({
 		type: 'POST',
 		url: url,
-		data: 'grant_type=password&'+data+'&client_id=W768A6yDuxGU8nEQ3iXOvghKxFfUGOWbHPWGHXQw&client_secret=LHrwNGN13ISnvXpQAn4YW5K5eWqzasICAwsGExdT5rmFTuAAsdpC0sH2JUbuAV3Am5U8zBHWRRYDyY1Vi4yQfILTugxCdrbitubEkyVuPU0bYNbknN8WUETNqkeaCixi',
+		data: 'grant_type=password&'+data+'&client_id='+CLIENT_ID+'&client_secret='+CLIENT_SECRET,
 	})
 	.done(function(response){
 		/*
@@ -16,7 +15,7 @@ function login(form, url)
 		*/
 		$.cookie.json = true;
 		$.cookie("Token", response, {path: '/' });
-		UserService.get_mini_user("http://127.0.0.1:8080/API/users/me");
+		UserService.get_mini_user(URL_CURRENT_USER);
 		UserView.showCurrentUser();
 	})
 	.fail(function(error){		

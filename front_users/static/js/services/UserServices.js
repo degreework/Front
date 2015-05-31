@@ -43,6 +43,7 @@ UserService.update_password = function(url, form)
 		else if(500 == error.status)
 		{
 			//if url is incorret
+			Error.server_internal_error();
 		}
 	})
 	.always(function(){
@@ -68,6 +69,7 @@ UserService.update_user = function(url, form)
 
 	})
 	.done(function(response){
+		console.log(response)
 		
 		$('#id_photo').remove();
 		$('#id_password').remove();
@@ -78,7 +80,8 @@ UserService.update_user = function(url, form)
 				$('#id_'+key).val(value); 			
 			}
 		});
-
+		UserService.get_mini_user(URL_CURRENT_USER);
+		UserView.showCurrentUser();
 		Notify.show_success("OK", "La info ha sido actualizada");
 	})
 	.fail(function(error){		
@@ -92,40 +95,19 @@ UserService.update_user = function(url, form)
 		//if BAD REQUEST -> show error response in fields form
 		if(400 == error.status || 401 == error.status)
 		{
-			//create new div for error message
-			div = document.createElement("div");
-			
-			//set id to div
-			div.id = "error_login";
-			
-			//set class to div
-			//div.className = 
 
-			//append error message to div
-			div.appendChild(document.createTextNode(error.responseJSON.error_description));
-			$("#form_login").prepend(div);
 		}
 		
 		// if UNAUTHORIZED ->
 		else if(401 == error.status)
 		{
-			//create new div for error message
-			div = document.createElement("div");
 			
-			//set id to div
-			div.id = "error_login";
-			
-			//set class to div
-			//div.className = 
-
-			//append error message to div
-			div.appendChild(document.createTextNode(error.responseJSON.error_description));
-			$("#form_login").prepend(div);	
 		}
 		//if INTERNAL SERVER ERROR
 		else if(500 == error.status)
 		{
 			//if url is incorret
+			Error.server_internal_error();
 		}
 	})
 	.always(function(){
@@ -145,8 +127,8 @@ UserService.get_mini_user = function (url) {
 	    	}
 		})
 		.done(function(response){
+			$.session.remove('user');
 			$.session.set('user', JSON.stringify(response));
-			user = JSON.parse($.session.get('user'));
 		})
 		.fail(function(error){		
 			console.log(error);
@@ -169,6 +151,7 @@ UserService.get_mini_user = function (url) {
 			else if(500 == error.status)
 			{
 				//if url is incorret
+				Error.server_internal_error();
 			}
 		})
 		.always(function(){
@@ -235,6 +218,7 @@ UserService.deauthenticate = function (url) {
 			else if(500 == error.status)
 			{
 				//if url is incorret
+				Error.server_internal_error();
 			}
 		})
 		.always(function(){
