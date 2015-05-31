@@ -6,18 +6,20 @@ var UserService = {};
 */
 UserService.update_password = function(url, form)
 {
-	data = form.serialize();
+	data = {'password': form[1].value};
 	$.ajax({
 		type: 'PUT',
 		url: url,
 		data: data,
 		beforeSend : function( xhr ) {
-	        	xhr.setRequestHeader( "Authorization", jQuery.parseJSON($.cookie("Token")).token_type +" "+ jQuery.parseJSON($.cookie("Token")).access_token );
+	        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
 	    	}
 
 	})
 	.done(function(response){
-		form.trigger("reset");
+		form[0].value = "";
+		form[1].value = "";
+		form[2].value = "";
 		Notify.show_success("OK", "La contraseña ha sido cambiada");
 	})
 	.fail(function(error){		
@@ -33,11 +35,15 @@ UserService.update_password = function(url, form)
 		{
 			
 		}
-		
 		// if UNAUTHORIZED -> no have permissions
 		else if(401 == error.status)
 		{
 			
+		}
+		// if NOT FOUND -> no found url
+		else if(404 == error.status)
+		{
+			Error.url_not_found();
 		}
 		//if INTERNAL SERVER ERROR
 		else if(500 == error.status)
@@ -64,12 +70,11 @@ UserService.update_user = function(url, form)
 		processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
 		beforeSend : function( xhr ) {
-	        	xhr.setRequestHeader( "Authorization", $.cookie("Token").token_type +" "+ $.cookie("Token").access_token );
+	        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
 	    	}
 
 	})
 	.done(function(response){
-		console.log(response)
 		
 		$('#id_photo').remove();
 		$('#id_password').remove();
@@ -97,7 +102,6 @@ UserService.update_user = function(url, form)
 		{
 
 		}
-		
 		// if UNAUTHORIZED ->
 		else if(401 == error.status)
 		{
@@ -118,45 +122,45 @@ UserService.update_user = function(url, form)
 
 // trae la informacion  (id, nicname, foto, nombre, apellido) de dropdowm
 UserService.get_mini_user = function (url) {
-		$.ajax({
-			type: 'GET',
-			url: url,
-			async: false,
-			beforeSend : function( xhr ) {
-	        	xhr.setRequestHeader( "Authorization", $.cookie("Token").token_type +" "+ $.cookie("Token").access_token );
-	    	}
-		})
-		.done(function(response){
-			$.session.remove('user');
-			$.session.set('user', JSON.stringify(response));
-		})
-		.fail(function(error){		
-			console.log(error);
-			//if status ==0  -> can't connect to server
-			if(0 == error.status)
-			{
-				Error.server_not_found();
-			}
+	$.ajax({
+		type: 'GET',
+		url: url,
+		async: false,
+		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+    	}
+	})
+	.done(function(response){
+		$.session.remove('user');
+		$.session.set('user', JSON.stringify(response));
+	})
+	.fail(function(error){		
+		console.log(error);
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
 
-			//if BAD REQUEST -> show error response in fields form
-			if(400 == error.status || 401 == error.status)
-			{
-				
-			}
-			// if UNAUTHORIZED ->
-			else if(401 == error.status)
-			{
-			}
-			//if INTERNAL SERVER ERROR
-			else if(500 == error.status)
-			{
-				//if url is incorret
-				Error.server_internal_error();
-			}
-		})
-		.always(function(){
-			console.log("always");
-		});
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status || 401 == error.status)
+		{
+			
+		}
+		// if UNAUTHORIZED ->
+		else if(401 == error.status)
+		{
+		}
+		//if INTERNAL SERVER ERROR
+		else if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		console.log("always");
+	});
 }
 
 
@@ -178,50 +182,49 @@ UserService.isAutenticated = function ()
 
 
 UserService.deauthenticate = function (url) {
-//"http://127.0.0.1:8080/API/auth/revoke_token/"
-		$.ajax({
-			type: 'POST',
-			url: url,
-			data: 'token='+$.cookie("Token")+'&client_id=W768A6yDuxGU8nEQ3iXOvghKxFfUGOWbHPWGHXQw&client_secret=LHrwNGN13ISnvXpQAn4YW5K5eWqzasICAwsGExdT5rmFTuAAsdpC0sH2JUbuAV3Am5U8zBHWRRYDyY1Vi4yQfILTugxCdrbitubEkyVuPU0bYNbknN8WUETNqkeaCixi',
-			beforeSend : function( xhr ) {
-	        	xhr.setRequestHeader( "Authorization", jQuery.parseJSON($.cookie("Token")).token_type +" "+ jQuery.parseJSON($.cookie("Token")).access_token );
-	    	}
-		})
-		.done(function(response){
-			/*
-			Logout succesful, then do anything
-			*/
-			$.removeCookie("Token", {path: '/'});
-			$.session.remove('user');
-			$(location).attr('href',"/");  
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data: 'token='+JSON.parse($.session.get("Token"))+'&client_id='+CLIENT_ID+'&client_secret='+CLIENT_SECRET,
+		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+    	}
+	})
+	.done(function(response){
+		/*
+		Logout succesful, then do anything
+		*/
+		$.session.remove('user');
+		$.session.remove('Token');
+		$(location).attr('href',"/");  
 
-		})
-		.fail(function(error){		
-			console.log(error);
-			//if status ==0  -> can't connect to server
-			if(0 == error.status)
-			{
-				Error.server_not_found();
-			}
+	})
+	.fail(function(error){		
+		console.log(error);
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
 
-			//if BAD REQUEST -> show error response in fields form
-			if(400 == error.status || 401 == error.status)
-			{
-				
-			}
-			// if UNAUTHORIZED ->
-			else if(401 == error.status)
-			{
-				
-			}
-			//if INTERNAL SERVER ERROR
-			else if(500 == error.status)
-			{
-				//if url is incorret
-				Error.server_internal_error();
-			}
-		})
-		.always(function(){
-			console.log("always");
-		});
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status || 401 == error.status)
+		{
+			
+		}
+		// if UNAUTHORIZED ->
+		else if(401 == error.status)
+		{
+			
+		}
+		//if INTERNAL SERVER ERROR
+		else if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		console.log("always");
+	});
 }

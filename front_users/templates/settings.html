@@ -26,7 +26,8 @@
 			UserService.update_user(url_update, form_update_user);
 		});
 
-		info_user_settings();
+		url_load = "http://127.0.0.1:8080/API/users/"+JSON.parse($.session.get('user')).id
+		UserView.showSetting(url_load);
 	});
 
 	</script>

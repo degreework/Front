@@ -13,8 +13,7 @@ function login(form, url)
 		/*
 		Login succesful, then do anything
 		*/
-		$.cookie.json = true;
-		$.cookie("Token", response, {path: '/' });
+		$.session.set("Token", JSON.stringify(response) );
 		UserService.get_mini_user(URL_CURRENT_USER);
 		UserView.showCurrentUser();
 	})
