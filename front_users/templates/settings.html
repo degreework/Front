@@ -17,7 +17,7 @@
 <script type="text/javascript">
 	$('document').ready(function() {
 
-		url_update = URL_UPDATE_USER+JSON.parse($.session.get('user')).id;
+		url_update = URL_UPDATE_USER+"2"//JSON.parse($.session.get('user')).id;
 		//form update user
 		form_update_user = $("#form_update_user");
 		create_form(url_update, form_update_user, 'PUT');
@@ -25,9 +25,7 @@
 			e.preventDefault();
 			UserService.update_user(url_update, form_update_user);
 		});
-
-		url_load = "http://127.0.0.1:8080/API/users/"+JSON.parse($.session.get('user')).id
-		UserView.showSetting(url_load);
+		UserView.showSetting(url_update);
 	});
 
 	</script>
