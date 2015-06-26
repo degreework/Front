@@ -38,6 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'front_users',
+    'front_modules',
+    'front_foro',
+    'front_wiki',
+    'front_comments',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -117,4 +121,3 @@ STATICFILES_DIRS = ( os.path.join('statics'), )
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
-

@@ -5,6 +5,7 @@
 		<link type="text/css" rel="stylesheet" href="{% static  'libs/bootstrap/css/bootstrap.min.css' %}"  media="screen,projection"/>
 
 		<link rel="stylesheet" href="{% static 'css/template_base.css' %}">
+		<link rel="stylesheet" href="{% static 'css/estilo_menu.css' %}">
 		{% block head %}			
 		{% endblock head %}
 	
@@ -36,7 +37,8 @@
 			</div>
 		</header>
 		
-		<div class="container">
+		{% include 'menu_modulos.html' %}
+		<div class="container hola">
 		  		{% block contenido %}
 				
 				{% endblock %}
@@ -65,6 +67,7 @@
 	<script src="{% static 'js/Error.js' %}" ></script>
 	<script src="{% static 'js/services/UserServices.js' %}" ></script>
 	<script src="{% static 'js/views/UserView.js' %}" ></script>
+	<script src="{% static 'js/animacion_menu.js' %}" ></script> <!-- este es -->
 	<script src="{% static 'js/manager_forms.js' %}" ></script>
 	<script src="{% static 'js/forms/form_register.js' %}" ></script>
 	<script src="{% static 'js/forms/form_login.js' %}" ></script>

@@ -22,4 +22,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('front_users.urls', namespace='front_users')),
+    url(r'^', include('front_modules.urls', namespace='front_modules')),
+    # this packages are of modules, by now is for test 
+    url(r'^', include('front_foro.urls', namespace='front_foro')),
+    url(r'^', include('front_wiki.urls', namespace='front_wiki')),
+    url(r'^', include('front_comments.urls', namespace='front_comments')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
