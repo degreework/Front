@@ -29,10 +29,11 @@ function show_errors (data, response) {
 		{		
 
 			//create new div for error message
-			div = document.createElement("div");
+			div = document.createElement("label");
 			
 			//set id to div
 			div.id = "error_"+field;
+			div.className = 'control-label';
 			
 			//set class to div
 			//div.className = 
@@ -41,6 +42,7 @@ function show_errors (data, response) {
 			div.appendChild(document.createTextNode(msg));
 
 			//append error message div to field
+			$("#id_"+field).parent().addClass('has-error')
 			$("#id_"+field).parent().prepend(div);
 		}
 		
@@ -52,6 +54,13 @@ function show_errors (data, response) {
 function create_form(url, form, method)
 {
 	
+	if (UserService.isAutenticated()) {
+		$.ajaxSetup({
+	    	beforeSend: function(xhr, settings) {
+	        xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+	    	}
+		});
+	};
 	$.ajax({
 		type: 'OPTIONS',
 		url: url,
@@ -69,8 +78,7 @@ function create_form(url, form, method)
 		{
 			fields = response.actions.POST;
 		};
-		
-
+				
 		var container = document.createElement("div");
 
 		$.each(fields, function(key, value) {
