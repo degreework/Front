@@ -1,0 +1,12 @@
+{% extends 'template_base.html' %}
+{% block contenido %}
+	<div class="col-md-10 capacity">
+		<h2>Bienvenido al Foro <br>
+		<small>Participa de las discuciones</small></h2>
+		<hr>
+		
+		<a class="pull-right" href="{% url 'front_foro:create' %}">crea una nueva discusion</a>
+		Este es el foro aqui hablan mucha popo
+	</div>
+
+{% endblock %}
