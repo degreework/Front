@@ -68,6 +68,7 @@ UserView.showSetting = function (url)
 		else if(500 == error.status)
 		{
 			//if url is incorret
+			Error.server_internal_error();
 		}
 	})
 	.always(function(){

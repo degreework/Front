@@ -1,5 +1,7 @@
 function register(form, url)
 {
+	$("#loader").show();
+
 	formSerialized = form.serialize()
 	formData = new FormData($("#form_register").get(0))
 
@@ -26,7 +28,7 @@ function register(form, url)
 		//if status ==0  -> can't connect to server
 		if(0 == error.status)
 		{
-			Notify.show_error("SERVER", "No se pudo encontrar el servidor");		
+			Error.server_not_found();
 		}
 
 		//if BAD REQUEST -> show error response in fields form
@@ -39,11 +41,12 @@ function register(form, url)
 		if(500 == error.status)
 		{
 			//if url is incorret
-			Notify.show_error("SERVER", "Server internal error");
+			Error.server_internal_error();
 		}
 	})
 	.always(function(){
-		console.log("always");
+		//console.log("always");
+		$("#loader").hide();
 	});
 
 }

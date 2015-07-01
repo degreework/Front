@@ -1,5 +1,6 @@
 function login(form, url)
 {
+	$("#loader").show();
 	data = form.serialize();
 	//remove all errors from before
 	remove_all_errors(data);
@@ -22,7 +23,7 @@ function login(form, url)
 		//if status ==0  -> can't connect to server
 		if(0 === error.status)
 		{
-			console.log("can't connect to server")
+			Error.server_not_found();
 		}
 
 		//if BAD REQUEST -> show error response in fields form
@@ -62,10 +63,12 @@ function login(form, url)
 		else if(500 == error.status)
 		{
 			//if url is incorret
+			Error.server_internal_error();
 		}
 	})
 	.always(function(){
 		console.log("always");
+		$("#loader").hide();
 	});
 
 }

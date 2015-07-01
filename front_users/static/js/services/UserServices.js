@@ -6,6 +6,8 @@ var UserService = {};
 */
 UserService.update_password = function(url, form)
 {
+	$("#loader").show();
+
 	data = {'password': form[1].value};
 	$.ajax({
 		type: 'PUT',
@@ -53,7 +55,8 @@ UserService.update_password = function(url, form)
 		}
 	})
 	.always(function(){
-		console.log("always");
+		//console.log("always");
+		$("#loader").show();
 	});
 }
 
@@ -62,6 +65,8 @@ UserService.update_password = function(url, form)
 */
 UserService.update_user = function(url, form)
 {
+	$("#loader").show();
+
 	data = new FormData(form.get(0));
 	$.ajax({
 		type: 'PUT',
@@ -115,7 +120,8 @@ UserService.update_user = function(url, form)
 		}
 	})
 	.always(function(){
-		console.log("always");
+		//console.log("always");
+		$("#loader").hide();
 	});
 }
 
@@ -182,6 +188,8 @@ UserService.isAutenticated = function ()
 
 
 UserService.deauthenticate = function (url) {
+	$("#loader").show();
+	
 	$.ajax({
 		type: 'POST',
 		url: url,
@@ -225,6 +233,7 @@ UserService.deauthenticate = function (url) {
 		}
 	})
 	.always(function(){
-		console.log("always");
+		//console.log("always");
+		$("#loader").hide();
 	});
 }

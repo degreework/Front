@@ -7,5 +7,6 @@ urlpatterns = patterns('',
         url(r'^changePassword/$', 'front_users.views.changePassword', name='changePassword'),
         url(r'^profile/$', 'front_users.views.profile', name='profile'),
         url(r'^settings/$', 'front_users.views.settings', name='settings'),
+        url(r'^authentication/$', 'front_users.views.authentication_requiered', name='authenticationRequiered'),
 
 )

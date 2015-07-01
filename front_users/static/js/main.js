@@ -25,7 +25,7 @@ var main = function(){
 		UserService.deauthenticate(URL_LOGOUT);
 		UserView.showCurrentUser();
 	});
-
+	$("#loader").hide();
 };
 
 	
