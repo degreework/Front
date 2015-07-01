@@ -13,6 +13,7 @@ UserView.showCurrentUser = function ()
 
 		$("#user_resume").show();
 		$(".resume_name").text(JSON.parse($.session.get('user')).first_name +" "+JSON.parse($.session.get('user')).last_name);	
+		$(".resume_profile").text(JSON.parse($.session.get('user')).first_name +" "+JSON.parse($.session.get('user')).last_name);	
 		$(".pic_resume").attr("src",'http://127.0.0.1:8080'+JSON.parse($.session.get('user')).thumb);
 
 	}

@@ -1,4 +1,6 @@
-/*Template base*/
+/*Template base   
+
+*/
 
 body{
 	font-family: 'OpenSans-Regular.ttf'
@@ -6,10 +8,14 @@ body{
 
 
 .page-header{
+	background-image: url("overlay2.png"), url("overlay3.svg"), linear-gradient(45deg, #EF0909 5%, #E02C2C 50%, #EF0909 ); /*#F48080*/
+	background-position: top left,	center center,	center center;
+  	background-size: auto,	cover,	cover;
 	background-color: #D51B23;
     color:  white;
     margin-top: 0;
     height: 100px;	
+    border-bottom: 10px solid  #7F1015;
 }
 
 /*elementos page header*/
@@ -47,3 +53,10 @@ hr{
 	border-color: #ccc;
 }
   
+
+/*introduccion*/
+.seccion{
+	margin-bottom:50px;
+	margin-top: 50px;
+	margin-right: 20px;
+}
