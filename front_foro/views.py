@@ -13,4 +13,4 @@ def create(request):
 
 
 def edit(request):
-    return render_to_response('Foroedit.html', {'title': 'Contraseña | Name App'}, context_instance=RequestContext(request))
+    return render_to_response('Foroedit.html', {'title': 'Edit Foro | Name App'}, context_instance=RequestContext(request))

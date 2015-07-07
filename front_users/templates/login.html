@@ -17,9 +17,11 @@
     </div>
     <button type="submit" class="btn btn-default btn-sm ">Iniciar sesión</button>
     <br>
-    <a href="/recoverPassword">Olvidaste tu contraseña</a>
+    <a href="{% url 'front_users:recoverPassword' %}">Olvidaste tu contraseña</a>
   </form>
 </div>
+
+
 <!-- template autheticated -->
 <div class="dropdown  pull-right" id="user_resume" hidden>
   <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -30,8 +32,8 @@
   
   <!--items del dropdown -->
   <ul class="dropdown-menu arrow-top" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile">Perfil</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/settings">Ajustes</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'front_users:profile' %}">Perfil</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'front_users:settings' %}">Ajustes</a></li>
     <li role="presentation" class="divider"></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="button_logout">Salir</a></li>
   </ul>

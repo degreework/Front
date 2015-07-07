@@ -184,9 +184,10 @@ function create_form(url, form, method)
 
 			//append div to container
 			container.appendChild(field_div);
+			//$('.formulario').prepend(container);
 
 		});
-	
+		console.log(container);
 		//append inputs to form
 		form.prepend(container);
 	})

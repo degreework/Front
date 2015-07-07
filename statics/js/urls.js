@@ -14,3 +14,6 @@ URL_REGISTER = host+":8080/API/users/";
 URL_CURRENT_USER = host+":8080/API/users/me";
 URL_UPDATE_USER = host+":8080/API/users/";
 URL_UPDATE_USER_PASSWORD = host+":8080/API/users/password/";
+
+//Foro
+URL_CREATE_ASK_FORO = host+":8080/API/forum/ask/";

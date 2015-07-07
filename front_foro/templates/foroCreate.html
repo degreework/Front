@@ -1,10 +1,13 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
 	<div class="col-md-10 capacity">
-		<h2>hola<br>
-		<small>hola</small></h2>
+		<h2>Crea tu pregunta<br>
+		<small>participa</small></h2>
 		<hr>
-		
+		<a class="pull-right" href="{% url 'front_foro:foro' %}">Temas de discusion</a>
+		<form class="" id="form_ask_foro">      
+      		<button class="btn btn-default" type="submit" name="action">crear</button>
+      	</form>
 		
 	</div>
 

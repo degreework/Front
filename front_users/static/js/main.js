@@ -17,7 +17,6 @@ var main = function(){
 		login(form_login, URL_LOGIN);
 	})
 
-
 	//action event to logout
 
 	$("#button_logout").click(function(e){
@@ -26,6 +25,15 @@ var main = function(){
 		UserView.showCurrentUser();
 	});
 	$("#loader").hide();
+
+	// ::::FORO ::::
+	//form Ask Foro
+	form_ask_foro = $("#form_ask_foro");
+	create_form(URL_CREATE_ASK_FORO, form_ask_foro, 'OPTIONS');
+	form_ask_foro.submit(function (e) {
+		e.preventDefault();
+		create_ask(form_register, URL_CREATE_ASK_FORO);
+	})
 };
 
 	
