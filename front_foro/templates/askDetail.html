@@ -2,25 +2,26 @@
 {% block contenido %}
 	<div class="col-md-10 col-md-offset-1 capacity">
 		
-		<h3 class="ask_title titulos"></h3>
-		
-		<hr>
-		
-		<div class="ask_summary"></div>
-		
-		
-
-		<div>
-			<h3 class="titulos">Respuestas</h3>
-			<div class="answer"></div>
+		<div class="row">
+			<h3 class="ask_title titulos"></h3>
+			
+			<hr>
+			
+			<div class="ask_summary"></div>
+				
+		</div>
+		<div class="row">
+			<h3 class="titulos">Tu respuesta</h3>
+			<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
+				<form class="" id="form_answer_foro">
+		      		<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
+		      	</form>
+			</div>	
 		</div>
 		
-		
-		<h3 class="titulos">Tu respuesta</h3>
-		<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
-			<form class="" id="form_answer_foro">
-	      		<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
-	      	</form>
+		<div class="row">
+			<h3 class="titulos">Respuestas</h3>
+			<div class="answer"></div>
 		</div>
 		
 	</div>
