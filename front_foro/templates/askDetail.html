@@ -2,15 +2,16 @@
 {% block contenido %}
 	<div class="col-md-10 col-md-offset-1 capacity">
 		
-		<h3 class="ask_title titulos"></h3>
+		<div class="row">
+			<h3 class="ask_title titulos"></h3>
+			
+			<hr>
+			
+			<div class="ask_summary"></div>
+				
+		</div>
 		
-		<hr>
-		
-		<div class="ask_summary"></div>
-		
-		
-
-		<div>
+		<div class="row">
 			<h3 class="titulos">Respuestas</h3>
 			<div class="answer"></div>
 		</div>
@@ -48,6 +49,7 @@
 	      	</form>
 		</div>
 		
+
 	</div>
 	
 {% endblock %}
