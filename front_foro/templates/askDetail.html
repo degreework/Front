@@ -1,0 +1,16 @@
+{% extends 'template_base.html' %}
+{% block contenido %}
+	<div class="col-md-10 capacity">
+		
+		<h2 class="ask_title"></h2>
+		<hr>
+		<div class="ask_summary">
+			
+		</div>
+	</div>
+{% endblock %}
+{% block scripts %}
+	<script type="text/javascript">
+		ForumService.get_Detail_Ask();
+	</script>
+{% endblock scripts %}

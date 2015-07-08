@@ -1,0 +1,19 @@
+/*FORO */
+
+.btn-create-foro{
+	padding: 10px;
+	border: 1px solid #ccc
+}
+
+/* asks */
+
+.question{	
+	color: rgba(0,0,0,1);
+	width:80%;
+	height:100%;
+	border-bottom: 3px double #ccc;	
+	padding: 10px 10px 10px 30px;
+	text-decoration:none;
+}
+
+

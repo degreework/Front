@@ -1,12 +1,26 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
+{% load staticfiles %}
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/ask.css' %}">	
+{% endblock head %}
 	<div class="col-md-10 capacity">
 		<h2>Bienvenido al Foro <br>
 		<small>Participa de las discuciones</small></h2>
 		<hr>
 		
-		<a class="pull-right" href="{% url 'front_foro:create' %}">crea una nueva discusion</a>
-		Este es el foro aqui hablan mucha popo
+		<a class=" btn-create-foro pull-right" href="{% url 'front_foro:create' %}">crea una nueva discusion</a>
+	
+
+		<div class="asks">
+			
+		</div>
 	</div>
 
 {% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+		ForumService.get_Asks();
+	</script>
+{% endblock scripts %}

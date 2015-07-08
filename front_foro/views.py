@@ -8,6 +8,10 @@ def foro(request):
     return render_to_response('foro.html', {'title': 'foro | Name App'}, context_instance=RequestContext(request))
 
 
+def detail(request,id):
+    return render_to_response('askDetail.html', {'title': 'foro | Name App'}, context_instance=RequestContext(request))
+
+
 def create(request):
     return render_to_response('foroCreate.html', {'title': 'Create Foro | Name App'}, context_instance=RequestContext(request))
 

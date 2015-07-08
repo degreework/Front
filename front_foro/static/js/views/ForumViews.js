@@ -1,6 +1,6 @@
 var ForumView = {};
 
-UserView.showThemes = function ()
+UserView.showAsks = function (url)
 {
-
+	
 }
