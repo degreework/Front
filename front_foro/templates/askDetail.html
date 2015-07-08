@@ -7,10 +7,30 @@
 		<div class="ask_summary">
 			
 		</div>
+		<hr>
+		<div>
+			<h3>Tu respuesta</h3>
+			<form class="" id="form_answer_foro">
+	      		<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
+	      	</form>
+		</div>
+		<div class="answer">
+		
+		</div>
 	</div>
+	
 {% endblock %}
 {% block scripts %}
 	<script type="text/javascript">
 		ForumService.get_Detail_Ask();
+		ForumService.get_Answers();
+		// ::::FORO ::::
+		//form Answer from Ask  at Foro
+		form_answer_foro = $("#form_answer_foro");
+		create_form(URL_CREATE_ANSWER_FORO, form_answer_foro, 'OPTIONS');
+		form_answer_foro.submit(function (e) {
+			e.preventDefault();
+			ForumService.create_answer(form_answer_foro, URL_CREATE_ANSWER_FORO);
+		})
 	</script>
 {% endblock scripts %}

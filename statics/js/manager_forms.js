@@ -102,6 +102,7 @@ function create_form(url, form, method)
 			if ('string' == value.type) 
 			{
 				input.type = 'text';
+				input.maxLength = 100000
 			}
 			else if ('integer' == value.type)
 			{

@@ -7,6 +7,35 @@
 		<link rel="stylesheet" href="{% static 'css/template_base.css' %}">
 		<link rel="stylesheet" href="{% static 'css/estilo_menu.css' %}">
 		<link rel="stylesheet" href="{% static 'css/loader.css' %}">
+
+		<!--CDN
+	<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  	-->
+	<script src="{% static 'libs/jquery/jquery.min.js' %}" ></script>
+	<script src="{% static 'libs/jquery/jquerysession.js' %}" ></script>
+	<script src="{% static 'libs/jquery/jquery.cookie.js' %}" ></script>
+	<script src="{% static 'libs/bootstrap/js/bootstrap.js' %}" ></script>
+	<script src="{% static 'libs/bootstrap-notify/bootstrap-notify.min.js' %}" ></script>
+	<script src="{% static 'libs/jquery/jquery.timeago.js' %}" ></script>
+	<script src="{% static 'libs/jquery/jquery.timeago.es.js' %}" ></script>
+
+	<!-- scripts de nostros -->	
+	<script src="{% static 'js/urls.js' %}" ></script>
+	<script src="{% static 'js/Notify.js' %}" ></script>
+	<script src="{% static 'js/Error.js' %}" ></script>
+	<script src="{% static 'js/services/UserServices.js' %}" ></script>
+	<script src="{% static 'js/services/ForumServices.js' %}" ></script><!-- este es -->
+	<script src="{% static 'js/views/UserView.js' %}" ></script>
+	<script src="{% static 'js/animacion_menu.js' %}" ></script> <!-- este es -->
+	<script src="{% static 'js/manager_forms.js' %}" ></script>
+	<script src="{% static 'js/forms/form_register.js' %}" ></script>
+	<script src="{% static 'js/forms/form_create_ask.js' %}" ></script> <!-- este es -->
+	<script src="{% static 'js/forms/form_login.js' %}" ></script>
+	<script src="{% static 'js/forms/ChangePasswordForm.js' %}" ></script>
+	<script src="{% static 'js/main.js' %}" ></script>
+	
+	
 		{% block head %}			
 		{% endblock head %}
 	
@@ -53,30 +82,6 @@
 		</footer>
 	
 
-	<!--CDN
-	<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  	-->
-	<script src="{% static 'libs/jquery/jquery.min.js' %}" ></script>
-	<script src="{% static 'libs/jquery/jquerysession.js' %}" ></script>
-	<script src="{% static 'libs/jquery/jquery.cookie.js' %}" ></script>
-	<script src="{% static 'libs/bootstrap/js/bootstrap.js' %}" ></script>
-	<script src="{% static 'libs/bootstrap-notify/bootstrap-notify.min.js' %}" ></script>
-
-	<!-- scripts de nostros -->	
-	<script src="{% static 'js/urls.js' %}" ></script>
-	<script src="{% static 'js/Notify.js' %}" ></script>
-	<script src="{% static 'js/Error.js' %}" ></script>
-	<script src="{% static 'js/services/UserServices.js' %}" ></script>
-	<script src="{% static 'js/services/ForumServices.js' %}" ></script><!-- este es -->
-	<script src="{% static 'js/views/UserView.js' %}" ></script>
-	<script src="{% static 'js/animacion_menu.js' %}" ></script> <!-- este es -->
-	<script src="{% static 'js/manager_forms.js' %}" ></script>
-	<script src="{% static 'js/forms/form_register.js' %}" ></script>
-	<script src="{% static 'js/forms/form_create_ask.js' %}" ></script> <!-- este es -->
-	<script src="{% static 'js/forms/form_login.js' %}" ></script>
-	<script src="{% static 'js/forms/ChangePasswordForm.js' %}" ></script>
-	<script src="{% static 'js/main.js' %}" ></script>
 	
 	{% block scripts %}
 	{% endblock scripts %}

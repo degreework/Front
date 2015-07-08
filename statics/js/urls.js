@@ -19,3 +19,6 @@ URL_UPDATE_USER_PASSWORD = host+":8080/API/users/password/";
 URL_CREATE_ASK_FORO = host+":8080/API/forum/ask/";
 URL_BRING_ASKS_FORO = host+":8080/API/forum/ask/all";
 URL_DETAIL_ASKS_FORO = host+":8080/API/forum/ask/detail/";
+
+URL_CREATE_ANSWER_FORO = host+":8080/API/forum/answer/";
+URL_GET_ANSWERS_FORUM = host+":8080/API/forum/answer/all";

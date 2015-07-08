@@ -2,14 +2,32 @@
 {% block contenido %}
 	<div class="col-md-10 capacity">
 		<h2>Crea tu pregunta<br>
-		<small>participa</small></h2>
+		<small>Participa</small></h2>
 		<hr>
 
 		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-3">
 			<form class="" id="form_ask_foro">      
-	      		<button class="btn btn-default pull-right" type="submit" name="action">crear</button>
+	      		<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
 	      	</form>
+		</div>
+		<div>
+			<h3>¿Cómo preguntar?</h3>
+			<span>Esto es sobre algoritmia</span>
+			<p>Se específico, detalla bien tu duda o inconveniente, la comunidad está para ayudarte y tu eres parte de ella...bla bla bla</p>
 		</div>
 	</div>
 
 {% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+	// ::::FORO ::::
+	//form Ask Foro
+	form_ask_foro = $("#form_ask_foro");
+	create_form(URL_CREATE_ASK_FORO, form_ask_foro, 'OPTIONS');
+	form_ask_foro.submit(function (e) {
+		e.preventDefault();
+		create_ask(form_register, URL_CREATE_ASK_FORO);
+	})
+</script>
+{% endblock scripts %}
