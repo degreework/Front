@@ -4,15 +4,18 @@
 {% block head %}
 	<link rel="stylesheet" href="{% static 'css/ask.css' %}">	
 {% endblock head %}
-	<div class="col-md-10 capacity">
-		<h2>Bienvenido al Foro <br>
-		<small>Participa de las discuciones</small></h2>
+	<div class="col-md-10 col-md-offset-1 capacity">
+		<h2 class="titulos">Bienvenido al Foro </h2>
+		<br>
+		<h4>Participa de las discuciones</h4>
 		<hr>
 		
-		<a class=" btn-create-foro pull-right" href="{% url 'front_foro:create' %}">Crea una nueva discusión</a>
+		<a class=" btn-create-foro pull-right margen_contenido" href="{% url 'front_foro:create' %}">
+			Crea una nueva discusión
+		</a>
 	
 
-		<div class="asks">
+		<div class="asks margen_contenido">
 			
 		</div>
 	</div>

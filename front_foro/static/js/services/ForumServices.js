@@ -147,8 +147,8 @@ ForumService.get_Answers = function () {
 			
 			// se crea el html     		
 			var container = document.createElement("div");
-			container.className = '';
-			var link = document.createElement("a");
+			container.className = 'response';
+			//var link = document.createElement("a");
 			var date = document.createElement("span");
 			var autor = document.createElement("span");
 			var id = response[i].id;
@@ -163,7 +163,7 @@ ForumService.get_Answers = function () {
 			$(date).text(jQuery.timeago(response[i].added_at))
 			
 			//se pega a los contenedores 
-			link.appendChild(titles);
+			//link.appendChild(titles);
 			//container.appendChild(link);
 			container.appendChild(summarys);
 			container.appendChild(autor);
