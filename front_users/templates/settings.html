@@ -8,7 +8,7 @@
 		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-3 margen_contenido">
 		
 
-			<form id="form_update_user">      
+			<form id="form_update_user" hidden>      
         		<button class="btn btn-default" type="submit" name="action">Guardar Cambios</button>
      			<a class="pull-right" href="{% url 'front_users:changePassword' %}">Cambiar contraseña</a>
       		</form>	
@@ -23,6 +23,7 @@
 		//form update user
 		form_update_user = $("#form_update_user");
 		create_form(url_update, form_update_user, 'PUT');
+		form_update_user.show();
 		form_update_user.submit(function (e) {
 			e.preventDefault();
 			UserService.update_user(url_update, form_update_user);
