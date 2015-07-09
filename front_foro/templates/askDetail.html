@@ -4,43 +4,34 @@
 		
 		<div class="row">
 			<h3 class="ask_title titulos"></h3>
-			
 			<hr>
 			
-			<div class="ask_summary"></div>
-				
+			<div class="col-md-9 col-md-offset-1">
+				<div class="ask_summary"></div>
+				<hr>
+				<a class="ask_author_link"><span class="ask_author"></span></a>, <span class="ask_added_at"></span>
+			</div>		
+		</div>
+		<hr>
+		<div class="row">
+			<div id="list-comment" class="col-md-9 col-md-offset-2">
+
+				<a id="a-comment">Comentar</a>
+				<div>
+					<form id="form-comment" hidden>
+						<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
+					</form>	
+				</div>
+			</div>
+			
 		</div>
 		
 		<div class="row">
-			<h3 class="titulos">Tu respuesta</h3>
+			<h3 class="titulos">Respuestas</h3>
 
 			<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
 				<form class="" id="form_answer_foro">
 					<div id="editor">
-						# Header Level 1
-
-						**Pellentesque habitant morbi tristique** senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. _Aenean ultricies mi vitae est_. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, `commodo vitae`, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum  rutrum orci, sagittis tempus lacus enim ac dui. [Donec non enim](#) in turpis pulvinar facilisis. Ut felis.
-
-						## Header Level 2
-
-	  					1. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-						2. Aliquam tincidunt mauris eu risus.
-
-
-						> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur  massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.
-
-						### Header Level 3
-
-						  * Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-						  * Aliquam tincidunt mauris eu risus.
-
-						```
-						#header h1 a {
-						  display: block;
-						  width: 300px;
-						  height: 80px;
-						}
-						```
 	                </div>
 	                
 		      		<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
@@ -53,7 +44,7 @@
 
 
 		<div class="row">
-			<h3 class="titulos">Respuestas</h3>
+			<hr>
 			<div class="answer"></div>
 		</div>
 		
@@ -71,6 +62,7 @@
 	<script type="text/javascript">
 		ForumService.get_Detail_Ask();
 		ForumService.get_Answers();
+		ForumService.get_Comments();
 		// ::::FORO ::::
 		//form Answer from Ask  at Foro
 		form_answer_foro = $("#form_answer_foro");
@@ -78,6 +70,21 @@
 		form_answer_foro.submit(function (e) {
 			e.preventDefault();
 			ForumService.create_answer(form_answer_foro, URL_CREATE_ANSWER_FORO);
+		})
+
+
+		//comments
+		form_comment_ask = $("#form-comment");
+		create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
+		form_comment_ask.submit(function (e) {
+			e.preventDefault();
+			CommentService.create(form_comment_ask, URL_CREATE_COMMENT, ForumService.append_comment_to_ask);
+		})
+
+		$("#a-comment").click(function (e) {
+			e.preventDefault()
+			$("#a-comment").hide()
+			$("#form-comment").show()
 		})
 	</script>
 	<script>
