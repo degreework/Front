@@ -22,3 +22,6 @@ URL_DETAIL_ASKS_FORO = host+":8080/API/forum/ask/detail/";
 
 URL_CREATE_ANSWER_FORO = host+":8080/API/forum/answer/";
 URL_GET_ANSWERS_FORUM = host+":8080/API/forum/answer/all";
+
+//Wiki
+URL_CREATE_PAGE_WIKI = host+":8080/API/wiki/";

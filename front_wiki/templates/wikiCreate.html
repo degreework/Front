@@ -1,0 +1,47 @@
+{% extends 'template_base.html' %}
+{% block contenido %}
+	<div class="col-md-10 col-md-offset-1 capacity">
+		<h2 class="titulos">Crea tu tema</h2>
+	
+		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-3 margen_contenido">
+			
+			
+				
+				<form id="form_create_wiki"></form>
+		      	<form id="form_update_wiki"></form>	
+		      	
+				<button class="btn btn-default pull-right" type="submit" name="action" id="btn-wiki">Crear</button>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+	// ::::WIKI ::::
+	
+	//form wiki create
+	form_create_wiki = $("#form_create_wiki");
+	form_update_wiki = $("#form_update_wiki");
+
+	create_form(URL_CREATE_PAGE_WIKI+"0", form_update_wiki, 'OPTIONS');
+	create_form(URL_CREATE_PAGE_WIKI, form_create_wiki, 'OPTIONS');
+
+	$('#btn-wiki').click(function(e){
+		e.preventDefault();
+		WikiService.create_page(form_create_wiki, URL_CREATE_PAGE_WIKI);
+
+		//WikiServices.update_page(form_update_wiki, URL_CREATE_PAGE_WIKI);
+
+	});
+
+
+	
+    	
+
+	/*$('#form_wiki').submit(function (e) {
+		e.preventDefault();
+		WikiServices.create_page(form_create_wiki, URL_CREATE_PAGE_WIKI);
+	})*/
+</script>
+{% endblock scripts %}

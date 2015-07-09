@@ -82,113 +82,116 @@ function create_form(url, form, method)
 		var container = document.createElement("div");
 
 		$.each(fields, function(key, value) {
-  			
-  			var field_div = document.createElement("div");
-  			field_div.className = 'form-group';
 
-  			var row_div = document.createElement("div");
-  			row_div.className = 'col-md-8';
+			if(value.read_only == false){
+				var field_div = document.createElement("div");
+	  			field_div.className = 'form-group';
 
-  			//create a input
-  			var input = document.createElement("input");
+	  			var row_div = document.createElement("div");
+	  			row_div.className = 'col-md-8';
 
-  			// set the CSS class
-			input.className = "form-control";
+	  			//create a input
+	  			var input = document.createElement("input");
 
-			//set max length to input
-			input.maxLength = value.max_length;
-
-  			//set type to input
-			if ('string' == value.type) 
-			{
-				input.type = 'text';
-				input.maxLength = 100000
-			}
-			else if ('integer' == value.type)
-			{
-				input.type = 'text';
-				//set max length to input
-				input.maxLength = 10;
-			}
-			else if('choice' == value.type)
-			{
-				input = document.createElement("select");
+	  			// set the CSS class
 				input.className = "form-control";
 
-				//create default option
-				var option = document.createElement("option");
-				option.selected = "selected";
-				option.disabled = true;
-				option.textContent = "";
-				
-				//add option to selectable
-				input.add(option);
+				//set max length to input
+				input.maxLength = value.max_length;
 
-				//create options
-				for (var i = 0, size=this.choices.length; i < size; i++) {
-					option = document.createElement("option");
-					option.value =  value.choices[i].value;
-					option.textContent = value.choices[i].display_name;
-					input.add(option);					
+	  			//set type to input
+
+				if ('string' == value.type) 
+				{
+					input.type = 'text';
+					input.maxLength = 100000
 				}
+				else if ('integer' == value.type)
+				{
+					input.type = 'text';
+					//set max length to input
+					input.maxLength = 10;
+				}
+				else if('choice' == value.type)
+				{
+					input = document.createElement("select");
+					input.className = "form-control";
+
+					//create default option
+					var option = document.createElement("option");
+					option.selected = "selected";
+					option.disabled = true;
+					option.textContent = "";
+					
+					//add option to selectable
+					input.add(option);
+
+					//create options
+					for (var i = 0, size=this.choices.length; i < size; i++) {
+						option = document.createElement("option");
+						option.value =  value.choices[i].value;
+						option.textContent = value.choices[i].display_name;
+						input.add(option);					
+					}
+				}
+				else if('image upload' == value.type)
+				{
+					input.type = 'file';
+					//set max length to input
+					input.maxLength = null
+					input.className = null;
+				}
+				else if('boolean' == value.type)
+				{
+					input.type = 'checkbox';
+					//set max length to input
+					input.maxLength = 100
+				}
+				else
+				{
+					input.type = value.type;
+					
+				}
+
+
+				//if is a password input
+				if('password' == key)
+				{
+					input.type = 'password';
+				}
+
+
+				//set id to input
+				input.id = 'id_'+key;
+
+				//set name to input
+				input.name = key;
+				input.placeholder = value.label;
+	/*
+				//if field is required
+				if (value.required) {
+					input.required = true;
+				};
+	*/
+				//creat label for input
+				//var label = document.createElement("label");
+				//set text to label
+				//label.appendChild(document.createTextNode(value.label));
+
+				//append input to div
+				field_div.appendChild(input);
+				//append input to div
+				//field_div.appendChild(label);
+				//append to row
+				row_div.appendChild(field_div);
+
+				//append div to container
+				container.appendChild(field_div);
+				//$('.formulario').prepend(container);
 			}
-			else if('image upload' == value.type)
-			{
-				input.type = 'file';
-				//set max length to input
-				input.maxLength = null
-				input.className = null;
-			}
-			else if('boolean' == value.type)
-			{
-				input.type = 'checkbox';
-				//set max length to input
-				input.maxLength = 100
-			}
-			else
-			{
-				input.type = value.type;
-				
-			}
-
-
-			//if is a password input
-			if('password' == key)
-			{
-				input.type = 'password';
-			}
-
-
-			//set id to input
-			input.id = 'id_'+key;
-
-			//set name to input
-			input.name = key;
-			input.placeholder = value.label;
-/*
-			//if field is required
-			if (value.required) {
-				input.required = true;
-			};
-*/
-			//creat label for input
-			//var label = document.createElement("label");
-			//set text to label
-			//label.appendChild(document.createTextNode(value.label));
-
-			//append input to div
-			field_div.appendChild(input);
-			//append input to div
-			//field_div.appendChild(label);
-			//append to row
-			row_div.appendChild(field_div);
-
-			//append div to container
-			container.appendChild(field_div);
-			//$('.formulario').prepend(container);
 
 		});
-		console.log(container);
+
 		//append inputs to form
 		form.prepend(container);
 	})

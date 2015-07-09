@@ -64,6 +64,10 @@ hr{
 	margin-top: 30px;
 }
 
+.btn-create{
+	padding: 10px;
+	border: 1px solid #ccc
+}
   
 
 /*introduccion*/
