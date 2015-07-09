@@ -27,15 +27,18 @@ ForumService.get_Asks = function () {
 			$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
 			var titles = document.createElement("h3");
 			var summarys = document.createElement("p");
+			var author = document.createElement("p");
 			
 			//se asigna el texto 
 			$(titles).text(response[i].title)
-			$(summarys).text(response[i].summary)
+			$(summarys).text(jQuery.timeago(response[i].added_at))
+			$(author).text("Autor apellido")
 			
 			//se pega a los contenedores 
 			link.appendChild(titles);
 			container.appendChild(link);
 			container.appendChild(summarys);
+			container.appendChild(author);
 			
 			$('.asks').prepend(container);
 		}
@@ -92,7 +95,10 @@ ForumService.get_Detail_Ask = function () {
 		
 		//aca escriba su codigo
 		$('.ask_title').text(response.title);
-		$('.ask_summary').text(response.summary);
+		$('.ask_summary').text(response.text);
+		$('.ask_added_at').text(jQuery.timeago(response.added_at));
+		$('.ask_author').text("Autor pendiente");
+		$('.ask_author_link').attr('href', "autor_link");
 	})
 	.fail(function(error){		
 		console.log(error);
@@ -257,6 +263,88 @@ ForumService.create_answer = function (form, url)
 	.always(function(){
 		//console.log("always");
 		$("#loader").hide();
+	});
+
+}
+
+
+ForumService.append_comment_to_ask = function(response)
+{
+	for (i = 0; i < response.length; i++) { 
+			
+			// se crea el html     		
+			var container = document.createElement("div");
+			container.className = '';
+			var link = document.createElement("a");
+			var id = response[i].id;
+			$(link).attr('href', "url_del_perfil_del_autor");
+			var text = document.createElement("p");
+			var author = document.createElement("span");
+			
+			//se asigna el texto 
+			$(text).text(response[i].text+" - ")
+			//$(text).text(jQuery.timeago(response[i].added_at))
+			$(author).text("Autor Pendiente")
+			
+			//se pega a los contenedores 
+			link.appendChild(author);
+			//container.appendChild(link);
+			text.appendChild(link);
+			container.appendChild(text);
+			container.appendChild(document.createElement("hr"));
+			
+			$('#list-comment').prepend(container);
+		}
+}
+
+
+// get all comments
+ForumService.get_Comments = function () {
+
+	//$("#loader").show();
+
+	$.ajax({
+		type: 'GET',
+		url: URL_GET_COMMENTS,
+		async: true,
+		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+    	}
+	})
+	.done(function(response){
+		// se pasa a arreglo la respuesta 
+		response = response.results;
+		ForumService.append_comment_to_ask(response);
+		
+		
+	})
+	.fail(function(error){		
+		console.log(error);
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status || 401 == error.status)
+		{
+			
+		}
+		// if UNAUTHORIZED ->
+		else if(401 == error.status)
+		{
+			
+		}
+		//if INTERNAL SERVER ERROR
+		else if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		console.log("always");
 	});
 
 }

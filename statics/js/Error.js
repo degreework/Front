@@ -19,3 +19,10 @@ Error.url_not_found = function()
 {
 	Notify.show_error("Servidor", "No se pudo encontrar el recurso solicitado");
 }
+
+
+//urls
+Error.UNAUTHORIZED = function()
+{
+	Notify.show_error("Usuario", "No tienes permiso para realizar esta acción");
+}

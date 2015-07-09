@@ -6,7 +6,8 @@
 		<h4>Participa</h4>
 
 		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-1 margen_contenido">
-			<form class="" id="form_ask_foro">      
+			<form class="" id="form_ask_foro" hidden>
+				<div id="editor"></div>   
 	      		<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
 	      	</form>
 		</div>
@@ -20,14 +21,33 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
-	// ::::FORO ::::
-	//form Ask Foro
-	form_ask_foro = $("#form_ask_foro");
-	create_form(URL_CREATE_ASK_FORO, form_ask_foro, 'OPTIONS');
-	form_ask_foro.submit(function (e) {
-		e.preventDefault();
-		create_ask(form_ask_foro, URL_CREATE_ASK_FORO);
-	})
-</script>
+{% load staticfiles %}
+	<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+<link href="{% static 'libs/bootstrap-markdown-editor/dist/css/bootstrap-markdown-editor.css' %}" rel="stylesheet">
+<script src="{% static 'libs/marked/marked.min.js' %}"></script>
+<script src="{% static 'libs/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor.js' %}"></script>
+
+	<script>
+            jQuery(document).ready(function($) {
+            	// ::::FORO ::::
+				//form Ask Foro
+				form_ask_foro = $("#form_ask_foro");
+				create_form(URL_CREATE_ASK_FORO, form_ask_foro, 'OPTIONS');
+				
+				form_ask_foro.submit(function (e) {
+					e.preventDefault();
+					create_ask(form_ask_foro, URL_CREATE_ASK_FORO);
+				})
+
+				$("#form_ask_foro").show()
+				$("#id_text").hide()
+                $('#editor').markdownEditor({
+                    preview: true,
+                    onPreview: function (content, callback) {
+                        callback( marked(content) );
+                    }
+                });
+
+            });
+	</script>
 {% endblock scripts %}
