@@ -61,16 +61,25 @@
 <script src="{% static 'libs/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor.js' %}"></script>
 
 	<script type="text/javascript">
-		ForumService.get_Detail_Ask();
+
+		//Se obtiene el id 
+		var id = location.pathname.split("/");
+		id = id[id.length-1];
+		
+		ForumService.get_Detail_Ask(id);
 		ForumService.get_Answers();
 		ForumService.get_Comments();
 		// ::::FORO ::::
 		//form Answer from Ask  at Foro
 		form_answer_foro = $("#form_answer_foro");
-		//create_form(URL_CREATE_ANSWER_FORO, form_answer_foro, 'OPTIONS');
+		create_form(URL_CREATE_ANSWER_FORO, form_answer_foro, 'OPTIONS');
+
+
 		form_answer_foro.submit(function (e) {
 			e.preventDefault();
-			ForumService.create_answer(form_answer_foro, URL_CREATE_ANSWER_FORO);
+			$("#id_ask").val(id),
+			$("#id_text").val( $('#editor').markdownEditor('content') )
+			ForumService.create_answer(form_answer_foro, URL_CREATE_ANSWER_FORO);		
 		})
 
 
@@ -93,6 +102,7 @@
 				//$("#form_answer_foro input").hide()
                 $('#editor').markdownEditor({
                     preview: true,
+                    height: 100,
                     onPreview: function (content, callback) {
                         callback( marked(content) );
                     }
