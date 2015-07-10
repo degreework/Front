@@ -51,7 +51,7 @@ function show_errors (data, response) {
 
 
 
-function create_form(url, form, method)
+function create_form(url, form, method, callback)
 {
 	
 	if (UserService.isAutenticated()) {
@@ -194,6 +194,11 @@ function create_form(url, form, method)
 
 		//append inputs to form
 		form.prepend(container);
+		if(callback)
+		{
+			callback();
+		}
+		
 	})
 	.fail(function(error){		
 		console.log("error");
