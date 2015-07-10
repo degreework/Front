@@ -76,13 +76,8 @@ ForumService.get_Asks = function () {
 }
 
 
-ForumService.get_Detail_Ask = function () {
+ForumService.get_Detail_Ask = function (id) {
 	$("#loader").show();
-
-	//Se obtiene el id 
-	var id = location.pathname;
-	id = id.split("/");
-	id = id[id.length-1];
 	
 	$.ajax({
 		type: 'GET',
@@ -217,6 +212,7 @@ ForumService.create_answer = function (form, url)
 
 	formSerialized = form.serialize();
 	formData = new FormData($(form).get(0));
+	console.log(formData)
 
 	//remove all errors from before
 	remove_all_errors(formSerialized);

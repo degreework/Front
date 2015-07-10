@@ -22,10 +22,15 @@
 	
 	//form wiki create
 	form_create_wiki = $("#form_create_wiki");
+
+	//form update wiki
 	form_update_wiki = $("#form_update_wiki");
 
-	create_form(URL_CREATE_PAGE_WIKI+"0", form_update_wiki, 'OPTIONS');
+	//create page
 	create_form(URL_CREATE_PAGE_WIKI, form_create_wiki, 'OPTIONS');
+
+	//update page
+	//create_form(URL_CREATE_PAGE_WIKI+"0", form_update_wiki, 'OPTIONS');
 
 	$('#btn-wiki').click(function(e){
 		e.preventDefault();
