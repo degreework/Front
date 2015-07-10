@@ -3,7 +3,7 @@ function create_ask(form, url)
 	$("#loader").show();
 
 	formSerialized = form.serialize()
-	formData = new FormData($("#form_ask_foro").get(0))
+	formData = new FormData($(form).get(0))
 
 	//remove all errors from before
 	remove_all_errors(formSerialized);

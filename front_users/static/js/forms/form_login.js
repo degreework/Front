@@ -29,18 +29,8 @@ function login(form, url)
 		//if BAD REQUEST -> show error response in fields form
 		if(400 == error.status || 401 == error.status)
 		{
-			//create new div for error message
-			div = document.createElement("div");
-			
-			//set id to div
-			div.id = "error_username";
-			
-			//set class to div
-			//div.className = 
+			Notify.show_error("OK", "credenciales invalidas");
 
-			//append error message to div
-			div.appendChild(document.createTextNode(error.responseJSON.error_description));
-			$("#form_login").prepend(div);
 		}
 		/*
 		// if UNAUTHORIZED ->

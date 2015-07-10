@@ -164,7 +164,7 @@ ForumService.get_Answers = function () {
 			
 			//se asigna el texto 
 			$(titles).text(response[i].title)
-			$(summarys).text(response[i].summary)
+			$(summarys).text(response[i].text)
 			$(autor).text("Nombre del autor - ")
 			$(date).text(jQuery.timeago(response[i].added_at))
 			
@@ -213,10 +213,9 @@ ForumService.get_Answers = function () {
 
 ForumService.create_answer = function (form, url)
 {
-	$("#loader").show();
 
-	formSerialized = form.serialize()
-	//formData = new FormData($("#form_ask_foro").get(0))
+	formSerialized = form.serialize();
+	formData = new FormData($(form).get(0));
 
 	//remove all errors from before
 	remove_all_errors(formSerialized);
@@ -224,9 +223,9 @@ ForumService.create_answer = function (form, url)
 	$.ajax({
 		type: 'POST',
 		url: url,
-		data: formSerialized,
-    	//processData: false, // tell jQuery not to process the data
-    	//contentType: false, // tell jQuery not to set contentType
+		data: formData,//formSerialized,
+    	processData: false, // tell jQuery not to process the data
+    	contentType: false, // tell jQuery not to set contentType
     	beforeSend : function( xhr ) {
         	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
     	}
@@ -235,6 +234,7 @@ ForumService.create_answer = function (form, url)
 		/*
 		Register succesful, then do anything
 		*/
+		
 		form.trigger("reset");
 		Notify.show_success("OK", "Respuesta creada");
 	})
