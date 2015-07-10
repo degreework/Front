@@ -27,6 +27,7 @@ ForumService.get_Asks = function () {
 			$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
 			var titles = document.createElement("h3");
 			var summarys = document.createElement("p");
+			summarys.className = 'pull-right';
 			var author = document.createElement("p");
 			
 			//se asigna el texto 

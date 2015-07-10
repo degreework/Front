@@ -8,7 +8,7 @@ var main = function(){
   
   $('.icon-close').click(function(){
     $('.menu').animate({
-        left:'-190px'
+        left:'-100px'
     },200);
   
   });
