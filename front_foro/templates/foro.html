@@ -5,16 +5,13 @@
 	<link rel="stylesheet" href="{% static 'css/ask.css' %}">	
 {% endblock head %}
 	<div class="col-md-10 col-md-offset-1 capacity">
-		<h2 class="titulos">Bienvenido al Foro </h2>
-		<br>
-		<h4>Participa de las discuciones</h4>
-		<hr>
-		
-		<a class=" btn-create pull-right margen_contenido" href="{% url 'front_foro:create' %}">
-			Crea una nueva discusión
-		</a>
-	
+		<!--<h2 class="titulos">Bienvenido al Foro </h2>
+		<br>-->
+		{% include 'nav_foro.html' %}
 
+		<!--<a class=" btn-create pull-right margen_contenido" href="{% url 'front_foro:create' %}">
+			Crea una nueva discusión
+		</a>-->
 		<div class="asks margen_contenido">
 			
 		</div>

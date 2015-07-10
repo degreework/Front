@@ -28,7 +28,7 @@ body{
 	padding-top: 15px
 }
 
-
+/*-------------*/
 .footer
 {
 	background-color: #D51B23;
@@ -91,6 +91,29 @@ hr{
 	padding: 15px;
 }
 
+/*navegacion foro*/
+.nav_foro{
+	
+	border-bottom: 1px solid #ccc;
+}
+
+.nav-pills li{
+	margin-top: 12px;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	color:black;
+	margin-right: 5px;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+	background-color: #D51B23;
+	color: white;
+}
+
+.nav-pills li a{
+	color: black;
+}
+/*-------------------------------*/
 #form_answer_foro{
 	margin-top: 20px;
 }

@@ -1,22 +1,24 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
 	<div class="col-md-10 col-md-offset-1 capacity">
-		
+		{% include 'nav_foro.html' %}
+
 		<div class="row">
 			<h3 class="ask_title titulos"></h3>
-			<hr>
 			
 			<div class="col-md-9 col-md-offset-1">
+			
 				<div class="ask_summary"></div>
-				<hr>
-				<a class="ask_author_link"><span class="ask_author"></span></a>, <span class="ask_added_at"></span>
+				<a class="ask_author_link"><span class="ask_author"></span></a>
+				<span class="ask_added_at pull-right"></span>
+				
 			</div>		
 		</div>
 		<hr>
 		<div class="row">
 			<div id="list-comment" class="col-md-9 col-md-offset-2">
 
-				<a id="a-comment">Comentar</a>
+				<a class="btn-create" id="a-comment">agrega un comentario</a>
 				<div>
 					<form id="form-comment" hidden>
 						<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
@@ -33,7 +35,7 @@
 				<form class="" id="form_answer_foro">
 					<div id="editor">
 	                </div>
-	                
+	                <br>
 		      		<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
 		      	</form>
 			</div>
@@ -44,7 +46,7 @@
 
 
 		<div class="row">
-		<h3 class="titulos">Respuestas</h3>
+			<h3 class="titulos">Respuestas</h3>
 			<hr>
 			<div class="answer"></div>
 		</div>

@@ -1,0 +1,31 @@
+<div class="row nav_foro ">
+	<div class="col-md-6">
+		<h2>Foro</h2>
+	</div>
+	<div class="col-md-6">
+		<ul class="nav nav-pills pull-right">
+	  				<li role="presentation"><a href="{% url 'front_foro:foro' %}">discusiones</a></li>
+	  				<li role="presentation"><a href="{% url 'front_foro:create' %}">Crea una nueva discusión</a></li>
+		</ul>
+		
+	</div>
+</div>
+	
+{% block scripts %}
+	<script>
+		//active foro
+		var active = function()
+		{
+			var elementos = document.getElementsByClassName('nav nav-pills')[0].children;
+			var localizacion = window.location.href;
+
+			for (x in elementos){
+				if(localizacion == elementos[x].children[0].href){
+					elementos[x].setAttribute('class','active');
+				}
+			}
+		}
+
+		active();
+	</script>
+{% endblock scripts %}
