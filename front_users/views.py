@@ -21,6 +21,10 @@ def changePassword(request):
 def profile(request):
     return render_to_response('profile.html', {'title': 'Perfil | Name App'}, context_instance=RequestContext(request))
 
+def detail(request,id):
+    return render_to_response('userDetail.html', {'title': 'userDetail | Name App'}, context_instance=RequestContext(request))
+
+
 import json
 def settings(request):
 

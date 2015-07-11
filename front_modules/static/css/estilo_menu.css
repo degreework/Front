@@ -21,7 +21,7 @@
   list-style: none;
   color: black;
   border-bottom: 1px solid #ddd;
-  line-height: 30px;
+  /*line-height: 30px;*/
 }
 
 .menu a {

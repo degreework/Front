@@ -126,7 +126,7 @@ UserService.update_user = function(url, form)
 }
 
 
-// trae la informacion  (id, nicname, foto, nombre, apellido) de dropdowm
+// trae la informacion para crear la sesion  (id, nicname, foto, nombre, apellido) de dropdowm
 UserService.get_mini_user = function (url) {
 	$.ajax({
 		type: 'GET',
@@ -156,6 +156,146 @@ UserService.get_mini_user = function (url) {
 		// if UNAUTHORIZED ->
 		else if(401 == error.status)
 		{
+		}
+		//if INTERNAL SERVER ERROR
+		else if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		console.log("always");
+	});
+}
+
+//trae la info de un solo usuario 
+UserService.getUser = function(id){
+
+	$.ajax({
+		type: 'GET',
+		url: URL_DETAIL_USERS+id+"/",
+		async: true,
+		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+    	}
+	})
+	.done(function(response){
+		
+		// se pasa a arreglo la respuesta 
+		console.log(response);
+		$('.resume_user_profile').text(response.first_name + " " + response.last_name);
+		$('.pic_user_profile').attr("src",'http://127.0.0.1:8080'+response.thumb);
+		//console.log(response[0].id)
+		//console.log("id sesion: "+JSON.parse($.session.get('user')).id);
+
+		
+		// se crea el html     		
+		/*var container = document.createElement("div");
+		var link = document.createElement("a");
+		var id = response[i].id;
+		$(link).attr('href', host+":"+location.port+"/users/detail/"+id);
+		var name = document.createElement("h4");
+		
+		//se asigna el texto 
+		$(name).text(response[i].first_name + " " + response[i].last_name);
+		
+		//se pega a los contenedores 
+		link.appendChild(name);
+		container.appendChild(link);
+
+		$('.listUsers').prepend(container);*/
+		
+	})
+	.fail(function(error){		
+		console.log(error);
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status || 401 == error.status)
+		{
+			
+		}
+		// if UNAUTHORIZED ->
+		else if(401 == error.status)
+		{
+			
+		}
+		//if INTERNAL SERVER ERROR
+		else if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		console.log("always");
+	});
+
+}
+// trae todos los usuarios 
+UserService.get_users = function () {
+
+
+	$.ajax({
+		type: 'GET',
+		url: URL_BRING_ALL_USERS,
+		async: true,
+		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+    	}
+	})
+	.done(function(response){
+		
+		// se pasa a arreglo la respuesta 
+		response = response.results;
+		//console.log(response[0].id)
+		//console.log("id sesion: "+JSON.parse($.session.get('user')).id);
+
+		for (i = 0; i < response.length; i++) { 
+
+			if( JSON.parse($.session.get('user')).id != response[i].id){
+				
+				// se crea el html     		
+				var container = document.createElement("div");
+				var link = document.createElement("a");
+				var id = response[i].id;
+				$(link).attr('href', host+":"+location.port+"/users/detail/"+id);
+				var name = document.createElement("h4");
+				
+				//se asigna el texto 
+				$(name).text(response[i].first_name + " " + response[i].last_name);
+				
+				//se pega a los contenedores 
+				link.appendChild(name);
+				container.appendChild(link);
+				$('.listUsers').prepend(container);
+			}
+			
+		}
+		
+	})
+	.fail(function(error){		
+		console.log(error);
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status || 401 == error.status)
+		{
+			
+		}
+		// if UNAUTHORIZED ->
+		else if(401 == error.status)
+		{
+			
 		}
 		//if INTERNAL SERVER ERROR
 		else if(500 == error.status)

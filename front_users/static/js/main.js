@@ -9,13 +9,16 @@ var main = function(){
 	})
 
 	//action event to logout
-
 	$("#button_logout").click(function(e){
 		e.preventDefault();
 		UserService.deauthenticate(URL_LOGOUT);
 		UserView.showCurrentUser();
 	});
 	$("#loader").hide();
+
+
+	//bring users 
+	UserService.get_users();
 
 
 

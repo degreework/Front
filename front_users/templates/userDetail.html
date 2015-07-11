@@ -1,0 +1,45 @@
+{% extends 'template_base.html' %}
+{% block contenido %}
+	<div class="col-md-10 col-md-offset-1 capacity">
+
+		<!--<img class="pic_profile .img-responsive img-circle" src="">-->
+		<div class="row nav_foro">
+			<img class="pic_user_profile .img-responsive img-circle" src="">
+			<h2 class="resume_user_profile"></h2>
+		</div>
+		<br>
+		<div class="margen_contenido">
+			<div>
+				<form id="form-comment">
+					<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
+				</form>	
+			</div>
+			<br>
+			Actividad usuario detalle 
+		</div>
+
+		
+
+
+	</div>
+{% endblock %}
+{% block scripts %}
+
+<script type="text/javascript">
+
+		//Se obtiene el id 
+		var id = location.pathname.split("/");
+		id = id[id.length-1];
+
+		// se ontiene la informacion del usuario para el perfil 
+		UserService.getUser(id);
+		
+		//formulario para publicar comentarios 
+		form_comment_ask = $("#form-comment");
+		create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
+		form_comment_ask.submit(function (e) {
+			e.preventDefault();
+			CommentService.create(form_comment_ask, URL_CREATE_COMMENT, ForumService.append_comment_to_ask);
+		})
+</script>
+{% endblock scripts %}

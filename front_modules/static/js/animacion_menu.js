@@ -1,6 +1,6 @@
 var main = function(){
   
-  $('.icon-menu').click(function() {
+  $('.icon-menu').mouseover(function() {
     $('.menu').animate({
       left: '0px'
     }, 200);
