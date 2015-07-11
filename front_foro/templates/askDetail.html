@@ -16,39 +16,39 @@
 		</div>
 		<hr>
 		<div class="row">
-			<div id="list-comment" class="col-md-9 col-md-offset-2">
-
-				<a class="btn-create" id="a-comment">agrega un comentario</a>
-				<div>
-					<form id="form-comment" hidden>
-						<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
-					</form>	
-				</div>
+			<div id="list-comment" class=""></div>
+			<div class="">
+				<span class="load-comment"></span>
 			</div>
 			
+			<div>
+				<a class="btn-create" id="a-comment">agrega un comentario</a>
+				<form id="form-comment" hidden>
+					<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
+				</form>	
+			</div>
+		</div>	
+
+
+		<div class="row">
+			<h3 class="titulos"><span class="count-answer"></span>Respuestas</h3>
+			<hr>
+			<div class="answer"></div>
+			<div class="">
+				<span class="load-answer"></span>
+			</div>
 		</div>
-		
+
 		<div class="row">
 			<h3 class="titulos">Tu respuesta</h3>
 
 			<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
-				<form class="" id="form_answer_foro">
-					<div id="editor">
-	                </div>
-	                <br>
-		      		<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
+				<form class="" id="form_answer_foro" hidden>
+					<div id="editor"></div>
+					<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
 		      	</form>
-			</div>
-
-			
-		</div>
-		
-
-
-		<div class="row">
-			<h3 class="titulos">Respuestas</h3>
-			<hr>
-			<div class="answer"></div>
+		      	<div class="my-answer"></div>
+			</div>		
 		</div>
 		
 
@@ -63,31 +63,113 @@
 <script src="{% static 'libs/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor.js' %}"></script>
 
 	<script type="text/javascript">
+		function handle()
+		{
+			var input_ask = $(form_answer_foro).get(0)[0];
+			$(input_ask).hide();
+			$(input_ask).val(id);
+
+			var input_text = $(form_answer_foro).get(0)[1];
+			$(input_text).hide()
+			$('textarea').keyup(function(e){
+				$(input_text).val($('#editor').markdownEditor('content'))
+	        });
+		}
+
+		function clear_editor(answer)
+		{
+			console.log('clear_editor')
+			console.log(answer)
+			$('#form_answer_foro').remove();
+			ForumService.append_answer_to_ask(answer, $('.my-answer'));
+		}
+
+		function show_detail_answers (count, next, previus) {
+			//show answer count
+			if(count)
+			{
+				count += ' ';  
+			}
+			else
+			{
+				count = '0 ';
+			}
+			$(".count-answer").text(count)
+			
+			//show link to load more answer
+			if(next)
+			{
+				var link = document.createElement("a");
+				//s$(link).attr('href', next);
+				var message = document.createElement("span");
+				$(message).text("Ver más")
+				link.appendChild(message);
+				$(".load-answer").append(link)	
+				$(link).click(function(e){
+					e.preventDefault();
+					$(link).remove()
+					ForumService.get_Answers(next);
+				});
+			}
+			
+			//console.log(previus)
+		}
+
+		function show_detail_comments (count, next, previus) {
+			//console.log(count)
+			//console.log(next)
+			//console.log(previus)	
+			//show link to load more answer
+			if(next)
+			{
+				var link = document.createElement("a");
+				//$(link).attr('href', next);
+				var message = document.createElement("span");
+				$(message).text("Ver más comentarios")
+				link.appendChild(message);
+				$(".load-comment").append(link)					
+				$(link).click(function(e){
+					e.preventDefault();
+					$(link).remove()
+					ForumService.get_Comments(next);
+				});
+			}
+			
+			//console.log(previus)
+		}
+
 
 		//Se obtiene el id 
 		var id = location.pathname.split("/");
 		id = id[id.length-1];
 		
 		ForumService.get_Detail_Ask(id);
-		ForumService.get_Answers();
-		ForumService.get_Comments();
-		// ::::FORO ::::
-		//form Answer from Ask  at Foro
+		ForumService.get_Answers(URL_GET_ANSWERS_FORUM, show_detail_answers);
+		ForumService.get_Comments(URL_GET_COMMENTS, show_detail_comments);
+
+		
+		//###   ANSWER   ###
+		//form Answer, to Ask at Foro
 		form_answer_foro = $("#form_answer_foro");
-		create_form(URL_CREATE_ANSWER_FORO, form_answer_foro, 'OPTIONS');
+		create_form(URL_CREATE_ANSWER_FORO, form_answer_foro, 'OPTIONS', handle);
+		$(form_answer_foro).show();
+
 
 
 		form_answer_foro.submit(function (e) {
 			e.preventDefault();
 			$("#id_ask").val(id),
 			$("#id_text").val( $('#editor').markdownEditor('content') )
-			ForumService.create_answer(form_answer_foro, URL_CREATE_ANSWER_FORO);		
+			ForumService.create_answer(form_answer_foro, URL_CREATE_ANSWER_FORO, clear_editor);
 		})
+		//###   end ANSWER   ###
 
 
-		//comments
+		//###   COMMENT   ###
+		//Form Comment, to Comment at Ask
 		form_comment_ask = $("#form-comment");
 		create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
+
 		form_comment_ask.submit(function (e) {
 			e.preventDefault();
 			CommentService.create(form_comment_ask, URL_CREATE_COMMENT, ForumService.append_comment_to_ask);
@@ -98,6 +180,9 @@
 			$("#a-comment").hide()
 			$("#form-comment").show()
 		})
+		//###   end COMMENT   ###
+
+
 	</script>
 	<script>
             jQuery(document).ready(function($) {

@@ -126,54 +126,61 @@ ForumService.get_Detail_Ask = function (id) {
 	});
 }
 
+ForumService.append_answer_to_ask = function(response, div_container)
+{
+	for (i = 0; i < response.length; i++) { 
+		
+		// se crea el html     		
+		var container = document.createElement("div");
+		container.className = 'response';
+		//var link = document.createElement("a");
+		var date = document.createElement("span");
+		var autor = document.createElement("span");
+		var id = response[i].id;
+		//$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
+		var titles = document.createElement("h3");
+		var summarys = document.createElement("p");
+		
+		//se asigna el texto 
+		//$(titles).text(response[i].title)
+		$(summarys).text(response[i].text)
+		$(autor).text("Nombre del autor - ")
+		$(date).text(jQuery.timeago(response[i].added_at))
+		
+		//se pega a los contenedores 
+		//link.appendChild(titles);
+		//container.appendChild(link);
+		container.appendChild(summarys);
+		container.appendChild(autor);
+		container.appendChild(date);
+
+		
+		$(div_container).append(container);
+	}
+
+}
 
 // get answer list from a ask at forum
-ForumService.get_Answers = function () {
+ForumService.get_Answers = function (url, callback) {
 
 	$("#loader").show();
 
 	$.ajax({
 		type: 'GET',
-		url: URL_GET_ANSWERS_FORUM,
+		url: url,
 		async: true,
 		beforeSend : function( xhr ) {
         	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
     	}
 	})
 	.done(function(response){
-
-		console.log(response)
+		if(callback)
+		{
+			callback(response.count, response.next, response.previus);
+		}
 		// se pasa a arreglo la respuesta 
 		response = response.results;
-		for (i = 0; i < response.length; i++) { 
-			
-			// se crea el html     		
-			var container = document.createElement("div");
-			container.className = 'response';
-			//var link = document.createElement("a");
-			var date = document.createElement("span");
-			var autor = document.createElement("span");
-			var id = response[i].id;
-			//$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
-			var titles = document.createElement("h3");
-			var summarys = document.createElement("p");
-			
-			//se asigna el texto 
-			$(titles).text(response[i].title)
-			$(summarys).text(response[i].text)
-			$(autor).text("Nombre del autor - ")
-			$(date).text(jQuery.timeago(response[i].added_at))
-			
-			//se pega a los contenedores 
-			//link.appendChild(titles);
-			//container.appendChild(link);
-			container.appendChild(summarys);
-			container.appendChild(autor);
-			container.appendChild(date);
-
-			
-			$('.answer').prepend(container);
-		}
+		ForumService.append_answer_to_ask(response, $('.answer'))
 		
 	})
 	.fail(function(error){		
@@ -207,7 +214,7 @@ ForumService.get_Answers = function () {
 }
 
 
-ForumService.create_answer = function (form, url)
+ForumService.create_answer = function (form, url, callback)
 {
 
 	formSerialized = form.serialize();
@@ -234,6 +241,10 @@ ForumService.create_answer = function (form, url)
 		
 		form.trigger("reset");
 		Notify.show_success("OK", "Respuesta creada");
+		if(callback)
+		{
+			callback([response]);
+		}
 	})
 	.fail(function(error){		
 		console.log(error);
@@ -290,29 +301,32 @@ ForumService.append_comment_to_ask = function(response)
 			container.appendChild(text);
 			container.appendChild(document.createElement("hr"));
 			
-			$('#list-comment').prepend(container);
+			$('#list-comment').append(container);
 		}
 }
 
 
 // get all comments
-ForumService.get_Comments = function () {
+ForumService.get_Comments = function (url, callback) {
 
 	//$("#loader").show();
 
 	$.ajax({
 		type: 'GET',
-		url: URL_GET_COMMENTS,
+		url: url,
 		async: true,
 		beforeSend : function( xhr ) {
         	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
     	}
 	})
 	.done(function(response){
-		// se pasa a arreglo la respuesta 
+		console.log(response)
+		if(callback)
+		{
+			callback(response.count, response.next, response.previuss);
+		}
 		response = response.results;
-		ForumService.append_comment_to_ask(response);
-		
+		ForumService.append_comment_to_ask(response);	
 		
 	})
 	.fail(function(error){		
