@@ -224,3 +224,17 @@ function create_form(url, form, method, callback)
 		console.log("always");
 	});
 }
+
+
+//active foro
+var active = function()
+{
+	var elementos = document.getElementsByClassName('nav nav-pills')[0].children;
+	var localizacion = window.location.href;
+
+	for (x in elementos){
+		if(localizacion == elementos[x].children[0].href){
+			elementos[x].setAttribute('class','active');
+		}
+	}
+}

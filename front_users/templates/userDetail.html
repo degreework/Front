@@ -14,6 +14,9 @@
 					<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
 				</form>	
 			</div>
+			<div id="list-comment" class="col-md-9 col-md-offset-2">
+				
+			</div>
 			<br>
 			Actividad usuario detalle 
 		</div>
@@ -33,6 +36,9 @@
 
 		// se ontiene la informacion del usuario para el perfil 
 		UserService.getUser(id);
+		
+		//se traen los comentarios publicados en el perfil 
+		ForumService.get_Comments();
 		
 		//formulario para publicar comentarios 
 		form_comment_ask = $("#form-comment");

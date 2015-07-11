@@ -1,0 +1,55 @@
+{% extends 'template_base.html' %}
+{% block contenido %}
+	<div class="col-md-10 col-md-offset-1 capacity">
+		{% include 'nav_wiki.html' %}
+
+		<div class="row">
+			<h3 class="page_title titulos"></h3>
+			
+			<div class="col-md-9 col-md-offset-1">
+				
+				<div class="page_content"></div>
+			</div>		
+		</div>
+		
+		<!--<div class="row">
+			<div id="list-comment" class="col-md-9 col-md-offset-2">
+
+				<a class="btn-create" id="a-comment">agrega un comentario</a>
+				<div>
+					<form id="form-comment" hidden>
+						<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
+					</form>	
+				</div>
+			</div>
+			
+		</div>-->
+	</div>
+	
+{% endblock %}
+{% block scripts %}
+{% load staticfiles %}
+
+	<script type="text/javascript">
+
+		//Se obtiene el id 
+		var id = location.pathname.split("/");
+		id = id[id.length-1];
+		
+		WikiService.get_Detail_Page(id);
+	
+		//comments
+		/*form_comment_ask = $("#form-comment");
+		create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
+		form_comment_ask.submit(function (e) {
+			e.preventDefault();
+			CommentService.create(form_comment_ask, URL_CREATE_COMMENT, ForumService.append_comment_to_ask);
+		})
+
+		$("#a-comment").click(function (e) {
+			e.preventDefault()
+			$("#a-comment").hide()
+			$("#form-comment").show()
+		})*/
+	</script>
+{% endblock scripts %}

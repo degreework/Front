@@ -28,6 +28,9 @@ URL_GET_ANSWERS_FORUM = host+":8080/API/forum/answer/all";
 
 //Wiki
 URL_CREATE_PAGE_WIKI = host+":8080/API/wiki/";
+URL_BRING_ALL_PAGES = host+":8080/API/wiki/list/";
+URL_DETAIL_ONE_PAGE = host+":8080/API/wiki/view/";
+
 
 //Comments
 URL_CREATE_COMMENT = host+':8080/API/comment/';

@@ -9,6 +9,10 @@ def wiki(request):
     return render_to_response('wiki.html', {'title': 'wiki | Name App'}, context_instance=RequestContext(request))
 
 
+def detail(request,id):
+    return render_to_response('detailPage.html', {'title': 'wiki page | Name App'}, context_instance=RequestContext(request))
+
+
 def create(request):
     return render_to_response('wikiCreate.html', {'title': 'Create wiki | Name App'}, context_instance=RequestContext(request))
 
