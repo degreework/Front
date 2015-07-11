@@ -29,11 +29,19 @@
 <script src="{% static 'libs/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor.js' %}"></script>
 
 	<script>
+		function handle()
+		{
+			var input_text = $(form_ask_foro).get(0)[1];
+			$(input_text).hide()
+			$('textarea').keyup(function(e){
+				$(input_text).val($('#editor').markdownEditor('content'))
+	        });
+		}
             jQuery(document).ready(function($) {
             	// ::::FORO ::::
 				//form Ask Foro
 				form_ask_foro = $("#form_ask_foro");
-				create_form(URL_CREATE_ASK_FORO, form_ask_foro, 'OPTIONS');
+				create_form(URL_CREATE_ASK_FORO, form_ask_foro, 'OPTIONS', handle);
 				
 				form_ask_foro.submit(function (e) {
 					e.preventDefault();
