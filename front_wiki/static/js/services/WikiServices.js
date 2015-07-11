@@ -26,7 +26,7 @@ WikiService.create_page = function (form, url, callback)
 		Register succesful, then do anything
 		*/
 		console.log(response)
-		WikiService = response;
+		WikiService.page = response;
 		callback(response);
 		//form.trigger("reset");
 		//Notify.show_success("OK", "Respuesta creada");
