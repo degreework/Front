@@ -4,52 +4,80 @@
 		{% include 'nav_foro.html' %}
 
 		<div class="row">
+
+			<!-- se pega el titulo de la pregunta -->
 			<h3 class="ask_title titulos"></h3>
 			
-			<div class="col-md-9 col-md-offset-1">
-			
-				<div class="ask_summary"></div>
-				<a class="ask_author_link"><span class="ask_author"></span></a>
-				<span class="ask_added_at pull-right"></span>
+			<div class="col-md-9 content_ask">
 				
-			</div>		
+				<!-- se pega el contenido de la pregunta -->
+				<p class="ask_summary"></p>
+
+				<div class="col-md-11 col-sm-offset-1">
+
+					<!-- contenedor de los comentarios -->
+					<div id="list-comment" class="">
+						<div>
+							<span class="load-comment"></span>	
+						</div>
+						
+					</div>
+
+				</div>
+
+				<div class="col-md-12 link_comment">
+					<!-- btn para crear un comentario -->
+					<a class="btn-create" id="a-comment">agrega un comentario</a>
+	
+				</div>
+				
+				<div class="col-md-11 col-sm-offset-1">
+					<!-- formulario para crear el comentario -->
+						<form id="form-comment" hidden>
+							<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
+						</form>	
+					
+				</div>
+				
+			</div>
+
+			<!-- contenedor con info sobre la pregunta -->
+			<div class="col-md-3 info_ask">
+				<p>
+					Preguntado por:
+						<a class="ask_author_link">
+							<span class="ask_author"></span>
+						</a>
+				</p>
+				<span class="ask_added_at"></span>
+			</div>
 		</div>
-		<hr>
-		<div class="row">
-			<div id="list-comment" class=""></div>
-			<div class="">
-				<span class="load-comment"></span>
-			</div>
-			
-			<div>
-				<a class="btn-create" id="a-comment">agrega un comentario</a>
-				<form id="form-comment" hidden>
-					<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
-				</form>	
-			</div>
-		</div>	
 
-
-		<div class="row">
-			<h3 class="titulos"><span class="count-answer"></span>Respuestas</h3>
-			<hr>
-			<div class="answer"></div>
-			<div class="">
-				<span class="load-answer"></span>
-			</div>
-		</div>
-
-		<div class="row">
+		<div class="row your_answer">
 			<h3 class="titulos">Tu respuesta</h3>
 
 			<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
 				<form class="" id="form_answer_foro" hidden>
 					<div id="editor"></div>
+					<br>
 					<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
 		      	</form>
 		      	<div class="my-answer"></div>
 			</div>		
 		</div>
+		
+		
+		<div class="row">
+			
+			<h3 class="titulos"><span class="count-answer"></span></h3>
+			
+			<div class="answer"></div>
+				<div class="">
+					<span class="load-answer"></span>
+				</div>
+		</div>
+
+		
 		
 
 	</div>
@@ -94,8 +122,14 @@
 			{
 				count = '0 ';
 			}
-			$(".count-answer").text(count)
-			
+
+			if(count == '1 '){
+				$(".count-answer").text(count + 'Respuesta')
+			}else{
+				$(".count-answer").text(count + 'Respuestas')	
+			}
+
+
 			//show link to load more answer
 			if(next)
 			{
@@ -177,9 +211,12 @@
 
 		$("#a-comment").click(function (e) {
 			e.preventDefault()
-			$("#a-comment").hide()
-			$("#form-comment").show()
+			$("#a-comment").fadeOut("slow")//.hide()
+			$("#form-comment").fadeIn("slow")//.show()
 		})
+
+		
+	
 		//###   end COMMENT   ###
 
 

@@ -15,8 +15,10 @@ ForumService.get_Asks = function () {
 	})
 	.done(function(response){
 		
+
 		// se pasa a arreglo la respuesta 
 		response = response.results;
+		console.log(response);
 		for (i = 0; i < response.length; i++) { 
 			
 			// se crea el html     		
@@ -26,20 +28,25 @@ ForumService.get_Asks = function () {
 			var id = response[i].id;
 			$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
 			var titles = document.createElement("h3");
-			var summarys = document.createElement("p");
-			summarys.className = 'pull-right';
-			var author = document.createElement("p");
+			var summarys = document.createElement("span");
+			//summarys.className = 'pull-right';
+			var author = document.createElement("span");
+			var count = document.createElement("span");
+			count.className= "count-answer pull-right number_answer";
 			
 			//se asigna el texto 
+			$(count).text('n respuestas')
 			$(titles).text(response[i].title)
 			$(summarys).text(jQuery.timeago(response[i].added_at))
-			$(author).text("Autor apellido")
+			$(author).text("Autor apellido - ")
 			
 			//se pega a los contenedores 
+			author.appendChild(summarys)
 			link.appendChild(titles);
 			container.appendChild(link);
-			container.appendChild(summarys);
+			//container.appendChild(summarys);
 			container.appendChild(author);
+			container.appendChild(count);
 			
 			$('.asks').prepend(container);
 		}
@@ -133,26 +140,30 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		// se crea el html     		
 		var container = document.createElement("div");
 		container.className = 'response';
-		//var link = document.createElement("a");
-		var date = document.createElement("span");
-		var autor = document.createElement("span");
+		var info_user = document.createElement("div");
+		info_user.className = "col-md-3";
+		var link = document.createElement("a");
+		var date = document.createElement("p");
+		var autor = document.createElement("p");
 		var id = response[i].id;
 		//$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
 		var titles = document.createElement("h3");
-		var summarys = document.createElement("p");
+		var summarys = document.createElement("div");
+		summarys.className = "col-md-9"
 		
 		//se asigna el texto 
 		//$(titles).text(response[i].title)
 		$(summarys).text(response[i].text)
-		$(autor).text("Nombre del autor - ")
-		$(date).text(jQuery.timeago(response[i].added_at))
+		$(autor).text("Nombre del autor")
+		$(date).text(""+jQuery.timeago(response[i].added_at))
 		
 		//se pega a los contenedores 
-		//link.appendChild(titles);
-		//container.appendChild(link);
+		link.appendChild(autor);
+		info_user.appendChild(link);
+		info_user.appendChild(date);
+		
 		container.appendChild(summarys);
-		container.appendChild(autor);
-		container.appendChild(date);
+		container.appendChild(info_user);
 
 		
 		$(div_container).append(container);
@@ -174,6 +185,7 @@ ForumService.get_Answers = function (url, callback) {
     	}
 	})
 	.done(function(response){
+		console.log(response)
 		if(callback)
 		{
 			callback(response.count, response.next, response.previus);
@@ -181,6 +193,10 @@ ForumService.get_Answers = function (url, callback) {
 		// se pasa a arreglo la respuesta 
 		response = response.results;
 		ForumService.append_answer_to_ask(response, $('.answer'))
+
+		//height div info
+		//var height = $('.content_ask').innerHeight()
+		//$('.info_ask').css('height',height);
 		
 	})
 	.fail(function(error){		
@@ -282,25 +298,25 @@ ForumService.append_comment_to_ask = function(response)
 			
 			// se crea el html     		
 			var container = document.createElement("div");
-			container.className = '';
+			container.className = 'comments';
 			var link = document.createElement("a");
 			var id = response[i].id;
 			$(link).attr('href', "url_del_perfil_del_autor");
 			var text = document.createElement("p");
 			var author = document.createElement("span");
+
 			
 			//se asigna el texto 
-			$(text).text(response[i].text+" - ")
-			//$(text).text(jQuery.timeago(response[i].added_at))
+			$(text).text(response[i].text+"")
 			$(author).text("Autor Pendiente")
 			
 			//se pega a los contenedores 
 			link.appendChild(author);
-			//container.appendChild(link);
-			text.appendChild(link);
+			container.appendChild(link);
 			container.appendChild(text);
-			container.appendChild(document.createElement("hr"));
+			//container.appendChild(document.createElement("hr"));
 			
+
 			$('#list-comment').append(container);
 		}
 }
