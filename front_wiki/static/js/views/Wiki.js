@@ -51,8 +51,6 @@ Wiki.show_page_content = function (content, preview)
 	//set current title to title input
 	$("#id_title").val(WikiService.page.title)
 
-	$("#id_markup").val('Markdown')
-
 	//here should set current page content to raw input
 	//show new form
 	$(form_edit_wiki).show();
@@ -69,7 +67,6 @@ Wiki.show_page_content = function (content, preview)
 		//remove inputs, ALERT:dont delete this
 		$("#id_slug").remove();
 		$("#id_title").remove();
-		$("#id_markup").remove();
 		//show new content
 		$(".page_content").show();
 	})
