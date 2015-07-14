@@ -5,7 +5,7 @@ from django.template.context import RequestContext
 
 # Create your views here.
 def evaluations(request):
-    return render_to_response('evaluations.html', {'title': 'evaluation | Name App'}, context_instance=RequestContext(request))
+    return render_to_response('listEvaluations.html', {'title': 'evaluation | Name App'}, context_instance=RequestContext(request))
 
 
 def detail(request,id):

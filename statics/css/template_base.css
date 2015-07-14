@@ -149,27 +149,44 @@ hr{
 
 
 /*nav foro*/
-.nav_foro{
-	
+.navigation{	
 	border-bottom: 1px solid #ccc;
+	padding: 15px 15px;
 }
 
-.nav-pills li{
-	margin-top: 12px;
+.navbar-brand {
+	font-size: 30px;
+}
+
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+	color: #333;
+}
+
+.navbar-default {
+	color: black;
+	border:none;
+	background-color: white;
+	border-bottom: 1px solid #eee;
+	padding: 0px;
+}
+
+.navbar-default .navbar-brand {
+  color: #333;
+}
+
+.navbar-nav li{
+	margin-top: 10px;
 	background-color: #eee;
-	border: 1px solid #ccc;
 	color:black;
 	margin-right: 5px;
 }
 
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
 	background-color: #D51B23;
 	color: white;
 }
 
-.nav-pills li a{
-	color: black;
-}
 
 /*asks*/
 .info_ask{

@@ -250,7 +250,7 @@ function create_form(url, form, method, callback)
 //active foro
 var active = function()
 {
-	var elementos = document.getElementsByClassName('nav nav-pills')[0].children;
+	var elementos = document.getElementsByClassName('nav navbar-nav')[0].children;
 	var localizacion = window.location.href;
 
 	for (x in elementos){

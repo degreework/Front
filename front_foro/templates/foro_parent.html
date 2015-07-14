@@ -7,18 +7,17 @@
 	scripts to markup
 {% endcomment %}
 {% block head %}
-{% include "header_wiki.html" %}
 {% endblock head %}
 
 
 {% block contenido %}
 
 <div class="col-md-12 capacity">
-	{% include 'nav_wiki.html' %}	
+	{% include 'nav_foro.html' %}	
 	<div class="margen_contenido">
-			{% block wiki_content %}
+			{% block foro_content %}
 		
-			{% endblock wiki_content %}		
+			{% endblock foro_content %}		
 	</div>
 </div>
 {% endblock %}

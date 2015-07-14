@@ -1,24 +1,25 @@
 {% extends 'template_base.html' %}
 {% comment %}
-	Parent for Wiki	
+	Parent for Activities
 {% endcomment %}
 
 {% comment %}
 	scripts to markup
 {% endcomment %}
 {% block head %}
-{% include "header_wiki.html" %}
 {% endblock head %}
 
 
 {% block contenido %}
 
 <div class="col-md-12 capacity">
-	{% include 'nav_wiki.html' %}	
+
+	{% include 'nav_activities.html' %}	
 	<div class="margen_contenido">
-			{% block wiki_content %}
+
+			{% block activities_content %}
 		
-			{% endblock wiki_content %}		
+			{% endblock activities_content %}		
 	</div>
 </div>
 {% endblock %}

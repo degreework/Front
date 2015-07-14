@@ -1,28 +1,31 @@
-{% extends 'template_base.html' %}
-{% block contenido %}
-	<div class="col-md-12 capacity">
-		<!--<h2 class="titulos">Crea tu pregunta</h2>
-		<br>-->
-		{% include 'nav_foro.html' %}
+{% extends "foro_parent.html" %}
+{% comment %}
+	template for create a ask 
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block foro_content %}
+	<div class="col-md-12">
 		<br><br>
-		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-1 margen_contenido">
+		<div class="col-md-7 col-sm-7 col-xs-7  ">
 			<form class="" id="form_ask_foro" hidden>
 				<div id="editor"></div>   
 				<br>
 	      		<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
 	      	</form>
 		</div>
-		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base margen_contenido">
+		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
 			<h4>¿Cómo preguntar?</h4>
 			<p>Esto es sobre algoritmia
 			Se específico, detalla bien tu duda o inconveniente, la comunidad está para ayudarte y tu eres parte de ella...bla bla bla</p>
 		</div>
 	</div>
 
-{% endblock %}
+{% endblock foro_content %}
 
 {% block scripts %}
-{% load staticfiles %}
+
 	<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
 <link href="{% static 'libs/bootstrap-markdown-editor/dist/css/bootstrap-markdown-editor.css' %}" rel="stylesheet">
 <script src="{% static 'libs/marked/marked.min.js' %}"></script>

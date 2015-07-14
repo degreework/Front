@@ -1,16 +1,16 @@
 {% extends 'nav.html' %}
 {% block title %}
-	<span class="navbar-brand" href="#">Foro module name</span>
+	<span class="navbar-brand" href="#">Materiales module name</span>
 {% endblock title %}		
 
 {% block items %}
 
 	<li role="presentation">
-		<a href="{% url 'front_foro:foro' %}">discusiones</a>
+		<a href="{% url 'front_resource:resource' %}">Materiales</a>
 	</li>
 
 	<li role="presentation">
-		<a href="{% url 'front_foro:create' %}">Crea una nueva discusión</a>
+		<a href="{% url 'front_resource:create' %}">Aporta un nuevo material</a>
 	</li>
 
 {% endblock items %}
@@ -20,4 +20,3 @@
 		active();
 	</script>
 {% endblock scripts %}
-

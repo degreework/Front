@@ -5,7 +5,7 @@ from django.template.context import RequestContext
 
 # Create your views here.
 def foro(request):
-    return render_to_response('foro.html', {'title': 'foro | Name App'}, context_instance=RequestContext(request))
+    return render_to_response('foroList.html', {'title': 'foro | Name App'}, context_instance=RequestContext(request))
 
 
 def detail(request,id):

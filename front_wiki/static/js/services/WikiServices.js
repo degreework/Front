@@ -135,19 +135,19 @@ WikiService.get_All_Pages = function () {
 		for (i = 0; i < response.length; i++) { 
 			
 			// se crea el html     		
-			var container = document.createElement("div");
+			var container = document.createElement("li");
 			//container.className = 'question';
 			var link = document.createElement("a");
 			var id = response[i].id;
 			$(link).attr('href', host+":"+location.port+"/wiki/detail/"+id);
-			var titles = document.createElement("spam");
+			//var titles = document.createElement("li");
 			
 			//se asigna el texto 
-			$(titles).text(response[i].title)
+			$(link).text(response[i].title)
 
 			//se pega a los contenedores 
-			link.appendChild(titles);
 			container.appendChild(link);
+			//container.appendChild(titles);
 			
 			$('.pages').prepend(container);
 		}

@@ -5,7 +5,7 @@ from django.template.context import RequestContext
 
 # Create your views here.
 def resource(request):
-    return render_to_response('resource.html', {'title': 'resource | Name App'}, context_instance=RequestContext(request))
+    return render_to_response('listResource.html', {'title': 'resource | Name App'}, context_instance=RequestContext(request))
 
 
 def detail(request,id):

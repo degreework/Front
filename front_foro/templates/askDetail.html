@@ -1,7 +1,13 @@
-{% extends 'template_base.html' %}
-{% block contenido %}
-	<div class="col-md-10 col-md-offset-1 capacity">
-		{% include 'nav_foro.html' %}
+{% extends "foro_parent.html" %}
+
+{% comment %}
+	template for view a ask with his answers and comments 
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block foro_content %}
+	<div class="col-md-12">
 
 		<div class="row">
 
@@ -53,6 +59,7 @@
 			</div>
 		</div>
 
+		<!-- contenedor con el formulario para dejar mi respuesta -->
 		<div class="row your_answer">
 			<h3 class="titulos">Tu respuesta</h3>
 
@@ -66,7 +73,7 @@
 			</div>		
 		</div>
 		
-		
+		<!-- contenedor con las respuestas de la pregunta -->
 		<div class="row">
 			
 			<h3 class="titulos"><span class="count-answer"></span></h3>
@@ -76,19 +83,17 @@
 					<span class="load-answer"></span>
 				</div>
 		</div>
-
-		
-		
-
 	</div>
 	
-{% endblock %}
+	
+{% endblock foro_content %}
+
 {% block scripts %}
-{% load staticfiles %}
+
 	<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
-<link href="{% static 'libs/bootstrap-markdown-editor/dist/css/bootstrap-markdown-editor.css' %}" rel="stylesheet">
-<script src="{% static 'libs/marked/marked.min.js' %}"></script>
-<script src="{% static 'libs/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor.js' %}"></script>
+	<link href="{% static 'libs/bootstrap-markdown-editor/dist/css/bootstrap-markdown-editor.css' %}" rel="stylesheet">
+	<script src="{% static 'libs/marked/marked.min.js' %}"></script>
+	<script src="{% static 'libs/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor.js' %}"></script>
 
 	<script type="text/javascript">
 		function handle()
