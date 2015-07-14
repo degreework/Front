@@ -26,3 +26,9 @@ Error.UNAUTHORIZED = function()
 {
 	Notify.show_error("Usuario", "No tienes permiso para realizar esta acción");
 }
+
+//Forms
+Error.BAD_REQUEST = function()
+{
+	Notify.show_error("DATOS", "Los datos ingresados están incompletos");
+}

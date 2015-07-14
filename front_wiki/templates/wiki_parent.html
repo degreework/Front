@@ -1,0 +1,24 @@
+{% extends 'template_base.html' %}
+{% comment %}
+	Parent for Wiki	
+{% endcomment %}
+
+{% comment %}
+	scripts to markup
+{% endcomment %}
+{% block head %}
+{% include "header_wiki.html" %}
+{% endblock head %}
+
+
+{% block contenido %}
+
+<div class="col-md-10 col-md-offset-1 capacity">
+	{% include 'nav_wiki.html' %}	
+	<br>
+	{% block wiki_content %}
+		
+	{% endblock wiki_content %}
+</div>
+
+{% endblock %}

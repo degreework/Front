@@ -1,0 +1,15 @@
+{% extends "wiki_parent.html" %}
+{% comment %}
+	template for listing wiki pages
+{% endcomment %}
+
+{% block wiki_content %}
+	Muestreme la historia
+	<div class="pages margen_contenido"></div>		
+{% endblock wiki_content %}
+
+{% block scripts %}
+<script>
+	WikiService.get_history(URL_GET_WIKI_HISTORY+'88/');
+</script>
+{% endblock scripts %}

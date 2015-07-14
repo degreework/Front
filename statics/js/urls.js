@@ -31,6 +31,9 @@ URL_CREATE_PAGE_WIKI = host+":8080/API/wiki/";
 URL_BRING_ALL_PAGES = host+":8080/API/wiki/list/";
 URL_DETAIL_ONE_PAGE = host+":8080/API/wiki/view/";
 
+URL_GET_ALL_WIKI_REQUEST = host+":8080/API/wiki/list/";
+URL_GET_WIKI_HISTORY = host+':8080/API/wiki/history/';
+
 
 //Comments
 URL_CREATE_COMMENT = host+':8080/API/comment/';

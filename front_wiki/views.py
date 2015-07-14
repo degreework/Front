@@ -6,16 +6,19 @@ from django.template.context import RequestContext
 
 # Create your views here.
 def wiki(request):
-    return render_to_response('wiki.html', {'title': 'wiki | Name App'}, context_instance=RequestContext(request))
+    return render_to_response('wikiList.html', {'title': 'Wiki | Name App'}, context_instance=RequestContext(request))
 
 
 def detail(request,id):
-    return render_to_response('detailPage.html', {'title': 'wiki page | Name App'}, context_instance=RequestContext(request))
+    return render_to_response('detailPage.html', {'title': 'Wiki page | Name App'}, context_instance=RequestContext(request))
 
 
 def create(request):
-    return render_to_response('wikiCreate.html', {'title': 'Create wiki | Name App'}, context_instance=RequestContext(request))
+    return render_to_response('wikiCreate.html', {'title': 'Create page | Name App'}, context_instance=RequestContext(request))
 
 
-def edit(request):
-    return render_to_response('wikiEdit.html', {'title': 'edit wiki | Name App'}, context_instance=RequestContext(request))
+def request(request):
+    return render_to_response('wikiRequest.html', {'title': 'Request edition | Name App'}, context_instance=RequestContext(request))
+
+def history(request, id):
+    return render_to_response('historyPage.html', {'title': 'History | Name App'}, context_instance=RequestContext(request))
