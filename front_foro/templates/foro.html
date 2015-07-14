@@ -4,7 +4,7 @@
 {% block head %}
 	<link rel="stylesheet" href="{% static 'css/ask.css' %}">	
 {% endblock head %}
-	<div class="col-md-10 col-md-offset-1 capacity">
+	<div class="col-md-12 capacity">
 		<!--<h2 class="titulos">Bienvenido al Foro </h2>
 		<br>-->
 		{% include 'nav_foro.html' %}
@@ -22,5 +22,6 @@
 {% block scripts %}
 	<script>
 		ForumService.get_Asks();
+		//ForumService.get_Answers(URL_GET_ANSWERS_FORUM, show_detail_answers);
 	</script>
 {% endblock scripts %}

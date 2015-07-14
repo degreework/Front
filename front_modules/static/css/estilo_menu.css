@@ -1,7 +1,7 @@
 
 /* Initial menu */
 .menu {
-  background: rgba(238,238,238,0.95); 
+  background: rgba(238,238,238,1); 
   opacity: 1;
   border-right: 5px solid  #ccc;
   left: -100px;  /* start off behind the scenes */
@@ -13,19 +13,22 @@
 
 /* Basic styling */
 .menu ul {
-  margin: 0;
+  border-top: 1px solid #636366;
+  list-style: none;
+  margin: 40px 0 0 0;
   padding: 0;
 }
 
 .menu li {
-  list-style: none;
-  color: black;
-  border-bottom: 1px solid #ddd;
-  /*line-height: 30px;*/
+  border-bottom: 1px solid #636366;
+  line-height: 45px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-top: 3px;
 }
 
 .menu a {
-  color: black;
+  /*color: #fff;*/
   font-size: 15px;
   text-decoration: none;
 }
@@ -38,18 +41,16 @@
 
 .icon-menu {
   /*color: #D51B23;*/
+  text-align: center;
   cursor: pointer;
   font-size: 16px;
   margin-right: 15px;
-  padding-top: 17px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+  padding-top: 25px;
+  text-decoration: none;
 }
 
 .icon-menu i {
   margin-right: 5px;
-}
-
-/*acordeon*/
-.panel-default>.panel-heading{
-  color:  black;
-  opacity: 0.7;
 }

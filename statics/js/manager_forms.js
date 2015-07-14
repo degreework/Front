@@ -136,6 +136,12 @@ function create_form(url, form, method, callback)
 				}
 				else if('image upload' == value.type)
 				{
+					//creat label for input
+					var label = document.createElement("label");
+					//set text to label
+					label.appendChild(document.createTextNode('Selecciona una foto de perfil'));
+					field_div.appendChild(label);
+					
 					input.type = 'file';
 					//set max length to input
 					input.maxLength = null

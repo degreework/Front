@@ -84,12 +84,14 @@ UserService.update_user = function(url, form)
 		$('#id_photo').remove();
 		$('#id_password').remove();
 		//fill the information of user in the input 
-		$.each(response, function(key, value) {
+		/*$.each(response, function(key, value) {
 			$('#id_'+key).attr('placeholder', $('#id_'+key).attr('placeholder') +': '+value);
 			if('id_'+key === 'id_plan'){
 				$('#id_'+key).val(value); 			
 			}
-		});
+		});*/
+
+		console.log(response)
 		UserService.get_mini_user(URL_CURRENT_USER);
 		UserView.showCurrentUser();
 		Notify.show_success("OK", "La info ha sido actualizada");
@@ -137,6 +139,7 @@ UserService.get_mini_user = function (url) {
     	}
 	})
 	.done(function(response){
+		console.log(response)
 		$.session.remove('user');
 		$.session.set('user', JSON.stringify(response));
 	})
@@ -185,7 +188,7 @@ UserService.getUser = function(id){
 		// se pasa a arreglo la respuesta 
 		console.log(response);
 		$('.resume_user_profile').text(response.first_name + " " + response.last_name);
-		$('.pic_user_profile').attr("src",'http://127.0.0.1:8080'+response.thumb);
+		$('.pic_user_profile').attr("src",'http://127.0.0.1:8080'+response.thumb[1]);
 		//console.log(response[0].id)
 		//console.log("id sesion: "+JSON.parse($.session.get('user')).id);
 
