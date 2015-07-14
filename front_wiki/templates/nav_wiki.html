@@ -4,8 +4,13 @@
 	</div>
 	<div class="col-md-6">
 		<ul class="nav nav-pills pull-right">
-	  				<li role="presentation"><a href="{% url 'front_wiki:wiki' %}">Contenido</a></li>
-	  				<li role="presentation"><a href="{% url 'front_wiki:create' %}">Crea una nuevo tema</a></li>
+			<li role="presentation">
+	  			<a href="{% url 'front_wiki:history' 0 %}">Historial</a></li>
+
+	  		<li role="presentation">
+	  			<a href="{% url 'front_wiki:wiki' %}">Contenido</a></li>
+	  		<li role="presentation">
+	  			<a href="{% url 'front_wiki:create' %}">Crea una nuevo tema</a></li>
 		</ul>
 		
 	</div>

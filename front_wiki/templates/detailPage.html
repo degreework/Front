@@ -1,16 +1,20 @@
-{% extends 'template_base.html' %}
-{% block contenido %}
-	<div class="col-md-12 capacity">
-		{% include 'nav_wiki.html' %}
+{% extends "wiki_parent.html" %}
+{% comment %}
+	template for view a wiki page
+{% endcomment %}
 
-		<div class="row">
-			<h3 class="page_title titulos"></h3>
-			
-			<div class="col-md-9 col-md-offset-1">
-				
-				<div class="page_content"></div>
-			</div>		
-		</div>
+
+{% block wiki_content %}
+<div class="row">
+	
+	{% include "page_wiki.html" %}
+	
+	<form id="form_edit_wiki" hidden>
+		<div id="editor"></div>
+		<button class="btn btn-default pull-right" type="submit" name="action" id="btn-wiki">Guardar</button>
+	</form>	
+
+</div>
 		
 		<!--<div class="row">
 			<div id="list-comment" class="col-md-9 col-md-offset-2">
@@ -24,32 +28,33 @@
 			</div>
 			
 		</div>-->
-	</div>
 	
-{% endblock %}
+{% endblock wiki_content %}
+
 {% block scripts %}
-{% load staticfiles %}
 
-	<script type="text/javascript">
+<script type="text/javascript">
 
-		//Se obtiene el id 
-		var id = location.pathname.split("/");
-		id = id[id.length-1];
-		
-		WikiService.get_Detail_Page(id);
+	//Se obtiene el id 
+	var id = location.pathname.split("/");
+	id = id[id.length-1];
 	
-		//comments
-		/*form_comment_ask = $("#form-comment");
-		create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
-		form_comment_ask.submit(function (e) {
-			e.preventDefault();
-			CommentService.create(form_comment_ask, URL_CREATE_COMMENT, ForumService.append_comment_to_ask);
-		})
+	WikiService.get_Detail_Page(id, Wiki.show_page_content);
 
-		$("#a-comment").click(function (e) {
-			e.preventDefault()
-			$("#a-comment").hide()
-			$("#form-comment").show()
-		})*/
-	</script>
+	//comments
+	/*form_comment_ask = $("#form-comment");
+	create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
+	form_comment_ask.submit(function (e) {
+		e.preventDefault();
+		CommentService.create(form_comment_ask, URL_CREATE_COMMENT, ForumService.append_comment_to_ask);
+	})
+
+	$("#a-comment").click(function (e) {
+		e.preventDefault()
+		$("#a-comment").hide()
+		$("#form-comment").show()
+	})*/
+
+		
+</script>
 {% endblock scripts %}

@@ -1,30 +1,26 @@
-{% extends 'template_base.html' %}
-{% block contenido %}
-	<div class="col-md-12 capacity">
-		{% include 'nav_wiki.html' %}
-	
-		<div class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 margen_contenido">
-			
-			
-				
-				<form id="form_create_wiki"></form>
-		      	<form id="form_update_wiki"></form>	
-		      	<div id="editor"></div>
-		      	
-				<button class="btn btn-default pull-right" type="submit" name="action" id="btn-wiki">Crear</button>
-		</div>
+{% extends "wiki_parent.html" %}
+{% comment %}
+	template for listing wiki pages
+{% endcomment %}
+
+
+
+{% block wiki_content %}
+<div class="margen_contenido">
+
+	<div id="editaded_page" hidden>
+		{% include "page_wiki.html" %}
 	</div>
 
-{% endblock %}
+	<form id="form_create_wiki" hidden>
+		<div id="editor"></div>
+		<button class="btn btn-default pull-right" type="submit" name="action" id="btn-wiki">Guardar</button>
+	</form>	
+		      	
+</div>
+{% endblock wiki_content %}
 
 {% block scripts %}
-
-{% load staticfiles %}
-	<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
-<link href="{% static 'libs/bootstrap-markdown-editor/dist/css/bootstrap-markdown-editor.css' %}" rel="stylesheet">
-<script src="{% static 'libs/marked/marked.min.js' %}"></script>
-<script src="{% static 'libs/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor.js' %}"></script>
-
 
 <script>
 
@@ -37,80 +33,52 @@
 	}
 
 	function handle()
-	{		
+	{
+		/*
+		* Event listener to form
+		*/
+
+		//append editor content to raw input
+		$('textarea').keyup(function(e){
+			$("#id_raw").val($('#editor').markdownEditor('content'))
+	    });
+
+		//generate slug
 		$($("input[name=title]")[0]).keyup( function(){
 			var title = $(this).val();
             var url = $('input#id_slug');
             $($("input[name=slug]")[0]).val(slug(title));
         });
 
-        $("#form_update_wiki").hide()
+        //show form
+        $(form_create_wiki).show()
 	}
-    
-    function update()
-    {
-		WikiService.update_page(form_update_wiki, URL_CREATE_PAGE_WIKI+WikiService.page.id)
-    }
 
-    function set_values()
-    {
-    	console.log( $("#form_create_wiki").serialize() )
-    	console.log( $("#form_update_wiki").serialize() )
+	function create_succes (response) {
+		$("#form_create_wiki").hide();
+		Wiki.show_page_content(response);
+		$("#editaded_page").show();
+	}
 
-    	/*
-    	fields = $("#form_create_wiki").serialize().split('&');
-    	var json = {};
-			
-		for (i=0, size=fields.length; i < size; i++) {
-			var individual = fields[i].split('=');
-			json[individual[0]] = individual[1];
-		}
-
-		console.log(json)
-		console.log(json.title)*/
-
-		$($("input[name=title]")[1]).val($($("input[name=title]")[0]).val())
-		//$("#id_raw").val( $('#editor').markdownEditor('content') );
-		$("#id_raw").val( "no quiere funcar el perro este" );
-
-
-		console.log( $("#form_create_wiki").serialize() )
-    	console.log( $("#form_update_wiki").serialize() )
-    }
-
-    //form wiki create
-	form_create_wiki = $("#form_create_wiki");
-
-	//form update wiki
-	form_update_wiki = $("#form_update_wiki");
-
-
-	$('#btn-wiki').click(function(e){
+	$('#form_create_wiki').submit(function(e){
 		e.preventDefault();
-		set_values();
 		WikiService.create_page(
 			form_create_wiki,
 			URL_CREATE_PAGE_WIKI,
-			update
+			create_succes
 		);
 
 	});
 
-
     jQuery(document).ready(function($) {
-	    	//create page
-		create_form(URL_CREATE_PAGE_WIKI, form_create_wiki, 'OPTIONS');
+    	//form wiki create
+		form_create_wiki = $("#form_create_wiki");
+	    
+	    //create form to page
+		create_form(URL_CREATE_PAGE_WIKI, form_create_wiki, 'OPTIONS', handle);
 
-		//update page
-		create_form(URL_CREATE_PAGE_WIKI+"0", form_update_wiki, 'OPTIONS', handle);
-
-        $('#editor').markdownEditor({
-            preview: true,
-            height: 100,
-            onPreview: function (content, callback) {
-                callback( marked(content) );
-            }
-        });
+        //load markdown editor
+		MarkdownEditor.load($('#editor'));
 
     });
 </script>

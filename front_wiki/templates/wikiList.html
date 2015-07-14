@@ -1,0 +1,14 @@
+{% extends "wiki_parent.html" %}
+{% comment %}
+	template for listing wiki pages
+{% endcomment %}
+
+{% block wiki_content %}
+	<div class="pages margen_contenido"></div>		
+{% endblock wiki_content %}
+
+{% block scripts %}
+<script>
+	WikiService.get_All_Pages();
+</script>
+{% endblock scripts %}
