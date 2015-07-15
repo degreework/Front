@@ -114,6 +114,14 @@ function create_form(url, form, method, callback)
 				}
 				else if('choice' == value.type)
 				{
+					console.log("entro");
+					//creat label for input
+					var label = document.createElement("label");
+					//set text to label
+					label.appendChild(document.createTextNode('Selecciona un programa'));
+					field_div.appendChild(label);
+
+					//create a input select 
 					input = document.createElement("select");
 					input.className = "form-control";
 
@@ -121,7 +129,7 @@ function create_form(url, form, method, callback)
 					var option = document.createElement("option");
 					option.selected = "selected";
 					option.disabled = true;
-					option.textContent = "";
+					option.textContent = "Selecciona un programa";
 					
 					//add option to selectable
 					input.add(option);
@@ -133,6 +141,7 @@ function create_form(url, form, method, callback)
 						option.textContent = value.choices[i].display_name;
 						input.add(option);					
 					}
+
 				}
 				else if('image upload' == value.type)
 				{
