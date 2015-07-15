@@ -40,6 +40,16 @@
 	
 	WikiService.get_Detail_Page(id, Wiki.show_page_content);
 
+
+	$('#form_edit_wiki').submit(function(e){
+		e.preventDefault();
+		WikiService.update_page(
+			$(this),
+			URL_CREATE_PAGE_WIKI+id
+			)
+
+	});
+
 	//comments
 	/*form_comment_ask = $("#form-comment");
 	create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');

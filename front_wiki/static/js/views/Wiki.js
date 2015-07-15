@@ -32,6 +32,16 @@ Wiki.show_page_content = function (content, preview)
 			//load wiki form
 			var form_edit_wiki = $("#form_edit_wiki");
 			create_form(URL_CREATE_PAGE_WIKI, form_edit_wiki, 'OPTIONS', Wiki.handle_update);
+
+			//create extra field to describe edition
+			var input = document.createElement("input");
+			input.id = 'id_message';
+			input.name = 'message';
+			input.type = "text";
+			input.className = 'form-control';
+			input.placeholder = 'Describe los cambios';
+
+			$(form_edit_wiki).append(input);
 		
 		});
 		}

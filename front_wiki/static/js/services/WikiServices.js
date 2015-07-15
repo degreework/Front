@@ -62,8 +62,12 @@ WikiService.create_page = function (form, url, callback)
 WikiService.update_page = function (form, url)
 {
 	$("#loader").show();
-	console.log("WikiService: "+WikiService)
 	formSerialized = form.serialize()
+	
+	console.log("WikiService: update ");
+	console.log(WikiService.page);
+	formSerialized += '&parent='+WikiService.page.parent;
+	console.log(formSerialized);
 	//formData = new FormData($("#form_create_wiki").get(0))
 
 	//remove all errors from before
