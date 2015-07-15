@@ -1,0 +1,25 @@
+{% extends 'template_base.html' %}
+{% comment %}
+	Parent for Activities
+{% endcomment %}
+
+{% comment %}
+	scripts to markup
+{% endcomment %}
+{% block head %}
+{% endblock head %}
+
+
+{% block contenido %}
+
+<div class="col-md-12 capacity">
+
+	{% include 'nav_activities.html' %}	
+	<div class="margen_contenido">
+
+			{% block activities_content %}
+		
+			{% endblock activities_content %}		
+	</div>
+</div>
+{% endblock %}

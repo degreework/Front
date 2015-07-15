@@ -1,17 +1,27 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
-	<div class="col-md-10 col-md-offset-1 capacity">
-		<div class="row nav_foro">
-			<img class="pic_profile .img-responsive img-circle" src="">
-			<h2 class="resume_profile"></h2>
+	<div class="col-md-12 capacity">
+		<div class="row header_profile">
+			<div class="  picture">
+				<img class="pic_profile .img-responsive img-rounded" src="">		
+			</div>
+			
+			<div class="col-md-11 col-sm-11 col-md-offset-1 navigation">
+				<h2 class="resume_profile"></h2>			
+			</div>
+			
 		</div>
 		<br>
 		<div class="margen_contenido">
 			My activity	
 		</div>
-
-		
-
-
 	</div>
 {% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+	$(".pic_profile").attr("src",'http://127.0.0.1:8080'+JSON.parse($.session.get('user')).thumb[1]);
+
+</script>
+{% endblock scripts %}

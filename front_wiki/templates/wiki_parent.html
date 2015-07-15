@@ -13,12 +13,12 @@
 
 {% block contenido %}
 
-<div class="col-md-10 col-md-offset-1 capacity">
+<div class="col-md-12 capacity">
 	{% include 'nav_wiki.html' %}	
-	<br>
-	{% block wiki_content %}
+	<div class="margen_contenido">
+			{% block wiki_content %}
 		
-	{% endblock wiki_content %}
+			{% endblock wiki_content %}		
+	</div>
 </div>
-
 {% endblock %}

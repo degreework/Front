@@ -1,7 +1,7 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
-	<div class="col-md-10 col-md-offset-1 capacity">
-		<div class="row nav_foro">
+	<div class="col-md-12 capacity">
+		<div class="row navigation">
 			<h2>Ajustes</h2>	
 		</div>
 		
@@ -13,7 +13,7 @@
 		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-3 margen_contenido">
 		
 
-			<form id="form_update_user" hidden>      
+			<form id="form_update_user" >      
         		<button class="btn btn-default" type="submit" name="action">Guardar Cambios</button>
      			<a class="pull-right" href="{% url 'front_users:changePassword' %}">Cambiar contraseña</a>
       		</form>	
@@ -28,12 +28,13 @@
 		//form update user
 		form_update_user = $("#form_update_user");
 		create_form(url_update, form_update_user, 'PUT');
-		form_update_user.show();
+		UserView.showSetting(url_update);
+		//form_update_user.show();
 		form_update_user.submit(function (e) {
 			e.preventDefault();
 			UserService.update_user(url_update, form_update_user);
 		});
-		UserView.showSetting(url_update);
+		
 	});
 
 	</script>

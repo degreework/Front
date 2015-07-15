@@ -1,0 +1,25 @@
+{% extends 'template_base.html' %}
+{% comment %}
+	Parent for Evaluations
+{% endcomment %}
+
+{% comment %}
+	scripts to markup
+{% endcomment %}
+{% block head %}
+{% endblock head %}
+
+
+{% block contenido %}
+
+<div class="col-md-12 capacity">
+
+	{% include 'nav_evaluations.html' %}	
+	<div class="margen_contenido">
+
+			{% block evaluations_content %}
+		
+			{% endblock evaluations_content %}		
+	</div>
+</div>
+{% endblock %}

@@ -4,14 +4,15 @@ var main = function(){
     $('.menu').animate({
       left: '0px'
     }, 200);
+    $('.menu ul').fadeIn();  
   });
   
   $('.icon-close').click(function(){
     $('.menu').animate({
         left:'-100px'
     },200);
-  
+    $('.menu ul').fadeOut();  
   });
-  };
+};
  
 $(document).ready(main);

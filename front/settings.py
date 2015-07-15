@@ -42,6 +42,10 @@ INSTALLED_APPS = (
     'front_foro',
     'front_wiki',
     'front_comments',
+    'front_activities',
+    'front_evaluations',
+    'front_resource',
+
 )
 
 MIDDLEWARE_CLASSES = (

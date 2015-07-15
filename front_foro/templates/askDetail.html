@@ -1,7 +1,13 @@
-{% extends 'template_base.html' %}
-{% block contenido %}
-	<div class="col-md-10 col-md-offset-1 capacity">
-		{% include 'nav_foro.html' %}
+{% extends "foro_parent.html" %}
+
+{% comment %}
+	template for view a ask with his answers and comments 
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block foro_content %}
+	<div class="col-md-12">
 
 		<div class="row">
 
@@ -13,7 +19,7 @@
 				<!-- se pega el contenido de la pregunta -->
 				<p class="ask_summary"></p>
 
-				<div class="col-md-11 col-sm-offset-1">
+				<div class="col-md-10 col-sm-offset-1">
 
 					<!-- contenedor de los comentarios -->
 					<div id="list-comment" class="">
@@ -53,6 +59,7 @@
 			</div>
 		</div>
 
+		<!-- contenedor con el formulario para dejar mi respuesta -->
 		<div class="row your_answer">
 			<h3 class="titulos">Tu respuesta</h3>
 
@@ -66,7 +73,7 @@
 			</div>		
 		</div>
 		
-		
+		<!-- contenedor con las respuestas de la pregunta -->
 		<div class="row">
 			
 			<h3 class="titulos"><span class="count-answer"></span></h3>
@@ -76,19 +83,17 @@
 					<span class="load-answer"></span>
 				</div>
 		</div>
-
-		
-		
-
 	</div>
 	
-{% endblock %}
+	
+{% endblock foro_content %}
+
 {% block scripts %}
-{% load staticfiles %}
+
 	<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
-<link href="{% static 'libs/bootstrap-markdown-editor/dist/css/bootstrap-markdown-editor.css' %}" rel="stylesheet">
-<script src="{% static 'libs/marked/marked.min.js' %}"></script>
-<script src="{% static 'libs/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor.js' %}"></script>
+	<link href="{% static 'libs/bootstrap-markdown-editor/dist/css/bootstrap-markdown-editor.css' %}" rel="stylesheet">
+	<script src="{% static 'libs/marked/marked.min.js' %}"></script>
+	<script src="{% static 'libs/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor.js' %}"></script>
 
 	<script type="text/javascript">
 		function handle()
@@ -110,66 +115,6 @@
 			console.log(answer)
 			$('#form_answer_foro').remove();
 			ForumService.append_answer_to_ask(answer, $('.my-answer'));
-		}
-
-		function show_detail_answers (count, next, previus) {
-			//show answer count
-			if(count)
-			{
-				count += ' ';  
-			}
-			else
-			{
-				count = '0 ';
-			}
-
-			if(count == '1 '){
-				$(".count-answer").text(count + 'Respuesta')
-			}else{
-				$(".count-answer").text(count + 'Respuestas')	
-			}
-
-
-			//show link to load more answer
-			if(next)
-			{
-				var link = document.createElement("a");
-				//s$(link).attr('href', next);
-				var message = document.createElement("span");
-				$(message).text("Ver más")
-				link.appendChild(message);
-				$(".load-answer").append(link)	
-				$(link).click(function(e){
-					e.preventDefault();
-					$(link).remove()
-					ForumService.get_Answers(next);
-				});
-			}
-			
-			//console.log(previus)
-		}
-
-		function show_detail_comments (count, next, previus) {
-			//console.log(count)
-			//console.log(next)
-			//console.log(previus)	
-			//show link to load more answer
-			if(next)
-			{
-				var link = document.createElement("a");
-				//$(link).attr('href', next);
-				var message = document.createElement("span");
-				$(message).text("Ver más comentarios")
-				link.appendChild(message);
-				$(".load-comment").append(link)					
-				$(link).click(function(e){
-					e.preventDefault();
-					$(link).remove()
-					ForumService.get_Comments(next);
-				});
-			}
-			
-			//console.log(previus)
 		}
 
 

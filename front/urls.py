@@ -27,4 +27,7 @@ urlpatterns = [
     url(r'^', include('front_foro.urls', namespace='front_foro')),
     url(r'^', include('front_wiki.urls', namespace='front_wiki')),
     url(r'^', include('front_comments.urls', namespace='front_comments')),
+    url(r'^', include('front_activities.urls', namespace='front_activities')),
+    url(r'^', include('front_evaluations.urls', namespace='front_evaluations')),
+    url(r'^', include('front_resource.urls', namespace='front_resource')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,18 +1,23 @@
-<div class="row nav_foro ">
-	<div class="col-md-6">
-		<h2>Foro</h2>
-	</div>
-	<div class="col-md-6">
-		<ul class="nav nav-pills pull-right">
-	  				<li role="presentation"><a href="{% url 'front_foro:foro' %}">discusiones</a></li>
-	  				<li role="presentation"><a href="{% url 'front_foro:create' %}">Crea una nueva discusión</a></li>
-		</ul>
-		
-	</div>
-</div>
+{% extends 'nav.html' %}
+{% block title %}
+	<span class="navbar-brand" href="#">Foro module name</span>
+{% endblock title %}		
+
+{% block items %}
+
+	<li role="presentation">
+		<a href="{% url 'front_foro:foro' %}">discusiones</a>
+	</li>
+
+	<li role="presentation">
+		<a href="{% url 'front_foro:create' %}">Crea una nueva discusión</a>
+	</li>
+
+{% endblock items %}
 	
 {% block scripts %}
 	<script>
 		active();
 	</script>
 {% endblock scripts %}
+

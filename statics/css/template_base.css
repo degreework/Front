@@ -6,7 +6,6 @@ body{
 	font-family: 'OpenSans-Regular.ttf'
 }
 
-
 .page-header{
 	background-image: url("overlay2.png"), url("overlay3.svg"), linear-gradient(45deg, #EF0909 5%, #E02C2C 50%, #EF0909 ); /*#F48080*/
 	background-position: top left,	center center,	center center;
@@ -28,7 +27,7 @@ body{
 	padding-top: 15px
 }
 
-/*-------------*/
+/*--elementos del footer-*/
 .footer
 {
 	background-color: #D51B23;
@@ -44,6 +43,7 @@ body{
 	
 }
 
+/*donde va el contenido*/
 .capacity{
 	min-height: 400px;
 	/*margin: 0 0 3% 0;*/
@@ -54,11 +54,6 @@ hr{
 	border-color: #ccc;
 }
 
-.titulos{
-	background-color: #eee;
-	border-bottom: 1px solid #ccc;
-	padding: 15px;
-}
 
 .margen_contenido{
 	margin-top: 30px;
@@ -68,6 +63,43 @@ hr{
 	padding: 10px;
 	border: 1px solid #ccc
 }
+
+/*Profile*/
+.header_profile{
+	min-height: 180px
+}
+
+.resume_profile{
+	margin-left: 95px;
+}
+
+.resume_user_profile{
+	margin-left: 95px;
+}
+
+
+.picture{
+	width: 178px;
+	height: 160px;
+	background-color: #eee;
+	display: flex;
+  	position: absolute;
+  	z-index: 1;
+  	border: 1px solid #ccc
+}
+
+
+/*FOTOS */
+
+.img-thumbnail{
+	border-radius: 6px;
+}
+
+.img-rounded{
+	border-radius: 6px;
+	padding: 5px;
+}
+
   
 
 /*introduccion*/
@@ -81,7 +113,25 @@ hr{
 	margin-left: 20px;
 }
 
+/*MODULOS*/
 
+.info-module{
+	min-height: 500px;
+	background-color: #b79350;
+	color: white;
+	padding: 20px;
+
+}
+
+.section-module{
+	min-height: 100px;
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.section-module:hover{
+	background-color: #eee;
+}
 
 /* ::FORO:: */
 /*list ask*/
@@ -93,42 +143,70 @@ hr{
 
 /* square of info */
 .base{
-	
-	border-left: 1px solid #ccc;
+	box-shadow:	1px 1px 3px #888888;
 	padding: 15px;
 }
 
 
 /*nav foro*/
-.nav_foro{
-	
+.navigation{	
 	border-bottom: 1px solid #ccc;
+	padding: 15px 15px;
 }
 
-.nav-pills li{
-	margin-top: 12px;
+.navbar-brand {
+	font-size: 30px;
+}
+
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+	color: #333;
+}
+
+.navbar-default {
+	color: black;
+	border:none;
+	background-color: white;
+	border-bottom: 1px solid #eee;
+	padding: 0px;
+}
+
+.navbar-default .navbar-brand {
+  color: #333;
+}
+
+.navbar-nav li{
+	margin-top: 10px;
 	background-color: #eee;
-	border: 1px solid #ccc;
 	color:black;
 	margin-right: 5px;
 }
 
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
 	background-color: #D51B23;
 	color: white;
 }
 
-.nav-pills li a{
-	color: black;
-}
 
 /*asks*/
-
+.info_ask{
+	width: 227px;
+	margin-left: 10px;
+	box-shadow: 1px 1px 3px #888888;
+	padding: 10px;
+}
 
 .ask_summary{
 	margin-top: 10px;
 }
 /*answer*/
+
+.titulos{
+	background-color: #eee;
+	border-bottom: 1px solid #ccc;
+	padding: 15px;
+}
+
 .content_answer{
 	width: 675px;
 }

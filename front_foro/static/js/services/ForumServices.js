@@ -18,7 +18,6 @@ ForumService.get_Asks = function () {
 
 		// se pasa a arreglo la respuesta 
 		response = response.results;
-		console.log(response);
 		for (i = 0; i < response.length; i++) { 
 			
 			// se crea el html     		
@@ -185,7 +184,6 @@ ForumService.get_Answers = function (url, callback) {
     	}
 	})
 	.done(function(response){
-		console.log(response)
 		if(callback)
 		{
 			callback(response.count, response.next, response.previus);
@@ -235,7 +233,6 @@ ForumService.create_answer = function (form, url, callback)
 
 	formSerialized = form.serialize();
 	formData = new FormData($(form).get(0));
-	console.log(formData)
 
 	//remove all errors from before
 	remove_all_errors(formSerialized);
@@ -336,7 +333,6 @@ ForumService.get_Comments = function (url, callback) {
     	}
 	})
 	.done(function(response){
-		console.log(response)
 		if(callback)
 		{
 			callback(response.count, response.next, response.previuss);
@@ -375,3 +371,62 @@ ForumService.get_Comments = function (url, callback) {
 	});
 
 }
+
+/*----------------*/
+
+function show_detail_answers (count, next, previus) {
+	//show answer count
+	if(count)
+	{
+		count += ' ';  
+	}
+	else
+	{
+		count = '0 ';
+	}
+
+	if(count == '1 '){
+		$(".count-answer").text(count + 'Respuesta')
+	}else{
+		$(".count-answer").text(count + 'Respuestas')	
+	}
+
+
+	//show link to load more answer
+	if(next)
+	{
+		var link = document.createElement("a");
+		//s$(link).attr('href', next);
+		var message = document.createElement("span");
+		$(message).text("Ver más")
+		link.appendChild(message);
+		$(".load-answer").append(link)	
+		$(link).click(function(e){
+			e.preventDefault();
+			$(link).remove()
+			ForumService.get_Answers(next);
+		});
+	}
+	
+}
+
+function show_detail_comments (count, next, previus) {
+	
+	//show link to load more answer
+	if(next)
+	{
+		var link = document.createElement("a");
+		//$(link).attr('href', next);
+		var message = document.createElement("span");
+		$(message).text("Ver más comentarios")
+		link.appendChild(message);
+		$(".load-comment").append(link)					
+		$(link).click(function(e){
+			e.preventDefault();
+			$(link).remove()
+			ForumService.get_Comments(next);
+		});
+	}
+}
+
+

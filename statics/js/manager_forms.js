@@ -136,6 +136,12 @@ function create_form(url, form, method, callback)
 				}
 				else if('image upload' == value.type)
 				{
+					//creat label for input
+					var label = document.createElement("label");
+					//set text to label
+					label.appendChild(document.createTextNode('Selecciona una foto de perfil'));
+					field_div.appendChild(label);
+					
 					input.type = 'file';
 					//set max length to input
 					input.maxLength = null
@@ -244,7 +250,7 @@ function create_form(url, form, method, callback)
 //active foro
 var active = function()
 {
-	var elementos = document.getElementsByClassName('nav nav-pills')[0].children;
+	var elementos = document.getElementsByClassName('nav navbar-nav')[0].children;
 	var localizacion = window.location.href;
 
 	for (x in elementos){

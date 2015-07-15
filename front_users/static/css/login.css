@@ -4,5 +4,12 @@
 }
 
 .resume_name{
-	font-size: 23px;
+	font-size: 18px;
+}
+
+.pic_resume{
+	padding: 0;
+	border-right: 1px white;
+	transform: scale(0.8,0.8);
+	margin-right: 5px;
 }

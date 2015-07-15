@@ -1,0 +1,22 @@
+{% extends 'nav.html' %}
+{% block title %}
+	<span class="navbar-brand" href="#">Evaluaciones module name</span>
+{% endblock title %}		
+
+{% block items %}
+
+	<li role="presentation">
+		<a href="{% url 'front_evaluations:evaluations' %}">evaluaciones</a>
+	</li>
+
+	<li role="presentation">
+		<a href="{% url 'front_evaluations:create' %}">Crea una nueva evaluacion</a>
+	</li>
+
+{% endblock items %}
+	
+{% block scripts %}
+	<script>
+		active();
+	</script>
+{% endblock scripts %}

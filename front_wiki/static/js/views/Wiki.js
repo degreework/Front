@@ -2,6 +2,7 @@ var Wiki = {};
 
 Wiki.show_page_content = function (content, preview)
 	{
+		console.log(content)
 		/*
 		*Render wiki page data to view
 		*/
@@ -14,14 +15,15 @@ Wiki.show_page_content = function (content, preview)
 		{
 			
 		//create element to edit button
-		var container = document.createElement("div");
+		//var container = document.createElement("div");
 		var link = document.createElement("a");
-		var title = document.createElement("spam");
-		$(title).text("Editar")
+		var title = document.createElement("span");
+		title.className = 'glyphicon glyphicon-edit pull-right';
+		//$(title).text("Editar")
 		link.appendChild(title);
 		//var id = content.id;
 
-		container.appendChild(link);			
+		//container.appendChild(link);			
 
 		//event handler
 		$(link).click(function(e){
@@ -46,14 +48,15 @@ Wiki.show_page_content = function (content, preview)
 		});
 		}
 
-		$('.page_title').append(container)
+		$('.page_title').append(link)
 
 	}
 
 
  Wiki.handle_update = function  () {	
 	//remove from view current content (wiki page)
-	$(".page_content").hide();
+	$(".page_content").fadeOut();
+	$("#form_edit_wiki").fadeIn();
 
 	//remove slug input from new form
 	$("#id_slug").remove();
@@ -72,12 +75,12 @@ Wiki.show_page_content = function (content, preview)
 	$(form_edit_wiki).submit(function  (e) {
 		e.preventDefault();
 		Wiki.show_page_content(WikiService.page);
-		$("#form_edit_wiki").hide();
+		$("#form_edit_wiki").fadeOut();
 		
 		//remove inputs, ALERT:dont delete this
 		$("#id_slug").remove();
 		$("#id_title").remove();
 		//show new content
-		$(".page_content").show();
+		$(".page_content").fadeIn();
 	})
 }

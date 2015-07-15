@@ -3,7 +3,9 @@
   <div class="menu"  hidden>
 
     <div class="icon-menu pull-right">
+      <span class="glyphicon glyphicon-menu-hamburger"></span>
       <h4>Modulos</h4>
+
     </div>
       
     <!-- Menu icon -->
@@ -11,67 +13,13 @@
       <img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/uber/close.png">
     </div>
 
-      <!-- Menu -->
-    <ul></ul>
-  
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-      
-      <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingOne">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            <h4 class="panel-title">
-            
-              Modulo 1
-            </h4>
-          </a>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-      
-          <div class="panel-body">
-            <ul>
-              <li>Descripcion</li>
-              <li><a href="{% url 'front_foro:foro' %}">foro</a></li>
-              <li><a href="{% url 'front_wiki:wiki' %}">Wiki</a></li>
-              <li>Materiales</li>
-            </ul> 
-          </div>
+    <!-- Menu -->
+    <ul hidden>
+        <li><a href="http://127.0.0.1:8000/modules/detail/1">Modulo 1</a></li>
+        <li><a href="http://127.0.0.1:8000/modules/detail/1">Modulo 2</a></li>
+        <li><a href="http://127.0.0.1:8000/modules/detail/1">Modulo 3</a></li>
 
-        </div>
-      </div>
-
-      <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingTwo">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            <h4 class="panel-title">
-            
-              Modulo 2 
-            </h4>
-          </a>
-        </div>
-
-        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-          <div class="panel-body">
-        
-          </div>
-        </div>
-      </div>
-
-      <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingthree">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsethree" aria-expanded="false" aria-controls="collapsethree">
-            <h4 class="panel-title">
-            
-              Modulo 3
-            </h4>
-          </a>
-        </div>
-        <div id="collapsethree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingthree">
-          <div class="panel-body">
-        
-          </div>
-        </div>
-      </div>
-  </div> <!-- aca cierra menu icon -->
+    </ul>
 
 </div>
 
