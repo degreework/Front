@@ -8,22 +8,43 @@
 {% block wiki_content %}
 <div class="margen_contenido">
 
-	<div id="editaded_page" hidden>
-		{% include "page_wiki.html" %}
-	</div>
+	
 
-	<div class="col-md-7 col-sm-7 col-xs-7  margen_contenido">
-		<form id="form_create_wiki" hidden>
-			<div id="editor"></div>
-			<br>
-			<button class="btn btn-default pull-right" type="submit" name="action" id="btn-wiki">Guardar</button>
-		</form>		
-	</div>
+	<div class="col-md-12 margen_contenido" id="editaded_page" hidden >
+		
+		<div class="row">
+			<div class="col-md-12 base">
+				<div class="col-md-6">
+					Gracias por contribuir a la enciclopedia, la pagina que acabas de crear pasara a revision por el docente para ser aprobada.		
+				</div>
+			</div>
+		</div>
 
-	<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base margen_contenido">
-			<h4>Aporta a la comunidad</h4>
-			<p>Crea nuevos temas dentro de la wiki, estos seran aprobados o no dependiendo de la informacion ...bla bla bla</p>
+		<div id="row margen_contenido">	
+			<div class="col-md-12">
+				{% include "page_wiki.html" %}	
+			</div>
+			
+		</div>
 	</div>
+	
+
+	<div class="col-md-12" id="formContent">
+		<div class="col-md-7 col-sm-7 col-xs-7  ">
+			<form id="form_create_wiki" hidden>
+				<div id="editor"></div>
+				<br>
+				<button class="btn btn-default pull-right" type="submit" name="action" id="btn-wiki">Guardar</button>
+			</form>		
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base">
+				<h4>Aporta a la comunidad</h4>
+				<p>Crea nuevos temas dentro de la wiki, estos seran aprobados o no dependiendo de la informacion ...bla bla bla</p>
+		</div>
+	</div>
+	
+
+		
 	
 		      	
 </div>
@@ -64,7 +85,9 @@
 	}
 
 	function create_succes (response) {
-		$("#form_create_wiki").hide();
+		//console.log(response)
+		
+		$("#formContent").hide();
 		Wiki.show_page_content(response);
 		$("#editaded_page").show();
 	}
