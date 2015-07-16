@@ -15,7 +15,7 @@ ForumService.get_Asks = function () {
 	})
 	.done(function(response){
 		
-
+		console.log(response)
 		// se pasa a arreglo la respuesta 
 		response = response.results;
 		for (i = 0; i < response.length; i++) { 
@@ -32,9 +32,10 @@ ForumService.get_Asks = function () {
 			var author = document.createElement("span");
 			var count = document.createElement("span");
 			count.className= "count-answer pull-right number_answer";
+
 			
 			//se asigna el texto 
-			$(count).text('n respuestas')
+			$(count).text('Respuestas: '+ response[i].count)
 			$(titles).text(response[i].title)
 			$(summarys).text(jQuery.timeago(response[i].added_at))
 			$(author).text("Autor apellido - ")

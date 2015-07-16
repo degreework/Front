@@ -2,7 +2,7 @@ var Wiki = {};
 
 Wiki.show_page_content = function (content, preview)
 	{
-		console.log(content)
+		console.log("entro a pegar el preview")
 		/*
 		*Render wiki page data to view
 		*/
