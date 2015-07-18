@@ -17,6 +17,9 @@ URL_UPDATE_USER_PASSWORD = host+":8080/API/users/password/";
 URL_BRING_ALL_USERS = host+":8080/API/users/all";
 URL_DETAIL_USERS = host+":8080/API/users/detail/";
 
+//Degree == Plan
+URL_GET_DEGREE = host+":8080/API/degree/all";
+
 //Foro
 URL_CREATE_ASK_FORO = host+":8080/API/forum/ask/";
 URL_BRING_ASKS_FORO = host+":8080/API/forum/ask/all";

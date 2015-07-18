@@ -112,9 +112,9 @@ function create_form(url, form, method, callback)
 					//set max length to input
 					input.maxLength = 10;
 				}
-				else if('choice' == value.type)
+				else if('choice' == value.type || 'plan' == key )
 				{
-					console.log("entro");
+
 					//creat label for input
 					var label = document.createElement("label");
 					//set text to label
@@ -134,13 +134,29 @@ function create_form(url, form, method, callback)
 					//add option to selectable
 					input.add(option);
 
-					//create options
-					for (var i = 0, size=this.choices.length; i < size; i++) {
-						option = document.createElement("option");
-						option.value =  value.choices[i].value;
-						option.textContent = value.choices[i].display_name;
-						input.add(option);					
+					if('plan' == key)
+					{
+						$.getJSON( URL_GET_DEGREE , function( data ) {
+							$.each( data.results, function( key, val ) {
+						  		option = document.createElement("option");
+								option.value =  val.code;
+								option.textContent = val.name;
+								input.add(option);					
+						  	});
+						});
 					}
+					else
+					{
+						//create options
+						for (var i = 0, size=this.choices.length; i < size; i++) {
+							option = document.createElement("option");
+							option.value =  value.choices[i].value;
+							option.textContent = value.choices[i].display_name;
+							input.add(option);					
+						}
+						
+					}
+
 
 				}
 				else if('image upload' == value.type)
@@ -167,7 +183,6 @@ function create_form(url, form, method, callback)
 					input.type = value.type;
 					
 				}
-
 
 				//if is a password input
 				if('password' == key)
