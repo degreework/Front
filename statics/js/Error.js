@@ -22,9 +22,14 @@ Error.url_not_found = function()
 
 
 //urls
-Error.UNAUTHORIZED = function()
+Error.UNAUTHORIZED = function(message)
 {
-	Notify.show_error("Usuario", "No tienes permiso para realizar esta acción");
+	var msg = "No tienes permiso para realizar esta acción";
+	if (message)
+	{
+		msg += ' : '+message;
+	}
+	Notify.show_error("Usuario", msg);
 }
 
 //Forms

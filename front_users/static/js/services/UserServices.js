@@ -1,15 +1,14 @@
 var UserService = {};
 
-
 /**
 *Update user's password
 */
-UserService.update_password = function(url, form)
+UserService.update_password = function(url, data, callback)
 {
 
-	data = {'password': form[1].value};
+
 	$.ajax({
-		type: 'PUT',
+		type: 'POST',
 		url: url,
 		data: data,
 		beforeSend : function( xhr ) {
@@ -18,10 +17,12 @@ UserService.update_password = function(url, form)
 
 	})
 	.done(function(response){
-		form[0].value = "";
-		form[1].value = "";
-		form[2].value = "";
+		console.log(response)
 		Notify.show_success("OK", "La contraseña ha sido cambiada");
+		if(callback())
+		{
+			callback();
+		}
 	})
 	.fail(function(error){		
 		console.log(error);
@@ -32,14 +33,14 @@ UserService.update_password = function(url, form)
 		}
 
 		//if BAD REQUEST -> show error response in fields form
-		if(400 == error.status || 401 == error.status)
+		if(400 == error.status)
 		{
 			
 		}
 		// if UNAUTHORIZED -> no have permissions
 		else if(401 == error.status)
 		{
-			
+			Error.UNAUTHORIZED(error.responseJSON);
 		}
 		// if NOT FOUND -> no found url
 		else if(404 == error.status)
