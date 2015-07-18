@@ -6,7 +6,6 @@ var UserService = {};
 */
 UserService.update_password = function(url, form)
 {
-	$("#loader").show();
 
 	data = {'password': form[1].value};
 	$.ajax({
@@ -56,7 +55,6 @@ UserService.update_password = function(url, form)
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").show();
 	});
 }
 
@@ -311,6 +309,66 @@ UserService.get_users = function () {
 		console.log("always");
 	});
 }
+
+UserService.confirmPassword = function (url,form) {
+
+	formSerialized = form.serialize();
+	formData = new FormData($(form).get(0));
+
+	//remove all errors from before
+	remove_all_errors(formSerialized);
+
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data: formData,//formSerialized,
+    	processData: false, // tell jQuery not to process the data
+    	contentType: false, // tell jQuery not to set contentType
+    	beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+    	}
+	})
+	.done(function(response){
+		/*
+		Register succesful, then do anything
+		*/
+		if(response.message === 'iguales'){
+			ChangePasswordForm.udpate_password(url_update, form[0]);
+		}else{
+			Notify.show_error("DATOS", "Digita bien tu contrasena actual");
+		}
+	})
+	.fail(function(error){		
+		console.log(error);
+
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status)
+		{
+			show_errors(formSerialized, error.responseJSON);
+			Notify.show_error("DATOS", "Los datos ingresados están incompletos");
+		}
+		//if INTERNAL SERVER ERROR
+		if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		//console.log("always");
+		$("#loader").hide();
+	});
+
+}
+
+
+
 
 
 UserService.isAutenticated = function ()
