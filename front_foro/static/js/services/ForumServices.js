@@ -290,35 +290,6 @@ ForumService.create_answer = function (form, url, callback)
 }
 
 
-ForumService.append_comment_to_ask = function(response)
-{
-	for (i = 0; i < response.length; i++) { 
-			
-			// se crea el html     		
-			var container = document.createElement("div");
-			container.className = 'comments';
-			var link = document.createElement("a");
-			var id = response[i].id;
-			$(link).attr('href', "url_del_perfil_del_autor");
-			var text = document.createElement("p");
-			var author = document.createElement("span");
-
-			
-			//se asigna el texto 
-			$(text).text(response[i].text+"")
-			$(author).text("Autor Pendiente")
-			
-			//se pega a los contenedores 
-			link.appendChild(author);
-			container.appendChild(link);
-			container.appendChild(text);
-			//container.appendChild(document.createElement("hr"));
-			
-
-			$('#list-comment').append(container);
-		}
-}
-
 
 // get all comments
 ForumService.get_Comments = function (url, callback) {
@@ -340,7 +311,7 @@ ForumService.get_Comments = function (url, callback) {
 		}
 
 		response = response.results;
-		ForumService.append_comment_to_ask(response);	
+		CommentView.append_comment(response);	
 		
 	})
 	.fail(function(error){		
