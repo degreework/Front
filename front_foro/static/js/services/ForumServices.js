@@ -338,6 +338,7 @@ ForumService.get_Comments = function (url, callback) {
 		{
 			callback(response.count, response.next, response.previuss);
 		}
+
 		response = response.results;
 		ForumService.append_comment_to_ask(response);	
 		
@@ -399,7 +400,7 @@ function show_detail_answers (count, next, previus) {
 		var link = document.createElement("a");
 		//s$(link).attr('href', next);
 		var message = document.createElement("span");
-		$(message).text("Ver más")
+		$(message).text("Ver más respuestas")
 		link.appendChild(message);
 		$(".load-answer").append(link)	
 		$(link).click(function(e){
