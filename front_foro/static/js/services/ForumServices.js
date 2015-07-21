@@ -139,34 +139,89 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		
 		// se crea el html     		
 		var container = document.createElement("div");
-		container.className = 'response';
+		container.className = 'col-md-12 response';
+		
+		//informacion de la persona q creo la respuesta
 		var info_user = document.createElement("div");
 		info_user.className = "col-md-3";
 		var link = document.createElement("a");
 		var date = document.createElement("p");
 		var autor = document.createElement("p");
-		var id = response[i].id;
-		//$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
-		var titles = document.createElement("h3");
-		var summarys = document.createElement("div");
-		summarys.className = "col-md-9"
 		
-		//se asigna el texto 
-		//$(titles).text(response[i].title)
-		$(summarys).text(response[i].text)
 		$(autor).text("Nombre del autor")
 		$(date).text(""+jQuery.timeago(response[i].added_at))
-		
-		//se pega a los contenedores 
+
 		link.appendChild(autor);
 		info_user.appendChild(link);
 		info_user.appendChild(date);
+
+		//var id = response[i].id;
+		//$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
+		//var titles = document.createElement("h3");
+	
+		//repuesta como tal 
+		var summarys = document.createElement("div");
+		summarys.className = "col-md-9"
+
+		content_summary = document.createElement("div");
+		content_summary.className = "col-md-12"
+		$(content_summary).text(response[i].text)
+		summarys.appendChild(content_summary)	
+
+		//comentarios 
+		var div_comments = document.createElement("div");
+		div_comments.className = "col-md-10 col-sm-offset-1"
 		
+		// contenedor para listar los comentarios 
+			var list_comments = document.createElement("div");
+			$(list_comments).attr('id', 'list-comment')
+		
+		// contenedor para el "ver mas" de los comentarios 
+			var div_load_comments = document.createElement("div");
+			var load_comments = document.createElement("span");
+			load_comments.className = 'load-comment'
+			div_load_comments.appendChild(load_comments)
+
+		div_comments.appendChild(list_comments)
+		div_comments.appendChild(div_load_comments)
+		summarys.appendChild(div_comments)
+
+		//enlace para comentar 
+		var div_link_comment = document.createElement("div");
+		div_link_comment.className = "col-md-10 col-sm-offset-1 link_comment"
+			var link_comment = document.createElement("a");
+			link_comment.className = "btn-create pull-right"
+			$(link_comment).attr('id', 'a-comment')
+			$(link_comment).text("agrega un comentario")
+		div_link_comment.appendChild(link_comment)
+
+		summarys.appendChild(div_link_comment)
+
+		//formulario para comentar 
+		var div_form_comment = document.createElement("div");
+		div_form_comment.className = "col-md-10 col-sm-offset-1"
+			var form_comment = document.createElement("form");
+			$(form_comment).attr('id', 'form-comment')
+			$(div_form_comment).hide()
+				var button = document.createElement("button");
+				button.className = "btn btn-default pull-right"
+				$(button).attr('id', 'btn-comment')
+				$(button).attr('type', 'submit')
+				$(button).attr('name', 'action')
+				$(button).text('comentar')
+
+		form_comment.appendChild(button)
+		div_form_comment.appendChild(form_comment)
+
+		summarys.appendChild(div_form_comment)
+
+		//se pega a los contenedores 
 		container.appendChild(summarys);
 		container.appendChild(info_user);
 
-		
+
 		$(div_container).append(container);
+
 	}
 
 }
@@ -253,12 +308,14 @@ ForumService.create_answer = function (form, url, callback)
 		Register succesful, then do anything
 		*/
 		
-		form.trigger("reset");
-		Notify.show_success("OK", "Respuesta creada");
 		if(callback)
 		{
 			callback([response]);
 		}
+
+		form.trigger("reset");
+		Notify.show_success("OK", "Respuesta creada");
+
 	})
 	.fail(function(error){		
 		console.log(error);

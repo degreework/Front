@@ -55,18 +55,21 @@ CommentView.append_comment = function(response)
 			//if isAuthor
 				var edit = document.createElement("a");
 				var edit_msg = document.createElement("span");
-				$(edit_msg).text("Editar")
+				edit_msg.className = "glyphicon glyphicon-pencil pull-right"
+				//$(edit_msg).text("Editar")
 				edit.appendChild(edit_msg);
 
 				edit.addEventListener('click', CommentView.edit, false);
 
-				var del = document.createElement("button");
+				var del = document.createElement("a");
 				var del_msg = document.createElement("span");
-				$(del_msg).text('x');
+				del_msg.className = 'glyphicon glyphicon-remove pull-right'
 				del.appendChild(del_msg);
 				del.addEventListener('click', CommentView.remove, false);
 
 				$(container).append(del)
+				$(container).append('<br>')
+				$(container).append(edit)
 			//end if isAuthor
 
 
@@ -75,7 +78,6 @@ CommentView.append_comment = function(response)
 			link.appendChild(author);
 			container.appendChild(link);
 			container.appendChild(text);
-			container.appendChild(edit);
 			//container.appendChild(document.createElement("hr"));
 			
 
