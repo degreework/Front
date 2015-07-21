@@ -66,7 +66,7 @@
 			<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
 				<form class="" id="form_answer_foro" hidden>
 					<div id="editor"></div>
-					<br>
+					<br>new_form
 					<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
 		      	</form>
 		      	<div class="my-answer"></div>
@@ -151,7 +151,13 @@
 
 		form_comment_ask.submit(function (e) {
 			e.preventDefault();
-			CommentService.create(form_comment_ask, URL_CREATE_COMMENT, ForumService.append_comment_to_ask);
+			CommentService.create(
+				form_comment_ask,
+				URL_CREATE_COMMENT,
+				CommentView.append_comment
+				);
+			$(e.target).parent().fadeOut("slow");
+			$("#a-comment").fadeIn("slow");
 		})
 
 		$("#a-comment").click(function (e) {
