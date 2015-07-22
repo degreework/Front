@@ -220,20 +220,6 @@ function create_form(url, form, method, callback)
 				//$('.formulario').prepend(container);
 			}
 
-			if('raw' == key)
-			{
-				console.log("wikis")
-				var input = document.createElement("input");
-				//set id to input
-				input.id = 'id_'+key;
-
-				//set name to input
-				input.name = key;
-
-				input.type = 'hidden';
-				container.appendChild(input);
-
-			}
 
 		});
 
