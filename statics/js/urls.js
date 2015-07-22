@@ -16,6 +16,7 @@ URL_UPDATE_USER = host+":8080/API/users/";
 URL_UPDATE_USER_PASSWORD = host+":8080/API/users/authenticate/";
 URL_BRING_ALL_USERS = host+":8080/API/users/all";
 URL_DETAIL_USERS = host+":8080/API/users/detail/";
+URL_RECOVERY_PASSWORD = host+":8080/API/users/recovery";
 
 //Degree == Plan
 URL_GET_DEGREE = host+":8080/API/degree/all";
