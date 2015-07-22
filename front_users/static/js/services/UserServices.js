@@ -444,3 +444,55 @@ UserService.deauthenticate = function (url) {
 		$("#loader").hide();
 	});
 }
+
+
+UserService.recovery_password = function(url, form)
+{
+	$("#loader").show();
+
+	var data = $(form).serialize();
+
+	console.log(data)
+
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data: data
+	})
+	.done(function(response){
+		console.log(response)
+		if (callback) {
+			callback();
+		};
+		Notify.show_success("OK", "Revise su correo");
+	})
+	.fail(function(error){		
+		console.log(error);
+		//if status ==0  -> can't connect to server
+		if(0 === error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status || 401 == error.status)
+		{
+
+		}
+		// if UNAUTHORIZED ->
+		else if(401 == error.status)
+		{
+			
+		}
+		//if INTERNAL SERVER ERROR
+		else if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		//console.log("always");
+		$("#loader").hide();
+	});
+}
