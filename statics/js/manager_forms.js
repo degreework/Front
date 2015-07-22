@@ -274,12 +274,9 @@ function create_form(url, form, method, callback)
 //active foro
 var active = function()
 {
-	var elementos = document.getElementsByClassName('nav navbar-nav')[0].children;
-	var localizacion = window.location.href;
-
-	for (x in elementos){
-		if(localizacion == elementos[x].children[0].href){
-			elementos[x].setAttribute('class','active');
-		}
-	}
+	var url = window.location;
+    $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+    $('ul.nav a').filter(function() {
+        return this.href == url;
+    }).parent().addClass('active');
 }
