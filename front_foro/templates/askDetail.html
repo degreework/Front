@@ -114,6 +114,20 @@
 			console.log('clear_editor')
 			console.log(answer)
 			$('#form_answer_foro').trigger("reset");
+			
+
+			// contador de las repuestas 
+			count = $('.count-answer').text();
+			count.split(' ');
+			count = parseInt(count[0])
+			count = count+1+" ";
+
+			if(count == '1 '){
+				$(".count-answer").text(count + 'Respuesta')
+			}else{
+				$(".count-answer").text(count + 'Respuestas')	
+			}
+
 			ForumService.append_answer_to_ask(answer, $('.answer'));
 		}
 

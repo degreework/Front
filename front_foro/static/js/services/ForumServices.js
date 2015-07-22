@@ -177,10 +177,6 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		link.appendChild(autor);
 		info_user.appendChild(link);
 		info_user.appendChild(date);
-
-		//var id = response[i].id;
-		//$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
-		//var titles = document.createElement("h3");
 	
 		//repuesta como tal 
 		var summarys = document.createElement("div");
@@ -268,6 +264,7 @@ ForumService.get_Answers = function (url, callback) {
 			callback(response.count, response.next, response.previus);
 		}
 		// se pasa a arreglo la respuesta 
+		console.log('entro')
 		response = response.results;
 		ForumService.append_answer_to_ask(response, $('.answer'))
 
@@ -390,6 +387,19 @@ ForumService.delete_answer = function(div, url, callback)
 		{
 			callback(response, div);
 		}
+
+		// contador de las repuestas 
+		count = $('.count-answer').text();
+		count.split(' ');
+		count = count[0]
+		count = count-1+" ";
+
+		if(count == '1 '){
+		$(".count-answer").text(count + 'Respuesta')
+		}else{
+		$(".count-answer").text(count + 'Respuestas')	
+		}
+
 		Notify.show_success("OK", "Respuesta eliminada");
 
 	})

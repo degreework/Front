@@ -6,6 +6,7 @@ ForumView.delete = function(response, div)
 	*remove comment's div
 	*/
 	div.fadeOut();
+	$('.count-answer').val();
 }
 
 
