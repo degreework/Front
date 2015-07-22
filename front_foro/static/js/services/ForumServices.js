@@ -140,6 +140,9 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		// se crea el html     		
 		var container = document.createElement("div");
 		container.className = 'col-md-12 response';
+		var id = response[i].id;
+		container.id = 'cmt-'+id;
+
 		
 		//informacion de la persona q creo la respuesta
 		var info_user = document.createElement("div");
@@ -150,6 +153,26 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		
 		$(autor).text("Nombre del autor")
 		$(date).text(""+jQuery.timeago(response[i].added_at))
+
+
+		//editar eliminar answer
+		var edit = document.createElement("a");
+		var edit_msg = document.createElement("span");
+		edit_msg.className = "glyphicon glyphicon-pencil pull-right"
+		//$(edit_msg).text("Editar")
+		edit.appendChild(edit_msg);
+
+		edit.addEventListener('click', ForumView.editAnswer, false);
+
+		var del = document.createElement("a");
+		var del_msg = document.createElement("span");
+		del_msg.className = 'glyphicon glyphicon-remove pull-right'
+		del.appendChild(del_msg);
+		del.addEventListener('click', ForumView.removeAnswer, false);
+
+		$(info_user).append(del)
+		$(info_user).append('<br>')
+		$(info_user).append(edit)
 
 		link.appendChild(autor);
 		info_user.appendChild(link);
@@ -344,6 +367,62 @@ ForumService.create_answer = function (form, url, callback)
 		$("#loader").hide();
 	});
 
+}
+
+
+ForumService.delete_answer = function(div, url, callback)
+{
+//	$("#loader").show();
+
+	$.ajax({
+		type: 'DELETE',
+		url: url,
+		async: true,
+		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+    	}
+	})
+	.done(function(response){
+		/*
+		Comment succesful, then do anything
+		*/
+		if(callback)
+		{
+			callback(response, div);
+		}
+		Notify.show_success("OK", "Respuesta eliminada");
+
+	})
+	.fail(function(error){		
+		console.log(error);
+
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		else if(400 == error.status)
+		{
+	
+		}
+		//if UNAUTHORIZED -> show error response in fields form
+		else if(401 == error.status)
+		{
+			Error.UNAUTHORIZED();
+		}
+		//if INTERNAL SERVER ERROR
+		if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		//console.log("always");
+		//$("#loader").hide();
+	});
 }
 
 

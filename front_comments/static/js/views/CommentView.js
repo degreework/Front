@@ -135,6 +135,5 @@ CommentView.remove = function(e)
 	var id = $(e.target).parents('.comments').attr("id");
 	var splited = id.split('-');
 	id = splited[splited.length-1];
-
 	CommentService.delete_($(e.target).parents('.comments'), URL_CREATE_COMMENT+id, CommentView.delete);
 }
