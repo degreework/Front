@@ -10,6 +10,14 @@ Notify.show_success = function(title, message)
 	// settings
 		type: 'success',
 		offset: 0,
+		placement: {
+		from: 'bottom',
+		align: 'left'
+		},
+		offset:{
+			x: 50,
+			y: 50
+		},
 	});
 }
 
@@ -23,5 +31,13 @@ Notify.show_error = function(title, message)
 	// settings
 		type: 'danger',
 		offset: 0,
+		placement: {
+		from: 'bottom',
+		align: 'left'
+		},
+		offset:{
+			x: 50,
+			y: 50
+		},
 	});
 }

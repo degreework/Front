@@ -23,21 +23,21 @@
 
 					<!-- contenedor de los comentarios -->
 					<div id="list-comment" class="">
-						<div>
-							<span class="load-comment"></span>	
-						</div>
 						
+					</div>
+					<div>
+						<span class="load-comment"></span>	
 					</div>
 
 				</div>
 
-				<div class="col-md-12 link_comment">
+				<div class="col-md-10 col-sm-offset-1 link_comment">
 					<!-- btn para crear un comentario -->
-					<a class="btn-create" id="a-comment">agrega un comentario</a>
+					<a class="btn-create pull-right" id="a-comment">agrega un comentario</a>
 	
 				</div>
 				
-				<div class="col-md-11 col-sm-offset-1">
+				<div class="col-md-10 col-sm-offset-1">
 					<!-- formulario para crear el comentario -->
 						<form id="form-comment" hidden>
 							<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
@@ -59,20 +59,6 @@
 			</div>
 		</div>
 
-		<!-- contenedor con el formulario para dejar mi respuesta -->
-		<div class="row your_answer">
-			<h3 class="titulos">Tu respuesta</h3>
-
-			<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
-				<form class="" id="form_answer_foro" hidden>
-					<div id="editor"></div>
-					<br>new_form
-					<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
-		      	</form>
-		      	<div class="my-answer"></div>
-			</div>		
-		</div>
-		
 		<!-- contenedor con las respuestas de la pregunta -->
 		<div class="row">
 			
@@ -82,6 +68,20 @@
 				<div class="">
 					<span class="load-answer"></span>
 				</div>
+		</div>
+
+		<!-- contenedor con el formulario para dejar mi respuesta -->
+		<div class="row your_answer">
+			<h3 class="titulos">Tu respuesta</h3>
+
+			<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
+				<form class="" id="form_answer_foro" hidden>
+					<div id="editor"></div>
+					<br>
+					<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
+		      	</form>
+		      	<div class="my-answer"></div>
+			</div>		
 		</div>
 	</div>
 	
@@ -113,8 +113,8 @@
 		{
 			console.log('clear_editor')
 			console.log(answer)
-			$('#form_answer_foro').remove();
-			ForumService.append_answer_to_ask(answer, $('.my-answer'));
+			$('#form_answer_foro').trigger("reset");
+			ForumService.append_answer_to_ask(answer, $('.answer'));
 		}
 
 

@@ -19,6 +19,7 @@ function create_ask(form, url)
 		/*
 		Register succesful, then do anything
 		*/
+		location.href =  host+":"+location.port+"/forum/detail/"+response.id
 		form.trigger("reset");
 		Notify.show_success("OK", "Pregunta creada");
 	})

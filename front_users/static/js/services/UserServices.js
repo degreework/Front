@@ -66,7 +66,10 @@ UserService.update_user = function(url, form)
 {
 	$("#loader").show();
 
+	formSerialized = form.serialize()
 	data = new FormData(form.get(0));
+	remove_all_errors(formSerialized);
+	
 	$.ajax({
 		type: 'PUT',
 		url: url,
@@ -106,6 +109,8 @@ UserService.update_user = function(url, form)
 		//if BAD REQUEST -> show error response in fields form
 		if(400 == error.status || 401 == error.status)
 		{
+			show_errors(formSerialized, error.responseJSON);
+			Notify.show_error("DATOS", "Los datos ingresados están incompletos");
 
 		}
 		// if UNAUTHORIZED ->
