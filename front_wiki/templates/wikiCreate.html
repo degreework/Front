@@ -3,19 +3,16 @@
 	template for create a page of wiki
 {% endcomment %}
 
-
-
 {% block wiki_content %}
 <div class="margen_contenido">
-
-	
 
 	<div class="col-md-12 margen_contenido" id="editaded_page" hidden >
 		
 		<div class="row">
 			<div class="col-md-12 base">
 				<div class="col-md-6">
-					Gracias por contribuir a la enciclopedia, la pagina que acabas de crear pasara a revision por el docente para ser aprobada.		
+					Gracias por contribuir a la enciclopedia, la página que acabas de crear pasará a revisión por el docente para ser aprobada.
+					Pueder ver el estado <a id="url_wiki_request" href="">aquí</a>
 				</div>
 			</div>
 		</div>
@@ -31,88 +28,34 @@
 
 	<div class="col-md-12" id="formContent">
 		<div class="col-md-7 col-sm-7 col-xs-7  ">
-			<form id="form_create_wiki" hidden>
-				<div id="editor"></div>
-				<br>
+			<div id="forms">
+				<form id="form_create_wiki" hidden>
+				<textarea id="id_textarea" name="content" data-provide="markdown" rows="10"></textarea>
+				<br>					
 				<button class="btn btn-default pull-right" type="submit" name="action" id="btn-wiki">Guardar</button>
-			</form>		
+				</form>
+				<form id="form_edit_wiki" hidden></form>
+			</div>
 		</div>
+		
 		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base">
 				<h4>Aporta a la comunidad</h4>
 				<p>Crea nuevos temas dentro de la wiki, estos seran aprobados o no dependiendo de la informacion ...bla bla bla</p>
 		</div>
-	</div>
-	
-
-		
+	</div>	
 	
 		      	
 </div>
+
 {% endblock wiki_content %}
 
 {% block scripts %}
-
 <script>
 
-	function slug(str)
-	{
-		str = str.replace(/\s/g,'-');
-		str = str.replace(/[^a-zA-Z0-9\s]/g,"");
-		str = str.toLowerCase();
-		return str;
-	}
-
-	function handle()
-	{
-		/*
-		* Event listener to form
-		*/
-
-		//append editor content to raw input
-		$('textarea').keyup(function(e){
-			$("#id_raw").val($('#editor').markdownEditor('content'))
-	    });
-
-		//generate slug
-		$($("input[name=title]")[0]).keyup( function(){
-			var title = $(this).val();
-            var url = $('input#id_slug');
-            $($("input[name=slug]")[0]).val(slug(title));
-        });
-
-        //show form
-        $(form_create_wiki).show()
-	}
-
-	function create_succes (response) {
-		//console.log(response)
-		
-		$("#formContent").hide();
-		Wiki.show_page_content(response);
-		$("#editaded_page").show();
-	}
-
-	$('#form_create_wiki').submit(function(e){
-		e.preventDefault();
-		WikiService.create_page(
-			form_create_wiki,
-			URL_CREATE_PAGE_WIKI,
-			create_succes
-		);
-
-	});
-
     jQuery(document).ready(function($) {
-    	//form wiki create
-		form_create_wiki = $("#form_create_wiki");
-	    
-	    //create form to page
-		create_form(URL_CREATE_PAGE_WIKI, form_create_wiki, 'OPTIONS', handle);
-
-        //load markdown editor
-		MarkdownEditor.load($('#editor'));
-
+		WikiView.initialize($("#form_create_wiki"), $("#id_textarea"));
     });
+
 </script>
 
 {% endblock scripts %}

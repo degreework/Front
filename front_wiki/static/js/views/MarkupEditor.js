@@ -9,3 +9,11 @@ MarkdownEditor.load = function (container) {
         }
     });
 }
+
+
+var MarkupEditor = {};
+
+MarkupEditor.load = function (container){
+	console.log("load marked")
+	console.log(container)
+}

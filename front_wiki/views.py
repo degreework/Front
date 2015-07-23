@@ -9,7 +9,7 @@ def wiki(request):
     return render_to_response('wikiList.html', {'title': 'Wiki | Name App'}, context_instance=RequestContext(request))
 
 
-def detail(request,id):
+def detail(request, *args, **kwargs):
     return render_to_response('detailPage.html', {'title': 'Wiki page | Name App'}, context_instance=RequestContext(request))
 
 

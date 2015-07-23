@@ -8,11 +8,6 @@
 <div class="row">
 	
 	{% include "page_wiki.html" %}
-	
-	<form id="form_edit_wiki" hidden>
-		<div id="editor"></div>
-		<button class="btn btn-default pull-right" type="submit" name="action" id="btn-wiki">Guardar</button>
-	</form>	
 
 </div>
 		
@@ -35,12 +30,32 @@
 
 <script type="text/javascript">
 
-	//Se obtiene el id 
+	//get url tokens
 	var id = location.pathname.split("/");
-	id = id[id.length-1];
-	
-	WikiService.get_Detail_Page(id, Wiki.show_page_content);
 
+	var key = id[id.length-1].split("..");
+
+	if(2 == key.length)
+	{
+		/*
+		*Is a Verion
+		*/
+		//key[key.length-1] = version
+		//key[key.length-2] = slug
+		WikiView.load_version(key[key.length-1], key[key.length-2])
+	}
+	else if(1 == key.length)
+	{
+		/*
+		*Is a Page
+		*/
+		WikiView.load_page(key[key.length-1])
+	}
+	
+
+	
+	//WikiService.get_Detail_Page(id, Wiki.show_page_content);
+	/*
 
 	$('#form_edit_wiki').submit(function(e){
 		e.preventDefault();
@@ -49,7 +64,7 @@
 			URL_CREATE_PAGE_WIKI+id
 			)
 
-	});
+	});*/
 
 	//comments
 	/*form_comment_ask = $("#form-comment");
