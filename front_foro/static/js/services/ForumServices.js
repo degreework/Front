@@ -181,9 +181,11 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		//repuesta como tal 
 		var summarys = document.createElement("div");
 		summarys.className = "col-md-9"
+		
 
 		content_summary = document.createElement("div");
 		content_summary.className = "col-md-12"
+		content_summary.id = "textAnswer"
 		$(content_summary).text(response[i].text)
 		summarys.appendChild(content_summary)	
 
@@ -249,10 +251,10 @@ ForumService.append_answer_to_ask = function(response, div_container)
 ForumService.get_Answers = function (url, callback) {
 
 	$("#loader").show();
-
+	console.log(id)
 	$.ajax({
 		type: 'GET',
-		url: url,
+		url: url+'/'+id+'/',
 		async: true,
 		beforeSend : function( xhr ) {
         	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
@@ -264,7 +266,6 @@ ForumService.get_Answers = function (url, callback) {
 			callback(response.count, response.next, response.previus);
 		}
 		// se pasa a arreglo la respuesta 
-		console.log('entro')
 		response = response.results;
 		ForumService.append_answer_to_ask(response, $('.answer'))
 
@@ -366,6 +367,63 @@ ForumService.create_answer = function (form, url, callback)
 
 }
 
+ForumService.updateAnswer = function(form, url, callback)
+{
+//	$("#loader").show();
+	formData = new FormData($(form).get(0))
+
+	//remove all errors from before
+	remove_all_errors($(form).serialize());
+
+	$.ajax({
+		type: 'PUT',
+		url: url,
+		data: formData,
+    	processData: false, // tell jQuery not to process the data
+    	contentType: false, // tell jQuery not to set contentType
+	})
+	.done(function(response){
+		/*
+		Comment succesful, then do anything
+		*/
+		callback(response, form);
+		Notify.show_success("OK", "Respuesta actualizado");
+
+	})
+	.fail(function(error){		
+		console.log(error);
+
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		else if(400 == error.status)
+		{
+			show_errors(formSerialized, error.responseJSON);
+			Notify.show_error("DATOS", "Los datos ingresados están incompletos");
+		}
+		//if UNAUTHORIZED -> show error response in fields form
+		else if(401 == error.status)
+		{
+			show_errors(formSerialized, error.responseJSON);
+			Error.UNAUTHORIZED();
+		}
+		//if INTERNAL SERVER ERROR
+		if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		//console.log("always");
+		//$("#loader").hide();
+	});
+}
+
 
 ForumService.delete_answer = function(div, url, callback)
 {
@@ -453,7 +511,7 @@ ForumService.get_Comments = function (url, callback) {
 	.done(function(response){
 		if(callback)
 		{
-			callback(response.count, response.next, response.previuss);
+			callback(response.count, response.next, response.previus);
 		}
 
 		response = response.results;
