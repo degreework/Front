@@ -16,9 +16,11 @@ def detail(request, *args, **kwargs):
 def create(request):
     return render_to_response('wikiCreate.html', {'title': 'Create page | Name App'}, context_instance=RequestContext(request))
 
-
 def request(request):
     return render_to_response('wikiRequest.html', {'title': 'Request edition | Name App'}, context_instance=RequestContext(request))
 
 def history(request, id):
     return render_to_response('historyPage.html', {'title': 'History | Name App'}, context_instance=RequestContext(request))
+
+def no_found(request):
+    return render_to_response('404.html', {'title': 'No encontrado | Name App'}, context_instance=RequestContext(request))

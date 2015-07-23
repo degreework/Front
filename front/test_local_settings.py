@@ -1,0 +1,1 @@
+PhantomJS_PATH = '/home/rizotas/Documents/degreework/testing/phantomjs-1.9.2-linux-x86_64/bin/phantomjs'

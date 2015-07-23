@@ -1,5 +1,8 @@
 var WikiView = {};
 
+//Class Attr
+//WikiView.list_request : div with a list of requests
+
 /*CREATE*/
 
 WikiView.initialize = function(form, editor)
@@ -182,5 +185,51 @@ WikiView.render_list = function(parent_container, response)
 		//container.appendChild(titles);
 		
 		parent_container.prepend(container);
+	}
+}
+
+
+/* REQUESTS */
+WikiView.show_all_request = function(container)
+{
+	WikiService.get_list(URL_GET_ALL_WIKI_REQUEST, WikiView.render_request)
+	WikiView.list_request = container;
+}
+
+WikiView.render_request = function(list)
+{
+	console.log(list)
+	for (i = 0; i < list.length; i++) {
+
+		var id = list[i].id;
+		var page = list[i].page;
+		var commit = list[i].commit;
+
+		var url = 'create/'+page.slug+'..'+commit;
+		
+
+		var container = document.createElement("li");
+		
+		var title = document.createElement("span");
+		$(title).text(page.title);
+		title.className = 'lead';
+
+		var description = document.createElement("span");
+
+
+		$(description).text('tiene una solicitud de modificación en: ');
+		
+		var link = document.createElement("a");
+		
+		$(link).attr('href', url);
+		
+		//se asigna el texto 
+		$(link).text(commit)
+
+		container.appendChild(title);
+		container.appendChild(description);
+		container.appendChild(link);
+		
+		WikiView.list_request.prepend(container);
 	}
 }

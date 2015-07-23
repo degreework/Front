@@ -4,12 +4,18 @@
 {% endcomment %}
 
 {% block wiki_content %}
+
 Muestreme las solicitudes
-	<div class="pages margen_contenido"></div>		
+	<div class="pages margen_contenido"></div>
+	<div id="list-request"></div>
+
 {% endblock wiki_content %}
+
 
 {% block scripts %}
 <script>
-	WikiService.get_All_Request(URL_GET_ALL_WIKI_REQUEST);
+  jQuery(document).ready(function($) {
+		WikiView.show_all_request($("#list-request"));
+    });
 </script>
 {% endblock scripts %}

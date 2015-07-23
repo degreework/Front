@@ -37,7 +37,8 @@ URL_GET_ALL_PAGES = host+":8080/API/wiki//all";
 URL_DETAIL_ONE_PAGE = host+":8080/API/wiki//";
 URL_VERSION_PAGE = host+":8080/API/wiki//%slug%/version/%version%/";
 
-URL_GET_ALL_WIKI_REQUEST = host+":8080/API/wiki/list/";
+URL_GET_ALL_WIKI_REQUEST = host+":8080/API/wiki/request/all";
+
 URL_GET_WIKI_HISTORY = host+':8080/API/wiki/history/';
 
 

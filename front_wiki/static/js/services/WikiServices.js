@@ -84,14 +84,20 @@ WikiService.get_page = function (url, callback) {
 		}
 
 		//if BAD REQUEST -> show error response in fields form
-		if(400 == error.status || 401 == error.status)
+		if(400 == error.status)
 		{
-			
+
 		}
-		// if UNAUTHORIZED ->
+
 		else if(401 == error.status)
 		{
 			
+		}
+		else if(404 == error.status)
+		{
+			Notify.show_error('404', 'No se encontró')
+			var url = location.origin+'/wiki/404';
+			window.location.replace(url);
 		}
 		//if INTERNAL SERVER ERROR
 		else if(500 == error.status)
@@ -208,9 +214,9 @@ WikiService.get_list = function (url, callback) {
 			
 		}
 		// if UNAUTHORIZED ->
-		else if(401 == error.status)
+		else if(403 == error.status)
 		{
-			
+			Error.UNAUTHORIZED()
 		}
 		//if INTERNAL SERVER ERROR
 		else if(500 == error.status)
