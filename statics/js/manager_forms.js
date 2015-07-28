@@ -136,8 +136,10 @@ function create_form(url, form, method, callback)
 
 					if('plan' == key)
 					{
+						option = document.createElement("option");
+						input.add(option);					
 						$.getJSON( URL_GET_DEGREE , function( data ) {
-							$.each( data.results, function( key, val ) {
+							$.each( data, function( key, val ) {
 						  		option = document.createElement("option");
 								option.value =  val.code;
 								option.textContent = val.name;
