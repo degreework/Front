@@ -3,7 +3,7 @@ var ForumService = {};
 // trae las preguntas hechas en el foro 
 ForumService.get_Asks = function () {
 
-	$("#loader").show();
+	$("#preloader_2").show();
 
 	$.ajax({
 		type: 'GET',
@@ -84,7 +84,7 @@ ForumService.get_Asks = function () {
 
 
 ForumService.get_Detail_Ask = function (id) {
-	$("#loader").show();
+	$("#preloader_2").show();
 	
 	$.ajax({
 		type: 'GET',
@@ -240,7 +240,7 @@ ForumService.append_answer_to_ask = function(response, div_container)
 // get answer list from a ask at forum
 ForumService.get_Answers = function (url, callback) {
 
-	$("#loader").show();
+	$("#preloader_2").show();
 	console.log(id)
 	$.ajax({
 		type: 'GET',
@@ -352,7 +352,7 @@ ForumService.create_answer = function (form, url, callback)
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 
 }

@@ -2,7 +2,7 @@ var WikiService = {};
 
 WikiService.create_page = function (form, url, callback)
 {
-	$("#loader").show();
+	$("#preloader_2").show();
 
 	formSerialized = $(form).serialize();
 
@@ -51,7 +51,7 @@ WikiService.create_page = function (form, url, callback)
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 
 }
@@ -60,6 +60,8 @@ WikiService.create_page = function (form, url, callback)
 
 
 WikiService.get_page = function (url, callback) {	
+
+	$("#preloader_2").show();
 
 	$.ajax({
 		type: 'GET',
@@ -108,6 +110,7 @@ WikiService.get_page = function (url, callback) {
 	})
 	.always(function(){
 		console.log("always");
+		$("#preloader_2").hide();
 	});
 }
 
@@ -180,7 +183,7 @@ WikiService.update_page = function(url, data)
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 }
 

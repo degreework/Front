@@ -70,9 +70,9 @@
 					<h1>
 						<a href="/">Name Aplication</a>
 					</h1>
-					<div id="loader" class="loader">Loading...</div>
+					<!--<div id="loader" class="loader">Loading...</div>-->
 				</div>
-				<div class="col-md-6 col-sm-6 col-xs-4  singin">
+				<div class="col-md-6 col-sm-6 col-xs-4 ">
 					{% include 'login.html' %}
 				</div>
 			</div>
@@ -81,6 +81,12 @@
 		{% include 'menu_modulos.html' %}
 		{% include 'listUsers.html' %}
 		<div class="container">
+			<div id="preloader_2">
+    			<span></span>
+    			<span></span>
+    			<span></span>
+    			<span></span>
+			</div>
 			
 		  	{% block contenido %}
 				

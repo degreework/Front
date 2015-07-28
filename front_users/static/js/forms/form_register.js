@@ -1,6 +1,6 @@
 function register(form, url)
 {
-	$("#loader").show();
+	$("#preloader_2").show();
 
 	formSerialized = form.serialize()
 	formData = new FormData($("#form_register").get(0))
@@ -46,7 +46,7 @@ function register(form, url)
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 
 }

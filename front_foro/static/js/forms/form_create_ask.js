@@ -1,6 +1,6 @@
 function create_ask(form, url)
 {
-	$("#loader").show();
+	$("#preloader_2").show();
 
 	formSerialized = form.serialize()
 	formData = new FormData($(form).get(0))
@@ -47,7 +47,7 @@ function create_ask(form, url)
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 
 }

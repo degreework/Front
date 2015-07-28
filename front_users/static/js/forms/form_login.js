@@ -1,6 +1,6 @@
 function login(form, url)
 {
-	$("#loader").show();
+	$("#preloader_2").show();
 	data = form.serialize();
 	//remove all errors from before
 	remove_all_errors(data);
@@ -58,7 +58,7 @@ function login(form, url)
 	})
 	.always(function(){
 		console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 
 }

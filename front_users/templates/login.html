@@ -6,7 +6,7 @@
 
 
 <!-- template if not autheticated -->
-<div class="col-md-12" id="div_form_login" hidden>
+<div class="col-md-12 singin" id="div_form_login" hidden>
   <form class="form-inline pull-right" id="form_login">
   	<div class="form-group form-group-sm">
       	<input type="email" name="username" class="form-control "  placeholder="E-mail">
@@ -23,24 +23,30 @@
 
 
 <!-- template autheticated -->
-<div class="dropdown  pull-right" id="user_resume" hidden>
-  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-    
-      <img class="pic_resume .img-responsive img-rounded">  
-
-    <div class="col-md-8" style="text-align:center">
-      <span class="resume_name"></span>
-      <span class="glyphicon glyphicon-triangle-bottom"></span>  
-    </div>
-    
-    
-  </div>
+<div class="col-md-12 pull-right" id="user_resume" hidden>
   
-  <!--items del dropdown -->
-  <ul class="dropdown-menu arrow-top" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'front_users:profile' %}">Perfil</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'front_users:settings' %}">Ajustes</a></li>
-    <li role="presentation" class="divider"></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="button_logout">Salir</a></li>
-  </ul>
+  <div class="col-md-6 col-md-offset-6" style="text-align:center; border-bottom: 1px solid">
+      <span class="resume_name"></span>
+      <!--<span class="glyphicon glyphicon-triangle-bottom"></span>  -->
+  </div>
+  <div class="col-md-4 col-md-offset-5" style="margin-top:-28px">
+    
+  
+    <div class="dropdown" >
+      <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+        
+          <img class="pic_resume .img-responsive img-rounded">  
+        
+      </div>
+      
+      <!--items del dropdown -->
+      <ul class="dropdown-menu arrow-top" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'front_users:profile' %}">Perfil</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'front_users:settings' %}">Ajustes</a></li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="button_logout">Salir</a></li>
+      </ul>
+    </div>
+  </div>
+
 </div>

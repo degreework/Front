@@ -64,7 +64,7 @@ UserService.update_password = function(url, data, callback)
 */
 UserService.update_user = function(url, form)
 {
-	$("#loader").show();
+	$("#preloader_2").show();
 
 	formSerialized = form.serialize()
 	data = new FormData(form.get(0));
@@ -127,7 +127,7 @@ UserService.update_user = function(url, form)
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 }
 
@@ -368,7 +368,7 @@ UserService.confirmPassword = function (url,form) {
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 
 }
@@ -395,7 +395,7 @@ UserService.isAutenticated = function ()
 
 
 UserService.deauthenticate = function (url) {
-	$("#loader").show();
+	$("#preloader_2").show();
 	
 	$.ajax({
 		type: 'POST',
@@ -441,14 +441,14 @@ UserService.deauthenticate = function (url) {
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 }
 
 
 UserService.recovery_password = function(url, form)
 {
-	$("#loader").show();
+	$("#preloader_2").show();
 
 	var data = $(form).serialize();
 
@@ -493,6 +493,6 @@ UserService.recovery_password = function(url, form)
 	})
 	.always(function(){
 		//console.log("always");
-		$("#loader").hide();
+		$("#preloader_2").hide();
 	});
 }
