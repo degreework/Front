@@ -146,7 +146,7 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		
 		//informacion de la persona q creo la respuesta
 		var info_user = document.createElement("div");
-		info_user.className = "col-md-3";
+		info_user.className = "col-md-2";
 		var link = document.createElement("a");
 		var date = document.createElement("p");
 		var autor = document.createElement("p");
@@ -154,29 +154,18 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		$(autor).text("Nombre del autor")
 		$(date).text(""+jQuery.timeago(response[i].added_at))
 
+		var options = document.createElement("div");
+		options.className = "col-md-1";
 
-		//editar eliminar answer
-		var edit = document.createElement("a");
-		var edit_msg = document.createElement("span");
-		edit_msg.className = "glyphicon glyphicon-pencil pull-right"
-		//$(edit_msg).text("Editar")
-		edit.appendChild(edit_msg);
-
-		edit.addEventListener('click', ForumView.editAnswer, false);
-
-		var del = document.createElement("a");
-		var del_msg = document.createElement("span");
-		del_msg.className = 'glyphicon glyphicon-remove pull-right'
-		del.appendChild(del_msg);
-		del.addEventListener('click', ForumView.removeAnswer, false);
-
-		$(info_user).append(del)
-		$(info_user).append('<br>')
-		$(info_user).append(edit)
+		//aqui iban editar y eliminar 
+		//$(info_user).append(del)
+		//$(info_user).append('<br>')
+		//$(info_user).append(edit)
 
 		link.appendChild(autor);
 		info_user.appendChild(link);
 		info_user.appendChild(date);
+		ForumView.appentOptions(options)
 	
 		//repuesta como tal 
 		var summarys = document.createElement("div");
@@ -239,6 +228,7 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		//se pega a los contenedores 
 		container.appendChild(summarys);
 		container.appendChild(info_user);
+		container.appendChild(options);
 
 
 		$(div_container).append(container);

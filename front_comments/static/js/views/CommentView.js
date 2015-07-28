@@ -53,7 +53,8 @@ CommentView.append_comment = function(response)
 			$(author).text("Autor Pendiente")
 
 			//if isAuthor
-				var edit = document.createElement("a");
+				CommentView.appentOptions(container)
+				/*var edit = document.createElement("a");
 				var edit_msg = document.createElement("span");
 				edit_msg.className = "glyphicon glyphicon-pencil pull-right"
 				//$(edit_msg).text("Editar")
@@ -69,7 +70,7 @@ CommentView.append_comment = function(response)
 
 				$(container).append(del)
 				$(container).append('<br>')
-				$(container).append(edit)
+				$(container).append(edit)*/
 			//end if isAuthor
 
 
@@ -136,4 +137,67 @@ CommentView.remove = function(e)
 	var splited = id.split('-');
 	id = splited[splited.length-1];
 	CommentService.delete_($(e.target).parents('.comments'), URL_CREATE_COMMENT+id, CommentView.delete);
+}
+
+
+CommentView.appentOptions = function(div_contenedor){
+
+	console.log("appentOptions")
+	// div del desplegable 
+	var div_dropdown = document.createElement("div");
+	div_dropdown.className = "dropdown pull-right"
+
+	// donde va el icono  despliega el menu 
+	var div_dropdow_toggle = document.createElement("div");
+	div_dropdow_toggle.className = "dropdown-toggle"
+		$(div_dropdow_toggle).attr('type', 'button')
+		$(div_dropdow_toggle).attr('id', 'dropdownMenu2')
+		$(div_dropdow_toggle).attr('data-toggle', 'dropdown')
+		$(div_dropdow_toggle).attr('aria-expanded', 'true')
+
+	//icono
+	var icon = document.createElement('span')
+	icon.className = 'glyphicon glyphicon-triangle-bottom' 
+
+	div_dropdow_toggle.appendChild(icon)
+
+	//donde va el menu 
+	var dropdown_menu = document.createElement("ul");
+	dropdown_menu.className = 'dropdown-menu arrow-top'
+		$(dropdown_menu).attr('role', 'menu')
+		$(dropdown_menu).attr('aria-labelledby', 'dropdownMenu2')
+
+	//editar answer
+	var item1 = document.createElement("li");
+	
+	var edit = document.createElement("a");
+	var edit_msg = document.createElement("span");
+	edit_msg.className = "glyphicon glyphicon-pencil"
+	$(edit_msg).text(' editar')
+	edit.appendChild(edit_msg);
+	edit.addEventListener('click', CommentView.edit, false);
+
+	item1.appendChild(edit)
+	//eliminar answer
+	var item2 = document.createElement("li");
+
+	var del = document.createElement("a");
+	var del_msg = document.createElement("span");
+	del_msg.className = 'glyphicon glyphicon-remove'
+	$(del_msg).text(' eliminar')
+	del.appendChild(del_msg);
+	del.addEventListener('click', CommentView.remove, false);
+	
+	item2.appendChild(del)
+
+	dropdown_menu.appendChild(item1)
+	dropdown_menu.appendChild(item2)
+
+
+	div_dropdown.appendChild(div_dropdow_toggle)
+	div_dropdown.appendChild(dropdown_menu)
+
+	div_contenedor.appendChild(div_dropdown)
+
+
 }
