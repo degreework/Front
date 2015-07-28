@@ -1,5 +1,49 @@
 var ForumView = {};
 
+ForumView.initialize = function(form, editor)
+{
+	ForumView.form_create = form;
+	ForumView.editor = editor;
+
+	create_form(
+		URL_CREATE_ASK_FORO,
+		ForumView.form_create,
+		'OPTIONS',
+		ForumView.succes_create_form
+	);
+
+	ForumView.form_create.submit(function (e) {
+		e.preventDefault();
+		create_ask(ForumView.form_create, URL_CREATE_ASK_FORO);
+	})
+}
+
+ForumView.succes_create_form = function()
+{
+	MarkupEditor.load(ForumView.editor);
+
+	
+	ForumView.hidde_input_text($("#id_text"));
+
+	//4 - Show form
+	debug_info("3.4 - Show form")
+	ForumView.form_create.show();
+}
+
+ForumView.hidde_input_text = function(input)
+{
+	//set listener
+	//append editor content to raw input
+	console.log(input)
+	$('textarea').keyup(function(e){
+		$(input).val(ForumView.editor.val());
+		console.log(ForumView.editor.val())
+    });
+	input.hide();
+
+}
+
+
 ForumView.updated = function (response, form)
 {
 	/*

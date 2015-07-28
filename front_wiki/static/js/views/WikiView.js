@@ -107,9 +107,9 @@ WikiView.hidde_input_raw = function(input)
 	//append editor content to raw input
 	$('textarea').keyup(function(e){
 		$(input).val(WikiView.editor.val())
-		console.log(WikiView.editor.val())
+		//console.log(WikiView.editor.val())
     });
-	input.hide();	
+	input.hide();
 }
 
 

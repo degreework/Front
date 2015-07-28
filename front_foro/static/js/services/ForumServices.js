@@ -98,7 +98,7 @@ ForumService.get_Detail_Ask = function (id) {
 		
 		//aca escriba su codigo
 		$('.ask_title').text(response.title);
-		$('.ask_summary').text(response.text);
+		$('.ask_summary').html(markdown.toHTML(response.text));
 		$('.ask_added_at').text(jQuery.timeago(response.added_at));
 		$('.ask_author').text("Autor pendiente");
 		$('.ask_author_link').attr('href', "autor_link");
@@ -175,7 +175,7 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		content_summary = document.createElement("div");
 		content_summary.className = "col-md-12"
 		content_summary.id = "textAnswer"
-		$(content_summary).text(response[i].text)
+		$(content_summary).html(markdown.toHTML(response[i].text))
 		summarys.appendChild(content_summary)	
 
 		//comentarios 
