@@ -38,7 +38,7 @@ ForumService.get_Asks = function () {
 			$(count).text('Respuestas: '+ response[i].count)
 			$(titles).text(response[i].title)
 			$(summarys).text(jQuery.timeago(response[i].added_at))
-			$(author).text("Autor apellido - ")
+			$(author).text(response[i].author+', ')
 			
 			//se pega a los contenedores 
 			author.appendChild(summarys)
@@ -100,7 +100,7 @@ ForumService.get_Detail_Ask = function (id) {
 		$('.ask_title').text(response.title);
 		$('.ask_summary').html(markdown.toHTML(response.text));
 		$('.ask_added_at').text(jQuery.timeago(response.added_at));
-		$('.ask_author').text("Autor pendiente");
+		$('.ask_author').text(response.author);
 		$('.ask_author_link').attr('href', "autor_link");
 	})
 	.fail(function(error){		
@@ -151,7 +151,7 @@ ForumService.append_answer_to_ask = function(response, div_container)
 		var date = document.createElement("p");
 		var autor = document.createElement("p");
 		
-		$(autor).text("Nombre del autor")
+		$(autor).text(response[i].author)
 		$(date).text(""+jQuery.timeago(response[i].added_at))
 
 		var options = document.createElement("div");

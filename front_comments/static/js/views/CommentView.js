@@ -50,7 +50,7 @@ CommentView.append_comment = function(response)
 			
 			//se asigna el texto 
 			$(text).text(response[i].text+"")
-			$(author).text("Autor Pendiente")
+			$(author).text(response[i].author)
 
 			//if isAuthor
 				CommentView.appentOptions(container)
