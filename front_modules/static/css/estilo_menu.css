@@ -4,7 +4,7 @@
   background: rgba(238,238,238,1); 
   opacity: 1;
   border-right: 5px solid  #ccc;
-  left: -100px;  /* start off behind the scenes */
+  left: -190px;  /* start off behind the scenes */
   position: fixed;
   z-index: 2;
   width: 190px;
@@ -40,15 +40,20 @@
 }
 
 .icon-menu {
-  /*color: #D51B23;*/
+  /* color: #D51B23; */
+  background-color: green;
+  width: 40px;
   text-align: center;
   cursor: pointer;
   font-size: 16px;
-  margin-right: 15px;
+  /* margin-right: 15px; */
+  margin-top: 0px;
   padding-bottom: 25px;
-  padding-left: 25px;
+  /* padding-left: 25px; */
   padding-top: 25px;
   text-decoration: none;
+  z-index: 2;
+  position: fixed;
 }
 
 .icon-menu i {

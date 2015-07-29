@@ -9,7 +9,10 @@ UserView.showCurrentUser = function ()
 		$("#introduction").hide();
 		$('#form_login').hide();
 		$('#register').hide();
+		$('.icon-menu').show();
+		$('.consult-user').show();
 		$('.menu').show();
+		
 
 		$("#user_resume").show();
 		$(".resume_name").text(JSON.parse($.session.get('user')).first_name +" "+JSON.parse($.session.get('user')).last_name);	

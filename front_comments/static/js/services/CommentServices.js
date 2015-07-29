@@ -63,6 +63,60 @@ CommentService.create =function(form, url, callback)
 	});
 }
 
+// get all comments
+CommentService.get_Comments = function (url, callback) {
+
+	//$("#loader").show();
+
+	$.ajax({
+		type: 'GET',
+		url: url,
+		async: true,
+		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+    	}
+	})
+	.done(function(response){
+		if(callback)
+		{
+			callback(response.count, response.next, response.previus);
+		}
+
+		response = response.results;
+		CommentView.append_comment(response);	
+		
+	})
+	.fail(function(error){		
+		console.log(error);
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status || 401 == error.status)
+		{
+			
+		}
+		// if UNAUTHORIZED ->
+		else if(401 == error.status)
+		{
+			
+		}
+		//if INTERNAL SERVER ERROR
+		else if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		console.log("always");
+	});
+
+}
+
 
 CommentService.update = function(form, url, callback)
 {

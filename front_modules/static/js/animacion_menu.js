@@ -9,7 +9,7 @@ var main = function(){
   
   $('.icon-close').click(function(){
     $('.menu').animate({
-        left:'-100px'
+        left:'-190px'
     },200);
     $('.menu ul').fadeOut();  
   });

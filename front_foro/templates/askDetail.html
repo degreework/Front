@@ -122,7 +122,7 @@
 				$(".count-answer").text(count + 'Respuestas')	
 			}
 
-			ForumService.append_answer_to_ask(answer, $('.answer'));
+			ForumView.append_answer_to_ask(answer, $('.answer'));
 		}
 
 
@@ -132,11 +132,12 @@
 		
 		ForumService.get_Detail_Ask(id);
 		ForumService.get_Answers(URL_GET_ANSWERS_FORUM, show_detail_answers);
-		ForumService.get_Comments(URL_GET_COMMENTS, show_detail_comments);
+		CommentService.get_Comments(URL_GET_COMMENTS, show_detail_comments);
 
 		
 		//###   ANSWER   ###
 		//form Answer, to Ask at Foro
+
 		form_answer_foro = $("#form_answer_foro");
 		create_form(URL_CREATE_ANSWER_FORO, form_answer_foro, 'OPTIONS', handle);
 		$(form_answer_foro).show();
