@@ -13,7 +13,8 @@ class RegisterTest(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super(RegisterTest, cls).setUpClass()
-        cls.selenium = webdriver.PhantomJS('/home/rizotas/Documents/degreework/testing/phantomjs-1.9.2-linux-x86_64/bin/phantomjs')
+        cls.selenium = webdriver.Firefox()
+        #cls.selenium = webdriver.PhantomJS('/home/rizotas/Documents/degreework/testing/phantomjs-1.9.2-linux-x86_64/bin/phantomjs')
 
     @classmethod
     def tearDownClass(cls):

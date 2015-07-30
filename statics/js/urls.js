@@ -10,7 +10,7 @@ URL_LOGIN = host+":8080/API/auth/token/";
 URL_LOGOUT = host+":8080/API/auth/revoke_token/";
 
 //user
-URL_REGISTER = host+":8080/API/users/";
+URL_REGISTER = host+":8080/API/users/new";
 URL_CURRENT_USER = host+":8080/API/users/me";
 URL_UPDATE_USER = host+":8080/API/users/";
 URL_UPDATE_USER_PASSWORD = host+":8080/API/users/authenticate/";
