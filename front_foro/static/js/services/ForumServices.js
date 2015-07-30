@@ -160,7 +160,6 @@ ForumService.get_Detail_Ask = function (id) {
 ForumService.get_Answers = function (url, callback) {
 
 	$("#preloader_2").show();
-	console.log(id)
 	$.ajax({
 		type: 'GET',
 		url: url+'/'+id+'/',
