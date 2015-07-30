@@ -217,9 +217,6 @@ ForumView.updated_answer = function (response, form)
 	* - remove form
 	* - show div
 	*/
-	
-
-
 	var parent = $(form).parents('.response');
 	var parent_id = parent.attr("id");
 	$("#textAnswer").text(response.text);
@@ -241,14 +238,23 @@ ForumView.removeAnswer = function(e)
 	/*
 	* when x (button) is clicked then call to Service to remove
 	*/
+	notify = Notify.show_confirm('respuesta');
 
-	// se obtiene el id de la respuesta para colocarlo en la url 
-	var id = $(e.target).parents('.response').attr("id");
-	var splited = id.split('-');
-	id = splited[splited.length-1];
+	$('#erase').click(function(){
+		// se obtiene el id de la respuesta para colocarlo en la url 
+		var id = $(e.target).parents('.response').attr("id");
+		var splited = id.split('-');
+		id = splited[splited.length-1];
 
+		ForumService.delete_answer($(e.target).parents('.response'), URL_CREATE_ANSWER_FORO+id, CommentView.delete);	
+		notify.close()	
+	})
 
-	ForumService.delete_answer($(e.target).parents('.response'), URL_CREATE_ANSWER_FORO+id, CommentView.delete);
+	$('#cancel').click(function(){
+		
+		notify.close()
+	
+	})
 }
 
 ForumView.callUpdateAnswer = function(e)
@@ -265,12 +271,12 @@ ForumView.callUpdateAnswer = function(e)
 
 ForumView.handle = function (form, id_ask){
 
-	console.log('entro')
+	
 	var input_ask = $(form).get(0)[0];
-	console.log(id_ask)
+	
 	$(input_ask).hide();
 	$(input_ask).val(id_ask);
-	console.log('valor: '+id_ask)
+
 
 	var input_text = $(form).get(0)[1];
 	$(input_text).hide()
@@ -307,9 +313,9 @@ ForumView.editAnswer = function(e)
 
 	//Se obtiene el id de la pregunta para pasarlo en el formulario 
 	var id_ask = location.pathname.split("/");
-	console.log('id_ask: '+ id_ask )
+	
 	id_ask = id_ask[id_ask.length-1];
-	console.log('id_ask: '+ id_ask )
+
 	
 	// se llena el formulario q esta escondido :) 
 	ForumView.handle(new_form, id_ask)

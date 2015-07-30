@@ -53,28 +53,8 @@ CommentView.append_comment = function(response)
 			$(author).text(response[i].author)
 
 			//if isAuthor
-				CommentView.appentOptions(container)
-				/*var edit = document.createElement("a");
-				var edit_msg = document.createElement("span");
-				edit_msg.className = "glyphicon glyphicon-pencil pull-right"
-				//$(edit_msg).text("Editar")
-				edit.appendChild(edit_msg);
-
-				edit.addEventListener('click', CommentView.edit, false);
-
-				var del = document.createElement("a");
-				var del_msg = document.createElement("span");
-				del_msg.className = 'glyphicon glyphicon-remove pull-right'
-				del.appendChild(del_msg);
-				del.addEventListener('click', CommentView.remove, false);
-
-				$(container).append(del)
-				$(container).append('<br>')
-				$(container).append(edit)*/
-			//end if isAuthor
-
-
-			
+			CommentView.appentOptions(container)
+				
 			//se pega a los contenedores 
 			link.appendChild(author);
 			container.appendChild(link);
@@ -133,16 +113,29 @@ CommentView.remove = function(e)
 	/*
 	* when x (button) is clicked then call to Service to remove
 	*/
-	var id = $(e.target).parents('.comments').attr("id");
-	var splited = id.split('-');
-	id = splited[splited.length-1];
-	CommentService.delete_($(e.target).parents('.comments'), URL_CREATE_COMMENT+id, CommentView.delete);
+
+	notify = Notify.show_confirm('comentario');
+
+	$('#erase').click(function(){
+		// se obtiene el id del comentario para colocarlo en la url 
+		var id = $(e.target).parents('.comments').attr("id");
+		var splited = id.split('-');
+		id = splited[splited.length-1];
+
+		CommentService.delete_($(e.target).parents('.comments'), URL_CREATE_COMMENT+id, CommentView.delete);
+		notify.close()	
+	})
+
+	$('#cancel').click(function(){
+		
+		notify.close()
+	
+	})
 }
 
 
 CommentView.appentOptions = function(div_contenedor){
 
-	console.log("appentOptions")
 	// div del desplegable 
 	var div_dropdown = document.createElement("div");
 	div_dropdown.className = "dropdown pull-right"

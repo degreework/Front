@@ -22,6 +22,30 @@ Notify.show_success = function(title, message)
 }
 
 
+Notify.show_confirm = function(section)
+{
+
+	var notify = $.notify({
+		message: "<div class='col-md-4 col-md-offset-4 confirmation-delete'><div class='panel panel-default'><div class='panel-heading'><h3 class='panel-title'>Eliminar "+section+"</h3></div><div class='panel-body'>Seguro que quiere eliminar su "+section+"<br><br><a id='cancel' class='btn-create pull-right' href='#'>cancelar</a><a id='erase' class='btn-create pull-right' href='#'>eliminar</a></div></div></div></div>"
+	},{
+	// settings
+		type: 'none',
+		offset: 0,
+		allow_dismiss: false,
+		delay: 0,
+		placement: {
+		from: 'bottom',
+		align: 'left'
+		},
+		offset:{
+			x: 460,
+			y: 200
+		},
+	});
+	return notify
+}
+
+
 Notify.show_error = function(title, message)
 {
 	$.notify({

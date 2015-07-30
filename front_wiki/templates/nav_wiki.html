@@ -5,19 +5,19 @@
 
 {% block items %}
 
-	<li role="presentation">
+	<li class="section-nav" role="presentation">
 		<a href="{% url 'front_wiki:wiki' %}">Contenido</a>
 	</li>
 
-	<li role="presentation">
+	<li class="section-nav" role="presentation">
 		<a href="{% url 'front_wiki:history' 0 %}">Historial</a>
 	</li>
 
-	<li role="presentation">
+	<li class="section-nav" role="presentation">
 		<a href="{% url 'front_wiki:create' %}">Crea una nuevo tema</a>
 	</li>
 
-	<li role="presentation">
+	<li class="section-nav" role="presentation">
 		<a href="{% url 'front_wiki:request' %}">Request</a>
 	
 

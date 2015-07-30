@@ -83,8 +83,12 @@
 		      	<div class="my-answer"></div>
 			</div>		
 		</div>
+
+
+
 	</div>
 	
+
 	
 {% endblock foro_content %}
 
@@ -105,8 +109,6 @@
 
 		function clear_editor(answer)
 		{
-			console.log('clear_editor')
-			console.log(answer)
 			$('#form_answer_foro').trigger("reset");
 			
 
@@ -147,7 +149,6 @@
 		form_answer_foro.submit(function (e) {
 			e.preventDefault();
 			$("#id_ask").val(id),
-			console.log($("#id_text").val( ))
 			ForumService.create_answer(
 				form_answer_foro,
 				URL_CREATE_ANSWER_FORO,
