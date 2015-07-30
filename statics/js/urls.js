@@ -34,10 +34,12 @@ URL_GET_ANSWERS_FORUM = host+":8080/API/forum/answer/all";
 URL_CREATE_PAGE_WIKI = host+":8080/API/wiki/new";
 URL_UPDATE_PAGE_WIKI = host+":8080/API/wiki/v0/%slug%/edit";
 URL_GET_ALL_PAGES = host+":8080/API/wiki/v0/all";
-URL_DETAIL_ONE_PAGE = host+":8080/API/wiki/v0/";
-URL_VERSION_PAGE = host+":8080/API/wiki/v0/%slug%/version/%version%/";
+URL_GET_LIST_APPROVED_PAGES = host+":8080/API/wiki/published";
+URL_DETAIL_ONE_PAGE = host+":8080/API/wiki/";
+URL_VERSION_PAGE = host+":8080/API/wiki/%slug%/version/%version%/";
 
 URL_GET_ALL_WIKI_REQUEST = host+":8080/API/wiki/request/all";
+URL_APPROVE_REQUEST = host+":8080/API/wiki/request/approve/%slug%..%version%";
 
 URL_GET_WIKI_HISTORY = host+':8080/API/wiki/history/';
 

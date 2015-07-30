@@ -141,6 +141,17 @@ WikiView.render_version = function(page)
 	$("#wiki_version").text(page.version);
 	$("#markdown").html(markdown.toHTML(page.raw));
 	var url = location.origin+'/wiki/'+page.slug;
+	
+	//to approve a request
+	var url_approv = URL_APPROVE_REQUEST.replace(/\%slug%/g, page.slug);
+	url_approv = url_approv.replace(/\%version%/g, page.version);
+	$("#submit_approved > a").click(function(e){
+		WikiService.approve_request(url_approv, WikiView.approve_succes);
+	});
+	$("#submit_approved").show();
+	//end approve
+
+
 	$("#show_current > a").attr('href', url)
 	$("#show_current").show();
 }
@@ -157,7 +168,7 @@ WikiView.render_page = function(page)
 
 WikiView.get_all_Pages = function()
 {
-	WikiService.get_list(URL_GET_ALL_PAGES, WikiView.render_all_pages);
+	WikiService.get_list(URL_GET_LIST_APPROVED_PAGES, WikiView.render_all_pages);
 }
 
 WikiView.render_all_pages = function (response)
@@ -172,17 +183,18 @@ WikiView.render_list = function(parent_container, response)
 		var container = document.createElement("li");
 		//container.className = 'question';
 		var link = document.createElement("a");
-		var id = response[i].id;
-		var slug = response[i].slug;
+		var id = response[i].page.id;
+		var slug = response[i].page.slug;
 		$(link).attr('href', host+":"+location.port+"/wiki/"+slug);
-		//var titles = document.createElement("li");
+		var date = document.createElement("span");
 		
 		//se asigna el texto 
-		$(link).text(response[i].title)
+		$(link).text(response[i].page.title)
+		$(date).text("Última edición "+jQuery.timeago(response[i].created));
 
 		//se pega a los contenedores 
 		container.appendChild(link);
-		//container.appendChild(titles);
+		container.appendChild(date);
 		
 		parent_container.prepend(container);
 	}
@@ -232,4 +244,9 @@ WikiView.render_request = function(list)
 		
 		WikiView.list_request.prepend(container);
 	}
+}
+
+WikiView.approve_succes = function(approve)
+{
+	Notify.show_success("Request approved", "This only is a test, please change it");
 }
