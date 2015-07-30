@@ -57,19 +57,24 @@ ForumService.create_ask = function(form, url){
 }
 
 // trae las preguntas hechas en el foro 
-ForumService.get_Asks = function () {
+ForumService.get_Asks = function (url, callback) {
 
 	$("#preloader_2").show();
 
 	$.ajax({
 		type: 'GET',
-		url: URL_BRING_ASKS_FORO,
+		url: url,
 		async: true,
 		beforeSend : function( xhr ) {
         	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
     	}
 	})
 	.done(function(response){
+
+		if(callback)
+		{
+			callback(response.next, response.previus);
+		}
 
 		ForumView.render_list_ask(response)
 	})
@@ -99,6 +104,7 @@ ForumService.get_Asks = function () {
 		}
 	})
 	.always(function(){
+		$("#preloader_2").hide();
 		console.log("always");
 	});
 }
@@ -390,6 +396,47 @@ ForumService.delete_answer = function(div, url, callback)
 //----------------
 // FUNTIONS 
 //----------------
+function pagination(link){
+	
+	$(link).click(function(e){
+				
+		number = $(link).text()
+		e.preventDefault();
+		console.log("i: "+number)
+		$('.question').remove();
+		ForumService.get_Asks(URL_BRING_ASKS_FORO+'?page='+number);
+	});
+
+}
+
+function show_detail_asks( next, previus) {
+	
+	console.log(next)
+	//show link to load more answer
+	
+	if(next)
+	{
+		//i get the number of pages 
+		var number_page = next.split("=");
+		console.log(number_page)
+		number_page = [(number_page.length)];
+		console.log(number_page)
+
+
+
+		for (i = number_page; i > 0 ; i--) { 
+
+			var li = document.createElement('li')
+			var link = document.createElement("a");
+			$(link).text(i)
+			link.id = "page-"+i
+			li.appendChild(link);
+			$("#previus").after(li)
+
+			pagination(link)
+		}		
+	}
+}
 
 function show_detail_answers (count, next, previus) {
 	//show answer count

@@ -13,10 +13,25 @@
 	<div class="col-md-12 asks">
 	</div>
 
+	<nav style="text-align:center">
+	  <ul class="pagination">
+	    <li id="previus" style="display:none">
+	      <a  href="#" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+	    <li style="display:none">
+	      <a href="#" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	  </ul>
+	</nav>
+
 {% endblock foro_content %}
 
 {% block scripts %}
 	<script>
-		ForumService.get_Asks();
+		ForumService.get_Asks(URL_BRING_ASKS_FORO,show_detail_asks);
 	</script>
 {% endblock scripts %}

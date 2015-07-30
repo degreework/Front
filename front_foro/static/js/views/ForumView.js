@@ -55,6 +55,8 @@ ForumView.create_ask_succes = function(response){
 
 ForumView.render_list_ask = function(response){
 	// se pasa a arreglo la respuesta 
+		//
+
 		response = response.results;
 		for (i = 0; i < response.length; i++) { 
 			
