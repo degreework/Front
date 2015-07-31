@@ -63,11 +63,13 @@ WikiService.get_page = function (url, callback) {
 
 	$("#preloader_2").show();
 
+	var auth = JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token;
+
 	$.ajax({
 		type: 'GET',
 		url: url,
 		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+        	xhr.setRequestHeader( "Authorization", auth );
     	}
 	})
 	.done(function(response){
@@ -115,9 +117,62 @@ WikiService.get_page = function (url, callback) {
 }
 
 
+WikiService.approve_request = function (url, callback) {	
 
+	$("#preloader_2").show();
 
+	var auth = JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token;
 
+	$.ajax({
+		type: 'GET',
+		url: url,
+		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", auth );
+    	}
+	})
+	.done(function(response){
+		if(callback)
+		{
+			callback(response);
+		}
+		
+	})
+	.fail(function(error){		
+		console.log(error);
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status)
+		{
+
+		}
+
+		else if(401 == error.status)
+		{
+			
+		}
+		else if(404 == error.status)
+		{
+			Notify.show_error('404', 'No se encontró')
+			var url = location.origin+'/wiki/404';
+			window.location.replace(url);
+		}
+		//if INTERNAL SERVER ERROR
+		else if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		console.log("always");
+		$("#preloader_2").hide();
+	});
+}
 
 
 
