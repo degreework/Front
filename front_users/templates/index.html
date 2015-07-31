@@ -2,13 +2,19 @@
 {% block contenido %}
 	
 	<div class="col-md-12 capacity">
-		<div class="col-md-6 col-sm-6 col-xs-8">
-			{% include 'introduction.html' %}
+		{% include 'introduction.html' %}
+		<!--<div class="col-md-6 col-sm-6 col-xs-8">
 			
-		</div>
-		<div class="col-md-6 col-sm-6 col-xs-8">
-			{% include 'register.html' %}
-		</div>
+			
+		</div>-->
+		<!--<div class="col-md-6 col-sm-6 col-xs-8">
+			
+		</div>-->
 	</div>
-	
+	<div class="col-md-12 " style="">
+		<div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-3">
+			{% include 'register.html' %}	
+		</div>
+
+	</div>
 {% endblock %}

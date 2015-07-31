@@ -239,7 +239,8 @@ ForumService.get_Answers = function (url, callback) {
 		}
 		// se pasa a arreglo la respuesta 
 		response = response.results;
-		ForumView.append_answer_to_ask(response, $('.answer'))		
+		ForumView.append_answer_to_ask(response, $('.answer'))	
+
 	})
 	.fail(function(error){		
 		console.log(error);
@@ -529,6 +530,7 @@ function show_detail_answers (count, next, previus) {
 			ForumService.get_Answers(next);
 		});
 	}
+	
 	
 }
 

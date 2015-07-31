@@ -105,6 +105,25 @@ hr{
   
 
 /*introduccion*/
+.slide2{
+	background-image: url("overlay1.png");
+	background-color: rgba(0,0,0,0.7);
+}
+
+.intro-img{
+	margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.intro-img:hover{
+	background-color: #eee;
+}
+
+.introduction-pic{
+	width: 50%;
+	margin: 0px auto;
+}
+
 .seccion{
 	margin-bottom:50px;
 	margin-top: 50px;

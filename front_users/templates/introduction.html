@@ -1,26 +1,43 @@
 {% load staticfiles %}
 <div id="introduction">
 
-  <div class="row seccion">
+  <div class="row">
     
-    <div class="col-sm-5 col-md-10">
+    <div class="col-sm-5 col-md-12" style="text-align:center">
     
         
-        <div class="col-md-8 ">  
-            <h3>About Name aplication</h3>
-            <p>hola ...</p>
+        <div class="col-md-12" >
+          <h2>Bienvenido</h2>
+        </div>
+        <div class="col-md-12">
+          <hr>
+        </div>
         
+        <div class="col-md-4 intro-img" style="text-align:center border">
+          <img class="img-circle img-responsive introduction-pic" src="{% static 'img/2.png' %}">   
+        </div>
+        <div class="col-md-4 intro-img" style="text-align:center">  
+           <img class="img-circle img-responsive introduction-pic" src="{% static 'img/1.png' %}">   
         </div>
 
-        <div class="col-md-4">
-          <img class="img-circle img-responsive" src="{% static 'img/1.jpg' %}">
+        <div class="col-md-4 intro-img" style="text-align:center">
+          <img class="img-circle img-responsive introduction-pic" src="{% static 'img/3.png' %}">   
         </div>
+         <div class="col-md-12">
+          <hr>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+          <h3>aprende, mejora y comparte tu conocimiento sobre algoritmia</h3>
+          <br>
+          <a id="btn-reg"class = 'btn btn-default btn-lg' >Registrate</a>
+        </div>
+
 
       
     </div>
   </div>
 
-  <div class="seccion">
+  <!--<div class="seccion">
   <hr>  
   </div>
   
@@ -61,6 +78,16 @@
         </div>
       
     </div>
-  </div>  
+  </div>  -->
 
 </div>
+{% block scripts %}
+  <script type="text/javascript">
+
+
+  $('#btn-reg').click(function(){
+      $("body").animate({scrollTop:$('#register').offset().top}, 600);
+    });
+
+  </script>
+{% endblock scripts %}

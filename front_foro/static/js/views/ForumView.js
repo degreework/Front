@@ -177,6 +177,55 @@ ForumView.render_ask_detail = function(response){
 // -------------------
 // :::: ANSWERS ::::
 // -------------------
+ForumView.create_comment_answer = function(e){
+			e.preventDefault();
+			console.log($(e.target))
+			CommentService.create(
+				$(e.target),
+				URL_CREATE_COMMENT,
+				CommentView.append_comment
+				);
+			$(e.target).parent().fadeOut("slow");
+			//link.fadeIn("slow");
+
+}
+
+
+
+
+ForumView.handle = function(new_form){
+	var input_text = $(new_form).get(0)[0];
+	
+	$(new_form).keyup(function(e){
+		$(input_text).val($(e.target).val())
+		//console.log($(input_text).val())
+	});
+}
+
+ForumView.show_form_comment_in_answer = function(e){
+	
+	// se obtine el id de la pregunta donde estan los comentarios 
+	var id = $(e.target).attr("id");
+	var id = id.split('-');
+	id = id[id.length-1];
+
+	//se oculta el boton de 
+	 var link = $(e.target)
+	 link.fadeOut("slow")
+	
+	//se clona el formulario y se muestra
+	form = $(e.target).parents('.response').find('#form-comment-ans-'+id)
+	var new_form = $("#form-comment").clone()
+	$(new_form).attr('id', '#form-comment-ans-'+id);
+	$(new_form).appendTo('.form-comment-ans-'+id);
+	$(new_form).fadeIn()
+	ForumView.handle(new_form)
+	//aqui servicio agregar comentario
+	new_form.submit(ForumView.create_comment_answer);
+	
+}
+
+
 
 ForumView.append_answer_to_ask = function(response, div_container)
 {
@@ -236,34 +285,24 @@ ForumView.append_answer_to_ask = function(response, div_container)
 		div_comments.appendChild(list_comments)
 		div_comments.appendChild(div_load_comments)
 		summarys.appendChild(div_comments)
+		
 
 		//enlace para comentar 
 		var div_link_comment = document.createElement("div");
 		div_link_comment.className = "col-md-10 col-sm-offset-1 link_comment"
 			var link_comment = document.createElement("a");
 			link_comment.className = "btn-create pull-right"
-			$(link_comment).attr('id', 'a-comment')
+			$(link_comment).attr('id', 'a-comment-ans-'+id)
 			$(link_comment).text("agrega un comentario")
+			link_comment.addEventListener('click', ForumView.show_form_comment_in_answer, false);
 		div_link_comment.appendChild(link_comment)
 
 		summarys.appendChild(div_link_comment)
 
 		//formulario para comentar 
 		var div_form_comment = document.createElement("div");
-		div_form_comment.className = "col-md-10 col-sm-offset-1"
-			var form_comment = document.createElement("form");
-			$(form_comment).attr('id', 'form-comment')
-			$(div_form_comment).hide()
-				var button = document.createElement("button");
-				button.className = "btn btn-default pull-right"
-				$(button).attr('id', 'btn-comment')
-				$(button).attr('type', 'submit')
-				$(button).attr('name', 'action')
-				$(button).text('comentar')
-
-		form_comment.appendChild(button)
-		div_form_comment.appendChild(form_comment)
-
+		div_form_comment.className = "col-md-10 col-sm-offset-1 form-comment-ans-"+id
+		
 		summarys.appendChild(div_form_comment)
 
 		//se pega a los contenedores 

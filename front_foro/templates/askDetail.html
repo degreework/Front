@@ -139,6 +139,7 @@
 		id = id[id.length-1];
 		
 		ForumService.get_Detail_Ask(id);
+
 		ForumService.get_Answers(URL_GET_ANSWERS_FORUM, show_detail_answers);
 		CommentService.get_Comments(URL_GET_COMMENTS, show_detail_comments);
 
@@ -179,6 +180,8 @@
 			$(e.target).parent().fadeOut("slow");
 			$("#a-comment").fadeIn("slow");
 		})
+
+
 
 		$("#a-comment").click(function (e) {
 			e.preventDefault()
