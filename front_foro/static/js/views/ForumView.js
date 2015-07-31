@@ -6,6 +6,7 @@ var ForumView = {};
 
 ForumView.initialize = function(form, editor)
 {
+	
 	ForumView.form_create = form;
 	ForumView.editor = editor;
 
@@ -15,6 +16,8 @@ ForumView.initialize = function(form, editor)
 		'OPTIONS',
 		ForumView.succes_create_form
 	);
+
+	
 
 	ForumView.form_create.submit(function (e) {
 		e.preventDefault();
@@ -32,6 +35,7 @@ ForumView.succes_create_form = function()
 	//4 - Show form
 	debug_info("3.4 - Show form")
 	ForumView.form_create.show();
+	fill();
 }
 
 ForumView.hidde_input_text = function(input)
@@ -50,6 +54,58 @@ ForumView.create_ask_succes = function(response){
 	location.href =  host+":"+location.port+"/forum/detail/"+response.id
 	form.trigger("reset");
 	Notify.show_success("OK", "Pregunta creada");
+}
+
+function fill(){
+	//get content of current comment
+	var current_question = $(".ask_summary").text();
+	var current_title = $(".ask_title").text();
+	
+	var input = $("#form_ask_edit_foro").find('#id_title')[0]; $(input).val(current_title)
+	var input = $("#form_ask_edit_foro").find('#id_text')[0]; $(input).val(current_question)
+	$('#id_textarea_ask').text(current_question)
+
+} 
+ForumView.edit_ask = function(e){
+	
+	/*
+	*when edit (a tag) is clicked, do many things here like create form and set an event handler
+	*/
+	//get div parent
+	var parent = $('.content_ask');
+	
+	//get id from div parent
+	var target_id = parent.attr("id");
+	$(".ask_title").text('edita tu respuesta');
+
+	//remove all elements of parent
+	$(parent).children().hide();
+
+	//change comment form location
+	ForumView.initialize($("#form_ask_edit_foro"), $("#id_textarea_ask"));
+
+	new_form = $('#form_ask_edit_foro')	
+
+	//Se obtiene el id de la pregunta para pasarlo en el formulario 
+	var id_ask = location.pathname.split("/");
+	id_ask = id_ask[id_ask.length-1];
+
+	
+	// se llena el formulario q esta escondido :) 
+	//ForumView.handle(new_form, id_ask)
+	/**/
+	new_form.submit(ForumView.callUpdateAsk);
+
+}
+
+ForumView.callUpdateAsk = function(e)
+{
+	// se obtiene el id de la respuesta para colocarlo en la url 
+	e.preventDefault();
+	var splited = e.target.id.split('-');
+	var id = splited[splited.length-1]
+
+	ForumService.updateAsk(e.target, URL_CREATE_ASK_FORO+id, ForumView.updated_ask);
 }
 
 
@@ -94,7 +150,22 @@ ForumView.render_list_ask = function(response){
 
 
 ForumView.render_ask_detail = function(response){
+	
 	$('.ask_title').text(response.title);
+	
+	//buttom edit and event
+	var edit = document.createElement("a");
+	edit.className = "pull-right"
+	var edit_msg = document.createElement("span");
+	edit_msg.className = "glyphicon glyphicon-edit"
+	edit.appendChild(edit_msg);
+	edit.addEventListener('click', ForumView.edit_ask, false);
+	$('.ask_title').append(edit)
+
+	var id = response.id;
+	console.log(id)
+	$('.content_ask').attr('id','a-'+id)
+
 	$('.ask_summary').html(markdown.toHTML(response.text));
 	$('.ask_added_at').text(jQuery.timeago(response.added_at));
 	$('.ask_author').text(response.author);
@@ -115,7 +186,7 @@ ForumView.append_answer_to_ask = function(response, div_container)
 		var container = document.createElement("div");
 		container.className = 'col-md-12 response';
 		var id = response[i].id;
-		container.id = 'cmt-'+id;
+		container.id = 'ans-'+id;
 
 		
 		//informacion de la persona q creo la respuesta
@@ -128,13 +199,9 @@ ForumView.append_answer_to_ask = function(response, div_container)
 		$(autor).text(response[i].author)
 		$(date).text(""+jQuery.timeago(response[i].added_at))
 
+		// opciones editar y eliminar 
 		var options = document.createElement("div");
 		options.className = "col-md-1";
-
-		//aqui iban editar y eliminar 
-		//$(info_user).append(del)
-		//$(info_user).append('<br>')
-		//$(info_user).append(edit)
 
 		link.appendChild(autor);
 		info_user.appendChild(link);
@@ -148,7 +215,7 @@ ForumView.append_answer_to_ask = function(response, div_container)
 
 		content_summary = document.createElement("div");
 		content_summary.className = "col-md-12"
-		content_summary.id = "textAnswer"
+		content_summary.id = "textAnswer-ans-"+id
 		$(content_summary).html(markdown.toHTML(response[i].text))
 		summarys.appendChild(content_summary)	
 
@@ -221,7 +288,7 @@ ForumView.updated_answer = function (response, form)
 	*/
 	var parent = $(form).parents('.response');
 	var parent_id = parent.attr("id");
-	$("#textAnswer").text(response.text);
+	$("#textAnswer-ans-"+response.id+">p").text(response.text);
 	$(form).remove();
 	$(parent).children().show();
 }
@@ -271,7 +338,7 @@ ForumView.callUpdateAnswer = function(e)
 	ForumService.updateAnswer(e.target, URL_CREATE_ANSWER_FORO+id, ForumView.updated_answer);
 }
 
-ForumView.handle = function (form, id_ask){
+ForumView.handleAnswer = function (form, id_ask){
 
 	
 	var input_ask = $(form).get(0)[0];
@@ -297,8 +364,9 @@ ForumView.editAnswer = function(e)
 	var parent = $(e.target).parents('.response');
 	//get id from div parent
 	var target_id = parent.attr("id");
+	console.log(target_id)
 	//get content of current comment
-	var current_answer = $("#textAnswer").text();
+	var current_answer = $("#textAnswer-"+target_id+">p").text();
 	//remove all elements of parent
 	$(parent).children().hide();
 
@@ -309,7 +377,8 @@ ForumView.editAnswer = function(e)
 	$(new_form).appendTo('#'+target_id);
 	//set current content of comment to form
 	$($("#form_answer_foro_"+target_id+" input")[0]).val(current_answer);
-	$('#id_textarea').text(current_answer)
+	$('#id_textarea').attr('id','textarea-'+target_id)
+	$('#textarea-'+target_id).text(current_answer)
 	//show form
 	$(new_form).fadeIn()
 
@@ -320,7 +389,7 @@ ForumView.editAnswer = function(e)
 
 	
 	// se llena el formulario q esta escondido :) 
-	ForumView.handle(new_form, id_ask)
+	ForumView.handleAnswer(new_form, id_ask)
 	/**/
 	new_form.submit(ForumView.callUpdateAnswer);
 }
@@ -370,7 +439,7 @@ ForumView.appentOptions = function(div_contenedor){
 	
 	var edit = document.createElement("a");
 	var edit_msg = document.createElement("span");
-	edit_msg.className = "glyphicon glyphicon-pencil"
+	edit_msg.className = "glyphicon glyphicon-edit"
 	$(edit_msg).text(' editar')
 	edit.appendChild(edit_msg);
 	edit.addEventListener('click', ForumView.editAnswer, false);

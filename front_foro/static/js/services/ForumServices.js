@@ -56,6 +56,64 @@ ForumService.create_ask = function(form, url){
 
 }
 
+ForumService.updateAsk = function(form, url, callback)
+{
+//	$("#loader").show();
+	formData = new FormData($(form).get(0))
+
+	//remove all errors from before
+	remove_all_errors($(form).serialize());
+
+	$.ajax({
+		type: 'PUT',
+		url: url,
+		data: formData,
+    	processData: false, // tell jQuery not to process the data
+    	contentType: false, // tell jQuery not to set contentType
+	})
+	.done(function(response){
+		/*
+		Comment succesful, then do anything
+		*/
+		callback(response, form);
+		Notify.show_success("OK", "Respuesta actualizado");
+
+	})
+	.fail(function(error){		
+		console.log(error);
+
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		else if(400 == error.status)
+		{
+			show_errors(formSerialized, error.responseJSON);
+			Notify.show_error("DATOS", "Los datos ingresados están incompletos");
+		}
+		//if UNAUTHORIZED -> show error response in fields form
+		else if(401 == error.status)
+		{
+			show_errors(formSerialized, error.responseJSON);
+			Error.UNAUTHORIZED();
+		}
+		//if INTERNAL SERVER ERROR
+		if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		//console.log("always");
+		//$("#loader").hide();
+	});
+}
+
+
 // trae las preguntas hechas en el foro 
 ForumService.get_Asks = function (url, callback) {
 
@@ -486,6 +544,7 @@ function show_detail_comments (count, next, previus) {
 		link.appendChild(message);
 		$(".load-comment").append(link)					
 		$(link).click(function(e){
+			console.log('click')
 			e.preventDefault();
 			$(link).remove()
 			CommentService.get_Comments(next);

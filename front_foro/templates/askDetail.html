@@ -15,6 +15,13 @@
 			<h3 class="ask_title titulos"></h3>
 			
 			<div class="col-md-9 content_ask">
+
+				<!--formulario oculto en caso de editar -->
+				<form class="margen_contenido" id="form_ask_edit_foro" hidden>
+					<textarea id="id_textarea_ask" name="content" data-provide="markdown" rows="10"></textarea>
+					<br>
+	      			<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
+	      		</form>
 				
 				<!-- se pega el contenido de la pregunta -->
 				<p class="ask_summary"></p>
@@ -126,7 +133,6 @@
 
 			ForumView.append_answer_to_ask(answer, $('.answer'));
 		}
-
 
 		//Se obtiene el id 
 		var id = location.pathname.split("/");

@@ -7,7 +7,7 @@ var main = function(){
     $('.menu ul').fadeIn();  
   });
   
-  $('.icon-close').click(function(){
+  $('.menu').mouseleave(function(){
     $('.menu').animate({
         left:'-190px'
     },200);

@@ -165,7 +165,7 @@ CommentView.appentOptions = function(div_contenedor){
 	
 	var edit = document.createElement("a");
 	var edit_msg = document.createElement("span");
-	edit_msg.className = "glyphicon glyphicon-pencil"
+	edit_msg.className = "glyphicon glyphicon-edit"
 	$(edit_msg).text(' editar')
 	edit.appendChild(edit_msg);
 	edit.addEventListener('click', CommentView.edit, false);
