@@ -101,19 +101,7 @@
 
 {% block scripts %}
 	<script type="text/javascript">
-		function handle()
-		{
-			var input_ask = $(form_answer_foro).get(0)[0];
-			$(input_ask).hide();
-			$(input_ask).val(id);
-
-			var input_text = $(form_answer_foro).get(0)[1];
-			$(input_text).hide()
-			$('textarea').keyup(function(e){
-				$(input_text).val($(e.target).val())
-	        });
-		}
-
+		
 		function clear_editor(answer)
 		{
 			$('#form_answer_foro').trigger("reset");
@@ -148,7 +136,7 @@
 		//form Answer, to Ask at Foro
 
 		form_answer_foro = $("#form_answer_foro");
-		create_form(URL_CREATE_ANSWER_FORO, form_answer_foro, 'OPTIONS', handle);
+		create_form(URL_CREATE_ANSWER_FORO, form_answer_foro, 'OPTIONS', ForumView.handleAnswer);
 		$(form_answer_foro).show();
 
 
@@ -170,27 +158,14 @@
 		form_comment_ask = $("#form-comment");
 		create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
 
-		form_comment_ask.submit(function (e) {
-			e.preventDefault();
-			CommentService.create(
-				form_comment_ask,
-				URL_CREATE_COMMENT,
-				CommentView.append_comment
-				);
-			$(e.target).parent().fadeOut("slow");
-			$("#a-comment").fadeIn("slow");
-		})
-
-
-
+		form_comment_ask.submit(ForumView.create_comment)
+		
 		$("#a-comment").click(function (e) {
 			e.preventDefault()
-			$("#a-comment").fadeOut("slow")//.hide()
+			$(".link_comment").fadeOut("slow")//.hide()
 			$("#form-comment").fadeIn("slow")//.show()
 		})
 
-		
-	
 		//###   end COMMENT   ###
 
 

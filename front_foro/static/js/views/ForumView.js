@@ -163,7 +163,6 @@ ForumView.render_ask_detail = function(response){
 	$('.ask_title').append(edit)
 
 	var id = response.id;
-	console.log(id)
 	$('.content_ask').attr('id','a-'+id)
 
 	$('.ask_summary').html(markdown.toHTML(response.text));
@@ -177,23 +176,21 @@ ForumView.render_ask_detail = function(response){
 // -------------------
 // :::: ANSWERS ::::
 // -------------------
-ForumView.create_comment_answer = function(e){
+ForumView.create_comment = function(e){
 			e.preventDefault();
-			console.log($(e.target))
 			CommentService.create(
 				$(e.target),
 				URL_CREATE_COMMENT,
 				CommentView.append_comment
 				);
 			$(e.target).parent().fadeOut("slow");
-			//link.fadeIn("slow");
-
+			$(e.target).parents().find('.link_comment').fadeIn('slow');
 }
 
 
 
 
-ForumView.handle = function(new_form){
+ForumView.handle_comment = function(new_form){
 	var input_text = $(new_form).get(0)[0];
 	
 	$(new_form).keyup(function(e){
@@ -210,7 +207,8 @@ ForumView.show_form_comment_in_answer = function(e){
 	id = id[id.length-1];
 
 	//se oculta el boton de 
-	 var link = $(e.target)
+	 var link = $(e.target).parent()
+	 console.log(link)
 	 link.fadeOut("slow")
 	
 	//se clona el formulario y se muestra
@@ -219,9 +217,9 @@ ForumView.show_form_comment_in_answer = function(e){
 	$(new_form).attr('id', '#form-comment-ans-'+id);
 	$(new_form).appendTo('.form-comment-ans-'+id);
 	$(new_form).fadeIn()
-	ForumView.handle(new_form)
+	ForumView.handle_comment(new_form)
 	//aqui servicio agregar comentario
-	new_form.submit(ForumView.create_comment_answer);
+	new_form.submit(ForumView.create_comment);
 	
 }
 
@@ -332,15 +330,6 @@ ForumView.updated_answer = function (response, form)
 	$(parent).children().show();
 }
 
-ForumView.delete = function(response, div)
-{
-	/*
-	*remove comment's div
-	*/
-	div.fadeOut();
-}
-
-
 ForumView.removeAnswer = function(e)
 {
 	/*
@@ -372,21 +361,23 @@ ForumView.callUpdateAnswer = function(e)
 	var splited = e.target.id.split('-');
 	var id = splited[splited.length-1]
 
-	//$("#id_ask").val(id_ask),
-
 	ForumService.updateAnswer(e.target, URL_CREATE_ANSWER_FORO+id, ForumView.updated_answer);
 }
 
-ForumView.handleAnswer = function (form, id_ask){
+ForumView.handleAnswer = function (form){
 
+	//Se obtiene el id de la pregunta para pasarlo en el formulario 
+	var id_ask = location.pathname.split("/");
 	
+	id_ask = id_ask[id_ask.length-1];
+
 	var input_ask = $(form).get(0)[0];
-	
 	$(input_ask).hide();
 	$(input_ask).val(id_ask);
 
 
 	var input_text = $(form).get(0)[1];
+
 	$(input_text).hide()
 	$('textarea').keyup(function(e){
 	$(input_text).val($(e.target).val())
@@ -403,7 +394,6 @@ ForumView.editAnswer = function(e)
 	var parent = $(e.target).parents('.response');
 	//get id from div parent
 	var target_id = parent.attr("id");
-	console.log(target_id)
 	//get content of current comment
 	var current_answer = $("#textAnswer-"+target_id+">p").text();
 	//remove all elements of parent
@@ -421,14 +411,9 @@ ForumView.editAnswer = function(e)
 	//show form
 	$(new_form).fadeIn()
 
-	//Se obtiene el id de la pregunta para pasarlo en el formulario 
-	var id_ask = location.pathname.split("/");
-	
-	id_ask = id_ask[id_ask.length-1];
-
 	
 	// se llena el formulario q esta escondido :) 
-	ForumView.handleAnswer(new_form, id_ask)
+	ForumView.handleAnswer(new_form)
 	/**/
 	new_form.submit(ForumView.callUpdateAnswer);
 }

@@ -229,7 +229,8 @@ function create_form(url, form, method, callback)
 		form.prepend(container);
 		if(callback)
 		{
-			callback();
+			//callback();
+			callback(form);
 		}
 		
 	})
