@@ -125,7 +125,7 @@ ForumView.render_list_ask = function(response){
 			var titles = document.createElement("h3");
 			var summarys = document.createElement("span");
 			//summarys.className = 'pull-right';
-			var author = document.createElement("span");
+			var author = document.createElement("a");
 			var count = document.createElement("span");
 			count.className= "count-answer pull-right number_answer";
 
@@ -137,11 +137,12 @@ ForumView.render_list_ask = function(response){
 			$(author).text(response[i].author+', ')
 			
 			//se pega a los contenedores 
-			author.appendChild(summarys)
+			//author.appendChild(summarys)
 			link.appendChild(titles);
 			container.appendChild(link);
 			//container.appendChild(summarys);
 			container.appendChild(author);
+			container.appendChild(summarys);
 			container.appendChild(count);
 			
 			$('.asks').prepend(container);
@@ -176,28 +177,8 @@ ForumView.render_ask_detail = function(response){
 // -------------------
 // :::: ANSWERS ::::
 // -------------------
-ForumView.create_comment = function(e){
-			e.preventDefault();
-			CommentService.create(
-				$(e.target),
-				URL_CREATE_COMMENT,
-				CommentView.append_comment
-				);
-			$(e.target).parent().fadeOut("slow");
-			$(e.target).parents().find('.link_comment').fadeIn('slow');
-}
 
 
-
-
-ForumView.handle_comment = function(new_form){
-	var input_text = $(new_form).get(0)[0];
-	
-	$(new_form).keyup(function(e){
-		$(input_text).val($(e.target).val())
-		//console.log($(input_text).val())
-	});
-}
 
 ForumView.show_form_comment_in_answer = function(e){
 	
@@ -217,13 +198,11 @@ ForumView.show_form_comment_in_answer = function(e){
 	$(new_form).attr('id', '#form-comment-ans-'+id);
 	$(new_form).appendTo('.form-comment-ans-'+id);
 	$(new_form).fadeIn()
-	ForumView.handle_comment(new_form)
+	CommentView.handle_comment(new_form)
 	//aqui servicio agregar comentario
-	new_form.submit(ForumView.create_comment);
+	new_form.submit(CommentView.create_comment);
 	
 }
-
-
 
 ForumView.append_answer_to_ask = function(response, div_container)
 {
@@ -489,6 +468,4 @@ ForumView.appentOptions = function(div_contenedor){
 	div_dropdown.appendChild(dropdown_menu)
 
 	div_contenedor.appendChild(div_dropdown)
-
-
 }

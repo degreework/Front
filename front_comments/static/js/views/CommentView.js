@@ -133,6 +133,26 @@ CommentView.remove = function(e)
 	})
 }
 
+CommentView.create_comment = function(e){
+			e.preventDefault();
+			CommentService.create(
+				$(e.target),
+				URL_CREATE_COMMENT,
+				CommentView.append_comment
+				);
+			$(e.target).parent().fadeOut("slow");
+			$(e.target).parents().find('.link_comment').fadeIn('slow');
+}
+
+CommentView.handle_comment = function(new_form){
+	var input_text = $(new_form).get(0)[0];
+	
+	$(new_form).keyup(function(e){
+		$(input_text).val($(e.target).val())
+		//console.log($(input_text).val())
+	});
+}
+
 
 CommentView.appentOptions = function(div_contenedor){
 

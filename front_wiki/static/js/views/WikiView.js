@@ -60,7 +60,7 @@ WikiView.succes_create_form = function()
 	        var url = $('input#id_slug');
 	        $($("input[name=slug]")[0]).val(WikiView.slugter(title));
 	    });
-
+		$('#id_slug').hide()
 
 	    //-> onsubmit
         WikiView.form_create.submit(function(e){
@@ -71,7 +71,7 @@ WikiView.succes_create_form = function()
 				URL_CREATE_PAGE_WIKI,
 				WikiView.create_succes
 			);
-        	//$("#editaded_page").show();
+        
 
 		});
 
@@ -160,7 +160,7 @@ WikiView.render_version = function(page)
 WikiView.render_page = function(page)
 {
 	$("#wiki_title").text(page.title);
-	//$("#wiki_version").text(page.version);
+	$("#wiki_version").text(page.version);
 	$("#markdown").html(markdown.toHTML(page.raw));
 
 }
@@ -180,20 +180,27 @@ WikiView.render_list = function(parent_container, response)
 {
 	for (i = 0; i < response.length; i++) { 		
 		// se crea el html     		
-		var container = document.createElement("li");
-		//container.className = 'question';
+
+		var container = document.createElement("div");
+		container.className = 'col-md-12 page_list'
+
+		var br = document.createElement('br')
 		var link = document.createElement("a");
 		var id = response[i].page.id;
 		var slug = response[i].page.slug;
 		$(link).attr('href', host+":"+location.port+"/wiki/"+slug);
+
+		var title_page = document.createElement("span");
+		$(title_page).css('font-size','24px')
 		var date = document.createElement("span");
-		
 		//se asigna el texto 
-		$(link).text(response[i].page.title)
+		$(title_page).text(response[i].page.title)
 		$(date).text("Última edición "+jQuery.timeago(response[i].created));
 
 		//se pega a los contenedores 
+		link.appendChild(title_page)
 		container.appendChild(link);
+		container.appendChild(br);
 		container.appendChild(date);
 		
 		parent_container.prepend(container);
@@ -222,6 +229,9 @@ WikiView.render_request = function(list)
 
 		var container = document.createElement("li");
 		
+		var div = document.createElement("div");
+		div.className = 'col-md-12 page_list'
+
 		var title = document.createElement("span");
 		$(title).text(page.title);
 		title.className = 'lead';
@@ -229,20 +239,22 @@ WikiView.render_request = function(list)
 		var description = document.createElement("span");
 
 
-		$(description).text('tiene una solicitud de modificación en: ');
-		
+		$(description).text(' Esta pagina tiene una solicitud de modificación y espera para ser aprobada ');
+		var br = document.createElement('br')
 		var link = document.createElement("a");
 		
 		$(link).attr('href', url);
 		
 		//se asigna el texto 
-		$(link).text(commit)
+		$(link).text("ver")
 
-		container.appendChild(title);
-		container.appendChild(description);
-		container.appendChild(link);
+		div.appendChild(title);
+		div.appendChild(br);
+		div.appendChild(description);
+		div.appendChild(link);
+		container.appendChild(div)
 		
-		WikiView.list_request.prepend(container);
+		WikiView.list_request.prepend(div);
 	}
 }
 

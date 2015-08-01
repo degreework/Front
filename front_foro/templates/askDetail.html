@@ -158,7 +158,7 @@
 		form_comment_ask = $("#form-comment");
 		create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
 
-		form_comment_ask.submit(ForumView.create_comment)
+		form_comment_ask.submit(CommentView.create_comment)
 		
 		$("#a-comment").click(function (e) {
 			e.preventDefault()
