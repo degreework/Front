@@ -1,23 +1,11 @@
 <div class="row" id="register" hidden>
 <br><br>
-    <div class="jumbotron" >
+    <div class="jumbotron">
     	<h2>Regístrate</h2>
-     	<p>Comienza a aprender algoritmia</p>
+     	<p>Aprende algoritmia</p>
 
-     	<form class="" id="form_register">      
+     	<form id="form_register">
       		<button class="btn btn-default pull-right" type="submit" name="action">Registrar</button>
       	</form>
     </div>
 </div>
-{% block scripts %}
-	<script type="text/javascript">
-		//form register
-		form_register = $("#form_register");
-		create_form(URL_REGISTER, form_register, 'OPTIONS');
-		form_register.submit(function (e) {
-			e.preventDefault();
-			register(form_register, URL_REGISTER);
-		})
-
-	</script>
-{% endblock scripts %}
