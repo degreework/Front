@@ -6,7 +6,6 @@ var ForumView = {};
 
 ForumView.initialize = function(form, editor)
 {
-	
 	ForumView.form_create = form;
 	ForumView.editor = editor;
 
@@ -17,12 +16,23 @@ ForumView.initialize = function(form, editor)
 		ForumView.succes_create_form
 	);
 
-	
+	if(ForumView.form_create.selector === '#form_ask_edit_foro'){
+		
+		//Se obtiene el id de la pregunta para pasarlo en el formulario 
+		var id_ask = location.pathname.split("/");
+		id_ask = id_ask[id_ask.length-1];
+		console.log(id)
+		ForumView.form_create.submit(function (e) {
+			
+			ForumService.updateAsk(ForumView.form_create, URL_CREATE_ASK_FORO+id_ask,ForumView.update_ask);
+		})
 
-	ForumView.form_create.submit(function (e) {
-		e.preventDefault();
-		ForumService.create_ask(ForumView.form_create, URL_CREATE_ASK_FORO);
-	})
+	}else{
+		ForumView.form_create.submit(function (e) {
+			e.preventDefault();
+			ForumService.create_ask(ForumView.form_create, URL_CREATE_ASK_FORO);
+		})	
+	}	
 }
 
 ForumView.succes_create_form = function()
@@ -44,7 +54,7 @@ ForumView.hidde_input_text = function(input)
 	//append editor content to raw input
 	
 	$('textarea').keyup(function(e){
-		$(input).val(ForumView.editor.val());
+		$(input).val($(e.target).val());
     });
 	input.hide();
 
@@ -76,36 +86,36 @@ ForumView.edit_ask = function(e){
 	
 	//get id from div parent
 	var target_id = parent.attr("id");
-	$(".ask_title").text('edita tu respuesta');
 
 	//remove all elements of parent
 	$(parent).children().hide();
 
+
 	//change comment form location
 	ForumView.initialize($("#form_ask_edit_foro"), $("#id_textarea_ask"));
+	$(".ask_title").hide();
+	$(".ask_edit").show();
 
 	new_form = $('#form_ask_edit_foro')	
-
-	//Se obtiene el id de la pregunta para pasarlo en el formulario 
-	var id_ask = location.pathname.split("/");
-	id_ask = id_ask[id_ask.length-1];
-
 	
-	// se llena el formulario q esta escondido :) 
-	//ForumView.handle(new_form, id_ask)
-	/**/
-	new_form.submit(ForumView.callUpdateAsk);
+	//new_form.submit(ForumView.callUpdateAsk);
 
 }
 
-ForumView.callUpdateAsk = function(e)
-{
-	// se obtiene el id de la respuesta para colocarlo en la url 
-	e.preventDefault();
-	var splited = e.target.id.split('-');
-	var id = splited[splited.length-1]
 
-	ForumService.updateAsk(e.target, URL_CREATE_ASK_FORO+id, ForumView.updated_ask);
+ForumView.updated_ask= function (response, form)
+{
+	/*
+	* - set new content
+	* - remove form
+	* - show div
+	*/
+	console.log('entro')
+	/*var parent = $(form).parents('.response');
+	var parent_id = parent.attr("id");
+	$("#textAnswer-ans-"+response.id+">p").text(response.text);
+	$(form).remove();
+	$(parent).children().show();*/
 }
 
 
@@ -357,11 +367,7 @@ ForumView.handleAnswer = function (form){
 
 	var input_text = $(form).get(0)[1];
 
-	$(input_text).hide()
-	$('textarea').keyup(function(e){
-	$(input_text).val($(e.target).val())
-	});
-
+	ForumView.hidde_input_text($(input_text));
 }
 
 ForumView.editAnswer = function(e)

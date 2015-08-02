@@ -59,8 +59,8 @@ ForumService.create_ask = function(form, url){
 ForumService.updateAsk = function(form, url, callback)
 {
 //	$("#loader").show();
-	formData = new FormData($(form).get(0))
 
+	formData = new FormData($(form).get(0))
 	//remove all errors from before
 	remove_all_errors($(form).serialize());
 
@@ -75,12 +75,13 @@ ForumService.updateAsk = function(form, url, callback)
 		/*
 		Comment succesful, then do anything
 		*/
+		console.log('termino')
 		callback(response, form);
 		Notify.show_success("OK", "Respuesta actualizado");
 
 	})
 	.fail(function(error){		
-		console.log(error);
+		//console.log(error);
 
 		//if status ==0  -> can't connect to server
 		if(0 == error.status)
@@ -108,7 +109,7 @@ ForumService.updateAsk = function(form, url, callback)
 		}
 	})
 	.always(function(){
-		//console.log("always");
+		console.log("me fui por aca");
 		//$("#loader").hide();
 	});
 }
@@ -338,8 +339,9 @@ ForumService.create_answer = function (form, url, callback)
 ForumService.updateAnswer = function(form, url, callback)
 {
 //	$("#loader").show();
-	formData = new FormData($(form).get(0))
 
+	formData = new FormData($(form).get(0))
+	console.log(formData)
 	//remove all errors from before
 	remove_all_errors($(form).serialize());
 
