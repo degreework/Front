@@ -7,7 +7,7 @@ UserView.initializeRegister = function(div_register)
 
 UserView.verify = function ()
 {
-	UserView.form_login = $("#div_form_login").find("form");
+	UserView.form_login = $('#form_login')
 	/*
 	* THIS FUNCTION MUST BE CALLED IN EVERY PAGE
 	* This function show login form when user is not authenticated
@@ -34,9 +34,11 @@ UserView.showIndexUser = function ()
 		$("#introduction").hide();
 		$('#form_login').hide();
 		$('#register').hide();
+		$('#resume-profile').show();
 		$('.icon-menu').show();
 		$('.consult-user').show();
 		$('.menu').show();
+		$(".pic_profile").attr("src",'http://127.0.0.1:8080'+JSON.parse($.session.get('user')).thumb[1]);
 
 		UserView.showLoggedUser();
 	}
@@ -67,7 +69,7 @@ UserView.showLoginForm = function()
 	*/
 	UserView.form_login.trigger("reset");
 	
-	$("#div_form_login").show();
+	$('#form_login').show();
 
 	//form login
 	UserView.form_login.submit(function (e) {

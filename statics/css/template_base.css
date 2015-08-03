@@ -13,7 +13,7 @@ body{
 	background-color: #D51B23;
     color:  white;
     margin-top: 0;
-    height: 100px;	
+    height: 60px;	
     border-bottom: 10px solid  #7F1015;
     margin-bottom: 0px;
 }
@@ -48,6 +48,7 @@ body{
 .capacity{
 	min-height: 400px;
 	/*margin: 0 0 3% 0;*/
+	margin-left:20px;
 	margin-bottom: 3%;
 }
 
@@ -67,27 +68,34 @@ hr{
 }
 
 /*Profile*/
+/*
 .header_profile{
 	min-height: 180px
-}
+}*/
 
 .resume_profile{
-	margin-left: 95px;
+	font-size: 18px;
 }
 
+/*
 .resume_user_profile{
 	margin-left: 95px;
+}*/
+
+.pic_profile{
+	width: 102px;
 }
 
-
 .picture{
-	width: 178px;
-	height: 160px;
+	width: 102px;
+	height: 102px;
+	margin-top: 20px;
 	background-color: #eee;
-	display: flex;
+	/*display: flex;
   	position: absolute;
-  	z-index: 1;
-  	border: 1px solid #ccc
+  	z-index: 1;*/
+  	border: 1px solid #ccc;
+  	padding:0;
 }
 
 
@@ -137,7 +145,7 @@ hr{
 /*MODULOS*/
 
 .info-module{
-	min-height: 500px;
+	min-height: 655px;
 	background-color: #b79350;
 	color: white;
 	padding: 20px;
@@ -146,7 +154,7 @@ hr{
 
 .section-module{
 	min-height: 100px;
-	padding: 10px;
+	margin-top: 20px;
 	border-bottom: 1px solid #ccc;
 }
 
@@ -165,18 +173,24 @@ hr{
 /* square of info */
 .base{
 	box-shadow:	1px 1px 3px #888888;
-	padding: 15px;
+	padding: 10px;
 }
 
 
 /*nav sections*/
 .navigation{	
+	text-align: center;
 	border-bottom: 1px solid #ccc;
-	padding: 15px 15px;
+	padding: 15px 15px 0px 3px;
+	padding: 10px 0px 0px 3px;
 }
 
+#title-nav{
+	padding: 15px 15px;
+}
 .navbar-brand {
 	font-size: 30px;
+	padding: 0;
 }
 
 
@@ -187,7 +201,7 @@ hr{
 .navbar-default {
 	color: black;
 	border:none;
-	background-color: white;
+	background-color: transparent;
 	border-bottom: 1px solid #eee;
 	padding: 0px;
 }
@@ -205,31 +219,7 @@ hr{
 	color: white;
 }
 
-/* nav login */
-.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{
-	background-color: transparent;
-}
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus{
-	background-color: transparent;
-	color: white	
-}
 
-.section-user{
-	background-color: transparent;
-	color: white;
-	border-bottom: none;
-}
-
-.section-user .navbar-nav>li>a, .section-user .navbar-nav>li>a:focus, .section-user .navbar-nav>li>a:hover{
-	color: white;
-}
-
-.pic_resume{
-    display: flex;
-    position: absolute;
-    z-index: 1;
-    left: -5px;
-}
 
 /*asks*/
 .info_ask{

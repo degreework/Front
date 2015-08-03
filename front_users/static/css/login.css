@@ -1,15 +1,36 @@
-.singin{
-	margin-top: 24px;
-	padding-right: 0;
+#form_login{
+	margin: 0;
 }
 
-.resume_name{
+#user_resume li{
 	font-size: 18px;
+	margin-right: 20px;
 }
 
 .pic_resume{
+	margin-top: -14px;
 	padding: 0;
 	border-right: 1px white;
 	transform: scale(0.8,0.8);
 	margin-right: 5px;
+}
+
+/* nav login */
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{
+	background-color: transparent;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus{
+	background-color: transparent;
+	color: white	
+}
+
+#button_logout{
+	background-color: transparent;
+	color: black;
+}
+
+#name-app{
+	color: white;
 }

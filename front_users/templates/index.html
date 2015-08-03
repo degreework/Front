@@ -1,6 +1,6 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
-	
+
 	<div class="col-md-12 capacity">
 		{% include 'introduction.html' %}
 		<!--<div class="col-md-6 col-sm-6 col-xs-8">
@@ -17,6 +17,7 @@
 		</div>
 
 	</div>
+	
 {% endblock %}
 
 {% block scripts %}
@@ -28,14 +29,14 @@
 
     jQuery(document).ready(function() {
 		UserView.initializeRegister($("#register"));
-		UserView.verify();
+		//UserView.verify();
 		
-		UserView.showIndexUser();
+		//UserView.showIndexUser();
 
 		$("#preloader_2").hide();
 
 		//bring users 
-		UserService.get_users();
+		//UserService.get_users();
     });
 
 </script>
