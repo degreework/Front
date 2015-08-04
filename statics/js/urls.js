@@ -46,5 +46,5 @@ URL_GET_WIKI_HISTORY = host+':8080/API/wiki/history/';
 
 //Comments
 URL_CREATE_COMMENT = host+':8080/API/comment/';
-URL_GET_COMMENTS = host+':8080/API/comment/all';
+URL_GET_COMMENTS = host+':8080/API/comment/all/%thread%';
 

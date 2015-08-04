@@ -222,7 +222,7 @@ ForumService.get_Detail_Ask = function (id) {
 
 
 // get answer list from a ask at forum
-ForumService.get_Answers = function (url, callback) {
+ForumService.get_Answers = function (url, callback, container) {
 
 	$("#preloader_2").show();
 	$.ajax({
@@ -240,7 +240,7 @@ ForumService.get_Answers = function (url, callback) {
 		}
 		// se pasa a arreglo la respuesta 
 		response = response.results;
-		ForumView.append_answer_to_ask(response, $('.answer'))	
+		ForumView.append_answer_to_ask(response, container)	
 
 	})
 	.fail(function(error){		
@@ -411,14 +411,16 @@ ForumService.delete_answer = function(div, url, callback)
 		/*
 		Comment succesful, then do anything
 		*/
-		if(callback)
-		{
-			callback(response, div);
-		}
 
 		ForumView.update_count_delete_answer()
 
 		Notify.show_success("OK", "Respuesta eliminada");
+
+		if(callback)
+		{
+			console.log("callback")
+			callback(response, div);
+		}
 
 	})
 	.fail(function(error){		
@@ -525,7 +527,7 @@ function show_detail_answers (count, next, previus) {
 		var message = document.createElement("span");
 		$(message).text("Ver más respuestas")
 		link.appendChild(message);
-		$(".load-answer").append(link)	
+		$(".load-answer-more").append(link)	
 		$(link).click(function(e){
 			e.preventDefault();
 			$(link).remove()
@@ -534,26 +536,6 @@ function show_detail_answers (count, next, previus) {
 	}
 	
 	
-}
-
-function show_detail_comments (count, next, previus) {
-	
-	//show link to load more answer
-	if(next)
-	{
-		var link = document.createElement("a");
-		//$(link).attr('href', next);
-		var message = document.createElement("span");
-		$(message).text("Ver más comentarios")
-		link.appendChild(message);
-		$(".load-comment").append(link)					
-		$(link).click(function(e){
-			console.log('click')
-			e.preventDefault();
-			$(link).remove()
-			CommentService.get_Comments(next);
-		});
-	}
 }
 
 

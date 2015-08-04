@@ -1,4 +1,8 @@
-var CommentView = {};
+var CommentView = function (form, container, container_load_more) {
+	this.form = form;
+	this.container_list = container;
+	this.container_load_more = container_load_more;
+};
 
 /*
 *
@@ -6,32 +10,37 @@ var CommentView = {};
 *
 */
 
-
-CommentView.updated = function (response, form)
+CommentView.prototype.load = function(thread)
 {
-	/*
-	* - set new content
-	* - remove form
-	* - show div
-	*/
-	var parent = $(form).parents('.comments');
-	var parent_id = parent.attr("id");
-	$("#"+parent_id+">p").text(response.text);
-	$(form).remove();
-	$(parent).children().show();
+	var self = this;
+	var url = URL_GET_COMMENTS.replace(/\%thread%/g, thread);
+	CommentService.get_Comments(
+		url,
+		function(response){		
+			self.append_comment(response.results)
+			self.show_detail_comments(response.count, response.next, response.previus);
+		}
+	);
+	
+
+	this.container_load_more.find("a").click(function(e){
+		console.log("get clikc")
+			e.preventDefault();
+			CommentService.get_Comments(
+				self.next,
+				function(response){
+					self.append_comment(response.results)
+					self.show_detail_comments(response.count, response.next, response.previus);
+				}
+			);
+		});
 }
 
-CommentView.delete = function(response, div)
-{
-	/*
-	*remove comment's div
-	*/
-	div.fadeOut();
-}
 
 
-CommentView.append_comment = function(response)
+CommentView.prototype.append_comment = function(response)
 {
+
 	/*
 	*append a list of comments (or only one)
 	*/
@@ -53,7 +62,7 @@ CommentView.append_comment = function(response)
 			$(author).text(response[i].author)
 
 			//if isAuthor
-			CommentView.appentOptions(container)
+			this.appentOptions(container)
 				
 			//se pega a los contenedores 
 			link.appendChild(author);
@@ -61,11 +70,23 @@ CommentView.append_comment = function(response)
 			container.appendChild(text);
 			//container.appendChild(document.createElement("hr"));
 			
-
-			$('#list-comment').append(container);
+			$(this.container_list).append(container);
 		}
 }
 
+CommentView.updated = function (response, form)
+{
+	/*
+	* - set new content
+	* - remove form
+	* - show div
+	*/
+	var parent = $(form).parents('.comments');
+	var parent_id = parent.attr("id");
+	$("#"+parent_id+">p").text(response.text);
+	$(form).remove();
+	$(parent).children().show();
+}
 
 /*
 *
@@ -81,23 +102,31 @@ CommentView.callUpdate = function(e)
 	CommentService.update(e.target, URL_CREATE_COMMENT+id, CommentView.updated);
 }
 
-CommentView.edit = function(e)
+CommentView.prototype.edit = function(e)
 {
+	console.log("edit")
 	/*
 	*when edit (a tag) is clicked, do many things here like create form and set an event handler
 	*/
 	//get div parent
 	var parent = $(e.target).parents('.comments');
+	console.log(parent)
 	//get id from div parent
 	var target_id = parent.attr("id");
 	//get content of current comment
 	var current_comment = $("#"+target_id+">p").text();
+	console.log(current_comment);
 	//remove all elements of parent
 	$(parent).children().hide();
 
 	//change comment form location
-	var new_form = $("#form-comment").clone()
+	
+	//this.load_create_comment(target_id)
+	var new_form = $(this.form).clone()
+	console.log(new_form)
+
 	$(new_form).attr('id', 'edit_comment_form_'+target_id);
+	console.log(new_form)
 
 	$(new_form).appendTo('#'+target_id);
 	//set current content of comment to form
@@ -113,6 +142,7 @@ CommentView.remove = function(e)
 	/*
 	* when x (button) is clicked then call to Service to remove
 	*/
+	console.log("remove")
 
 	notify = Notify.show_confirm('comentario');
 
@@ -122,7 +152,13 @@ CommentView.remove = function(e)
 		var splited = id.split('-');
 		id = splited[splited.length-1];
 
-		CommentService.delete_($(e.target).parents('.comments'), URL_CREATE_COMMENT+id, CommentView.delete);
+		CommentService.delete_(
+			$(e.target).parents('.comments'),
+			URL_CREATE_COMMENT+id,
+			function(response, div)
+			{
+				div.fadeOut();
+			});
 		notify.close()	
 	})
 
@@ -133,28 +169,36 @@ CommentView.remove = function(e)
 	})
 }
 
-CommentView.create_comment = function(e){
+CommentView.prototype.load_create_comment = function (parent) {
+
+	var form = this.form;
+	create_form(URL_CREATE_COMMENT, form, 'OPTIONS', function(){
+		$(form.find("#id_parent")[0]).attr('value', parent);
+		$(form.find("#id_parent")[0]).hide()
+		form.show()
+	});
+	var self = this;
+	
+	form.submit(function(e)
+		{
 			e.preventDefault();
+
 			CommentService.create(
 				$(e.target),
 				URL_CREATE_COMMENT,
-				CommentView.append_comment
-				);
+				function(response)
+				{
+					self.append_comment(response);
+				}
+			);
+
 			$(e.target).parent().fadeOut("slow");
 			$(e.target).parents().find('.link_comment').fadeIn('slow');
-}
-
-CommentView.handle_comment = function(new_form){
-	var input_text = $(new_form).get(0)[0];
-	
-	$(new_form).keyup(function(e){
-		$(input_text).val($(e.target).val())
-		//console.log($(input_text).val())
-	});
+		});
 }
 
 
-CommentView.appentOptions = function(div_contenedor){
+CommentView.prototype.appentOptions = function(div_contenedor){
 
 	// div del desplegable 
 	var div_dropdown = document.createElement("div");
@@ -188,7 +232,14 @@ CommentView.appentOptions = function(div_contenedor){
 	edit_msg.className = "glyphicon glyphicon-edit"
 	$(edit_msg).text(' editar')
 	edit.appendChild(edit_msg);
-	edit.addEventListener('click', CommentView.edit, false);
+	var self = this;
+	edit.addEventListener(
+		'click',
+		function(e){
+
+			self.edit(e);
+		},
+		false);
 
 	item1.appendChild(edit)
 	//eliminar answer
@@ -212,5 +263,19 @@ CommentView.appentOptions = function(div_contenedor){
 
 	div_contenedor.appendChild(div_dropdown)
 
+}
+
+CommentView.prototype.show_detail_comments  = function (count, next, previus) {
+	//show link to load more answer
+	var self = this;
+	if(next)
+	{
+		self.next = next;
+		self.container_load_more.show();
+	}
+	else
+	{
+		self.container_load_more.hide();
+	}
 
 }

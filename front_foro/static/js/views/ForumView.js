@@ -190,8 +190,8 @@ ForumView.render_ask_detail = function(response){
 
 
 
-ForumView.show_form_comment_in_answer = function(e){
-	
+ForumView.show_form_comment_in_answer = function(e, comentariosAnswer){
+
 	// se obtine el id de la pregunta donde estan los comentarios 
 	var id = $(e.target).attr("id");
 	var id = id.split('-');
@@ -199,25 +199,21 @@ ForumView.show_form_comment_in_answer = function(e){
 
 	//se oculta el boton de 
 	 var link = $(e.target).parent()
-	 console.log(link)
 	 link.fadeOut("slow")
 	
-	//se clona el formulario y se muestra
-	form = $(e.target).parents('.response').find('#form-comment-ans-'+id)
-	var new_form = $("#form-comment").clone()
-	$(new_form).attr('id', '#form-comment-ans-'+id);
-	$(new_form).appendTo('.form-comment-ans-'+id);
-	$(new_form).fadeIn()
-	CommentView.handle_comment(new_form)
-	//aqui servicio agregar comentario
-	new_form.submit(CommentView.create_comment);
+	//se asigna el id del form a la respuesta actual
+	$(comentariosAnswer.form).attr('id', 'form-comment-ans-'+id);
+	
+	//comentariosAnswer.load_create_comment(id);
+	
+	$(comentariosAnswer.form).appendTo('.form-comment-ans-'+id);
 	
 }
 
 ForumView.append_answer_to_ask = function(response, div_container)
 {
-	for (i = 0; i < response.length; i++) { 
-		
+	for (i = 0; i < response.length; i++) { 		
+
 		// se crea el html     		
 		var container = document.createElement("div");
 		container.className = 'col-md-12 response';
@@ -261,18 +257,27 @@ ForumView.append_answer_to_ask = function(response, div_container)
 		
 		// contenedor para listar los comentarios 
 			var list_comments = document.createElement("div");
-			$(list_comments).attr('id', 'list-comment')
+			$(list_comments).attr('id', 'list-comment-ans-'+id)
 		
 		// contenedor para el "ver mas" de los comentarios 
 			var div_load_comments = document.createElement("div");
 			var load_comments = document.createElement("span");
-			load_comments.className = 'load-comment'
+			var load_comments_a = document.createElement("a");
+			load_comments.className = 'load-comment-'+id;
+			$(load_comments_a).text("Cargar")
+			load_comments.appendChild(load_comments_a)
 			div_load_comments.appendChild(load_comments)
 
 		div_comments.appendChild(list_comments)
 		div_comments.appendChild(div_load_comments)
 		summarys.appendChild(div_comments)
 		
+
+		var comentariosAnswer = new CommentView(
+			$("#form-comment-ask"),
+			list_comments,
+			$(".load-comment-"+id)
+		);
 
 		//enlace para comentar 
 		var div_link_comment = document.createElement("div");
@@ -281,7 +286,15 @@ ForumView.append_answer_to_ask = function(response, div_container)
 			link_comment.className = "btn-create pull-right"
 			$(link_comment).attr('id', 'a-comment-ans-'+id)
 			$(link_comment).text("agrega un comentario")
-			link_comment.addEventListener('click', ForumView.show_form_comment_in_answer, false);
+		
+		link_comment.addEventListener(
+			'click', 
+			function(e)
+			{
+				ForumView.show_form_comment_in_answer(e, comentariosAnswer)
+			}
+			,false);
+
 		div_link_comment.appendChild(link_comment)
 
 		summarys.appendChild(div_link_comment)
@@ -296,9 +309,13 @@ ForumView.append_answer_to_ask = function(response, div_container)
 		container.appendChild(summarys);
 		container.appendChild(info_user);
 		container.appendChild(options);
-
+		
 
 		$(div_container).append(container);
+
+
+		//Load comments
+		comentariosAnswer.load(id);
 
 	}
 

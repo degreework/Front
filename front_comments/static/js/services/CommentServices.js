@@ -79,11 +79,8 @@ CommentService.get_Comments = function (url, callback) {
 	.done(function(response){
 		if(callback)
 		{
-			callback(response.count, response.next, response.previus);
+			callback(response)
 		}
-
-		response = response.results;
-		CommentView.append_comment(response);	
 		
 	})
 	.fail(function(error){		
@@ -188,11 +185,12 @@ CommentService.delete_ = function(div, url, callback)
 		/*
 		Comment succesful, then do anything
 		*/
+		console.log("after")
+		Notify.show_success("OK", "Comentario eliminado");
 		if(callback)
 		{
 			callback(response, div);
 		}
-		Notify.show_success("OK", "Comentario eliminado");
 
 	})
 	.fail(function(error){		

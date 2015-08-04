@@ -3,6 +3,7 @@ var Notify = {};
 
 Notify.show_success = function(title, message)
 {
+	console.log("Show_success: "+message)
 	$.notify({
 		title: title,
 		message: message
