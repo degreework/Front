@@ -328,7 +328,12 @@ ForumView.removeAnswer = function(e)
 		var splited = id.split('-');
 		id = splited[splited.length-1];
 
-		ForumService.delete_answer($(e.target).parents('.response'), URL_CREATE_ANSWER_FORO+id, CommentView.delete);	
+		ForumService.delete_answer(
+			$(e.target).parents('.response'),
+			URL_CREATE_ANSWER_FORO+id,
+			function (response, div) {
+				div.fadeOut();
+			});	
 		notify.close()	
 	})
 
