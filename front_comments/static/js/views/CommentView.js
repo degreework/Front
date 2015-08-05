@@ -1,5 +1,7 @@
-var CommentView = function (form, container, container_load_more) {
+var CommentView = function (thread, form, container, container_load_more) {
+	this.thread = thread;
 	this.form = form;
+	this.form_edit = $(form).clone();
 	this.container_list = container;
 	this.container_load_more = container_load_more;
 };
@@ -10,37 +12,37 @@ var CommentView = function (form, container, container_load_more) {
 *
 */
 
-CommentView.prototype.load = function(thread)
+CommentView.prototype.load = function()
 {
 	var self = this;
-	var url = URL_GET_COMMENTS.replace(/\%thread%/g, thread);
+	var url = URL_GET_COMMENTS.replace(/\%thread%/g, this.thread);
+	
 	CommentService.get_Comments(
 		url,
 		function(response){		
 			self.append_comment(response.results)
-			self.show_detail_comments(response.count, response.next, response.previus);
+			self.there_are_more_comments(response.count, response.next, response.previus);
 		}
 	);
 	
-
+	//set listener to link to load more comments
 	this.container_load_more.find("a").click(function(e){
-		console.log("get clikc")
-			e.preventDefault();
-			CommentService.get_Comments(
-				self.next,
-				function(response){
-					self.append_comment(response.results)
-					self.show_detail_comments(response.count, response.next, response.previus);
-				}
-			);
-		});
+		e.preventDefault();
+		CommentService.get_Comments(
+			self.next,
+			function(response){
+				self.append_comment(response.results)
+				self.there_are_more_comments(
+					response.count,
+					response.next,
+					response.previus);
+			}
+		);
+	});
 }
-
-
 
 CommentView.prototype.append_comment = function(response)
 {
-
 	/*
 	*append a list of comments (or only one)
 	*/
@@ -59,11 +61,13 @@ CommentView.prototype.append_comment = function(response)
 			
 			//se asigna el texto 
 			$(text).text(response[i].text+"")
-			$(author).text(response[i].author)
+			$(author).text(response[i].author.name)
 
 			//if isAuthor
-			this.appentOptions(container)
-				
+			if (response[i].author.id == JSON.parse($.session.get('user')).id)
+			{
+				this.appentOptions(container)		
+			}
 			//se pega a los contenedores 
 			link.appendChild(author);
 			container.appendChild(link);
@@ -84,6 +88,7 @@ CommentView.updated = function (response, form)
 	var parent = $(form).parents('.comments');
 	var parent_id = parent.attr("id");
 	$("#"+parent_id+">p").text(response.text);
+
 	$(form).remove();
 	$(parent).children().show();
 }
@@ -94,47 +99,47 @@ CommentView.updated = function (response, form)
 *
 */
 
-CommentView.callUpdate = function(e)
+CommentView.prototype.handler_edit = function(e)
 {
-	e.preventDefault();
-	var splited = e.target.id.split('-');
-	var id = splited[splited.length-1]
-	CommentService.update(e.target, URL_CREATE_COMMENT+id, CommentView.updated);
-}
-
-CommentView.prototype.edit = function(e)
-{
-	console.log("edit")
 	/*
 	*when edit (a tag) is clicked, do many things here like create form and set an event handler
 	*/
 	//get div parent
 	var parent = $(e.target).parents('.comments');
-	console.log(parent)
 	//get id from div parent
 	var target_id = parent.attr("id");
 	//get content of current comment
 	var current_comment = $("#"+target_id+">p").text();
-	console.log(current_comment);
 	//remove all elements of parent
 	$(parent).children().hide();
 
 	//change comment form location
 	
 	//this.load_create_comment(target_id)
-	var new_form = $(this.form).clone()
-	console.log(new_form)
+	//var new_form = $(this.form).clone()
+	var new_form = this.form_edit.clone();
+	create_form(URL_CREATE_COMMENT, new_form, 'OPTIONS', function(){
+		$(new_form.find("#id_parent")[0]).attr('value', target_id);
+		$(new_form.find("#id_parent")[0]).hide()
+
+		$(new_form.find("#id_text")[0]).val(current_comment);
+	});
 
 	$(new_form).attr('id', 'edit_comment_form_'+target_id);
-	console.log(new_form)
 
 	$(new_form).appendTo('#'+target_id);
 	//set current content of comment to form
-	$($("#edit_comment_form_"+target_id+" input")[0]).val(current_comment);
+	//$($("#edit_comment_form_"+target_id+" input")[0]).val(current_comment);
 	//show form
 	$(new_form).fadeIn()
 
-	new_form.submit(CommentView.callUpdate);
+	new_form.submit(function(e)
+		{
+			e.preventDefault();
+			var splited = e.target.id.split('-');
+			var id = splited[splited.length-1]
+			CommentService.update(e.target, URL_CREATE_COMMENT+id, CommentView.updated);
+		});
 }
 
 CommentView.remove = function(e)
@@ -142,7 +147,6 @@ CommentView.remove = function(e)
 	/*
 	* when x (button) is clicked then call to Service to remove
 	*/
-	console.log("remove")
 
 	notify = Notify.show_confirm('comentario');
 
@@ -170,7 +174,6 @@ CommentView.remove = function(e)
 }
 
 CommentView.prototype.load_create_comment = function (parent) {
-
 	var form = this.form;
 	create_form(URL_CREATE_COMMENT, form, 'OPTIONS', function(){
 		$(form.find("#id_parent")[0]).attr('value', parent);
@@ -192,8 +195,8 @@ CommentView.prototype.load_create_comment = function (parent) {
 				}
 			);
 
-			$(e.target).parent().fadeOut("slow");
-			$(e.target).parents().find('.link_comment').fadeIn('slow');
+			//$(e.target).parent().fadeOut("slow");
+			//$(e.target).parents().find('.link_comment').fadeIn('slow');
 		});
 }
 
@@ -202,7 +205,7 @@ CommentView.prototype.appentOptions = function(div_contenedor){
 
 	// div del desplegable 
 	var div_dropdown = document.createElement("div");
-	div_dropdown.className = "dropdown pull-right"
+	div_dropdown.className = "dropdown pull-right";
 
 	// donde va el icono  despliega el menu 
 	var div_dropdow_toggle = document.createElement("div");
@@ -237,7 +240,7 @@ CommentView.prototype.appentOptions = function(div_contenedor){
 		'click',
 		function(e){
 
-			self.edit(e);
+			self.handler_edit(e);
 		},
 		false);
 
@@ -265,7 +268,7 @@ CommentView.prototype.appentOptions = function(div_contenedor){
 
 }
 
-CommentView.prototype.show_detail_comments  = function (count, next, previus) {
+CommentView.prototype.there_are_more_comments = function (count, next, previus) {
 	//show link to load more answer
 	var self = this;
 	if(next)

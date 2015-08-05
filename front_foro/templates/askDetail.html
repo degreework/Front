@@ -30,12 +30,8 @@
 				<div class="col-md-10 col-sm-offset-1">
 
 					<!-- contenedor de los comentarios -->
-					<div id="list-comment">
-						
-					</div>
-					<div class="load-comment-ask" hidden>
-						<a><span>Ver más</span></a>
-					</div>
+					<div id="list-comment-ask">	</div>
+					<div class="load-comment-ask" hidden><a>Ver más</a></div>
 
 				</div>
 
@@ -71,7 +67,7 @@
 			
 			<div class=""><span class="load-answer-more"></span></div>
 			
-			<form id="form-comment-clone" hidden>
+			<form id="form-comment-clone">
 				<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
 			</form>
 		</div>
@@ -126,7 +122,11 @@
 				
 		ForumService.get_Detail_Ask(id);
 
-		ForumService.get_Answers(URL_GET_ANSWERS_FORUM, show_detail_answers, $('.answer'));
+		ForumService.get_Answers(
+			URL_GET_ANSWERS_FORUM+'/'+id+'/',
+			show_detail_answers,
+			$('.answer')
+		);
 		
 
 		
@@ -152,13 +152,13 @@
 
 
 		//###   COMMENT   ###
-		//Form Comment, to Comment at Ask
 		var comentariosAsk = new CommentView(
+			id,
 			$("#form-comment-ask"),
-			$('#list-comment'),
-			$(".load-comment-ask"));
-		
-		comentariosAsk.load(id);
+			$('#list-comment-ask'),
+			$(".load-comment-ask")
+		);		
+		comentariosAsk.load();
 		comentariosAsk.load_create_comment(id);
 		//###   end COMMENT   ###
 

@@ -188,30 +188,9 @@ ForumView.render_ask_detail = function(response){
 // :::: ANSWERS ::::
 // -------------------
 
-
-
-ForumView.show_form_comment_in_answer = function(e, comentariosAnswer){
-
-	// se obtine el id de la pregunta donde estan los comentarios 
-	var id = $(e.target).attr("id");
-	var id = id.split('-');
-	id = id[id.length-1];
-
-	//se oculta el boton de 
-	 var link = $(e.target).parent()
-	 link.fadeOut("slow")
-	
-	//se asigna el id del form a la respuesta actual
-	$(comentariosAnswer.form).attr('id', 'form-comment-ans-'+id);
-	
-	//comentariosAnswer.load_create_comment(id);
-	
-	$(comentariosAnswer.form).appendTo('.form-comment-ans-'+id);
-	
-}
-
 ForumView.append_answer_to_ask = function(response, div_container)
 {
+	var to_comment = [];
 	for (i = 0; i < response.length; i++) { 		
 
 		// se crea el html     		
@@ -253,57 +232,17 @@ ForumView.append_answer_to_ask = function(response, div_container)
 
 		//comentarios 
 		var div_comments = document.createElement("div");
-		div_comments.className = "col-md-10 col-sm-offset-1"
+		div_comments.className = "col-md-10 col-sm-offset-1 comment-answer"
 		
 		// contenedor para listar los comentarios 
-			var list_comments = document.createElement("div");
-			$(list_comments).attr('id', 'list-comment-ans-'+id)
-		
-		// contenedor para el "ver mas" de los comentarios 
-			var div_load_comments = document.createElement("div");
-			var load_comments = document.createElement("span");
-			var load_comments_a = document.createElement("a");
-			load_comments.className = 'load-comment-'+id;
-			$(load_comments_a).text("Cargar")
-			load_comments.appendChild(load_comments_a)
-			div_load_comments.appendChild(load_comments)
+		var list_comments = document.createElement("div");
+		$(list_comments).attr('id', 'list-comment-ans-'+id)
 
-		div_comments.appendChild(list_comments)
-		div_comments.appendChild(div_load_comments)
-		summarys.appendChild(div_comments)
-		
+		list_comments.appendChild(div_comments)
 
-		var comentariosAnswer = new CommentView(
-			$("#form-comment-ask"),
-			list_comments,
-			$(".load-comment-"+id)
-		);
+		summarys.appendChild(list_comments)
 
-		//enlace para comentar 
-		var div_link_comment = document.createElement("div");
-		div_link_comment.className = "col-md-10 col-sm-offset-1 link_comment"
-			var link_comment = document.createElement("a");
-			link_comment.className = "btn-create pull-right"
-			$(link_comment).attr('id', 'a-comment-ans-'+id)
-			$(link_comment).text("agrega un comentario")
-		
-		link_comment.addEventListener(
-			'click', 
-			function(e)
-			{
-				ForumView.show_form_comment_in_answer(e, comentariosAnswer)
-			}
-			,false);
 
-		div_link_comment.appendChild(link_comment)
-
-		summarys.appendChild(div_link_comment)
-
-		//formulario para comentar 
-		var div_form_comment = document.createElement("div");
-		div_form_comment.className = "col-md-10 col-sm-offset-1 form-comment-ans-"+id
-		
-		summarys.appendChild(div_form_comment)
 
 		//se pega a los contenedores 
 		container.appendChild(summarys);
@@ -313,11 +252,51 @@ ForumView.append_answer_to_ask = function(response, div_container)
 
 		$(div_container).append(container);
 
-
-		//Load comments
-		comentariosAnswer.load(id);
+		to_comment.push(container);
 
 	}
+
+	
+
+	//load comments
+	$(to_comment).each(function(index, value)
+	{
+		//console.log(value)
+		var thread = $(value).attr("id").split('-')[1]
+		var container_comment = $(value).find(".comment-answer")[0]
+
+		var form = $("#form-comment-clone").clone();
+		$(form).attr('id', "form-comment-ans-"+thread);
+
+		$(container_comment).append(form);
+
+		//link to load
+		var div_load_comments = document.createElement("div");
+		var load_comments_a = document.createElement("a");
+		
+		div_load_comments.className = 'load-comment-ans-'+thread;
+		$(load_comments_a).text("Ver más comentarios")
+		div_load_comments.appendChild(load_comments_a)
+
+		container_comment.appendChild(div_load_comments);
+
+
+		//load comments
+		var container_list_comments = document.createElement("div");
+
+		var comentariosAnswer = new CommentView(
+			thread,
+			form,
+			container_list_comments,
+			$(div_load_comments)
+		);
+		comentariosAnswer.load();
+		comentariosAnswer.load_create_comment(thread);
+		
+		//link to load
+		container_comment.appendChild(container_list_comments)
+
+	});		
 
 }
 

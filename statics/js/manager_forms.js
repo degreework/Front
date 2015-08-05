@@ -50,25 +50,8 @@ function show_errors (data, response) {
 }
 
 
-
-function create_form(url, form, method, callback)
+function render_form(method, form , response, callback)
 {
-	
-	if (UserService.isAutenticated()) {
-		$.ajaxSetup({
-	    	beforeSend: function(xhr, settings) {
-	        xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-	    	}
-		});
-	};
-	$.ajax({
-		type: 'OPTIONS',
-		url: url,
-	})
-	.done(function(response){
-		/*
-		Create form
-		*/
 
 		if ('PUT' == method)
 		{
@@ -232,6 +215,39 @@ function create_form(url, form, method, callback)
 			//callback();
 			callback(form);
 		}
+}
+
+
+function create_form(url, form, method, callback)
+{
+	/*implement cache*/
+	var doc = $(document);
+	var cache = doc.data( "cache" );
+
+	 
+	 if( cache ) {
+        render_form(method, form, cache, callback);
+        return true;
+    }
+	
+	if (UserService.isAutenticated()) {
+		$.ajaxSetup({
+	    	beforeSend: function(xhr, settings) {
+	        xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+	    	}
+		});
+	};
+	$.ajax({
+		type: 'OPTIONS',
+		url: url,
+		cache: true
+	})
+	.done(function(response){
+		/*
+		Create form
+		*/
+		doc.data("cache", response);
+		render_form(method, form, response, callback);
 		
 	})
 	.fail(function(error){		

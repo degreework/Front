@@ -227,7 +227,8 @@ ForumService.get_Answers = function (url, callback, container) {
 	$("#preloader_2").show();
 	$.ajax({
 		type: 'GET',
-		url: url+'/'+id+'/',
+		//url: url+'/'+id+'/',
+		url: url,
 		async: true,
 		beforeSend : function( xhr ) {
         	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
@@ -523,7 +524,7 @@ function show_detail_answers (count, next, previus) {
 	if(next)
 	{
 		var link = document.createElement("a");
-		//s$(link).attr('href', next);
+		//$(link).attr('href', next);
 		var message = document.createElement("span");
 		$(message).text("Ver más respuestas")
 		link.appendChild(message);
@@ -531,7 +532,11 @@ function show_detail_answers (count, next, previus) {
 		$(link).click(function(e){
 			e.preventDefault();
 			$(link).remove()
-			ForumService.get_Answers(next);
+			console.log(next)
+			ForumService.get_Answers(
+				next,
+				show_detail_answers,
+				$('.answer'));
 		});
 	}
 	
