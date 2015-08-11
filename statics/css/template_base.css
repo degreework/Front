@@ -132,11 +132,13 @@ hr{
 	margin: 0px auto;
 }
 
-.seccion{
+
+#form_update_user{
 	margin-bottom:50px;
 	margin-top: 50px;
 	margin-right: 20px;
 }
+
 
 #div_form_login{
 	margin-left: 20px;
@@ -223,8 +225,8 @@ hr{
 
 /*asks*/
 .info_ask{
-	width: 227px;
-	margin-left: 10px;
+	/*width: 227px;
+	margin-left: 10px;*/
 	box-shadow: 1px 1px 3px #888888;
 	padding: 10px;
 }

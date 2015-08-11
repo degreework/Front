@@ -1,0 +1,41 @@
+{% extends "evaluations_parent.html" %}
+{% comment %}
+	template for list all questions
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block evaluations_content %}
+	<div class="col-md-12">
+		
+		<h3 class="titulos">Essay Questions</h3>
+		<div class="table-responsive">
+			<table class="table table-hover">
+  				<thead>
+					<tr>
+						<th>#</th>
+						<th>Sub-Category</th>
+						<th>Category</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody id="list-subcategories">
+					
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+{% endblock evaluations_content %}
+
+{% block scripts %}
+	<script>
+        jQuery(document).ready(function($) {
+			//
+			EvaluationsView.get_all_subCategories()
+			
+		});
+	</script>
+	
+{% endblock scripts %}

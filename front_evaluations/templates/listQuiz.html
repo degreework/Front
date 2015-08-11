@@ -1,0 +1,30 @@
+{% extends 'evaluations_parent.html' %}
+{% block evaluations_content %}
+{% load staticfiles %}
+
+	<div class="col-md-12 capacity">
+		
+		<h3 class="titulos">Quizzes</h3>
+		<br>
+		<div class="table-responsive">
+			<table class="table table-hover">
+  				<thead>
+					<tr>
+						<th>#</th>
+						<th>Titulo</th>
+					</tr>
+				</thead>
+				<tbody id="list-quiz">
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock evaluations_content%}
+
+{% block scripts %}
+	<script>
+		EvaluationsView.get_all_Quiz();
+	</script>
+{% endblock scripts %}

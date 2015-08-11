@@ -83,7 +83,7 @@ function render_form(method, form , response, callback)
 				input.maxLength = value.max_length;
 
 	  			//set type to input
-
+	  			
 				if ('string' == value.type) 
 				{
 					input.type = 'text';
@@ -159,9 +159,38 @@ function render_form(method, form , response, callback)
 				}
 				else if('boolean' == value.type)
 				{
+					var label = document.createElement("label");
+					//var br = document.createElement("br");
+
+					$(label).text(value.label)
+					field_div.appendChild(label);
+					//field_div.appendChild(br);
 					input.type = 'checkbox';
+					input.className = 'pull-right';
 					//set max length to input
-					input.maxLength = 100
+					//input.maxLength = 100
+				}
+				else if('field' == value.type){
+					//var label = document.createElement("label");
+					//set text to label
+					//label.appendChild(document.createTextNode(value.label));
+					//field_div.appendChild(label);
+					//console.log(this.choices)
+					input = document.createElement("select");
+					input.className = "form-control";
+
+					var option = document.createElement("option");
+					option.selected = "selected";
+					option.disabled = true;
+					option.textContent = value.label;
+					input.add(option);
+
+					for (var i = 0, size=this.choices.length; i < size; i++) {
+						option = document.createElement("option");
+						option.value =  value.choices[i].value;
+						option.textContent = value.choices[i].display_name;
+						input.add(option);					
+					}
 				}
 				else
 				{

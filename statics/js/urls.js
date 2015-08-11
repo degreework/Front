@@ -48,3 +48,31 @@ URL_GET_WIKI_HISTORY = host+':8080/API/wiki/history/';
 URL_CREATE_COMMENT = host+':8080/API/comment/';
 URL_GET_COMMENTS = host+':8080/API/comment/all/%thread%';
 
+
+//Evaluations 
+
+// question of evaluations 
+URL_CREATE_QUESTION_TF = host+':8080/API/quiz/questions/createTrueFalse';
+URL_GET_ALL_QUESTION_TF = host+':8080/API/quiz/questions/listTrueFalse';
+
+URL_CREATE_QUESTION_ESSAY = host+':8080/API/quiz/questions/createEssay';
+URL_GET_ALL_QUESTION_ESSAY = host+':8080/API/quiz/questions/listEssay';
+
+URL_CREATE_QUESTION_MC = host+':8080/API/quiz/questions/createMultichoice';
+URL_GET_ALL_QUESTION_MC = host+':8080/API/quiz/questions/listMultichoice';
+
+// category of the evaluations 
+URL_CREATE_CATEGORY = host+':8080/API/quiz/category/createCategory';
+URL_GET_ALL_CATEGORY = host+':8080/API/quiz/category/listCategory';
+
+URL_CREATE_SUBCATEGORY = host+':8080/API/quiz/category/createSubcategory';
+URL_GET_ALL_SUBCATEGORY = host+':8080/API/quiz/category/listSubcategory';
+
+// Quiz
+URL_CREATE_QUIZ = host+':8080/API/quiz/createQuiz';
+URL_GET_ALL_QUIZ = host+':8080/API/quiz/listQuiz';
+URL_GET_QUIZ_BY_CATEGORY = host+':8080/API/quiz/listQuizbyCategory/'; // se le pega el nombre de la categoria al final
+URL_DETAIL_QUIZ = host+':8080/API/quiz/detail/'; // se le pega el id del quiz al final 
+URL_MARKING_QUIZ = host+':8080/API/quiz/marking';
+URL_MARKING_DETAIL_QUIZ = host+':8080/API/quiz/marking/detail/'; // se le pega el id del quiz al final 
+URL_PROGRESS_QUIZ = host+':8080/API/quiz/progress';

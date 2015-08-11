@@ -1,0 +1,78 @@
+{% extends "evaluations_parent.html" %}
+{% comment %}
+	template for list all questions
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block evaluations_content %}
+	<div class="col-md-12">
+		
+		<h3 class="titulos">Essay Questions</h3>
+		<div class="table-responsive">
+			<table class="table table-hover">
+  				<thead>
+					<tr>
+						<th>#</th>
+						<th>Question</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3 class="titulos">True and False Questions</h3>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Question</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					</tr>
+				</tbody>
+  
+			</table>
+		</div>
+
+		<h3 class="titulos">Multichoice Questions</h3>
+		<div class="table-responsive">
+			<table class="table table-hover">
+  				<thead>
+					<tr>
+						<th>#</th>
+						<th>Question</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+{% endblock evaluations_content %}
+
+{% block scripts %}
+	<script>
+        jQuery(document).ready(function($) {
+			//form question essay
+			EvaluationsView.initialize($("#form_essay"), URL_CREATE_QUESTION_ESSAY);
+			
+		});
+	</script>
+	
+{% endblock scripts %}

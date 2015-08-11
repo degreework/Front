@@ -1,0 +1,29 @@
+{% extends "evaluations_parent.html" %}
+{% comment %}
+	template for create a quiz
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block evaluations_content %}
+	<div class="col-md-12">
+		<h3 class="titulos"></h3>
+		<p class="category"></p>
+		<p class="description"></p>
+		<br>
+		<a class="btn-create" style="margin: 1em 45%;" href="#">empieza</a>
+
+		
+		
+	</div>
+{% endblock evaluations_content %}
+
+{% block scripts %}
+	<script>
+        jQuery(document).ready(function($) {
+			EvaluationsView.get_Quiz()
+			
+		});
+	</script>
+	
+{% endblock scripts %}
