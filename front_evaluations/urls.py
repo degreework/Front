@@ -23,6 +23,7 @@ urlpatterns = patterns('',
         #Quiz
         url(r'^evaluations/$', 'front_evaluations.views.quiz', name='quiz'),
         url(r'^evaluations/detail/(?P<id>\d+)$', 'front_evaluations.views.detailQuiz', name='detailQuiz'),
+        url(r'^evaluations/take/$', 'front_evaluations.views.take', name='take'),
         url(r'^evaluations/create/$', 'front_evaluations.views.createQuiz', name='createQuiz'),
         url(r'^listQuizbyCategory/(?P<category_name>[\w.-]+)$', 'front_evaluations.views.listQuizbyCategory' , name='listQuizbyCategory'),
         url(r'^marking$', 'front_evaluations.views.markingQuiz', name='markingQuiz'),
