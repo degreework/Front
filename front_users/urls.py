@@ -10,4 +10,6 @@ urlpatterns = patterns('',
         url(r'^settings/$', 'front_users.views.settings', name='settings'),
         url(r'^authentication/$', 'front_users.views.authentication_requiered', name='authenticationRequiered'),
 
+        url(r'^p$', 'front_users.views.permissions', name='permissions'),
+
 )
