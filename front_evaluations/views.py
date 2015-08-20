@@ -61,12 +61,12 @@ def detailQuiz(request,id):
     return render_to_response('quizDetail.html', {'title': 'detail quiz | Name App'}, context_instance=RequestContext(request))
 
 
+def take(request):
+    return render_to_response('takeQuiz.html', {'title': 'quiz | Name App'}, context_instance=RequestContext(request))
+
+
 def createQuiz(request):
     return render_to_response('quizCreate.html', {'title': 'Create quiz | Name App'}, context_instance=RequestContext(request))
-
-
-def quiz(request):
-    return render_to_response('listQuiz.html', {'title': 'quiz | Name App'}, context_instance=RequestContext(request))
 
 
 def listQuizbyCategory(request):

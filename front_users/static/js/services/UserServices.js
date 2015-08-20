@@ -95,7 +95,7 @@ UserService.update_user = function(url, form)
 
 		console.log(response)
 		UserService.get_mini_user(URL_CURRENT_USER);
-		UserView.showCurrentUser();
+		UserView.showIndexUser();
 		Notify.show_success("OK", "La info ha sido actualizada");
 	})
 	.fail(function(error){		

@@ -1,15 +1,25 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
 
-	<div class="col-md-12 capacity">
+
+
+<!-- sign-out-->
+	<div class="col-md-12" id="introduction">
 		{% include 'introduction.html' %}
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-12" style="margin-top: 60px;" id="register" hidden>
 		<div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-3">
 			{% include 'register.html' %}	
 		</div>
 
 	</div>
+
+<!-- sign-in-->
+	<div class="col-md-8 base capacity" hidden>
+		<div class="margen_contenido">
+		</div>
+	</div>
+
 	
 {% endblock %}
 

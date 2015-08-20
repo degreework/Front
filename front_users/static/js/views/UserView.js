@@ -58,7 +58,7 @@ UserView.showLoggedUser = function () {
 	$("#button_logout").click(function(e){
 		e.preventDefault();
 		UserService.deauthenticate(URL_LOGOUT);
-		UserView.showCurrentUser();
+		//UserView.showIndexUser();
 	});
 }
 
