@@ -3,28 +3,12 @@
 
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from django.contrib.auth.decorators import user_passes_test
 
-def my_custom_authenticated(user):
-    print "my_custom_authenticated"
-    print request.session['scope']
-    return True
 
-from functools import wraps
+from decorators.ScopeRequired import ScopeRequired
 
-def scope_required(function=None, scope=None, *args, **kwargs):
-    print "membership_required"
-    print function
-    print kwargs
-    print args
 
-    @wraps(function)
-    def decorator(request, scope, *args, **kwargs):
-        print request.session.get('scope', None)
-        return function(request, args, kwargs)
-    return decorator
-
-@scope_required(['wiki',])
+@ScopeRequired(["login", "wiki"])
 def wiki(request, *args, **kwargs):
     return render_to_response('wikiList.html', {'title': 'Wiki | Name App'}, context_instance=RequestContext(request))
 
