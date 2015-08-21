@@ -15,7 +15,7 @@ class ScopeRequired(object):
         once, as part of the decoration process! You can only give
         it a single argument, which is the function object.
         """
-        def wrapped_f(*args):
+        def wrapped_f(*args, **kwargs):
             scope = args[0].session.get('scope', '').split(" ")
             print "Decorator arguments:", self.scope
             print scope
@@ -26,7 +26,7 @@ class ScopeRequired(object):
                     count_scope += 1
             
             if len(self.scope) == count_scope:
-                return f(*args)
+                return f(*args,**kwargs)
 
             raise PermissionDenied
 

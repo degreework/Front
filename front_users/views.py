@@ -70,23 +70,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import PermissionDenied
 @csrf_exempt
 def permissions(request):
+  print("permissions")
+  print(request.POST)
   token = request.POST.get('Token', None)
   if None == token:
     raise PermissionDenied
 
   p = requests.get('http://127.0.0.1:8080/API/users/permissions/'+token)
   request.session['scope'] = p.content
-  print request.session['scope']
-  if 'delete' in request.session['scope']:
-    print "can delete"
-  else:
-    print "can not delete"
-
-  if 'EDIT' in request.session['scope']:
-    print "can edit"
-  else:
-    print "can not edit"
-
-
-
+  print(request.session['scope'])
   return HttpResponse(p)
