@@ -16,14 +16,18 @@ class ScopeRequired(object):
         it a single argument, which is the function object.
         """
         def wrapped_f(*args, **kwargs):
-            scope = args[0].session.get('scope', '').split(" ")
-            print "Decorator arguments:", self.scope
-            print scope
+            user_scope = args[0].session.get('scope', '').split(" ")
+            print "Must have:", self.scope
+            print "Have", user_scope
             count_scope = 0
             
-            for s in scope:
-                if s in self.scope:
+            for scope in user_scope:
+                if scope in self.scope:
                     count_scope += 1
+
+            print("count_scope", count_scope)
+            print("user_scope", len(user_scope))
+            print("self scope", len(self.scope))
             
             if len(self.scope) == count_scope:
                 return f(*args,**kwargs)
