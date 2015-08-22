@@ -185,6 +185,7 @@ CommentView.prototype.load_create_comment = function (parent) {
 	form.submit(function(e)
 		{
 			e.preventDefault();
+			console.log($(e.target))
 
 			CommentService.create(
 				$(e.target),

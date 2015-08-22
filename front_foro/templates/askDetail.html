@@ -118,6 +118,7 @@
 		//Se obtiene el id 
 		var id = location.pathname.split("/");
 		id = id[id.length-1];
+		console.log(id)
 
 				
 		ForumService.get_Detail_Ask(id);
@@ -152,6 +153,7 @@
 
 
 		//###   COMMENT   ###
+		console.log("parent: "+id)
 		var comentariosAsk = new CommentView(
 			id,
 			$("#form-comment-ask"),

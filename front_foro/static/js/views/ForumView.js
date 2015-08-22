@@ -21,7 +21,9 @@ ForumView.initialize = function(form, editor)
 		//Se obtiene el id de la pregunta para pasarlo en el formulario 
 		var id_ask = location.pathname.split("/");
 		id_ask = id_ask[id_ask.length-1];
+		console.log("como asi")
 		console.log(id)
+		console.log(id_ask)
 		ForumView.form_create.submit(function (e) {
 			
 			ForumService.updateAsk(ForumView.form_create, URL_CREATE_ASK_FORO+id_ask,ForumView.update_ask);
@@ -62,8 +64,6 @@ ForumView.hidde_input_text = function(input)
 
 ForumView.create_ask_succes = function(response){
 	location.href =  host+":"+location.port+"/forum/detail/"+response.id
-	form.trigger("reset");
-	Notify.show_success("OK", "Pregunta creada");
 }
 
 function fill(){
