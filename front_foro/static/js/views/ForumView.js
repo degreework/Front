@@ -63,7 +63,9 @@ ForumView.hidde_input_text = function(input)
 }
 
 ForumView.create_ask_succes = function(response){
-	location.href =  host+":"+location.port+"/forum/detail/"+response.id
+	var new_url = host+":"+location.port+"/forum/detail/"+response.id;
+	//console.log(new_url)
+	location.href =  new_url
 }
 
 function fill(){
@@ -310,6 +312,8 @@ ForumView.updated_answer = function (response, form)
 	*/
 	var parent = $(form).parents('.response');
 	var parent_id = parent.attr("id");
+	console.log("respuesta")
+	console.log(parent_id)
 	$("#textAnswer-ans-"+response.id+">p").text(response.text);
 	$(form).remove();
 	$(parent).children().show();
@@ -380,6 +384,8 @@ ForumView.editAnswer = function(e)
 	var parent = $(e.target).parents('.response');
 	//get id from div parent
 	var target_id = parent.attr("id");
+	//console.log("target_id")
+	//console.log(target_id)
 	//get content of current comment
 	var current_answer = $("#textAnswer-"+target_id+">p").text();
 	//remove all elements of parent
