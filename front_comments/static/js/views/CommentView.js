@@ -43,6 +43,8 @@ CommentView.prototype.load = function()
 
 CommentView.prototype.append_comment = function(response)
 {
+	console.log("CommentView:append")
+	console.log(response)
 	/*
 	*append a list of comments (or only one)
 	*/
