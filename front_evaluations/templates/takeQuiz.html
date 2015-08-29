@@ -1,0 +1,61 @@
+{% extends 'evaluations_parent.html' %}
+{% block evaluations_content %}
+{% load staticfiles %}
+
+	<div class="col-md-12 ">
+		
+		<h3 class="titulos">Quizzes</h3>
+		<br>
+		<div class="col-md-12">
+			
+			<span class= 'pull-right' id="count_question"></span>
+			<span class= 'pull-left' id = 'score'></span>
+
+			<div class="col-md-8 col-sm-8 col-md-offset-2">
+				
+				<div class=" col-md-4 col-sm-4 col-md-offset-4">
+					imagen
+					<img id="img-question" class="img-responsive img-rounded" src="">		
+				</div>
+
+				<div class=" col-md-12">
+
+					<h4 id="question_content"></h4>	
+					<br>	
+					<form id="question_form">
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	
+		<!-- para verificar la pregunta -->		
+		<div class="col-md-12 " id="container-check">
+
+			<button class="btn btn-default pull-right" id="btn-check" style="margin-top: 10px" type="submit" form="question_form" name="action">Calificar</button>
+		</div>
+
+		<!-- para pasar a otra pregunta -->
+		<div class=" col-md-12 " id="container-continue">
+			<button class="btn btn-default pull-right" id="btn_continue" style="margin-top: 10px" type="submit">Continuar</button>
+			<strong id="question-status"></strong>
+			<p id="question-explication"></p>
+		</div>	
+		
+		
+		
+	</div>
+
+{% endblock evaluations_content%}
+
+{% block scripts %}
+	<script>
+			
+		button = $('#btn_continue')
+		EvaluationsView.take_quiz(button);
+		form = $('#question_form')
+		EvaluationsView.btn_check(form);
+			
+
+	</script>
+{% endblock scripts %}
