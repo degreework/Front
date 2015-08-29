@@ -11,6 +11,7 @@ Login.login = function (form, url, callback)
 	$.ajax({
 		type: 'POST',
 		url: url,
+		async: false,
 		data: 'grant_type=password&'+data+'&client_id='+CLIENT_ID+'&client_secret='+CLIENT_SECRET,
 	})
 	.done(function(response){
@@ -18,6 +19,17 @@ Login.login = function (form, url, callback)
 		Login succesful, then do anything
 		*/
 		$.session.set("Token", JSON.stringify(response) );
+		console.log("Call get permissions")
+		
+		$.ajax({
+			type: 'POST',
+			url: "http://127.0.0.1:8000/p",
+			data: {"Token": JSON.parse($.session.get("Token")).access_token},
+		})
+		.done(function (response) {
+			console.log("response get Permissions")
+			console.log(response)
+		})
 		if(callback)
 		{
 			callback();	

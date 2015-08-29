@@ -50,7 +50,7 @@ function show_errors (data, response) {
 }
 
 
-function render_form(method, form , response, callback)
+function render_form(method, form , response, callback, params)
 {
 
 		if ('PUT' == method)
@@ -242,14 +242,15 @@ function render_form(method, form , response, callback)
 		if(callback)
 		{
 			//callback();
-			callback(form);
+			callback(form, params);
 		}
 }
 
 
-function create_form(url, form, method, callback)
+function create_form(url, form, method, callback, params)
 {
 	/*implement cache*/
+	/*
 	var doc = $(document);
 	var cache = doc.data( "cache" );
 
@@ -257,7 +258,9 @@ function create_form(url, form, method, callback)
 	 if( cache ) {
         render_form(method, form, cache, callback);
         return true;
+    
     }
+    */
 	
 	if (UserService.isAutenticated()) {
 		$.ajaxSetup({
@@ -275,8 +278,8 @@ function create_form(url, form, method, callback)
 		/*
 		Create form
 		*/
-		doc.data("cache", response);
-		render_form(method, form, response, callback);
+		//doc.data("cache", response);
+		render_form(method, form, response, callback, params);
 		
 	})
 	.fail(function(error){		
@@ -314,3 +317,4 @@ var active = function()
         return this.href == url;
     }).parent().addClass('active');
 }
+

@@ -65,7 +65,17 @@
 			
 			<div class="answer"></div>
 			
-			<div class=""><span class="load-answer-more"></span></div>
+			<div class="">
+				<nav style="text-align:center">
+		  			<ul class="pagination">
+		    			<li id="answer_next">
+		      				<a href="#" aria-label="Next">
+		        			<span aria-hidden="true">&raquo;</span>
+		      				</a>
+		    			</li>
+		  			</ul>
+				</nav>
+			</div>
 			
 			<form id="form-comment-clone" hidden>
 				<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
@@ -78,7 +88,7 @@
 
 			<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
 				<form class="" id="form_answer_foro" hidden>
-					<textarea id="id_textarea" name="content" data-provide="markdown" rows="10"></textarea>
+					<textarea id="id_textarea_answer" name="content" data-provide="markdown" rows="10"></textarea>
 					<br>
 					<button class="btn btn-default pull-right" type="submit" name="action">Responder</button>
 		      	</form>
@@ -96,71 +106,40 @@
 
 {% block scripts %}
 	<script type="text/javascript">
-		
-		function clear_editor(answer)
-		{
-			$('#form_answer_foro').trigger("reset");
-			// contador de las repuestas 
-			count = $('.count-answer').text();
-			count.split(' ');
-			count = parseInt(count[0])
-			count = count+1+" ";
 
-			if(count == '1 '){
-				$(".count-answer").text(count + 'Respuesta')
-			}else{
-				$(".count-answer").text(count + 'Respuestas')	
-			}
 
-			ForumView.append_answer_to_ask(answer, $('.answer'));
-		}
-
+	var id = function ()
+	{
 		//Se obtiene el id 
 		var id = location.pathname.split("/");
 		id = id[id.length-1];
+		//console.log(id)
+		return id;
+	}
 
-				
-		ForumService.get_Detail_Ask(id);
+	var askView = new AskView();
+	askView.retrieve(URL_DETAIL_ASKS_FORO+id());
 
-		ForumService.get_Answers(
-			URL_GET_ANSWERS_FORUM+'/'+id+'/',
-			show_detail_answers,
-			$('.answer')
-		);
-		
+	var answerView = new AnswerView(id());
+	answerView.list(URL_GET_ANSWERS_FORUM+id());
 
-		
-		//###   ANSWER   ###
-		//form Answer, to Ask at Foro
-
-		form_answer_foro = $("#form_answer_foro");
-		create_form(URL_CREATE_ANSWER_FORO, form_answer_foro, 'OPTIONS', ForumView.handleAnswer);
-		$(form_answer_foro).show();
+	
+	var answerForm = new AnswerForm(id());
+	answerView.set_scroll_list(URL_GET_ANSWERS_FORUM);
 
 
+	//###   COMMENT   ###
+	console.log("parent: "+id())
+	var comentariosAsk = new CommentView(
+		id(),
+		$("#form-comment-ask"),
+		$('#list-comment-ask'),
+		$(".load-comment-ask")
+	);		
+	comentariosAsk.load();
+	comentariosAsk.load_create_comment(id());
+	//###   end COMMENT   ###
 
-		form_answer_foro.submit(function (e) {
-			e.preventDefault();
-			$("#id_ask").val(id),
-			ForumService.create_answer(
-				form_answer_foro,
-				URL_CREATE_ANSWER_FORO,
-				clear_editor
-			);
-		})
-		//###   end ANSWER   ###
-
-
-		//###   COMMENT   ###
-		var comentariosAsk = new CommentView(
-			id,
-			$("#form-comment-ask"),
-			$('#list-comment-ask'),
-			$(".load-comment-ask")
-		);		
-		comentariosAsk.load();
-		comentariosAsk.load_create_comment(id);
-		//###   end COMMENT   ###
 
 
 	</script>

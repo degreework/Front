@@ -4,34 +4,28 @@
 	template for listing wiki pages
 {% endcomment %}
 
-{% load staticfiles %}
-{% block head %}
-	<link rel="stylesheet" href="{% static 'css/ask.css' %}">	
-{% endblock head %}
-
 {% block foro_content %}
 	<div class="col-md-12 asks">
 	</div>
-
-	<nav style="text-align:center">
-	  <ul class="pagination">
-	    <li id="previus" style="display:none">
-	      <a  href="#" aria-label="Previous">
-	        <span aria-hidden="true">&laquo;</span>
-	      </a>
-	    </li>
-	    <li style="display:none">
-	      <a href="#" aria-label="Next">
-	        <span aria-hidden="true">&raquo;</span>
-	      </a>
-	    </li>
-	  </ul>
-	</nav>
 
 {% endblock foro_content %}
 
 {% block scripts %}
 	<script>
-		ForumService.get_Asks(URL_BRING_ASKS_FORO,show_detail_asks);
+
+	/*
+	var asks = new AskService();
+	asks.create(URL_CREATE_ASK_FORO, {})
+	*/
+
+	var ask = new AskView();
+	ask.list(URL_LIST_ASKS_FORO);
+
+	$(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+			ask.scroll_list(URL_LIST_ASKS_FORO);          
+    	}
+	});
+
 	</script>
 {% endblock scripts %}

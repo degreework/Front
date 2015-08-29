@@ -43,6 +43,8 @@ CommentView.prototype.load = function()
 
 CommentView.prototype.append_comment = function(response)
 {
+	console.log("CommentView:append")
+	console.log(response)
 	/*
 	*append a list of comments (or only one)
 	*/
@@ -185,6 +187,7 @@ CommentView.prototype.load_create_comment = function (parent) {
 	form.submit(function(e)
 		{
 			e.preventDefault();
+			console.log($(e.target))
 
 			CommentService.create(
 				$(e.target),

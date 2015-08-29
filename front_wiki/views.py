@@ -4,21 +4,27 @@
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 
-# Create your views here.
-def wiki(request):
+
+from decorators.ScopeRequired import ScopeRequired
+
+
+@ScopeRequired(["waliki.view_page"])
+def wiki(request, *args, **kwargs):
     return render_to_response('wikiList.html', {'title': 'Wiki | Name App'}, context_instance=RequestContext(request))
 
-
+@ScopeRequired(["waliki.view_page"])
 def detail(request, *args, **kwargs):
     return render_to_response('detailPage.html', {'title': 'Wiki page | Name App'}, context_instance=RequestContext(request))
 
-
+@ScopeRequired(["waliki.add_page"])
 def create(request):
     return render_to_response('wikiCreate.html', {'title': 'Create page | Name App'}, context_instance=RequestContext(request))
 
+@ScopeRequired(["waliki.view_page"])
 def request(request):
     return render_to_response('wikiRequest.html', {'title': 'Request edition | Name App'}, context_instance=RequestContext(request))
 
+@ScopeRequired(["waliki.view_page"])
 def history(request, id):
     return render_to_response('historyPage.html', {'title': 'History | Name App'}, context_instance=RequestContext(request))
 
