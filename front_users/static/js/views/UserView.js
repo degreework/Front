@@ -34,6 +34,7 @@ UserView.showIndexUser = function ()
 		$("#introduction").hide();
 		$('#form_login').hide();
 		$('#register').hide();
+		$('#index').show();
 		$('#resume-profile').show();
 		$('.icon-menu').show();
 		$('.consult-user').show();

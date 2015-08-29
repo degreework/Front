@@ -8,7 +8,42 @@
 {% block evaluations_content %}
 	<div class="col-md-12">
 		
-		<h3 class="titulos"></h3>
+		<div class="col-md-12" style="border:1px solid #ccc; text-align: center; padding: 10px; border-radius: 114px; margin-top: 25px;">
+			<h1><span class="glyphicon glyphicon-education" aria-hidden="true"></span></h1>
+
+			<h3 id="result_message"></h3>
+			<h3 id="finish"></h3>		
+			
+		</div>
+			
+		
+		<div class="col-md-4 col-md-offset-2" style="border-right:1px solid #ccc; border-left:1px solid #ccc; border-bottom:1px solid #ccc; text-align: center; padding: 10px; ">
+			<span>Porcentaje Correcto</span>
+			<br>
+			<span id="percent"></span>
+		</div>
+		<div class="col-md-4" style="border-right:1px solid #ccc; border-left:1px solid #ccc; border-bottom:1px solid #ccc; text-align: center; padding: 10px;">
+			<span>Puntos obtenidos</span>
+			<br>
+			<span id="score"></span>	
+		</div>
+	
+	<div class="col-md-12" style="margin-top: 50px;">
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Pregunta</th>
+					<th>Tu respuesta</th>
+					<th>Resultado</th>
+				</tr>
+			</thead>
+			<tbody id="list-results">
+				
+			</tbody>
+		</table>
+	</div>
+	</div>
 		
 	</div>
 {% endblock evaluations_content %}
@@ -17,6 +52,7 @@
 	<script>
         jQuery(document).ready(function($) {
 			//
+			EvaluationsView.get_marking_detail()
 			
 			
 		});
