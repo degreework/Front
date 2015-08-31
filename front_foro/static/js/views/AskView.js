@@ -190,7 +190,7 @@ AskForm.prototype.handler_created_form = function(){
 
 		var data = new FormData($(e.target).get(0))
 		
-		if(e.target.baseURI.indexOf("create"))
+		if(e.target.baseURI.indexOf("create") !== -1)
 		{
 			askService.create(URL_CREATE_ASK_FORO, data, AskForm.prototype.succes_create)
 		}

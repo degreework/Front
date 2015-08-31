@@ -1,5 +1,8 @@
 var EvaluationsView = {};
 
+// resetea formularios 
+// trigger("reset");
+
 //inicializa los formularios 
 EvaluationsView.initialize = function(form, url)
 {
@@ -495,6 +498,9 @@ EvaluationsView.render_check = function(response){
 	//se actualiza la session 
 	sessionStorage.setItem('sitting', JSON.stringify(sitting));	
 
+	//console.log($('#question_form')[0].input)
+	$('#question_form').find('input, textarea, button, select').attr('disabled','disabled');
+	
 	$('#container-check').hide()
 	$('#container-continue').fadeIn()
 
@@ -520,7 +526,7 @@ EvaluationsView.current_proggres = function(user_answers, total_questions){
 //renderiza los puntos actuales 
 EvaluationsView.get_current_score = function(current_score){
 	
-	$('#score').text( 'Puntos: '+current_score)
+	$('#current_score').text( 'Puntos: '+current_score)
 }
 
 // obtiene la pregunta actual 
@@ -560,7 +566,8 @@ EvaluationsView.save_status_quiz = function(sitting){
 EvaluationsView.redirect_results = function(sitting){
 	
 	//elimina la session del quiz 
-	sessionStorage.clear('sitting');
+	$.session.remove('sitting');
+	//sessionStorage.remove('sitting');
 	// redirige a mostrar los resultados 
 	location.href =  host+":"+location.port+"/evaluations/marking/detail/"+sitting.id; 
 }
@@ -619,17 +626,19 @@ EvaluationsView.get_marking_detail = function(){
 }
 
 EvaluationsView.render_results = function(sitting){
-	
-	$('.titulos').text('quiz name '+sitting.quiz)
+		
+	if (sitting.check_if_passed) {
+		$('#titulo').text('Examen Aprobado: '+sitting.quiz)
+		
+	}else{
+		$('#titulo').text('Examen Desaprobado '+sitting.quiz)
+	}
+
+	$('#result_message').text(sitting.result_message)	
 	$('#percent').text(sitting.get_percent_correct+'%')
 	$('#score').text(sitting.current_score)
 	$('#finish').text(jQuery.timeago(sitting.end))
-	
-	if (sitting.check_if_passed) {
-		$('#result_message').text('Examen Aprobado '+sitting.result_message)	
-	}else{
-		$('#result_message').text('Examen Desaprobado '+sitting.result_message)	
-	}
+
 	
 	total_questions = sitting.question_order.split(',').length-1
 
@@ -658,11 +667,14 @@ EvaluationsView.render_results = function(sitting){
 		dato = dato[index]
 		index++
 		$.each(user_answers, function(k, v) {
-			console.log(sitting.incorrect_questions.indexOf(k))
+			console.log(k +' == '+ dato)
+			//console.log(sitting.incorrect_questions.indexOf(k))
 			if ( k === dato) {
 				$(qualify).text('correcta')
+				return false
 			}else{
 				$(qualify).text('incorrecta')
+				//return false
 			};
 		})
 	
