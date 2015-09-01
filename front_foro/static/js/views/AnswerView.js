@@ -237,7 +237,7 @@ AnswerView.prototype.appentOptions = function(div_contenedor){
 	del_msg.className = 'glyphicon glyphicon-remove'
 	$(del_msg).text(' eliminar')
 	del.appendChild(del_msg);
-	//del.addEventListener('click', ForumView.removeAnswer, false);
+	del.addEventListener('click', AnswerView.prototype.handle_delete, false);
 	
 	item2.appendChild(del)
 
@@ -253,6 +253,37 @@ AnswerView.prototype.appentOptions = function(div_contenedor){
 /*
 * Event Handler functions
 */
+
+AnswerView.prototype.handle_delete = function(e){
+	notify = Notify.show_confirm('respuesta');
+
+	$('#erase').click(function(){
+		// se obtiene el id de la respuesta para colocarlo en la url 
+		var id = $(e.target).parents('.response').attr("id");
+		var splited = id.split('-');
+		id = splited[splited.length-1];
+		console.log('handle_delete')
+		console.log(id)
+ 
+		//ForumService.delete_answer($(e.target).parents('.response'), URL_CREATE_ANSWER_FORO+id, CommentView.delete);
+
+		var answerService = new AnswerService();
+		answerService.delete(
+			URL_CREATE_ANSWER_FORO+id,
+			$(e.target).parents('.response'),
+			function(response, div)
+			{
+				div.fadeOut();
+			}
+		)
+
+		notify.close()	
+	})
+
+	$('#cancel').click(function(){
+		notify.close()	
+	})
+}
 
 AnswerView.prototype.handle_edit = function(e)
 {
@@ -408,17 +439,7 @@ AnswerForm.prototype.succes_create = function(response){
 	// contador de las repuestas 
 	count = $('.count-answer').text();
 	count = AnswerView.prototype.update_count_answer(count, 'aumenta');
-	/*count.split(' ');
-	count = parseInt(count[0])
-	count = count+1+" ";
-	console.log(count)
-	if(count == '1 '){
-		$(".count-answer").text(count + 'Respuesta')
-	}else{
-		$(".count-answer").text(count + 'Respuestas')	
-	}*/
-	//ForumView.append_answer_to_ask(answer, $('.answer'));
-	//AnswerView.prototype.render_answer(response)
+	
 	AnswerView.prototype.render_list({'count':count,'results':[response]})
 
 }

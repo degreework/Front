@@ -29,9 +29,8 @@ AnswerService.prototype.list = function (url, callback) {
 	this.doGET(url, callback);
 }
 
-/*
-AnswerService.prototype.delete = function (url, callback) {
+
+AnswerService.prototype.delete = function (url, div, callback) {
 	console.log("AnswerService:delete")
-	this.doDELETE(url);
+	this.doDELETE(url, div, callback);
 }
-*/
