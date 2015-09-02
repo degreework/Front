@@ -265,8 +265,6 @@ AnswerView.prototype.handle_delete = function(e){
 		console.log('handle_delete')
 		console.log(id)
  
-		//ForumService.delete_answer($(e.target).parents('.response'), URL_CREATE_ANSWER_FORO+id, CommentView.delete);
-
 		var answerService = new AnswerService();
 		answerService.delete(
 			URL_CREATE_ANSWER_FORO+id,
@@ -377,7 +375,7 @@ AnswerForm.prototype.handler_created_form = function(created_form, id_ask){
 	var input_ask_id  = $(AnswerForm.prototype.form).find("#id_ask")[0];
 
 	$(input_ask_id).hide();
-	$(input_ask_id).val(id_ask);
+	
 	//console.log($(input_ask_id))
 
 	var input = $(AnswerForm.prototype.form).find("#id_text");
@@ -386,31 +384,19 @@ AnswerForm.prototype.handler_created_form = function(created_form, id_ask){
     });
 	input.hide();
 	
-	//AnswerForm.prototype.fill();
 	$(AnswerForm.prototype.form).show();
 
 	$(AnswerForm.prototype.form).submit(function(e){
 		e.preventDefault();
 		//console.log("AnswerForm:submit");
-
-		var splited = e.target.parentElement.id.split('-');
-		var id = splited[splited.length-1]
-
+		
+		$(input_ask_id).val(id_ask);
+		
 		var data = new FormData($(e.target).get(0));
-
 
 		var answerService = new AnswerService();
 		answerService.create(URL_CREATE_ANSWER_FORO, data, AnswerForm.prototype.succes_create);
 
-		/*
-		if(e.target.baseURI.indexOf("create"))
-		{
-			askService.create(URL_CREATE_ASK_FORO, data, AnswerForm.prototype.succes_create)
-		}
-		else
-		{
-			askService.update(URL_CREATE_ASK_FORO+id, data, AnswerForm.prototype.succes_update)
-		}*/
 	});
 
 }
