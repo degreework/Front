@@ -50,5 +50,7 @@ def permissions(request):
 
   p = requests.get('http://127.0.0.1:8080/API/users/permissions/'+token)
   request.session['scope'] = p.content
+  request.session.set_expiry(52560000)
   print(request.session['scope'])
+  print(request.session.get_expiry_age())
   return HttpResponse(p)

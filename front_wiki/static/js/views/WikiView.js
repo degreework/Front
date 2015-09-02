@@ -262,3 +262,62 @@ WikiView.approve_succes = function(approve)
 {
 	Notify.show_success("Request approved", "This only is a test, please change it");
 }
+
+
+/*History*/
+
+WikiView.show_all_history = function(container)
+{
+	WikiService.get_list(URL_GET_ALL_WIKI_HISTORY, WikiView.render_history)
+	WikiView.list_history = container;
+}
+
+WikiView.render_history = function(list)
+{
+	console.log("WikiView:render_history")
+	console.log(list)
+
+	for (i = 0; i < list.length; i++) {
+
+		var id = list[i].id;
+		var page = list[i].page;
+		var commit = list[i].commit;
+
+		var url = 'create/'+page.slug+'..'+commit;
+		
+
+		var container = document.createElement("li");
+		
+		var div = document.createElement("div");
+		div.className = 'col-md-12 page_list'
+
+		//var title = document.createElement("span");
+		//$(title).text(page.title);
+		//title.className = 'lead';
+
+		var description_author = document.createElement("span");
+		var description_reviewed = document.createElement("span");
+
+
+		$(description_author).text('Creado por '+list[i].author.fullname+' '+jQuery.timeago(list[i].author.created_at));
+		$(description_reviewed).text('Aprobado por '+list[i].review.reviewer.fullname+' '+jQuery.timeago(list[i].review.approved.approved_at));
+		
+		var br = document.createElement('br')
+		var link = document.createElement("a");
+		
+		$(link).attr('href', url);
+		
+		//se asigna el texto 
+		$(link).text(page.title)
+
+		//div.appendChild(title);
+		div.appendChild(link)
+		div.appendChild(br.cloneNode(true));
+		div.appendChild(description_author);
+		div.appendChild(br);
+		div.appendChild(description_reviewed)
+		container.appendChild(div)
+		
+		WikiView.list_history.prepend(div);
+	}
+}

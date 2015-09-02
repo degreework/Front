@@ -41,7 +41,7 @@ URL_VERSION_PAGE = host+":8080/API/wiki/%slug%/version/%version%/";
 URL_GET_ALL_WIKI_REQUEST = host+":8080/API/wiki/request/all";
 URL_APPROVE_REQUEST = host+":8080/API/wiki/request/approve/%slug%..%version%";
 
-URL_GET_WIKI_HISTORY = host+':8080/API/wiki/history/';
+URL_GET_ALL_WIKI_HISTORY = host+':8080/API/wiki/history/all';
 
 
 //Comments

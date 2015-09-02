@@ -25,7 +25,7 @@ def request(request):
     return render_to_response('wikiRequest.html', {'title': 'Request edition | Name App'}, context_instance=RequestContext(request))
 
 @ScopeRequired(["waliki.view_page"])
-def history(request, id):
+def history(request):
     return render_to_response('historyPage.html', {'title': 'History | Name App'}, context_instance=RequestContext(request))
 
 def no_found(request):

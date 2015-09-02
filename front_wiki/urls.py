@@ -7,7 +7,7 @@ urlpatterns = patterns('',
         url(r'^wiki/create/$', 'front_wiki.views.create', name='create'),
         
 
-        url(r'^wiki/history/(?P<id>\d+)$', 'front_wiki.views.history', name='history'),
+        url(r'^wiki/history$', 'front_wiki.views.history', name='history'),
         url(r'^wiki/request$', 'front_wiki.views.request', name='request'),
         
         #must be last urls
