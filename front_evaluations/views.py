@@ -61,7 +61,7 @@ def detailQuiz(request,id):
     return render_to_response('quizDetail.html', {'title': 'detail quiz | Name App'}, context_instance=RequestContext(request))
 
 
-def take(request):
+def take(request,id):
     return render_to_response('takeQuiz.html', {'title': 'quiz | Name App'}, context_instance=RequestContext(request))
 
 

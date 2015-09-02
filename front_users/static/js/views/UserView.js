@@ -34,6 +34,7 @@ UserView.showIndexUser = function ()
 		$("#introduction").hide();
 		$('#form_login').hide();
 		$('#register').hide();
+		$('#index').show();
 		$('#resume-profile').show();
 		$('.icon-menu').show();
 		$('.consult-user').show();
@@ -99,8 +100,11 @@ UserView.loginCallback = function ()
 }
 
 
-UserView.showSetting = function (url)
+UserView.showSetting = function (form, url)
 {
+	/*
+	* @form, is  a parameter returned at manager_forms.create_form, here is not used but is requiered to do callback
+	*/
 	
 	console.log("Info load")
 	$.ajax({

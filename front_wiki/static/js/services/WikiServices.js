@@ -56,9 +56,6 @@ WikiService.create_page = function (form, url, callback)
 
 }
 
-
-
-
 WikiService.get_page = function (url, callback) {	
 
 	$("#preloader_2").show();
@@ -173,29 +170,6 @@ WikiService.approve_request = function (url, callback) {
 		$("#preloader_2").hide();
 	});
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 WikiService.update_page = function(url, data)
 {

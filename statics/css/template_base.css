@@ -304,3 +304,27 @@ margin-top: 100px;
 	border-bottom: 1px solid #eee;
 	padding: 10px;
 }
+
+/*----------------
+	EVALUATIONS
+------------------*/
+
+#container-continue{
+	padding: 15px;
+    /*height: 80px;*/
+    margin-top: 20px;
+    display: block;
+    /*background-color: #eee;*/
+    display: none;
+}
+
+#score{
+	font-size: 33px
+}
+
+#percent{
+	font-size: 33px
+}
+
+
+

@@ -140,7 +140,7 @@ Service.prototype.doPUT = function(url, data, callback)
 	});
 }
 
-Service.prototype.doDELETE = function(url, callback)
+Service.prototype.doDELETE = function(url, div, callback)
 {
 	//console.log('Service:doGET');
 	$.ajax({
@@ -153,7 +153,7 @@ Service.prototype.doDELETE = function(url, callback)
 	.done(function(response){
 		if(callback)
 		{
-			callback(response);
+			callback(response, div);
 		}
 	})
 	.fail(function(error){

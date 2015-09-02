@@ -3,8 +3,8 @@ from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
 
-		#Questions
-		url(r'^evaluations/questions/$', 'front_evaluations.views.questions', name='questions'),
+	#Questions
+	url(r'^evaluations/questions/$', 'front_evaluations.views.questions', name='questions'),
 
         url(r'^evaluations/questions/essay/create$', 'front_evaluations.views.createEssay', name='createEssay'),
         url(r'^evaluations/questions/multichoice/create$', 'front_evaluations.views.createMultichoice', name='createMultichoice'),
@@ -23,10 +23,10 @@ urlpatterns = patterns('',
         #Quiz
         url(r'^evaluations/$', 'front_evaluations.views.quiz', name='quiz'),
         url(r'^evaluations/detail/(?P<id>\d+)$', 'front_evaluations.views.detailQuiz', name='detailQuiz'),
-        url(r'^evaluations/take/$', 'front_evaluations.views.take', name='take'),
+        url(r'^evaluations/take/(?P<id>\d+)$', 'front_evaluations.views.take', name='take'),
         url(r'^evaluations/create/$', 'front_evaluations.views.createQuiz', name='createQuiz'),
         url(r'^listQuizbyCategory/(?P<category_name>[\w.-]+)$', 'front_evaluations.views.listQuizbyCategory' , name='listQuizbyCategory'),
-        url(r'^marking$', 'front_evaluations.views.markingQuiz', name='markingQuiz'),
-	url(r'^marking/detail/(?P<id>[0-9]+)/$', 'front_evaluations.views.detailMarkingQuiz', name='detailMarkingQuiz'),
-	url(r'^progress$', 'front_evaluations.views.progressQuiz' , name='progressQuiz'),
+        url(r'^evaluations/marking$', 'front_evaluations.views.markingQuiz', name='markingQuiz'),
+	url(r'^evaluations/marking/detail/(?P<id>[0-9]+)$', 'front_evaluations.views.detailMarkingQuiz', name='detailMarkingQuiz'),
+	url(r'^evaluations/progress$', 'front_evaluations.views.progressQuiz' , name='progressQuiz'),
 )

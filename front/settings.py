@@ -134,3 +134,6 @@ if DEBUG:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+
+#persisntent sessions 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False

@@ -1,6 +1,6 @@
 var AnswerView = function(ask)
 {
-	console.log("AnswerView:instance created")	
+	//console.log("AnswerView:instance created")	
 	this.ask = ask;
 	this.service = new AnswerService();
 }
@@ -12,26 +12,26 @@ AskView.prototype.next_page = null;
 * Service request functions
 */
 AnswerView.prototype.list = function (url) {
-	console.log('AnswerView:list');
+	//console.log('AnswerView:list');
 	this.service.list(url,this.render_list);
 }
 
 
 AnswerView.prototype.set_scroll_list = function(url){
-	console.log("AnswerView:set_scroll_list")
+	//console.log("AnswerView:set_scroll_list")
 
 	var paginator_next = "#answer_next";
 	var paginator = new NonPaginator(paginator_next, this);
 		
 	if(AnswerView.prototype.next_page)
 	{
-		console.log("There is not more Answers")
+		//console.log("There is not more Answers")
 		paginator.disable();
 	}
 	else
 	{
-		console.log("There is more Answers")
-		console.log(AnswerView.prototype.next_page);
+		//console.log("There is more Answers")
+		//console.log(AnswerView.prototype.next_page);
 	}
 }
 
@@ -41,14 +41,14 @@ var NonPaginator = function (btn_next, view) {
 
 	$(this.btn_next).click(function(e){
 		e.preventDefault();
-		console.log("paginator_next:clicked")
+		//console.log("paginator_next:clicked")
 		view.list(AnswerView.prototype.next_page);
 	});
 };
 
 NonPaginator.prototype.disable = function()
 {
-	console.log('Paginator:disable');
+	//console.log('Paginator:disable');
 	$(this.btn_next).remove();
 }
 
@@ -63,8 +63,8 @@ AnswerView.prototype.retrieve = function (url) {
 * View render manager functions
 */
 AnswerView.prototype.render_list = function (data){
-	console.log('AnswerView:render_list');
-	console.log(data)
+	//console.log('AnswerView:render_list');
+	//console.log(data)
 
 	var data_list_asks = data.results;
 	var to_comment = [];
@@ -134,6 +134,10 @@ AnswerView.prototype.render_list = function (data){
 		to_comment.push(container);
 
 	}
+
+	//console.log("render comment")
+	AnswerView.prototype.render_count_answer(data.count)
+	//$('.count-answer').text()
 	
 
 	AnswerView.prototype.next_page = data.next;
@@ -141,7 +145,7 @@ AnswerView.prototype.render_list = function (data){
 	//load comments
 	$(to_comment).each(function(index, value)
 	{
-		//console.log(value)
+		console.log(value)
 		var thread = $(value).attr("id").split('-')[1]
 		var container_comment = $(value).find(".comment-answer")[0]
 
@@ -233,7 +237,7 @@ AnswerView.prototype.appentOptions = function(div_contenedor){
 	del_msg.className = 'glyphicon glyphicon-remove'
 	$(del_msg).text(' eliminar')
 	del.appendChild(del_msg);
-	//del.addEventListener('click', ForumView.removeAnswer, false);
+	del.addEventListener('click', AnswerView.prototype.handle_delete, false);
 	
 	item2.appendChild(del)
 
@@ -250,9 +254,40 @@ AnswerView.prototype.appentOptions = function(div_contenedor){
 * Event Handler functions
 */
 
+AnswerView.prototype.handle_delete = function(e){
+	notify = Notify.show_confirm('respuesta');
+
+	$('#erase').click(function(){
+		// se obtiene el id de la respuesta para colocarlo en la url 
+		var id = $(e.target).parents('.response').attr("id");
+		var splited = id.split('-');
+		id = splited[splited.length-1];
+		console.log('handle_delete')
+		console.log(id)
+ 
+		//ForumService.delete_answer($(e.target).parents('.response'), URL_CREATE_ANSWER_FORO+id, CommentView.delete);
+
+		var answerService = new AnswerService();
+		answerService.delete(
+			URL_CREATE_ANSWER_FORO+id,
+			$(e.target).parents('.response'),
+			function(response, div)
+			{
+				div.fadeOut();
+			}
+		)
+
+		notify.close()	
+	})
+
+	$('#cancel').click(function(){
+		notify.close()	
+	})
+}
+
 AnswerView.prototype.handle_edit = function(e)
 {
-	console.log('AnswerView:handle_edit');
+	//console.log('AnswerView:handle_edit');
 	/*
 	*when edit (a tag) is clicked, do many things here like create form and set an event handler
 	*/
@@ -294,7 +329,7 @@ AnswerView.prototype.handle_edit = function(e)
 	
 	new_form.submit(function(e){
 		e.preventDefault();
-		console.log("AnswerView:submit_edit")
+		//console.log("AnswerView:submit_edit")
 		// se obtiene el id de la respuesta para colocarlo en la url
 		var splited = e.target.id.split('-');
 		var id = splited[splited.length-1]
@@ -316,8 +351,8 @@ AnswerView.prototype.handle_edit = function(e)
 
 
 var AnswerForm = function(id_ask){
-	console.log('AnswerForm:instance created');
-	console.log($(AnswerForm.prototype.form))
+	//console.log('AnswerForm:instance created');
+	//console.log($(AnswerForm.prototype.form))
 	
 	create_form(
 		URL_CREATE_ANSWER_FORO,
@@ -332,8 +367,8 @@ AnswerForm.prototype.form = "#form_answer_foro";
 AnswerForm.prototype.editor = "#id_textarea_answer";
 
 AnswerForm.prototype.handler_created_form = function(created_form, id_ask){
-	console.log('AnswerForm:handler_created_form');
-	console.log(id_ask)
+	//console.log('AnswerForm:handler_created_form');
+	//console.log(id_ask)
 	
 
 	var input_ask_id  = $(AnswerForm.prototype.form).find("#id_ask")[0];
@@ -353,7 +388,7 @@ AnswerForm.prototype.handler_created_form = function(created_form, id_ask){
 
 	$(AnswerForm.prototype.form).submit(function(e){
 		e.preventDefault();
-		console.log("AnswerForm:submit");
+		//console.log("AnswerForm:submit");
 
 		var splited = e.target.parentElement.id.split('-');
 		var id = splited[splited.length-1]
@@ -378,7 +413,7 @@ AnswerForm.prototype.handler_created_form = function(created_form, id_ask){
 }
 
 AnswerForm.prototype.fill = function(){
-	console.log('AnswerForm:fill');
+	//console.log('AnswerForm:fill');
 	//get content of current comment
 	var current_question = $(AnswerView.prototype.container_summary).text();
 	
@@ -391,7 +426,7 @@ AnswerForm.prototype.fill = function(){
 }
 
 AnswerForm.prototype.succes_update = function (response, form){
-	console.log('AnswerForm:succes_update');
+	//console.log('AnswerForm:succes_update');
 	location.reload();
 }
 
@@ -403,14 +438,38 @@ AnswerForm.prototype.succes_create = function(response){
 	
 	// contador de las repuestas 
 	count = $('.count-answer').text();
-	count.split(' ');
-	count = parseInt(count[0])
-	count = count+1+" ";
-	if(count == '1 '){
-		$(".count-answer").text(count + 'Respuesta')
+	count = AnswerView.prototype.update_count_answer(count, 'aumenta');
+	
+	AnswerView.prototype.render_list({'count':count,'results':[response]})
+
+}
+
+AnswerView.prototype.update_count_answer = function(count_container, tipo){
+	
+	count_container = count_container.split(' ');
+	count_container = parseInt(count_container[0])
+
+	if (tipo == 'aumenta') {
+		count_container = count_container+1;
+	};
+
+	if (tipo == 'disminuye') {
+		count_container = count_container-1;
+	};
+
+	//console.log('actualizo')
+	//console.log(count_container)
+
+	return count_container
+}
+
+AnswerView.prototype.render_count_answer = function(count){
+
+	if(count == 1){
+		$(".count-answer").text(count + ' Respuesta')
 	}else{
-		$(".count-answer").text(count + 'Respuestas')	
+		$(".count-answer").text(count + ' Respuestas')	
 	}
-	AnswerView.prototype.render_list({'results':[response]})
+	//AnswerView.prototype.render_list({'results':[response]})
 
 }

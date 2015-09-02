@@ -61,6 +61,11 @@ URL_GET_ALL_QUESTION_ESSAY = host+':8080/API/quiz/questions/listEssay';
 URL_CREATE_QUESTION_MC = host+':8080/API/quiz/questions/createMultichoice';
 URL_GET_ALL_QUESTION_MC = host+':8080/API/quiz/questions/listMultichoice';
 
+URL_CREATE_ANSWER_MC = host+':8080/API/quiz/questions/createAnswerMultichoice';
+URL_GET_ALL_ANSWER_MC = host+':8080/API/quiz/questions/MultichoiceAnswerList/'; // se le pega el id de la MC del q se quiere buscar las respuestas
+
+URL_DETAIL_QUESTION = host+':8080/API/quiz/questions/detail/';// se le pega el id de la question
+
 // category of the evaluations 
 URL_CREATE_CATEGORY = host+':8080/API/quiz/category/createCategory';
 URL_GET_ALL_CATEGORY = host+':8080/API/quiz/category/listCategory';
@@ -73,6 +78,16 @@ URL_CREATE_QUIZ = host+':8080/API/quiz/createQuiz';
 URL_GET_ALL_QUIZ = host+':8080/API/quiz/listQuiz';
 URL_GET_QUIZ_BY_CATEGORY = host+':8080/API/quiz/listQuizbyCategory/'; // se le pega el nombre de la categoria al final
 URL_DETAIL_QUIZ = host+':8080/API/quiz/detail/'; // se le pega el id del quiz al final 
+
+URL_QUALIFY_QUIZ = host+':8080/API/quiz/qualify';
+URL_CHECK_PASSED_QUIZ = host+':8080/API/quiz/checkPassed';
+
+
+URL_CREATE_SITTING = host+':8080/API/quiz/sitting/'; // se le pega el id del quiz al final 
+URL_UPDATE_SITTING = host+':8080/API/quiz/updateSitting/'; // se le pega el id del sitting al final 
+URL_ALL_SITTING = host+':8080/API/quiz/allSitting';
 URL_MARKING_QUIZ = host+':8080/API/quiz/marking';
-URL_MARKING_DETAIL_QUIZ = host+':8080/API/quiz/marking/detail/'; // se le pega el id del quiz al final 
+URL_MARKING_DETAIL_QUIZ = host+':8080/API/quiz/marking/detail/'; // se le pega el id del sitting al final 
+
 URL_PROGRESS_QUIZ = host+':8080/API/quiz/progress';
+URL_PROGRESS_EXAMS_QUIZ = host+':8080/API/quiz/progress/exams/'; // se le pega el id del usuario al final 
