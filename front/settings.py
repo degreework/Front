@@ -64,10 +64,11 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'front.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates', os.path.join(BASE_DIR, 'front_evaluations', 'templates/quiz'), os.path.join(BASE_DIR, 'front_evaluations', 'templates/questions'), os.path.join(BASE_DIR, 'front_evaluations', 'templates/categories')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

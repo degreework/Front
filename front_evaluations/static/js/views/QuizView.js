@@ -33,188 +33,16 @@ EvaluationsView.initialize = function(form, url)
 
 
 // cambia el valor de ON por un True en un campo tipo boolean 
-EvaluationsView.change_boolean = function(formSerialized){
-
-	number = formSerialized.split('=on').length-1
+EvaluationsView.change_boolean = function(data){
 	
-	for (i = 0; i < number; i++) {
-		formSerialized = formSerialized.replace('=on','=True')
+	for (i = 0; i < $(data).find('input').length; i++) {
+		if($(data).find('input')[i].value=== 'on'){
+
+			$(data).find('input')[i].value =  true
+			console.log($(data).find('input')[i].value)
+		}
 	}
-	return formSerialized
-}
-
-
-//---------------
-// QUESTIONS
-//---------------
-
-EvaluationsView.create_essay = function(form)
-{
-	form.submit(function (e) {
-			e.preventDefault();
-			EvaluationsService.create_question(form,URL_CREATE_QUESTION_ESSAY);
-	})
-	
-}
-
-EvaluationsView.create_mc = function(form)
-{
-	form.submit(function (e) {
-			e.preventDefault();
-			EvaluationsService.create_question(form, URL_CREATE_QUESTION_MC);;
-	})
-	
-}
-
-EvaluationsView.create_tf = function(form)
-{
-	form.submit(function (e) {
-			e.preventDefault();
-			EvaluationsService.create_question(form, URL_CREATE_QUESTION_TF);
-	})
-	
-}
-
-EvaluationsView.notifify_create_question = function(){
-	Notify.show_success("question create", "the question was create succesful");
-}
-
-//---------------
-// CATEGORY
-//---------------
-EvaluationsView.create_category = function(form)
-{
-	form.submit(function (e) {
-			e.preventDefault();
-			EvaluationsService.create_category(form, URL_CREATE_CATEGORY);
-	})
-	
-}
-
-EvaluationsView.get_all_Categories = function()
-{
-	EvaluationsService.get_list_categories(URL_GET_ALL_CATEGORY, EvaluationsView.render_all_categories);
-}
-
-EvaluationsView.render_all_categories = function (response)
-{	
-	EvaluationsView.render_list_categories($('#list-categories'), response);
-}
-
-EvaluationsView.render_list_categories = function(parent_container, response)
-{
-	for (i = 0; i < response.length; i++) { 
-
-		var container = document.createElement("tr");
-		
-		var id = response[i].id;		
-		
-		var number = document.createElement("td");
-		$(number).text('1')
-
-		var title_category = document.createElement("td");
-		$(title_category).text(response[i].category)
-
-
-		var col_edit = document.createElement("td");
-		var link = document.createElement("a");
-		var icon = document.createElement("span")
-		icon.className = 'glyphicon glyphicon-edit'
-
-
-		//$(link).attr('href', host+":"+location.port+"/evaluations/detail/"+id);
-		link.appendChild(icon)
-		col_edit.appendChild(link)
-		
-		var col_del = document.createElement("td");
-		var link2 = document.createElement("a");
-		var icon2 = document.createElement("span")
-		icon2.className = 'glyphicon glyphicon-trash'
-
-
-		//$(link2).attr('href', host+":"+location.port+"/evaluations/detail/"+id);
-		link2.appendChild(icon2)
-		col_del.appendChild(link2)
-
-		//se pega a los contenedores 
-		container.appendChild(number);
-		container.appendChild(title_category);
-		container.appendChild(col_edit);
-		container.appendChild(col_del);
-		
-		parent_container.prepend(container);		
-	}
-}
-
-EvaluationsView.create_subcategory = function(form)
-{
-	form.submit(function (e) {
-			e.preventDefault();
-			EvaluationsService.create_category(form,URL_CREATE_SUBCATEGORY);
-	})
-	
-}
-
-EvaluationsView.get_all_subCategories = function()
-{
-	EvaluationsService.get_list_categories(URL_GET_ALL_SUBCATEGORY, EvaluationsView.render_all_subcategories);
-}
-
-EvaluationsView.render_all_subcategories = function (response)
-{	
-	EvaluationsView.render_list_subcategories($('#list-subcategories'), response);
-}
-
-EvaluationsView.render_list_subcategories = function(parent_container, response)
-{
-	for (i = 0; i < response.length; i++) { 
-
-		var container = document.createElement("tr");
-		
-		var id = response[i].id;		
-		
-		var number = document.createElement("td");
-		$(number).text('1')
-
-		var title_subcategory = document.createElement("td");
-		$(title_subcategory).text(response[i].sub_category)
-
-		var title_category = document.createElement("td");
-		$(title_category).text(response[i].category)
-
-		var col_edit = document.createElement("td");
-		var link = document.createElement("a");
-		var icon = document.createElement("span")
-		icon.className = 'glyphicon glyphicon-edit'
-
-
-		//$(link).attr('href', host+":"+location.port+"/evaluations/detail/"+id);
-		link.appendChild(icon)
-		col_edit.appendChild(link)
-		
-		var col_del = document.createElement("td");
-		var link2 = document.createElement("a");
-		var icon2 = document.createElement("span")
-		icon2.className = 'glyphicon glyphicon-trash'
-
-
-		//$(link2).attr('href', host+":"+location.port+"/evaluations/detail/"+id);
-		link2.appendChild(icon2)
-		col_del.appendChild(link2)
-
-		//se pega a los contenedores 
-		container.appendChild(number);
-		container.appendChild(title_subcategory);
-		container.appendChild(title_category);
-		container.appendChild(col_edit);
-		container.appendChild(col_del);
-		
-		parent_container.prepend(container);		
-	}
-}
-
-EvaluationsView.notifify_create_category = function(){
-	Notify.show_success("create", "it was create succesful");
+	return data
 }
 
 //---------------
@@ -224,7 +52,11 @@ EvaluationsView.create_quiz = function(form)
 {
 	form.submit(function (e) {
 			e.preventDefault();
-			EvaluationsService.create_quiz(form, URL_CREATE_QUIZ);
+
+			var quizService = new QuizService();
+			var form = EvaluationsView.change_boolean(($(e.target).get(0)))
+			var data = new FormData(form);
+			quizService.create(URL_CREATE_QUIZ, data, EvaluationsView.notifify_create_question)
 	})
 	
 }
@@ -236,7 +68,8 @@ EvaluationsView.notifify_create_quiz = function(){
 
 EvaluationsView.get_all_Quiz = function()
 {
-	EvaluationsService.get_list_quiz(URL_GET_ALL_QUIZ, EvaluationsView.render_all_quiz);
+	var quizService = new QuizService();
+	quizService.retrieve(URL_GET_ALL_QUIZ, EvaluationsView.render_all_quiz)	
 }
 
 EvaluationsView.render_all_quiz = function (response)
@@ -277,6 +110,11 @@ EvaluationsView.render_list_quiz = function(parent_container, response)
 	}
 }
 
+EvaluationsView.create_sitting_session = function(response){
+	sessionStorage.setItem('sitting', JSON.stringify(response));
+	$(location).attr('href', host+":"+location.port+"/evaluations/take/"+response.quiz); 
+}
+
 
 EvaluationsView.get_Quiz = function(){
 	
@@ -285,10 +123,13 @@ EvaluationsView.get_Quiz = function(){
 
 	$('.btn-create').click(function(e){
 		e.preventDefault();
-		EvaluationsService.create_sitting(URL_CREATE_SITTING+id+'/')
+		var quizService = new QuizService();
+		var data = JSON.parse($.session.get('user'))
+		quizService.dispatch(URL_CREATE_SITTING+id+'/', data, EvaluationsView.create_sitting_session)
 	})
 
-	EvaluationsService.get_quiz(URL_DETAIL_QUIZ+id+'/', EvaluationsView.render_quiz);
+	var quizService = new QuizService();
+	quizService.retrieve(URL_DETAIL_QUIZ+id+'/', EvaluationsView.render_quiz)	
 }
 
 
@@ -374,8 +215,8 @@ EvaluationsView.render_form_question = function(question){
 	// pregunta tipo opcion multiple
 	if(clase === 'Multiple Choice Question'){
 		
-		//console.log(question.id)
-		EvaluationsService.get_answer_multichoice(URL_GET_ALL_ANSWER_MC+question.id+'/', EvaluationsView.render_answer_mc)
+		var quizService = new QuizService();
+		quizService.retrieve(URL_GET_ALL_ANSWER_MC+question.id+'/', EvaluationsView.render_answer_mc)
 		input_clase.value = question.clase
 
 	}
@@ -419,7 +260,6 @@ EvaluationsView.render_form_question = function(question){
 		input2.name = 'answered';
 		input2.value = 'False';
 
-		//label_false.appendChild(input2)
 		li_false.appendChild(input2)
 		li_false.appendChild(label_false)
 		ul.appendChild(li_false)
@@ -498,7 +338,6 @@ EvaluationsView.render_check = function(response){
 	//se actualiza la session 
 	sessionStorage.setItem('sitting', JSON.stringify(sitting));	
 
-	//console.log($('#question_form')[0].input)
 	$('#question_form').find('input, textarea, button, select').attr('disabled','disabled');
 	
 	$('#container-check').hide()
@@ -511,7 +350,17 @@ EvaluationsView.btn_check = function(form){
 
 	form.submit(function (e) {
 			e.preventDefault()
-			EvaluationsService.qualify(form, URL_QUALIFY_QUIZ, EvaluationsView.render_check)
+			var quizService = new QuizService();
+			var data = ($(e.target).get(0))
+			data = $(data).serialize()
+			console.log(data)
+			
+			if (data.search('answered') !== -1) {
+				quizService.dispatch(URL_QUALIFY_QUIZ, data, EvaluationsView.render_check)
+			}
+			else{
+				Notify.show_error('', 'Por favor responda la pregunta')
+			}
 	})
 }
 
@@ -534,8 +383,9 @@ EvaluationsView.get_first_question = function(question_list){
 
 	question_id = question_list.split(',', 1)
 	question_id = question_id[0] 
-    EvaluationsService.get_question_detail(URL_DETAIL_QUESTION+question_id+'/', EvaluationsView.render_question)
-    
+
+	var quizService = new QuizService();
+	quizService.retrieve(URL_DETAIL_QUESTION+question_id+'/', EvaluationsView.render_question)
 }
 
 // elimina la pregunta de la lista para seguir con la proxima
@@ -567,7 +417,7 @@ EvaluationsView.redirect_results = function(sitting){
 	
 	//elimina la session del quiz 
 	$.session.remove('sitting');
-	//sessionStorage.remove('sitting');
+
 	// redirige a mostrar los resultados 
 	location.href =  host+":"+location.port+"/evaluations/marking/detail/"+sitting.id; 
 }
@@ -601,8 +451,8 @@ EvaluationsView.take_quiz = function(btn_continue){
 				EvaluationsView.save_status_quiz(sitting)
 
 				//se guarda en la BD
-				EvaluationsService.update_sitting(sitting, URL_UPDATE_SITTING+sitting.id+'/', EvaluationsView.redirect_results)
-
+				var quizService = new QuizService();
+				quizService.update2( URL_UPDATE_SITTING+sitting.id+'/', sitting, EvaluationsView.redirect_results)
 			}
 		})
 
@@ -613,16 +463,17 @@ EvaluationsView.take_quiz = function(btn_continue){
 	}
 }
 
-/*
-	MARKING
-*/
+//---------------
+//	MARKING
+//---------------
 
 EvaluationsView.get_marking_detail = function(){
 
 	var id = location.pathname.split("/");
 	id = id[id.length-1];
 
-	EvaluationsService.get_marking_detail(URL_MARKING_DETAIL_QUIZ+id+'/', EvaluationsView.render_results)
+	var quizService = new QuizService();
+	quizService.retrieve(URL_MARKING_DETAIL_QUIZ+id+'/', EvaluationsView.render_results)
 }
 
 EvaluationsView.render_results = function(sitting){
@@ -663,18 +514,16 @@ EvaluationsView.render_results = function(sitting){
 		 
 		//verifico q la pregunta sea correcta o no en la lista de respuestas incorrectas
 		user_answers = JSON.parse(sitting.user_answers)
-		dato = sitting.question_list.split(',')
+		dato = sitting.incorrect_questions.split(',')
 		dato = dato[index]
 		index++
 		$.each(user_answers, function(k, v) {
-			console.log(k +' == '+ dato)
-			//console.log(sitting.incorrect_questions.indexOf(k))
+			
 			if ( k === dato) {
-				$(qualify).text('correcta')
+				$(qualify).text('incorrecta')
 				return false
 			}else{
-				$(qualify).text('incorrecta')
-				//return false
+				$(qualify).text('correcta')
 			};
 		})
 	
@@ -694,7 +543,9 @@ EvaluationsView.call_render_marking = function(response){
 }
 
 EvaluationsView.get_all_marking_quiz = function(){
-	EvaluationsService.get_all_marking_quiz(URL_MARKING_QUIZ, EvaluationsView.call_render_marking)
+
+	var quizService = new QuizService();
+	quizService.retrieve(URL_MARKING_QUIZ, EvaluationsView.call_render_marking)
 }
 
 
