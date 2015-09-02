@@ -273,6 +273,9 @@ AnswerView.prototype.handle_delete = function(e){
 			$(e.target).parents('.response'),
 			function(response, div)
 			{
+				count = $('.count-answer').text();
+				count = AnswerView.prototype.update_count_answer(count, 'disminuye');
+				AnswerView.prototype.render_count_answer(count)
 				div.fadeOut();
 			}
 		)
@@ -457,8 +460,8 @@ AnswerView.prototype.update_count_answer = function(count_container, tipo){
 		count_container = count_container-1;
 	};
 
-	//console.log('actualizo')
-	//console.log(count_container)
+	console.log('actualizo')
+	console.log(count_container)
 
 	return count_container
 }
