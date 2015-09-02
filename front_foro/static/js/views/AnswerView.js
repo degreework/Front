@@ -135,7 +135,7 @@ AnswerView.prototype.render_list = function (data){
 
 	}
 
-	console.log(data)
+	//console.log("render comment")
 	AnswerView.prototype.render_count_answer(data.count)
 	//$('.count-answer').text()
 	
@@ -145,7 +145,7 @@ AnswerView.prototype.render_list = function (data){
 	//load comments
 	$(to_comment).each(function(index, value)
 	{
-		//console.log(value)
+		console.log(value)
 		var thread = $(value).attr("id").split('-')[1]
 		var container_comment = $(value).find(".comment-answer")[0]
 
@@ -431,8 +431,8 @@ AnswerForm.prototype.succes_update = function (response, form){
 }
 
 AnswerForm.prototype.succes_create = function(response){
-	//console.log('AnswerForm:succes_create');
-	//console.log(response)
+	console.log('AnswerForm:succes_create');
+	console.log(response)
 	
 	$(AnswerForm.prototype.form).trigger("reset");
 	
@@ -457,8 +457,8 @@ AnswerView.prototype.update_count_answer = function(count_container, tipo){
 		count_container = count_container-1;
 	};
 
-	console.log('actualizo')
-	console.log(count_container)
+	//console.log('actualizo')
+	//console.log(count_container)
 
 	return count_container
 }
@@ -470,5 +470,6 @@ AnswerView.prototype.render_count_answer = function(count){
 	}else{
 		$(".count-answer").text(count + ' Respuestas')	
 	}
+	//AnswerView.prototype.render_list({'results':[response]})
 
 }

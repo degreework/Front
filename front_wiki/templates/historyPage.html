@@ -5,13 +5,15 @@
 
 {% block wiki_content %}
 	Muestreme la historia
-	<div class="pages margen_contenido"></div>		
+	<div class="pages margen_contenido"></div>	
+	<div class="col-md-12" id="list-history"></div>	
 {% endblock wiki_content %}
 
 {% block scripts %}
 <script>
 jQuery(document).ready(function() {
 	console.log("Read")
+	WikiView.show_all_history($("#list-history"));
 });
 </script>
 {% endblock scripts %}

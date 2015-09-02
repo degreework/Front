@@ -27,8 +27,8 @@
 		url_update = URL_UPDATE_USER+JSON.parse($.session.get('user')).id;
 		//form update user
 		form_update_user = $("#form_update_user");
-		create_form(url_update, form_update_user, 'PUT');
-		UserView.showSetting(url_update);
+		create_form(url_update, form_update_user, 'PUT', UserView.showSetting, url_update) ;
+		
 		//form_update_user.show();
 		form_update_user.submit(function (e) {
 			e.preventDefault();
