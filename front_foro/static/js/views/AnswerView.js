@@ -411,8 +411,6 @@ AnswerForm.prototype.succes_create = function(response){
 	}else{
 		$(".count-answer").text(count + 'Respuestas')	
 	}
-	//ForumView.append_answer_to_ask(answer, $('.answer'));
-	//AnswerView.prototype.render_answer(response)
 	AnswerView.prototype.render_list({'results':[response]})
 
 }
