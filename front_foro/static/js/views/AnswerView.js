@@ -369,14 +369,10 @@ AnswerForm.prototype.editor = "#id_textarea_answer";
 
 AnswerForm.prototype.handler_created_form = function(created_form, id_ask){
 	//console.log('AnswerForm:handler_created_form');
-	//console.log(id_ask)
-	
 
 	var input_ask_id  = $(AnswerForm.prototype.form).find("#id_ask")[0];
-
 	$(input_ask_id).hide();
 	
-	//console.log($(input_ask_id))
 
 	var input = $(AnswerForm.prototype.form).find("#id_text");
 	$('textarea').keyup(function(e){

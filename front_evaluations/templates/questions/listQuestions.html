@@ -15,13 +15,14 @@
 					<tr>
 						<th>#</th>
 						<th>Question</th>
+						<th>Categoria</th>
+						<th>Subcategoria</th>
 						<th>Edit</th>
 						<th>Delete</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-					</tr>
+				<tbody id="list-equestion">
+					
 				</tbody>
 			</table>
 		</div>
@@ -33,13 +34,14 @@
 					<tr>
 						<th>#</th>
 						<th>Question</th>
+						<th>Categoria</th>
+						<th>Subcategoria</th>
 						<th>Edit</th>
 						<th>Delete</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-					</tr>
+				<tbody id="list-tfquestion">
+
 				</tbody>
   
 			</table>
@@ -52,13 +54,13 @@
 					<tr>
 						<th>#</th>
 						<th>Question</th>
+						<th>Categoria</th>
+						<th>Subcategoria</th>
 						<th>Edit</th>
 						<th>Delete</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-					</tr>
+				<tbody id="list-mcquestion">
 				</tbody>
 			</table>
 		</div>
@@ -70,7 +72,10 @@
 	<script>
         jQuery(document).ready(function($) {
 			//form question essay
-			EvaluationsView.initialize($("#form_essay"), URL_CREATE_QUESTION_ESSAY);
+			EvaluationsView.get_all_TFQuestions();
+			EvaluationsView.get_all_MCQuestions();
+			EvaluationsView.get_all_EQuestions(); 
+
 			
 		});
 	</script>

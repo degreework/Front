@@ -16,16 +16,18 @@ EvaluationsView.create_category = function(form)
 EvaluationsView.get_all_Categories = function()
 {
 	var categoryService = new CategoryService();
-	categoryService.retrieve(URL_GET_ALL_CATEGORY, EvaluationsView.render_all_categories)	
+	categoryService.list(URL_GET_ALL_CATEGORY, EvaluationsView.render_all_categories)	
 }
 
 EvaluationsView.render_all_categories = function (response)
 {	
+	console.log(response)
 	EvaluationsView.render_list_categories($('#list-categories'), response);
 }
 
 EvaluationsView.render_list_categories = function(parent_container, response)
 {
+	
 	for (i = 0; i < response.length; i++) { 
 
 		var container = document.createElement("tr");
@@ -33,7 +35,7 @@ EvaluationsView.render_list_categories = function(parent_container, response)
 		var id = response[i].id;		
 		
 		var number = document.createElement("td");
-		$(number).text('1')
+		$(number).text(i+1)
 
 		var title_category = document.createElement("td");
 		$(title_category).text(response[i].category)
@@ -99,7 +101,7 @@ EvaluationsView.render_list_subcategories = function(parent_container, response)
 		var id = response[i].id;		
 		
 		var number = document.createElement("td");
-		$(number).text('1')
+		$(number).text(i+1)
 
 		var title_subcategory = document.createElement("td");
 		$(title_subcategory).text(response[i].sub_category)

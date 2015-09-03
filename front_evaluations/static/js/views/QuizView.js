@@ -85,7 +85,7 @@ EvaluationsView.render_list_quiz = function(parent_container, response)
 		var container = document.createElement("tr");
 		
 		var number = document.createElement("td");
-		$(number).text('1')
+		$(number).text(i+1)
 
 		var title_quiz = document.createElement("td");
 		$(title_quiz).text(response[i].title)
@@ -383,6 +383,7 @@ EvaluationsView.get_first_question = function(question_list){
 
 	question_id = question_list.split(',', 1)
 	question_id = question_id[0] 
+	console.log(question_list)
 
 	var quizService = new QuizService();
 	quizService.retrieve(URL_DETAIL_QUESTION+question_id+'/', EvaluationsView.render_question)
