@@ -39,6 +39,13 @@
 				<div class="col-md-10 col-sm-offset-1">
 					<!-- formulario para crear el comentario -->
 						<form id="form-comment-ask" hidden>
+							<div class="form-group">
+								<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
+							</div>
+							<div class="form-group">
+								<input type="hidden" id="id_parent" name="parent">
+							</div>
+
 							<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
 						</form>	
 					
@@ -78,6 +85,14 @@
 			</div>
 			
 			<form id="form-comment-clone" hidden>
+				<div class="form-group">
+					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
+				</div>
+				<div class="form-group">
+					<input type="hidden" id="id_parent" name="parent">
+				</div>
+
+
 				<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
 			</form>
 		</div>
