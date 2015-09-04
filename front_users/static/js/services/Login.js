@@ -45,11 +45,11 @@ Login.login = function (form, url, callback)
 		//if BAD REQUEST -> show error response in fields form
 		else if(400 == error.status)
 		{
-			Notify.show_error("OK", "credenciales invalidas");
+			Notify.show_error("Login", "Campos incompletos");
 		}
 		else if (401 == error.status)
 		{
-			Notify.show_error("APP", "Key secret Invalid");
+			Notify.show_error("Login", "El usuario o la contraseña son incorrectos");
 		}
 	})
 	.always(function(){
