@@ -8,15 +8,16 @@
 {% block evaluations_content %}
 	<div class="col-md-12">
 		
+		<!-- tabla con la lista de las categorias -->
 		<h3 class="titulos">Essay Questions</h3>
-		<div class="table-responsive">
+		<div class="table-responsive" id="show_">
 			<table class="table table-hover">
   				<thead>
 					<tr>
 						<th>#</th>
-						<th>Category</th>
-						<th>Edit</th>
-						<th>Delete</th>
+						<th>Categoria</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
 					</tr>
 				</thead>
 				<tbody id="list-categories">
@@ -24,6 +25,24 @@
 				</tbody>
 			</table>
 		</div>
+
+		<!-- en caso tal de que quiera editar una categoria-->
+		<div class="col-md-12" id="edit_" hidden>
+			<br><br>
+			<div class="col-md-7 col-sm-7 col-xs-7  ">
+				<form class="" id="form_update_category" hidden>
+	      			<!--<button class="btn btn-default" id="cancel">Cancelar</button>-->
+	      			<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
+	      		</form>
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
+				<h4>¿Category?</h4>
+				<p>Esto es sobre algoritmia
+				Se específico, detalla bien tu duda o inconveniente, la comunidad está para ayudarte y tu eres parte de ella...bla bla bla</p>
+			</div>
+		</div> 
+
+
 
 	</div>
 {% endblock evaluations_content %}

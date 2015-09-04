@@ -28,9 +28,10 @@ EvaluationsView.render_all_categories = function (response)
 EvaluationsView.render_list_categories = function(parent_container, response)
 {
 	
-	for (i = 0; i < response.length; i++) { 
+	for (i = response.length-1; i >= 0; i--) { 
 
 		var container = document.createElement("tr");
+		container.className = 'row_category-'+i
 		
 		var id = response[i].id;		
 		
@@ -45,8 +46,9 @@ EvaluationsView.render_list_categories = function(parent_container, response)
 		var link = document.createElement("a");
 		var icon = document.createElement("span")
 		icon.className = 'glyphicon glyphicon-edit'
+		icon.name = i
 
-
+		link.addEventListener('click', function(e){ EvaluationsView.handle_edit(response, e.target.name, 'category') }, false);
 		link.appendChild(icon)
 		col_edit.appendChild(link)
 		
@@ -54,7 +56,7 @@ EvaluationsView.render_list_categories = function(parent_container, response)
 		var link2 = document.createElement("a");
 		var icon2 = document.createElement("span")
 		icon2.className = 'glyphicon glyphicon-trash'
-
+		icon2.name = i
 
 		link2.appendChild(icon2)
 		col_del.appendChild(link2)
@@ -66,7 +68,65 @@ EvaluationsView.render_list_categories = function(parent_container, response)
 		container.appendChild(col_del);
 		
 		parent_container.prepend(container);		
+
+		link2.addEventListener('click', function(e){ EvaluationsView.handle_delete(response, e.target.name, 'categoria', $(e.target).parents('.row_category-'+e.target.name)) }, false);
 	}
+}
+
+EvaluationsView.update_Categories = function(form, id)
+{
+	form.submit(function (e) {
+			e.preventDefault();
+
+			var categoryService = new CategoryService();
+			var data = new FormData(($(e.target).get(0)));
+			categoryService.update(URL_UPDATE_CATEGORY+id+'/', data, EvaluationsView.redirect_Categories)
+	})
+}
+
+EvaluationsView.redirect_Categories = function(response){
+
+	//Notify.show_success("categoria", "la categoria fue editada con exito");
+	location.reload();
+}
+
+EvaluationsView.render_parametros = function(form, response){
+
+	$.each(response, function(key, value) {	
+		
+			$('#id_'+key).attr('value', value);
+	})
+
+	$(form).show()
+
+	if (form.selector = '#form_update_category') {
+		EvaluationsView.update_Categories(form, response.id)
+	}
+
+	if (form.selector = '#form_update_subcategory') {
+		EvaluationsView.update_SubCategories(form, response.id)
+	}
+	
+}
+
+EvaluationsView.handle_edit = function(response, index, tipo){
+	
+	$('#edit_').fadeIn()
+	$('#show_').hide()	
+	response = response[index]
+	
+	if (tipo == 'category') {
+
+		form = $("#form_update_category")
+		create_form(URL_CREATE_CATEGORY, form, 'OPTIONS', EvaluationsView.render_parametros, response)
+	};
+
+
+	if (tipo == 'subcategory') {
+
+		form = $("#form_update_subcategory")		
+		create_form(URL_CREATE_SUBCATEGORY, form, 'OPTIONS', EvaluationsView.render_parametros, response)
+	};
 }
 
 EvaluationsView.create_subcategory = function(form)
@@ -81,6 +141,41 @@ EvaluationsView.create_subcategory = function(form)
 	
 }
 
+EvaluationsView.handle_delete = function(response, index, tipo, row){
+	console.log('handle_delete')
+	console.log(response)
+	
+	response = response[index]
+	notify = Notify.show_confirm('la '+ tipo);
+
+	console.log(row)
+	var id = response.id
+
+	$('#erase').click(function(){
+		var categoryService = new CategoryService();
+		
+		if (tipo == 'categoria') {
+		
+			categoryService.delete(URL_UPDATE_CATEGORY+id+'/', row, EvaluationsView.hide_div)
+			notify.close()	
+		}
+
+		if (tipo == 'subcategoria') {
+			categoryService.delete(URL_UPDATE_SUBCATEGORY+id+'/', row, EvaluationsView.hide_div)
+			notify.close()	
+		}
+	})
+	
+	$('#cancel').click(function(){
+		notify.close()	
+	})
+}
+
+EvaluationsView.hide_div= function(response, row){
+	row.fadeOut()
+}
+
+
 EvaluationsView.get_all_subCategories = function()
 {
 	var categoryService = new CategoryService();
@@ -94,9 +189,10 @@ EvaluationsView.render_all_subcategories = function (response)
 
 EvaluationsView.render_list_subcategories = function(parent_container, response)
 {
-	for (i = 0; i < response.length; i++) { 
+	for (i = response.length-1; i >= 0; i--) { 
 
 		var container = document.createElement("tr");
+		container.className = 'row_subcategory-'+i
 		
 		var id = response[i].id;		
 		
@@ -113,6 +209,8 @@ EvaluationsView.render_list_subcategories = function(parent_container, response)
 		var link = document.createElement("a");
 		var icon = document.createElement("span")
 		icon.className = 'glyphicon glyphicon-edit'
+		icon.name = i
+		link.addEventListener('click', function(e){ EvaluationsView.handle_edit(response, e.target.name, 'subcategory') }, false);
 
 
 		link.appendChild(icon)
@@ -122,6 +220,8 @@ EvaluationsView.render_list_subcategories = function(parent_container, response)
 		var link2 = document.createElement("a");
 		var icon2 = document.createElement("span")
 		icon2.className = 'glyphicon glyphicon-trash'
+		icon2.name = i
+
 
 
 		link2.appendChild(icon2)
@@ -134,8 +234,21 @@ EvaluationsView.render_list_subcategories = function(parent_container, response)
 		container.appendChild(col_edit);
 		container.appendChild(col_del);
 		
-		parent_container.prepend(container);		
+		parent_container.prepend(container);
+
+		link2.addEventListener('click', function(e){ EvaluationsView.handle_delete(response, e.target.name, 'subcategoria', $(e.target).parents('.row_subcategory-'+e.target.name)) }, false);		
 	}
+}
+
+EvaluationsView.update_SubCategories = function(form, id)
+{
+	form.submit(function (e) {
+			e.preventDefault();
+
+			var categoryService = new CategoryService();
+			var data = new FormData(($(e.target).get(0)));
+			categoryService.update(URL_UPDATE_SUBCATEGORY+id+'/', data, EvaluationsView.redirect_Categories)
+	})
 }
 
 EvaluationsView.notifify_create_category = function(){
