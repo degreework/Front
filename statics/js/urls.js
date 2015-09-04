@@ -54,12 +54,15 @@ URL_GET_COMMENTS = host+':8080/API/comment/all/%thread%';
 // question of evaluations 
 URL_CREATE_QUESTION_TF = host+':8080/API/quiz/questions/createTrueFalse';
 URL_GET_ALL_QUESTION_TF = host+':8080/API/quiz/questions/listTrueFalse';
+URL_UPDATE_QUESTION_TF = host+':8080/API/quiz/questions/updateTrueFalse/'; // se le pega el id de la pregunta 
 
 URL_CREATE_QUESTION_ESSAY = host+':8080/API/quiz/questions/createEssay';
 URL_GET_ALL_QUESTION_ESSAY = host+':8080/API/quiz/questions/listEssay';
+URL_UPDATE_QUESTION_ESSAY = host+':8080/API/quiz/questions/updateEssay/'; // se le pega el id de la pregunta 
 
 URL_CREATE_QUESTION_MC = host+':8080/API/quiz/questions/createMultichoice';
 URL_GET_ALL_QUESTION_MC = host+':8080/API/quiz/questions/listMultichoice';
+URL_UPDATE_QUESTION_MC = host+':8080/API/quiz/questions/updateMultichoice/'; // se le pega el id de la pregunta 
 
 URL_CREATE_ANSWER_MC = host+':8080/API/quiz/questions/createAnswerMultichoice';
 URL_GET_ALL_ANSWER_MC = host+':8080/API/quiz/questions/MultichoiceAnswerList/'; // se le pega el id de la MC del q se quiere buscar las respuestas
@@ -69,9 +72,11 @@ URL_DETAIL_QUESTION = host+':8080/API/quiz/questions/detail/';// se le pega el i
 // category of the evaluations 
 URL_CREATE_CATEGORY = host+':8080/API/quiz/category/createCategory';
 URL_GET_ALL_CATEGORY = host+':8080/API/quiz/category/listCategory';
+URL_UPDATE_CATEGORY = host+':8080/API/quiz/category/updateCategory/'; // se le pega el id de la Categoria 
 
 URL_CREATE_SUBCATEGORY = host+':8080/API/quiz/category/createSubcategory';
 URL_GET_ALL_SUBCATEGORY = host+':8080/API/quiz/category/listSubcategory';
+URL_UPDATE_SUBCATEGORY = host+':8080/API/quiz/category/updateSubCategory/'; // se le pega el id de la Categoria 
 
 // Quiz
 URL_CREATE_QUIZ = host+':8080/API/quiz/createQuiz';

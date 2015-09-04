@@ -255,7 +255,7 @@ AnswerView.prototype.appentOptions = function(div_contenedor){
 */
 
 AnswerView.prototype.handle_delete = function(e){
-	notify = Notify.show_confirm('respuesta');
+	notify = Notify.show_confirm('la respuesta');
 
 	$('#erase').click(function(){
 		// se obtiene el id de la respuesta para colocarlo en la url 
@@ -372,7 +372,7 @@ AnswerForm.prototype.handler_created_form = function(created_form, id_ask){
 
 	var input_ask_id  = $(AnswerForm.prototype.form).find("#id_ask")[0];
 	$(input_ask_id).hide();
-	
+	$(input_ask_id).val(id_ask);
 
 	var input = $(AnswerForm.prototype.form).find("#id_text");
 	$('textarea').keyup(function(e){

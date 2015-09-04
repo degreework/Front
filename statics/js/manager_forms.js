@@ -52,7 +52,6 @@ function show_errors (data, response) {
 
 function render_form(method, form , response, callback, params)
 {
-
 		if ('PUT' == method)
 		{
 			fields = response.actions.PUT;
@@ -263,7 +262,6 @@ function create_form(url, form, method, callback, params)
     
     }
     */
-	
 	if (UserService.isAutenticated()) {
 		$.ajaxSetup({
 	    	beforeSend: function(xhr, settings) {

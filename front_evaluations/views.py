@@ -30,20 +30,12 @@ def category(request):
     return render_to_response('listCategory.html', {'title': ' category | Name App'}, context_instance=RequestContext(request))
 
 
-#def detailCategory(request,id):
-#    return render_to_response('categoryDetail.html', {'title': 'detail category | Name App'}, context_instance=RequestContext(request))
-
-
 def createCategory(request):
     return render_to_response('categoryCreate.html', {'title': 'create category | Name App'}, context_instance=RequestContext(request))
 
 
 def subcategory(request):
     return render_to_response('listSubcategory.html', {'title': 'subcategory | Name App'}, context_instance=RequestContext(request))
-
-
-#def detailSubcategory(request,id):
-#    return render_to_response('subcategoryDetail.html', {'title': 'detail subcategory | Name App'}, context_instance=RequestContext(request))
 
 
 def createSubcategory(request):

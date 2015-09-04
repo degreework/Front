@@ -83,7 +83,7 @@ EvaluationsView.call_render_questions = function (response)
 EvaluationsView.render_list_questions = function(parent_container, response)
 {
 	
-	for (i = 0; i < response.length; i++) { 
+	for (i = response.length-1; i >= 0; i--) { 
 
 		var container = document.createElement("tr");
 		

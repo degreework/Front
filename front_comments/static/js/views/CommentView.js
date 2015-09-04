@@ -150,7 +150,7 @@ CommentView.remove = function(e)
 	* when x (button) is clicked then call to Service to remove
 	*/
 
-	notify = Notify.show_confirm('comentario');
+	notify = Notify.show_confirm('el comentario');
 
 	$('#erase').click(function(){
 		// se obtiene el id del comentario para colocarlo en la url 

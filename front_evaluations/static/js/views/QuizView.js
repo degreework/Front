@@ -4,7 +4,7 @@ var EvaluationsView = {};
 // trigger("reset");
 
 //inicializa los formularios 
-EvaluationsView.initialize = function(form, url)
+EvaluationsView.initialize = function(form, url, data, callback)
 {
 	
 	/*
@@ -23,7 +23,9 @@ EvaluationsView.initialize = function(form, url)
 	create_form(
 		url,
 		EvaluationsView.form_create,
-		'OPTIONS'
+		'OPTIONS',
+		callback,
+		data
 	);
 
 	debug_info("3.4 - Show form")
@@ -62,7 +64,7 @@ EvaluationsView.create_quiz = function(form)
 }
 
 EvaluationsView.notifify_create_quiz = function(){
-	Notify.show_success("quiz create", "the quiz was create succesful");
+	Notify.show_success("quiz creado", "el quiz fue creado con exito");
 }
 
 
@@ -79,7 +81,7 @@ EvaluationsView.render_all_quiz = function (response)
 
 EvaluationsView.render_list_quiz = function(parent_container, response)
 {
-	for (i = 0; i < response.length; i++) { 		
+	for (i = response.length-1; i >= 0; i--) { 		
 		
 		// se crea el html     		
 		var container = document.createElement("tr");
