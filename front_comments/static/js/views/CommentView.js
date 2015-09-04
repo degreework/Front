@@ -4,6 +4,10 @@ var CommentView = function (thread, form, container, container_load_more) {
 	this.form_edit = $(form).clone();
 	this.container_list = container;
 	this.container_load_more = container_load_more;
+
+	/*para mostar el link para comentar*/
+	this.container_show_comment = document.createElement("a");
+	this.container_show_comment.text = "Comentar";
 };
 
 /*
@@ -177,17 +181,29 @@ CommentView.remove = function(e)
 
 CommentView.prototype.load_create_comment = function (parent) {
 	var form = this.form;
-	create_form(URL_CREATE_COMMENT, form, 'OPTIONS', function(){
-		$(form.find("#id_parent")[0]).attr('value', parent);
-		$(form.find("#id_parent")[0]).hide()
-		form.show()
+	
+	var container_parent = $(form).parent();
+
+	
+	this.container_show_comment.id = $(form).attr('id');
+
+	container_parent.append(this.container_show_comment);
+	
+	this.container_show_comment.addEventListener("click", function(e){
+		$(e.target).fadeOut();
+		$(form).fadeIn();
+
 	});
+
+	
+	$(form.find("#id_parent")[0]).attr('value', parent);
+	//
+
 	var self = this;
 	
-	form.submit(function(e)
-		{
-			e.preventDefault();
-			console.log($(e.target))
+	form.submit(function(e){
+		console.log("submit")
+		e.preventDefault();
 
 			CommentService.create(
 				$(e.target),
@@ -195,6 +211,8 @@ CommentView.prototype.load_create_comment = function (parent) {
 				function(response)
 				{
 					self.append_comment(response);
+					$(e.target).fadeOut();
+					$(self.container_show_comment).fadeIn()
 				}
 			);
 

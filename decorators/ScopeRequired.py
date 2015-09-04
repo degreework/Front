@@ -16,6 +16,9 @@ class ScopeRequired(object):
         it a single argument, which is the function object.
         """
         def wrapped_f(*args, **kwargs):
+            print("wrapped_f")
+            print(args[0].session.get_expiry_date())
+            print(args[0].session.items())
             user_scope = args[0].session.get('scope', '').split(" ")
             print "Must have:", self.scope
             print "Have", user_scope

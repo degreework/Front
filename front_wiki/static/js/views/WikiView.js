@@ -179,7 +179,8 @@ WikiView.render_all_pages = function (response)
 WikiView.render_list = function(parent_container, response)
 {
 	for (i = 0; i < response.length; i++) { 		
-		// se crea el html     		
+		// se crea el html   
+		console.log(response[i])  		
 
 		var container = document.createElement("div");
 		container.className = 'col-md-12 page_list'
@@ -195,7 +196,7 @@ WikiView.render_list = function(parent_container, response)
 		var date = document.createElement("span");
 		//se asigna el texto 
 		$(title_page).text(response[i].page.title)
-		$(date).text("Última edición "+jQuery.timeago(response[i].created));
+		$(date).text("Última edición "+jQuery.timeago(response[i].author.created_at));
 
 		//se pega a los contenedores 
 		link.appendChild(title_page)
