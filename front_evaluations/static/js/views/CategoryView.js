@@ -8,9 +8,14 @@ EvaluationsView.create_category = function(form)
 
 			var questionService = new QuestionService();
 			var data = new FormData(($(e.target).get(0)));
-			questionService.create(URL_CREATE_CATEGORY, data, EvaluationsView.notifify_create_question)
+			questionService.create(URL_CREATE_CATEGORY, data, EvaluationsView.notifify_create_category)
 	})
 	
+}
+
+EvaluationsView.notifify_create_category = function(response){
+	console.log('entro')
+	location.href =  host+":"+location.port+"/evaluations/category"; 
 }
 
 EvaluationsView.get_all_Categories = function()
@@ -136,10 +141,16 @@ EvaluationsView.create_subcategory = function(form)
 
 			var questionService = new QuestionService();
 			var data = new FormData(($(e.target).get(0)));
-			questionService.create(URL_CREATE_SUBCATEGORY, data, EvaluationsView.notifify_create_question)
+			questionService.create(URL_CREATE_SUBCATEGORY, data, EvaluationsView.notifify_create_subcategory)
 	})
 	
 }
+
+EvaluationsView.notifify_create_subcategory = function(response){
+	console.log('entro')
+	location.href =  host+":"+location.port+"/evaluations/subcategory"; 
+}
+
 
 EvaluationsView.handle_delete = function(response, index, tipo, row){
 	console.log('handle_delete')
@@ -251,6 +262,4 @@ EvaluationsView.update_SubCategories = function(form, id)
 	})
 }
 
-EvaluationsView.notifify_create_category = function(){
-	Notify.show_success("create", "it was create succesful");
-}
+
