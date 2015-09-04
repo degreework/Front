@@ -177,17 +177,15 @@ CommentView.remove = function(e)
 
 CommentView.prototype.load_create_comment = function (parent) {
 	var form = this.form;
-	create_form(URL_CREATE_COMMENT, form, 'OPTIONS', function(){
-		$(form.find("#id_parent")[0]).attr('value', parent);
-		$(form.find("#id_parent")[0]).hide()
-		form.show()
-	});
+	
+	$(form.find("#id_parent")[0]).attr('value', parent);
+	form.show();
+
 	var self = this;
 	
-	form.submit(function(e)
-		{
-			e.preventDefault();
-			console.log($(e.target))
+	form.submit(function(e){
+		console.log("submit")
+		e.preventDefault();
 
 			CommentService.create(
 				$(e.target),
