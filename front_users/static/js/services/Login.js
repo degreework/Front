@@ -28,7 +28,14 @@ Login.login = function (form, url, callback)
 		})
 		.done(function (response) {
 			console.log("response get Permissions")
-			console.log(response)
+			//console.log(response)
+			//var s = new Storage();
+			//s.save("permissions", response)
+			//console.log(s.get("permissions"))
+			var s = StorageClass.getInstance();
+			s.storage.set("permissions", response);
+			console.log(s.storage.get("permissions"));
+
 		})
 		if(callback)
 		{

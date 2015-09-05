@@ -407,6 +407,8 @@ UserService.deauthenticate = function (url) {
 		/*
 		Logout succesful, then do anything
 		*/
+		var s = StorageClass.getInstance();
+		s.storage.removeAll();
 		$.session.remove('user');
 		$.session.remove('Token');
 		$(location).attr('href',"/");  
