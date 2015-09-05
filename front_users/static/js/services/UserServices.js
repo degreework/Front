@@ -66,7 +66,12 @@ UserService.update_user = function(url, form)
 {
 	$("#preloader_2").show();
 
-	formSerialized = form.serialize()
+	formSerialized = form.serialize();
+	//si el usaurio no puso foto en el input, que remueva el dato del input para el envio
+	if("" == $("#id_photo").val())
+	{
+		$("#id_photo").remove()
+	}
 	data = new FormData(form.get(0));
 	remove_all_errors(formSerialized);
 	
@@ -83,20 +88,13 @@ UserService.update_user = function(url, form)
 	})
 	.done(function(response){
 		
-		$('#id_photo').remove();
-		$('#id_password').remove();
-		//fill the information of user in the input 
-		/*$.each(response, function(key, value) {
-			$('#id_'+key).attr('placeholder', $('#id_'+key).attr('placeholder') +': '+value);
-			if('id_'+key === 'id_plan'){
-				$('#id_'+key).val(value); 			
-			}
-		});*/
+		//$('#id_photo').remove();
+		//$('#id_password').remove();
 
 		console.log(response)
 		UserService.get_mini_user(URL_CURRENT_USER);
 		UserView.showIndexUser();
-		Notify.show_success("OK", "La info ha sido actualizada");
+		Notify.show_success("Usuario", "La información de tu perfil ha sido actualizada");
 	})
 	.fail(function(error){		
 		console.log(error);
