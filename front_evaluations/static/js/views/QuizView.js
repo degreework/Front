@@ -139,6 +139,34 @@ EvaluationsView.render_list_quiz = function(parent_container, response)
 	}
 }
 
+EvaluationsView.get_all_Quiz_Users = function()
+{
+	var quizService = new QuizService();
+	quizService.retrieve(URL_GET_ALL_QUIZ, EvaluationsView.render_every_quiz)	
+}
+
+EvaluationsView.render_every_quiz = function(response)
+{
+	console.log('entro')
+	console.log(response)
+	for (i = response.length-1; i >= 0; i--) { 		
+		
+		var div = $("#div_quiz").clone();
+		div.name = response[i].id
+
+		var titulo = $(div).find('#title_quiz')
+		$(titulo).text(response[i].title)
+		
+		var description = $(div).find('#decription_quiz')
+		$(description).text(response[i].description)
+
+		$(div).show()
+		$('.container_quiz').prepend(div)
+	}
+}
+
+
+
 EvaluationsView.update_quiz = function(form, id)
 {
 
@@ -472,8 +500,9 @@ EvaluationsView.take_quiz = function(btn_continue){
 	question_list = sitting.question_list
 	total_questions = sitting.question_order.split(',').length-1
 
+	
 
-	if(sitting.question_list !== ""){
+	if(sitting.question_list !== "" && sitting.question_list !== ','){
 
 		// trae pregunta 1/n
 		EvaluationsView.current_proggres(sitting.user_answers, total_questions)
@@ -500,7 +529,10 @@ EvaluationsView.take_quiz = function(btn_continue){
 
 	}else{
 
-		//console.log('hola')
+		$('#container-check').hide()
+		$('#without_questions').show()
+
+		console.log('hola')
              
 	}
 }
