@@ -7,7 +7,6 @@ var WikiView = {};
 
 WikiView.initialize = function(form, editor)
 {
-	debug_info("- initialize")
 	/*
 	* 1 - Set form name
 	* 2 - Get form from service
@@ -15,13 +14,10 @@ WikiView.initialize = function(form, editor)
 	*/
 
 	// 1 - Set form name
-	debug_info("1 - Set form name")
 	WikiView.form_create = form;
 	WikiView.editor = editor;
 
-
 	//2 - Get form from service
-	debug_info("2 - Get form from service")
 	create_form(
 		URL_CREATE_PAGE_WIKI,
 		WikiView.form_create,
@@ -83,8 +79,8 @@ WikiView.succes_create_form = function()
 
 WikiView.create_succes = function(wiki)
 {
-	debug_info("- create_succes")
-	Notify.show_success("OK", "Pagina creada");
+	//debug_info("- create_succes")
+	Notify.show_success("Wiki", "Página creada");
 
 	var url = wiki.page.slug+'..'+JSON.parse(wiki.page.extra_data).parent;
 	$("#url_wiki_request").attr('href', url);
@@ -143,12 +139,17 @@ WikiView.render_version = function(page)
 	var url = location.origin+'/wiki/'+page.slug;
 	
 	//to approve a request
-	var url_approv = URL_APPROVE_REQUEST.replace(/\%slug%/g, page.slug);
-	url_approv = url_approv.replace(/\%version%/g, page.version);
-	$("#submit_approved > a").click(function(e){
-		WikiService.approve_request(url_approv, WikiView.approve_succes);
-	});
-	$("#submit_approved").show();
+	var s = StorageClass.getInstance();
+	if(-1 != s.storage.get("permissions").indexOf("wiki.delete_request")){
+
+		var url_approv = URL_APPROVE_REQUEST.replace(/\%slug%/g, page.slug);
+		url_approv = url_approv.replace(/\%version%/g, page.version);
+		
+		$("#submit_approved > a").click(function(e){
+			WikiService.approve_request(url_approv, WikiView.approve_succes);
+		});
+		$("#submit_approved").show();
+	}
 	//end approve
 
 
@@ -159,10 +160,71 @@ WikiView.render_version = function(page)
 
 WikiView.render_page = function(page)
 {
+	console.log("render_page")
 	$("#wiki_title").text(page.title);
 	$("#wiki_version").text(page.version);
+	$("#wiki_slug").text(page.slug)
 	$("#markdown").html(markdown.toHTML(page.raw));
 
+
+	/*Esto es para editarla*/
+	var edit = document.createElement("a");
+	edit.className = "pull-right"
+	var edit_msg = document.createElement("span");
+	edit_msg.className = "glyphicon glyphicon-edit"
+	edit.appendChild(edit_msg);
+	edit.addEventListener(
+		'click',
+		function(e){
+			console.log("editar")
+			create_form(
+				URL_CREATE_PAGE_WIKI,
+				$("#form_create_wiki"),
+				'OPTIONS',
+				call
+			);
+		}, false);
+	$("#wiki_title").append(edit)
+
+}
+
+function call()
+{
+	console.log("form creatted para ");
+	var slug = $("#wiki_slug").text();
+	//oculta los campos que no se necesitan
+	$("#id_slug").remove();
+	$("#id_raw").hide();
+
+	//asigna el valor actual del titulo al input para el titulo
+	$("#id_title").val($("#wiki_title").text())
+
+	//asigna el valor del raw al editor
+	$("#id_textarea").val($("#markdown").text())
+
+	//asigna el valor del editor al raw
+	$('textarea').keyup(function(e){
+		$("#id_raw").val($(e.target).val());
+    });
+
+	$("#form_create_wiki").show();
+	$("#wiki_title").fadeOut();
+	$("#markdown").fadeOut();
+
+	$("#form_create_wiki").submit(function(e){
+		e.preventDefault();
+		var url = URL_UPDATE_PAGE_WIKI.replace(/\%slug%/g, slug);
+		WikiService.edit_page(e.target, url,
+			function(response){
+				$("#form_create_wiki").fadeOut();
+				$("#editaded_page").fadeIn();
+				var url = response.page.slug+'..'+JSON.parse(response.page.extra_data).parent;
+				$("#url_wiki_request").attr('href', url);
+			})
+
+	});
+
+				
 }
 
 
@@ -261,7 +323,7 @@ WikiView.render_request = function(list)
 
 WikiView.approve_succes = function(approve)
 {
-	Notify.show_success("Request approved", "This only is a test, please change it");
+	Notify.show_success("Wiki", "Éste contenido ha sido aprobado");
 }
 
 

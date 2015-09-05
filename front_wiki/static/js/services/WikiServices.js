@@ -1,6 +1,16 @@
 var WikiService = {};
 
-WikiService.create_page = function (form, url, callback)
+WikiService.create_page = function(form, url, callback)
+{
+	this.doRequest(form, url, "POST", callback);
+}
+
+WikiService.edit_page = function(form, url, callback)
+{
+	this.doRequest(form, url, "POST", callback);
+}
+
+WikiService.doRequest = function (form, url, method, callback)
 {
 	$("#preloader_2").show();
 
@@ -10,7 +20,7 @@ WikiService.create_page = function (form, url, callback)
 	remove_all_errors(formSerialized);
 
 	$.ajax({
-		type: 'POST',
+		type: method,
 		url: url,
 		data: formSerialized,
     	beforeSend : function( xhr ) {
@@ -171,6 +181,7 @@ WikiService.approve_request = function (url, callback) {
 	});
 }
 
+/*
 WikiService.update_page = function(url, data)
 {
 	$.ajax({
@@ -182,9 +193,9 @@ WikiService.update_page = function(url, data)
     	}
 	})
 	.done(function(response){
-		/*
-		Register succesful, then do anything
-		*/
+		
+		//Register succesful, then do anything
+		
 		console.log(response)
 		Notify.show_success("OK", "Pagina creada");
 	})
@@ -214,7 +225,7 @@ WikiService.update_page = function(url, data)
 		//console.log("always");
 		$("#preloader_2").hide();
 	});
-}
+}*/
 
 
 WikiService.get_list = function (url, callback) {

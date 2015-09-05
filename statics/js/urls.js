@@ -32,7 +32,7 @@ URL_GET_ANSWERS_FORUM = host+":8080/API/forum/answer/all/";
 
 //Wiki
 URL_CREATE_PAGE_WIKI = host+":8080/API/wiki/new";
-URL_UPDATE_PAGE_WIKI = host+":8080/API/wiki/v0/%slug%/edit";
+URL_UPDATE_PAGE_WIKI = host+":8080/API/wiki/%slug%/edit";
 URL_GET_ALL_PAGES = host+":8080/API/wiki/v0/all";
 URL_GET_LIST_APPROVED_PAGES = host+":8080/API/wiki/published";
 URL_DETAIL_ONE_PAGE = host+":8080/API/wiki/";
