@@ -14,7 +14,7 @@ EvaluationsView.create_category = function(form)
 }
 
 EvaluationsView.notifify_create_category = function(response){
-	console.log('entro')
+
 	location.href =  host+":"+location.port+"/evaluations/category"; 
 }
 
@@ -78,7 +78,7 @@ EvaluationsView.render_list_categories = function(parent_container, response)
 	}
 }
 
-EvaluationsView.update_Categories = function(form, id)
+EvaluationsView.update_categories = function(form, id)
 {
 	form.submit(function (e) {
 			e.preventDefault();
@@ -98,18 +98,28 @@ EvaluationsView.redirect_Categories = function(response){
 EvaluationsView.render_parametros = function(form, response){
 
 	$.each(response, function(key, value) {	
-		
-			$('#id_'+key).attr('value', value);
+			
+			if (value === true) { 
+				$('#id_'+key).prop("checked", true);
+			}else{
+				$('#id_'+key).attr('value', value);	
+			}
+			
 	})
 
 	$(form).show()
 
-	if (form.selector = '#form_update_category') {
-		EvaluationsView.update_Categories(form, response.id)
+	if (form.selector === '#form_update_category') {
+		EvaluationsView.update_categories(form, response.id)
 	}
 
-	if (form.selector = '#form_update_subcategory') {
-		EvaluationsView.update_SubCategories(form, response.id)
+	if (form.selector === '#form_update_subcategory') {
+		EvaluationsView.update_subCategories(form, response.id)
+	}
+
+	if (form.selector === '#form_update_quiz') {
+		//console.log('quiz')
+		EvaluationsView.update_quiz(form, response.id)
 	}
 	
 }
@@ -120,6 +130,8 @@ EvaluationsView.handle_edit = function(response, index, tipo){
 	$('#show_').hide()	
 	response = response[index]
 	
+	//console.log('tipo= '+ tipo)
+
 	if (tipo == 'category') {
 
 		form = $("#form_update_category")
@@ -131,6 +143,12 @@ EvaluationsView.handle_edit = function(response, index, tipo){
 
 		form = $("#form_update_subcategory")		
 		create_form(URL_CREATE_SUBCATEGORY, form, 'OPTIONS', EvaluationsView.render_parametros, response)
+	};
+
+
+	if (tipo == 'quiz') {
+		form = $("#form_update_quiz")		
+		create_form(URL_CREATE_QUIZ, form, 'OPTIONS', EvaluationsView.render_parametros, response)
 	};
 }
 
@@ -147,34 +165,45 @@ EvaluationsView.create_subcategory = function(form)
 }
 
 EvaluationsView.notifify_create_subcategory = function(response){
-	console.log('entro')
+	//console.log('entro')
 	location.href =  host+":"+location.port+"/evaluations/subcategory"; 
 }
 
 
 EvaluationsView.handle_delete = function(response, index, tipo, row){
-	console.log('handle_delete')
-	console.log(response)
+	//console.log('handle_delete')
+	//console.log(response)
 	
 	response = response[index]
 	notify = Notify.show_confirm('la '+ tipo);
 
-	console.log(row)
+	//console.log(row)
 	var id = response.id
 
 	$('#erase').click(function(){
-		var categoryService = new CategoryService();
+		
 		
 		if (tipo == 'categoria') {
-		
+
+			var categoryService = new CategoryService();
 			categoryService.delete(URL_UPDATE_CATEGORY+id+'/', row, EvaluationsView.hide_div)
 			notify.close()	
 		}
 
 		if (tipo == 'subcategoria') {
+
+			var categoryService = new CategoryService();
 			categoryService.delete(URL_UPDATE_SUBCATEGORY+id+'/', row, EvaluationsView.hide_div)
 			notify.close()	
 		}
+
+		if (tipo == 'quiz') {
+		
+			var quizService = new QuizService();
+			quizService.delete(URL_DETAIL_QUIZ+id+'/', row, EvaluationsView.hide_div)
+			notify.close()	
+		}
+
 	})
 	
 	$('#cancel').click(function(){
@@ -251,7 +280,7 @@ EvaluationsView.render_list_subcategories = function(parent_container, response)
 	}
 }
 
-EvaluationsView.update_SubCategories = function(form, id)
+EvaluationsView.update_subCategories = function(form, id)
 {
 	form.submit(function (e) {
 			e.preventDefault();

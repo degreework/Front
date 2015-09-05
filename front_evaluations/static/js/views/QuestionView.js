@@ -65,9 +65,9 @@ EvaluationsView.get_all_EQuestions = function()
 
 EvaluationsView.call_render_questions = function (response)
 {	
-	console.log(response[0].clase)
+	//console.log(response[0].clase)
 	if (response[0].clase === 'True/False Question') {
-		console.log('entro')
+		//console.log('entro')
 		EvaluationsView.render_list_questions($('#list-tfquestion'), response);
 	};
 

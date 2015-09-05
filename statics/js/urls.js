@@ -84,6 +84,7 @@ URL_GET_ALL_QUIZ = host+':8080/API/quiz/listQuiz';
 URL_GET_QUIZ_BY_CATEGORY = host+':8080/API/quiz/listQuizbyCategory/'; // se le pega el nombre de la categoria al final
 URL_DETAIL_QUIZ = host+':8080/API/quiz/detail/'; // se le pega el id del quiz al final 
 
+
 URL_QUALIFY_QUIZ = host+':8080/API/quiz/qualify';
 URL_CHECK_PASSED_QUIZ = host+':8080/API/quiz/checkPassed';
 

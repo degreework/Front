@@ -41,7 +41,7 @@ EvaluationsView.change_boolean = function(data){
 		if($(data).find('input')[i].value=== 'on'){
 
 			$(data).find('input')[i].value =  true
-			console.log($(data).find('input')[i].value)
+			//console.log($(data).find('input')[i].value)
 		}
 	}
 	return data
@@ -64,7 +64,9 @@ EvaluationsView.create_quiz = function(form)
 }
 
 EvaluationsView.notifify_create_quiz = function(){
-	Notify.show_success("quiz creado", "el quiz fue creado con exito");
+	
+	//Notify.show_success("quiz creado", "el quiz fue creado con exito");
+	location.href =  host+":"+location.port+"/evaluations/"; 
 }
 
 
@@ -85,6 +87,7 @@ EvaluationsView.render_list_quiz = function(parent_container, response)
 		
 		// se crea el html     		
 		var container = document.createElement("tr");
+		container.className = 'row_quiz-'+i
 		
 		var number = document.createElement("td");
 		$(number).text(i+1)
@@ -92,7 +95,7 @@ EvaluationsView.render_list_quiz = function(parent_container, response)
 		var title_quiz = document.createElement("td");
 		$(title_quiz).text(response[i].title)
 
-
+		// para ver el detalle del quiz 
 		var col_link = document.createElement("td");
 		var link = document.createElement("a");
 		var id = response[i].id;
@@ -100,23 +103,59 @@ EvaluationsView.render_list_quiz = function(parent_container, response)
 		$(link).attr('href', host+":"+location.port+"/evaluations/detail/"+id);
 		$(link).text('ver detalles')
 		col_link.appendChild(link)
-		
-		
 
+		// editar 
+		var col_edit = document.createElement("td");
+		var link = document.createElement("a");
+		var icon = document.createElement("span")
+		icon.className = 'glyphicon glyphicon-edit'
+		icon.name = i
+
+		link.addEventListener('click', function(e){ EvaluationsView.handle_edit(response, e.target.name, 'quiz') }, false);
+		link.appendChild(icon)
+		col_edit.appendChild(link)
+		
+		//eliminar 
+		var col_del = document.createElement("td");
+		var link2 = document.createElement("a");
+		var icon2 = document.createElement("span")
+		icon2.className = 'glyphicon glyphicon-trash'
+		icon2.name = i
+
+		link2.appendChild(icon2)
+		col_del.appendChild(link2)
+		
+		//console.log('entro')
 		//se pega a los contenedores 
 		container.appendChild(number);
 		container.appendChild(title_quiz);
 		container.appendChild(col_link);
+		container.appendChild(col_edit);
+		container.appendChild(col_del);
 		
 		parent_container.prepend(container);
+
+		link2.addEventListener('click', function(e){ EvaluationsView.handle_delete(response, e.target.name, 'quiz', $(e.target).parents('.row_quiz-'+e.target.name)) }, false);
 	}
+}
+
+EvaluationsView.update_quiz = function(form, id)
+{
+
+	form.submit(function (e) {
+			e.preventDefault();
+	//		console.log('envio actualiza')
+			var quizService = new QuizService();
+			var form = EvaluationsView.change_boolean(($(e.target).get(0)))
+			var data = new FormData(form);
+			quizService.update(URL_DETAIL_QUIZ+id+'/', data, EvaluationsView.redirect_Categories)
+	})
 }
 
 EvaluationsView.create_sitting_session = function(response){
 	sessionStorage.setItem('sitting', JSON.stringify(response));
 	$(location).attr('href', host+":"+location.port+"/evaluations/take/"+response.quiz); 
 }
-
 
 EvaluationsView.get_Quiz = function(){
 	
@@ -324,8 +363,8 @@ EvaluationsView.render_check = function(response){
 	user_answers = JSON.parse(sitting.user_answers ) 
 	
 	if(response.clase === 'Multiple Choice Question'){
-		console.log('entro')
-		console.log(response.answerMC)
+
+		//console.log(response.answerMC)
 		user_answers[response.id] = response.answerMC
 	}else{
 		user_answers[response.id] = response.answered
@@ -355,7 +394,7 @@ EvaluationsView.btn_check = function(form){
 			var quizService = new QuizService();
 			var data = ($(e.target).get(0))
 			data = $(data).serialize()
-			console.log(data)
+			//console.log(data)
 			
 			if (data.search('answered') !== -1) {
 				quizService.dispatch(URL_QUALIFY_QUIZ, data, EvaluationsView.render_check)
@@ -385,7 +424,7 @@ EvaluationsView.get_first_question = function(question_list){
 
 	question_id = question_list.split(',', 1)
 	question_id = question_id[0] 
-	console.log(question_list)
+	//console.log(question_list)
 
 	var quizService = new QuizService();
 	quizService.retrieve(URL_DETAIL_QUESTION+question_id+'/', EvaluationsView.render_question)
@@ -461,7 +500,7 @@ EvaluationsView.take_quiz = function(btn_continue){
 
 	}else{
 
-		console.log('hola')
+		//console.log('hola')
              
 	}
 }
@@ -497,7 +536,7 @@ EvaluationsView.render_results = function(sitting){
 	total_questions = sitting.question_order.split(',').length-1
 
 	answers = sitting.questions_with_user_answers
-	console.log(answers)
+	//console.log(answers)
 	
 
 	index = 0
@@ -554,7 +593,7 @@ EvaluationsView.get_all_marking_quiz = function(){
 
 EvaluationsView.render_marking_quiz = function(parent_container, response)
 {
-	console.log(response)
+	///console.log(response)
 	for (i = 0; i < response.length; i++) { 		
 		
 		// se crea el html     		
