@@ -18,10 +18,11 @@ urlpatterns = patterns('',
         #Subcategory
         url(r'^evaluations/subcategory/$', 'front_evaluations.views.subcategory', name='subcategory'),
         #url(r'^evaluations/category/detail/$', 'front_evaluations.views.detailSubcategory', name='detailCategory'),
-        url(r'^evaluations/subcategory/create$', 'front_evaluations.views.createSubcategory', name='createCategory'),
+        url(r'^evaluations/subcategory/create$', 'front_evaluations.views.createSubcategory', name='createsubCategory'),
 
         #Quiz
         url(r'^evaluations/$', 'front_evaluations.views.quiz', name='quiz'),
+        url(r'^evaluations/list/$', 'front_evaluations.views.quizAdmin', name='quizAdmin'),
         url(r'^evaluations/detail/(?P<id>\d+)$', 'front_evaluations.views.detailQuiz', name='detailQuiz'),
         url(r'^evaluations/take/(?P<id>\d+)$', 'front_evaluations.views.take', name='take'),
         url(r'^evaluations/create/$', 'front_evaluations.views.createQuiz', name='createQuiz'),

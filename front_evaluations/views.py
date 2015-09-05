@@ -45,8 +45,13 @@ def createSubcategory(request):
 #---------------
 # QUIZ
 #---------------
+
 def quiz(request):
-    return render_to_response('listQuiz.html', {'title': 'quiz | Name App'}, context_instance=RequestContext(request))
+    return render_to_response('quiz.html', {'title': 'quiz | Name App'}, context_instance=RequestContext(request))
+
+
+def quizAdmin(request):
+    return render_to_response('listQuiz.html', {'title': 'quizAdmin | Name App'}, context_instance=RequestContext(request))
 
 
 def detailQuiz(request,id):

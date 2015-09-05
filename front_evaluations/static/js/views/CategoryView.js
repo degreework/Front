@@ -26,7 +26,7 @@ EvaluationsView.get_all_Categories = function()
 
 EvaluationsView.render_all_categories = function (response)
 {	
-	console.log(response)
+	//console.log(response)
 	EvaluationsView.render_list_categories($('#list-categories'), response);
 }
 
