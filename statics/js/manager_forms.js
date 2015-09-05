@@ -65,6 +65,9 @@ function render_form(method, form , response, callback, params)
 
 		$.each(fields, function(key, value) {
 
+			console.log(value)
+			console.log(value.type)
+			
 			if(value.read_only == false){
 				var field_div = document.createElement("div");
 	  			field_div.className = 'form-group';
