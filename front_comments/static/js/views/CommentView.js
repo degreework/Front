@@ -59,7 +59,7 @@ CommentView.prototype.append_comment = function(response)
 			container.className = 'comments';
 			var link = document.createElement("a");
 			var id = response[i].id;
-			$(link).attr('href', "url_del_perfil_del_autor");
+			$(link).attr('href', UserView.getUrl(response[i].author.id));
 			container.id = 'cmt-'+id;
 			var text = document.createElement("p");
 			var author = document.createElement("span");
