@@ -32,7 +32,7 @@ def settings(request):
 
 
 def listUsers(request):
-    return render_to_response('listUsers.html', {'title': 'Contraseña | Name App'}, context_instance=RequestContext(request))
+    return render_to_response('listUsers.html', {'title': 'lista de Usuarios | Name App'}, context_instance=RequestContext(request))
     
 
 def authentication_requiered(request):
