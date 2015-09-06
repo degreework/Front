@@ -9,6 +9,7 @@ urlpatterns = patterns('',
         url(r'^profile/$', 'front_users.views.profile', name='profile'),
         url(r'^settings/$', 'front_users.views.settings', name='settings'),
         url(r'^authentication/$', 'front_users.views.authentication_requiered', name='authenticationRequiered'),
+        url(r'^listUsers/$', 'front_users.views.listUsers', name='listUsers'),
 
         url(r'^p$', 'front_users.views.permissions', name='permissions'),
 

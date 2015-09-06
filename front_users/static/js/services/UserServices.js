@@ -67,6 +67,8 @@ UserService.update_user = function(url, form)
 	$("#preloader_2").show();
 
 	formSerialized = form.serialize();
+	
+	// se crea una copia del campo para luego colocarlo otra vez despues de ser removido 
 	formCopy =  $("#id_photo")
 	
 	//si el usaurio no puso foto en el input, que remueva el dato del input para el envio
@@ -91,10 +93,7 @@ UserService.update_user = function(url, form)
 	})
 	.done(function(response){
 		
-		//$('#id_photo').remove();
-		//$('#id_password').remove();
 		$(formCopy).appendTo('#imagen')
-		console.log(response)
 		UserService.get_mini_user(URL_CURRENT_USER);
 		UserView.showIndexUser();
 		Notify.show_success("Usuario", "La información de tu perfil ha sido actualizada");
@@ -190,30 +189,8 @@ UserService.getUser = function(id){
 	})
 	.done(function(response){
 		
-		// se pasa a arreglo la respuesta 
-		console.log(response);
 		$('.resume_user_profile').text(response.first_name + " " + response.last_name);
 		$('.pic_user_profile').attr("src",'http://127.0.0.1:8080'+response.thumb[1]);
-		//console.log(response[0].id)
-		//console.log("id sesion: "+JSON.parse($.session.get('user')).id);
-
-		
-		// se crea el html     		
-		/*var container = document.createElement("div");
-		var link = document.createElement("a");
-		var id = response[i].id;
-		$(link).attr('href', host+":"+location.port+"/users/detail/"+id);
-		var name = document.createElement("h4");
-		
-		//se asigna el texto 
-		$(name).text(response[i].first_name + " " + response[i].last_name);
-		
-		//se pega a los contenedores 
-		link.appendChild(name);
-		container.appendChild(link);
-
-		$('.listUsers').prepend(container);*/
-		
 	})
 	.fail(function(error){		
 		console.log(error);
@@ -246,7 +223,7 @@ UserService.getUser = function(id){
 
 }
 // trae todos los usuarios 
-UserService.get_users = function () {
+UserService.get_users = function (callback) {
 
 
 	$.ajax({
@@ -258,34 +235,9 @@ UserService.get_users = function () {
     	}
 	})
 	.done(function(response){
-		
-		// se pasa a arreglo la respuesta 
-		response = response.results;
-		//console.log(response[0].id)
-		//console.log("id sesion: "+JSON.parse($.session.get('user')).id);
-
-		for (i = 0; i < response.length; i++) { 
-
-			if( JSON.parse($.session.get('user')).id != response[i].id){
-				
-				// se crea el html     		
-				var container = document.createElement("div");
-				var link = document.createElement("a");
-				var id = response[i].id;
-				$(link).attr('href', host+":"+location.port+"/users/detail/"+id);
-				var name = document.createElement("h4");
-				
-				//se asigna el texto 
-				$(name).text(response[i].first_name + " " + response[i].last_name);
-				
-				//se pega a los contenedores 
-				link.appendChild(name);
-				container.appendChild(link);
-				$('.listUsers').prepend(container);
-			}
-			
-		}
-		
+		if (callback) {
+			callback(response);
+		};
 	})
 	.fail(function(error){		
 		console.log(error);

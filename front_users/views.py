@@ -29,6 +29,10 @@ def detail(request,id):
 def settings(request):
   return render_to_response('settings.html', {'title': 'Ajustes | Name App'}, context_instance=RequestContext(request))
   #return HttpResponseRedirect(reverse('front_users:authenticationRequiered'))
+
+
+def listUsers(request):
+    return render_to_response('listUsers.html', {'title': 'Contraseña | Name App'}, context_instance=RequestContext(request))
     
 
 def authentication_requiered(request):

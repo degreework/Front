@@ -1,6 +1,33 @@
-<div class="col-md4 pull-right consult-user" hidden>
-    <h3>Usuarios</h3>
-    <div class="listUsers" >
+{% extends 'template_base.html' %}
 
-    </div>
+{% load staticfiles %}
+{% block contenido %}
+<div class="col-md-8 base capacity consult-user" hidden>
+    <h3 class="titulos">Estudiantes</h3>
+   
+    <div class="table-responsive" id="show_">
+			<table class="table table-hover">
+  				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>e-mail</th>
+						<th>Código</th>
+						<th>plan</th>
+					</tr>
+				</thead>
+				<tbody id="listUsers">
+					
+				</tbody>
+			</table>
+		</div>
 </div>
+{% endblock %}
+{% block scripts %}
+<script>
+	//bring users 
+	UserService.get_users(UserView.renderListUsers);	
+</script>
+
+{% endblock scripts %}
+

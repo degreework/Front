@@ -154,3 +154,54 @@ UserView.showSetting = function (form, url)
 		console.log("always");
 	});
 }
+
+
+UserView.renderListUsers = function (response){
+
+	// se pasa a arreglo la respuesta 
+	response = response.results;
+	
+	for (i = response.length-1; i >= 0; i--) { 
+
+		// para que no muestre al usuario q consulta
+		//if( JSON.parse($.session.get('user')).id != response[i].id){
+			
+			// se crea el html     		
+			var container = document.createElement("tr");
+
+			var number = document.createElement("td");
+			$(number).text(i+1)
+
+			var col_name = document.createElement("td");
+			var link = document.createElement("a");
+			var id = response[i].id;
+			$(link).attr('href', host+":"+location.port+"/users/detail/"+id);
+			var name = document.createElement("p");
+			//se asigna el nombre
+			$(name).text(response[i].first_name + " " + response[i].last_name);
+			link.appendChild(name);
+			col_name.appendChild(link)
+
+			var col_email = document.createElement("td");
+			$(col_email).text(response[i].email)
+
+			var col_codigo = document.createElement("td");				
+			$(col_codigo).text(response[i].codigo)
+
+			var col_plan = document.createElement("td");				
+			$(col_plan).text(response[i].plan)
+			
+
+
+			//se pega a los contenedores 
+			container.appendChild(number);
+			container.appendChild(col_name);
+			container.appendChild(col_email);
+			container.appendChild(col_codigo);
+			container.appendChild(col_plan);
+			$('#listUsers').prepend(container);
+		//}
+			
+	}
+
+}
