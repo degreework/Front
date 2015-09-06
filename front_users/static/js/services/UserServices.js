@@ -67,11 +67,14 @@ UserService.update_user = function(url, form)
 	$("#preloader_2").show();
 
 	formSerialized = form.serialize();
+	formCopy =  $("#id_photo")
+	
 	//si el usaurio no puso foto en el input, que remueva el dato del input para el envio
 	if("" == $("#id_photo").val())
 	{
-		$("#id_photo").remove()
+		$("#id_photo").remove()  
 	}
+
 	data = new FormData(form.get(0));
 	remove_all_errors(formSerialized);
 	
@@ -90,7 +93,7 @@ UserService.update_user = function(url, form)
 		
 		//$('#id_photo').remove();
 		//$('#id_password').remove();
-
+		$(formCopy).appendTo('#imagen')
 		console.log(response)
 		UserService.get_mini_user(URL_CURRENT_USER);
 		UserView.showIndexUser();

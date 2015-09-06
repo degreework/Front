@@ -65,8 +65,8 @@ function render_form(method, form , response, callback, params)
 
 		$.each(fields, function(key, value) {
 
-			console.log(value)
-			console.log(value.type)
+			//console.log(value)
+			//console.log(value.type)
 			
 			if(value.read_only == false){
 				var field_div = document.createElement("div");
@@ -149,13 +149,16 @@ function render_form(method, form , response, callback, params)
 				}
 				else if('image upload' == value.type)
 				{
+
 					//creat label for input
 					var label = document.createElement("label");
+					label.id = 'imagen'
 					//set text to label
 					label.appendChild(document.createTextNode('Selecciona una foto de perfil'));
 					field_div.appendChild(label);
 					
 					input.type = 'file';
+
 					//set max length to input
 					input.maxLength = null
 					input.className = null;
