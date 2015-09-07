@@ -17,6 +17,9 @@ CommentService.create =function(form, url, callback)
 		data: formData,
     	processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
+    	beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+    	}
 	})
 	.done(function(response){
 		/*
