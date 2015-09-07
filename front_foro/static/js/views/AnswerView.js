@@ -86,7 +86,7 @@ AnswerView.prototype.render_list = function (data){
 		var autor = document.createElement("p");
 		
 		$(autor).text(data_list_asks[i].author.name)
-		$(link).attr('href', host+":"+location.port+'/users/detail/'+data_list_asks[i].author.id)
+		$(link).attr('href', UserView.getUrl(data_list_asks[i].author.id));
 		$(date).text(""+jQuery.timeago(data_list_asks[i].added_at))
 
 		// opciones editar y eliminar 

@@ -107,7 +107,7 @@ AskView.prototype.render_ask = function (data){
 	$(AskView.prototype.container_summary).html(markdown.toHTML(data.text));
 	$(AskView.prototype.container_added_at).text(jQuery.timeago(data.added_at));
 	$(AskView.prototype.container_author).text(data.author.name);
-	$(AskView.prototype.container_author_link).attr('href', host+":"+location.port+'/users/detail/'+data.author.id);
+	$(AskView.prototype.container_author_link).attr('href', UserView.getUrl(data.author.id));
 
 }
 

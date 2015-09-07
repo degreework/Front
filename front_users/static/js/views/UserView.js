@@ -5,6 +5,10 @@ UserView.initializeRegister = function(div_register)
 	UserView.form_register = div_register.find("form");
 }
 
+UserView.getUrl = function (id) {
+	return host+":"+location.port+'/users/detail/'+id;
+}
+
 UserView.verify = function ()
 {
 	UserView.form_login = $('#form_login')
