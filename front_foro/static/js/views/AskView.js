@@ -58,11 +58,14 @@ AskView.prototype.render_list = function (data){
 		var link = document.createElement("a");
 		var id = data_list_asks[i].id;
 		
+
+		//
 		$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
 		var titles = document.createElement("h3");
 		var summarys = document.createElement("span");
 		//summarys.className = 'pull-right';
 		var author = document.createElement("a");
+		$(author).attr('href', UserView.getUrl(data_list_asks[i].author.id));
 		var count = document.createElement("span");
 		count.className= "count-answer pull-right number_answer";
 
@@ -70,8 +73,8 @@ AskView.prototype.render_list = function (data){
 		//se asigna el texto 
 		$(count).text('Respuestas: '+ data_list_asks[i].count)
 		$(titles).text(data_list_asks[i].title)
-		$(summarys).text(jQuery.timeago(data_list_asks[i].added_at))
-		$(author).text(data_list_asks[i].author+', ')
+		$(summarys).text(', '+jQuery.timeago(data_list_asks[i].added_at))
+		$(author).text(data_list_asks[i].author.name)
 			
 		//se pega a los contenedores 
 		link.appendChild(titles);
