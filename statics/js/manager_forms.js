@@ -114,7 +114,7 @@ function render_form(method, form , response, callback, params)
 					//create default option
 					var option = document.createElement("option");
 					option.selected = "selected";
-					option.disabled = true;
+					option.value = ''//option.disabled = true;
 					option.textContent = "Selecciona un programa";
 					
 					//add option to selectable
