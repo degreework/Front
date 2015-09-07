@@ -183,8 +183,10 @@ function render_form(method, form , response, callback, params)
 					//label.appendChild(document.createTextNode(value.label));
 					//field_div.appendChild(label);
 					//console.log(this.choices)
+					
 					input = document.createElement("select");
 					input.className = "form-control";
+					
 
 					var option = document.createElement("option");
 					option.selected = "selected";

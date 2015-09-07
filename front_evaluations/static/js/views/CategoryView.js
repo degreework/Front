@@ -99,10 +99,22 @@ EvaluationsView.render_parametros = function(form, response){
 
 	$.each(response, function(key, value) {	
 			
+			//console.log(key +'=='+ value)
 			if (value === true) { 
 				$('#id_'+key).prop("checked", true);
 			}else{
-				$('#id_'+key).attr('value', value);	
+				if (value !== null) {
+					if (value.nombre === undefined) {
+						$('#id_'+key).attr('value', value);
+					}else{
+						$('#id_'+key).val(value.id);	
+					};	
+				}else{
+					$('#id_'+key).attr('value', value);	
+				};
+				
+				
+				
 			}
 			
 	})
@@ -121,16 +133,50 @@ EvaluationsView.render_parametros = function(form, response){
 		//console.log('quiz')
 		EvaluationsView.update_quiz(form, response.id)
 	}
+
+	if (form.selector === '#form_update_tf') {
+		EvaluationsView.update_question(form, response.id)
+	}
+
+	if (form.selector === '#form_update_mc') {
+		EvaluationsView.update_question(form, response.id)
+	}
+
+	if (form.selector === '#form_update_e') {
+		EvaluationsView.update_question(form, response.id)
+	}
 	
 }
 
 EvaluationsView.handle_edit = function(response, index, tipo){
 	
 	$('#edit_').fadeIn()
-	$('#show_').hide()	
+	$('#show_').hide()
+
+	// questions
+
 	response = response[index]
-	
-	//console.log('tipo= '+ tipo)
+
+	if (tipo == 'True/False Question') {
+
+		$('#edit_tf').fadeIn()
+		form = $("#form_update_tf")
+		create_form(URL_CREATE_QUESTION_TF, form, 'OPTIONS', EvaluationsView.render_parametros, response)
+	};
+
+	if (tipo == 'Multiple Choice Question') {
+
+		$('#edit_mc').fadeIn()
+		form = $("#form_update_mc")
+		create_form(URL_CREATE_QUESTION_MC, form, 'OPTIONS', EvaluationsView.render_parametros, response)
+	};
+
+	if (tipo == 'Essay style question') {
+		$('#edit_e').fadeIn()
+		form = $("#form_update_e")
+		create_form(URL_CREATE_QUESTION_ESSAY, form, 'OPTIONS', EvaluationsView.render_parametros, response)
+	};
+
 
 	if (tipo == 'category') {
 
@@ -165,14 +211,13 @@ EvaluationsView.create_subcategory = function(form)
 }
 
 EvaluationsView.notifify_create_subcategory = function(response){
-	//console.log('entro')
 	location.href =  host+":"+location.port+"/evaluations/subcategory"; 
 }
 
 
 EvaluationsView.handle_delete = function(response, index, tipo, row){
-	//console.log('handle_delete')
-	//console.log(response)
+	console.log('handle_delete')
+	console.log(tipo)
 	
 	response = response[index]
 	notify = Notify.show_confirm('la '+ tipo);
@@ -181,6 +226,27 @@ EvaluationsView.handle_delete = function(response, index, tipo, row){
 	var id = response.id
 
 	$('#erase').click(function(){
+
+		if (tipo == 'True/False Question') {
+			
+			var questionService = new QuestionService();
+			questionService.delete(URL_UPDATE_QUESTION_TF+id+'/', row, EvaluationsView.hide_div)
+			notify.close()	
+		};
+
+		if (tipo == 'Multiple Choice Question') {
+			
+			var questionService = new QuestionService();
+			questionService.delete(URL_UPDATE_QUESTION_MC+id+'/', row, EvaluationsView.hide_div)
+			notify.close()	
+		};
+
+		if (tipo == 'Essay style question') {
+			
+			var questionService = new QuestionService();
+			questionService.delete(URL_UPDATE_QUESTION_ESSAY+id+'/', row, EvaluationsView.hide_div)
+			notify.close()	
+		};
 		
 		
 		if (tipo == 'categoria') {
@@ -243,7 +309,7 @@ EvaluationsView.render_list_subcategories = function(parent_container, response)
 		$(title_subcategory).text(response[i].sub_category)
 
 		var title_category = document.createElement("td");
-		$(title_category).text(response[i].category)
+		$(title_category).text(response[i].category.nombre)
 
 		var col_edit = document.createElement("td");
 		var link = document.createElement("a");

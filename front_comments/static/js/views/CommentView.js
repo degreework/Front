@@ -124,18 +124,18 @@ CommentView.prototype.handler_edit = function(e)
 	//this.load_create_comment(target_id)
 	//var new_form = $(this.form).clone()
 	var new_form = this.form_edit.clone();
-	create_form(URL_CREATE_COMMENT, new_form, 'OPTIONS', function(){
+	/*create_form(URL_CREATE_COMMENT, new_form, 'OPTIONS', function(){
 		$(new_form.find("#id_parent")[0]).attr('value', target_id);
 		$(new_form.find("#id_parent")[0]).hide()
 
 		$(new_form.find("#id_text")[0]).val(current_comment);
-	});
+	});*/
 
 	$(new_form).attr('id', 'edit_comment_form_'+target_id);
 
 	$(new_form).appendTo('#'+target_id);
 	//set current content of comment to form
-	//$($("#edit_comment_form_"+target_id+" input")[0]).val(current_comment);
+	$($("#edit_comment_form_"+target_id+" input")[0]).val(current_comment);
 	//show form
 	$(new_form).fadeIn()
 

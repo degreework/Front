@@ -7,71 +7,133 @@
 
 {% block evaluations_content %}
 	<div class="col-md-12">
-		
-		<h3 class="titulos">Essay Questions</h3>
-		<div class="table-responsive">
-			<table class="table table-hover">
-  				<thead>
-					<tr>
-						<th>#</th>
-						<th>Question</th>
-						<th>Categoria</th>
-						<th>Subcategoria</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
-					</tr>
-				</thead>
-				<tbody id="list-equestion">
-					
-				</tbody>
-			</table>
+		<h3>Selecciona un tipo de pregunta para ver la lista</h3>
+		<div class="col-md-4" style="text-align:center">
+			<button class="btn btn-default" id="Essay">Preguntas tipo ensayo</button>
 		</div>
-
-		<h3 class="titulos">True and False Questions</h3>
-		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Question</th>
-						<th>Categoria</th>
-						<th>Subcategoria</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
-					</tr>
-				</thead>
-				<tbody id="list-tfquestion">
-
-				</tbody>
-  
-			</table>
+		<div class="col-md-4" style="text-align:center">
+			<button class="btn btn-default" id="TF">Preguntas tipo verdadero y falso</button>
 		</div>
-
-		<h3 class="titulos">Multichoice Questions</h3>
-		<div class="table-responsive">
-			<table class="table table-hover">
-  				<thead>
-					<tr>
-						<th>#</th>
-						<th>Question</th>
-						<th>Categoria</th>
-						<th>Subcategoria</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
-					</tr>
-				</thead>
-				<tbody id="list-mcquestion">
-				</tbody>
-			</table>
+		<div class="col-md-4" style="text-align:center">
+			<button class="btn btn-default" id="MC">Preguntas tipo multiopcion</button>
 		</div>
-		
 	</div>
+
+	<div class="col-md-12" id="show_">
+		
+		<!--div con tabla para preguntas essay -->
+		<div class="col-md-12" id="table-essay" hidden>
+			<h3 class="titulos">Essay Questions</h3>
+			<div class="table-responsive">
+				<table class="table table-hover">
+	  				<thead>
+						<tr>
+							<th>#</th>
+							<th>Question</th>
+							<th>Categoria</th>
+							<th>Subcategoria</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody id="list-equestion">
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!--div con tabla para preguntas tf -->
+		<div class="col-md-12" id="table-tf" hidden>
+			<h3 class="titulos">True and False Questions</h3>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Question</th>
+							<th>Categoria</th>
+							<th>Subcategoria</th>
+							<th>Editar</th>
+							<th>Eliminar</th>	
+						</tr>
+					</thead>
+					<tbody id="list-tfquestion">
+
+					</tbody>
+	  
+				</table>
+			</div>
+		</div>
+
+		<!--div con tabla para preguntas mc -->
+		<div class="col-md-12" id="table-mc" hidden>
+			<h3 class="titulos">Multichoice Questions</h3>
+			<div class="table-responsive">
+				<table class="table table-hover">
+	  				<thead>
+						<tr>
+							<th>#</th>
+							<th>Question</th>
+							<th>Categoria</th>
+							<th>Subcategoria</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody id="list-mcquestion">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<!-- editar -->
+	<!-- formulario essay -->
+	<div class="col-md-12" id="edit_e" hidden>
+		<br><br>
+		<div class="col-md-7 col-sm-7 col-xs-7  ">
+			<form class="" id="form_update_e" hidden>
+	      		<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
+	      	</form>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
+			<h4>Essay question</h4>
+			<p> pregunta tipo ensayo ..bla bla bla</p>
+		</div>
+	</div>
+
+	<!-- formulario tf -->
+	<div class="col-md-12" id="edit_tf" hidden>
+		<br><br>
+		<div class="col-md-7 col-sm-7 col-xs-7  ">
+			<form class="" id="form_update_tf" hidden>
+	      		<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
+	      	</form>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
+			<h4>True and False question</h4>
+			<p> pregunta tipo ensayo ..bla bla bla</p>
+		</div>
+	</div>		
+
+	<!-- formulario mc -->
+	<div class="col-md-12" id="edit_mc" hidden>
+		Formulario preguna y respuestas :/
+		form_update_mc
+	</div>
+
+	
+	
+	
+
 {% endblock evaluations_content %}
 
 {% block scripts %}
 	<script>
         jQuery(document).ready(function($) {
 			//form question essay
+			EvaluationsView.show_table_questions()
 			EvaluationsView.get_all_TFQuestions();
 			EvaluationsView.get_all_MCQuestions();
 			EvaluationsView.get_all_EQuestions(); 
