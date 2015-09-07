@@ -3,6 +3,7 @@ function register(form, url)
 	$("#preloader_2").show();
 
 	formSerialized = form.serialize()
+	console.log(formSerialized)
 	formData = new FormData($("#form_register").get(0))
 
 	//remove all errors from before

@@ -5,24 +5,32 @@
 
 
 {% block wiki_content %}
-<div class="row">
-	{% include "wiki_form.html" %}
-	{% include "page_wiki.html" %}
+	<div class="col-md-12">
+		{% include "wiki_form.html" %}
+		{% include "page_wiki.html" %}
 
-</div>
-		
-		<!--<div class="row">
-			<div id="list-comment" class="col-md-9 col-md-offset-2">
+	</div>
 
-				<a class="btn-create" id="a-comment">agrega un comentario</a>
-				<div>
-					<form id="form-comment" hidden>
-						<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
-					</form>	
+	<div class="col-md-12"><hr></div>
+
+	<div id="list-comment-wiki"></div>
+	<div class="load-comment-wiki" hidden><a>Ver más</a></div>
+
+	<div class="col-md-6 col-sm-offset-2">
+		<!-- formulario para crear el comentario -->
+			<form id="form-comment-wiki" hidden>
+				<div class="form-group">
+					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
 				</div>
-			</div>
-			
-		</div>-->
+				<div class="form-group">
+					<input type="hidden" id="id_parent" name="parent">
+				</div>
+
+				<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
+			</form>	
+		
+	</div>
+		
 	
 {% endblock wiki_content %}
 
@@ -51,22 +59,6 @@
 		*/
 		WikiView.load_page(key[key.length-1])
 	}
-	
-
-	//comments
-	/*form_comment_ask = $("#form-comment");
-	create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
-	form_comment_ask.submit(function (e) {
-		e.preventDefault();
-		CommentService.create(form_comment_ask, URL_CREATE_COMMENT, ForumService.append_comment_to_ask);
-	})
-
-	$("#a-comment").click(function (e) {
-		e.preventDefault()
-		$("#a-comment").hide()
-		$("#form-comment").show()
-	})*/
-
 		
 </script>
 {% endblock scripts %}

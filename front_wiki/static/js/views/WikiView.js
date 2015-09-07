@@ -161,6 +161,7 @@ WikiView.render_version = function(page)
 WikiView.render_page = function(page)
 {
 	console.log("render_page")
+	console.log(page)
 	$("#wiki_title").text(page.title);
 	$("#wiki_version").text(page.version);
 	$("#wiki_slug").text(page.slug)
@@ -185,6 +186,18 @@ WikiView.render_page = function(page)
 			);
 		}, false);
 	$("#wiki_title").append(edit)
+
+	
+	//comments
+	var comentariosWiki = new CommentView(
+		page.id_thread,
+		$("#form-comment-wiki"),
+		$('#list-comment-wiki'),
+		$(".load-comment-wiki")
+	);		
+	
+	comentariosWiki.load();
+	comentariosWiki.load_create_comment(page.id_thread);
 
 }
 
