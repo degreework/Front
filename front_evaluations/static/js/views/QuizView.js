@@ -52,12 +52,18 @@ EvaluationsView.change_boolean = function(data){
 //---------------
 EvaluationsView.create_quiz = function(form)
 {
+	console.log('create_quiz')
+	
+
 	form.submit(function (e) {
 			e.preventDefault();
+			
+			//Selecciona todas las opciones del contendor 
+			$("#id_quiz option").attr("selected","selected"); 
 
 			var quizService = new QuizService();
-			var form = EvaluationsView.change_boolean(($(e.target).get(0)))
-			var data = new FormData(form);
+			var formu = EvaluationsView.change_boolean(($(e.target).get(0)))
+			var data = new FormData(formu);
 			quizService.create(URL_CREATE_QUIZ, data, EvaluationsView.notifify_create_question)
 	})
 	
@@ -172,7 +178,10 @@ EvaluationsView.update_quiz = function(form, id)
 
 	form.submit(function (e) {
 			e.preventDefault();
-	//		console.log('envio actualiza')
+			
+			//Selecciona todas las opciones del contendor 
+			$("#id_quiz option").attr("selected","selected"); 
+
 			var quizService = new QuizService();
 			var form = EvaluationsView.change_boolean(($(e.target).get(0)))
 			var data = new FormData(form);

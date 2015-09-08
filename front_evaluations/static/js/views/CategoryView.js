@@ -99,22 +99,57 @@ EvaluationsView.render_parametros = function(form, response){
 
 	$.each(response, function(key, value) {	
 			
-			//console.log(key +'=='+ value)
+			/*
+				1. verifica si el valor es true para marcarlo en el checkbox 
+					1.1 marca el checbox como true
+				si no 
+					2. verifica si el valor es distinto de nulo para que pueda leer la propiedad nombre 
+						2.1. verifica si valor tiene la propiedad nombre idefinida
+							2.1.1 coloca el valor del atributo
+							2.1.2 verifica si el campo es quiz para seleccionar las opciones guardadas
+								selecciona las opciones guardadas
+						si no 
+						2.2 en el desplegable selecciona la opcion con el id del nombre 
+					si no 
+					3. pone valor null (foto)
+				
+			*/
+			console.log(key +'=='+ value)
+
 			if (value === true) { 
 				$('#id_'+key).prop("checked", true);
 			}else{
+				
 				if (value !== null) {
+					
+
 					if (value.nombre === undefined) {
 						$('#id_'+key).attr('value', value);
+						
+						// para las opciones seleccionadas en el quiz 
+						if (key === 'quiz') {
+							value = String(value) 
+							value = value.split(',')
+								
+							//selecciona las opciones de el selector de disponibles						
+							for (var i = 0; i < value.length; i++) {
+								
+								$('#id_quiz_from option[value = '+value[i]+']').prop('selected', true)
+
+							};
+							//las pasaal selector de elegidos
+							$('#id_quiz_from option:selected').appendTo("#id_quiz");
+						}
+				
 					}else{
-						$('#id_'+key).val(value.id);	
-					};	
+						// desplegables categoria y sub_categoria
+						$('#id_'+key).val(value.id);
+							
+						};	
+				
 				}else{
 					$('#id_'+key).attr('value', value);	
-				};
-				
-				
-				
+				};			
 			}
 			
 	})

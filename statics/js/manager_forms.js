@@ -178,28 +178,102 @@ function render_form(method, form , response, callback, params)
 					//input.maxLength = 100
 				}
 				else if('field' == value.type){
-					//var label = document.createElement("label");
-					//set text to label
-					//label.appendChild(document.createTextNode(value.label));
-					//field_div.appendChild(label);
-					//console.log(this.choices)
 					
 					input = document.createElement("select");
 					input.className = "form-control";
+
+					if (key ==='quiz') {
+						
+						// etiqueta
+						var label = document.createElement("label");					
+						$(label).text("Selecciona las "+value.label);
+						field_div.appendChild(label);
 					
+						//salto
+						var br = document.createElement("br");	
+						field_div.appendChild(br);
 
-					var option = document.createElement("option");
-					option.selected = "selected";
-					option.disabled = true;
-					option.textContent = value.label;
-					input.add(option);
+						//selector donde se cargan las preguntas
+						input1 =  document.createElement("select");
+						input1.className = "form-control";
+						$(input1).attr('multiple', 'multiple')
+						input1.id = 'id_quiz_from'
 
-					for (var i = 0, size=this.choices.length; i < size; i++) {
-						option = document.createElement("option");
-						option.value =  value.choices[i].value;
-						option.textContent = value.choices[i].display_name;
-						input.add(option);					
-					}
+						//segundo selector donde se colocan las q se van a guardar
+						$(input).attr('multiple', 'multiple')
+				
+						//teclas para mover de un selector a otro
+						up = document.createElement('strong')
+						a = document.createElement('a')
+						a.className = "glyphicon glyphicon-circle-arrow-up"
+						
+						down = document.createElement('strong')
+						$(down).css('margin-right', '20px')
+						a2 = document.createElement('a')
+						a2.className = "glyphicon glyphicon-circle-arrow-down"
+						
+						up.appendChild(a)
+						down.appendChild(a2)
+
+						// div de las teclas para mover
+						teclas = document.createElement('div')
+						teclas.className = "col-md-12"
+						teclas.appendChild(down);
+						teclas.appendChild(up);
+						$(teclas).css('font-size', '25px')
+						$(teclas).css('margin-top', '10px')					
+						$(teclas).css('text-align', 'center')						
+
+						//titulos de los selectores
+						title2 = document.createElement('spam')
+						$(title2).text('elegidos')
+
+						title1 = document.createElement('spam')
+						$(title1).text('disponibles')
+
+						// se pegan las opciones en el selector disponible
+						for (var i = 0, size=this.choices.length; i < size; i++) {
+							option = document.createElement("option");
+							option.value =  value.choices[i].value;
+							option.textContent = value.choices[i].display_name;
+							input1.add(option);					
+						}
+
+						// se pegan los elementos al contenedor
+						field_div.appendChild(title1)
+						field_div.appendChild(input1)
+						field_div.appendChild(teclas);
+						field_div.appendChild(title2);
+
+
+						// eventos para mover las opciones de un selector a otro 
+						$(a).click(function(){
+							$('#id_quiz option:selected').appendTo("#id_quiz_from");
+						})
+
+						$(a2).click(function(){
+							$('#id_quiz_from option:selected').appendTo("#id_quiz");
+						})
+
+					}else
+					{
+						var option = document.createElement("option");
+						option.selected = "selected";
+						option.disabled = true;
+						option.textContent = value.label;
+						input.add(option);
+
+						for (var i = 0, size=this.choices.length; i < size; i++) {
+							option = document.createElement("option");
+							option.value =  value.choices[i].value;
+							option.textContent = value.choices[i].display_name;
+							input.add(option);					
+						}
+					};
+
+
+
+						
 				}
 				else
 				{
@@ -254,7 +328,6 @@ function render_form(method, form , response, callback, params)
 			callback(form, params);
 		}
 }
-
 
 function create_form(url, form, method, callback, params)
 {

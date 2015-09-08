@@ -7,6 +7,9 @@ EvaluationsView.create_essay = function(form)
 	form.submit(function (e) {
 			e.preventDefault();
 			
+			//Selecciona todas las opciones del contendor 
+			$("#id_quiz option").attr("selected","selected"); 
+
 			var questionService = new QuestionService();
 			var data = new FormData(($(e.target).get(0)));
 			questionService.create(URL_CREATE_QUESTION_ESSAY, data, EvaluationsView.notifify_create_question)
@@ -18,6 +21,9 @@ EvaluationsView.create_mc = function(form)
 {
 	form.submit(function (e) {
 			e.preventDefault();
+
+			//Selecciona todas las opciones del contendor 
+			$("#id_quiz option").attr("selected","selected"); 
 
 			var questionService = new QuestionService();
 			var form = EvaluationsView.change_boolean(($(e.target).get(0)))
@@ -31,6 +37,9 @@ EvaluationsView.create_tf = function(form)
 {
 	form.submit(function (e) {
 			e.preventDefault();
+			
+			//Selecciona todas las opciones del contendor 
+			$("#id_quiz option").attr("selected","selected"); 
 
 			var questionService = new QuestionService();
 			var form = EvaluationsView.change_boolean(($(e.target).get(0)))
@@ -142,6 +151,7 @@ EvaluationsView.render_list_questions = function(parent_container, response)
 }
 
 EvaluationsView.show_table_questions = function(){
+	
 	$('#Essay').click(function(){
 				$('#table-essay').show()
 				$('#table-tf').hide()
@@ -151,6 +161,10 @@ EvaluationsView.show_table_questions = function(){
 				$('#edit_tf').hide()
 				$('#edit_mc').hide()
 				$('#edit_e').hide()
+
+				$('#form_update_tf').empty()
+				//$('#edit_mc').empty()
+				$('#form_update_e').empty()
 			})
 
 			$('#TF').click(function(){
@@ -162,6 +176,10 @@ EvaluationsView.show_table_questions = function(){
 				$('#edit_tf').hide()
 				$('#edit_mc').hide()
 				$('#edit_e').hide()
+
+				$('#form_update_tf').empty()
+				//$('#edit_mc').empty()
+				$('#form_update_e').empty()
 			})
 
 			$('#MC').click(function(){
@@ -173,6 +191,10 @@ EvaluationsView.show_table_questions = function(){
 				$('#edit_tf').hide()
 				$('#edit_mc').hide()
 				$('#edit_e').hide()
+
+				$('#form_update_tf').empty()
+				//$('#edit_mc').empty()
+				$('#form_update_e').empty()
 			})
 }
 
@@ -181,6 +203,9 @@ EvaluationsView.update_question = function(form, id)
 {
 	form.submit(function (e) {
 			e.preventDefault();
+
+			//Selecciona todas las opciones del contendor 
+			$("#id_quiz option").attr("selected","selected"); 
 
 			var questionService = new QuestionService();
 
