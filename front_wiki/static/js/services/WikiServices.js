@@ -124,15 +124,16 @@ WikiService.get_page = function (url, callback) {
 }
 
 
-WikiService.approve_request = function (url, callback) {	
+WikiService.approve_request = function (url, action,callback) {	
 
 	$("#preloader_2").show();
 
 	var auth = JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token;
 
 	$.ajax({
-		type: 'GET',
+		type: 'POST',
 		url: url,
+		data: {'action': action},
 		beforeSend : function( xhr ) {
         	xhr.setRequestHeader( "Authorization", auth );
     	}

@@ -146,9 +146,15 @@ WikiView.render_version = function(page)
 		url_approv = url_approv.replace(/\%version%/g, page.version);
 		
 		$("#submit_approved > a").click(function(e){
-			WikiService.approve_request(url_approv, WikiView.approve_succes);
+			WikiService.approve_request(url_approv, "approved", WikiView.approve_succes);
 		});
 		$("#submit_approved").show();
+
+		$("#submit_rejected > a").click(function(e){
+			WikiService.approve_request(url_approv, "reject", WikiView.approve_succes);
+		});
+		$("#submit_rejected").show();
+
 	}
 	//end approve
 
@@ -334,9 +340,9 @@ WikiView.render_request = function(list)
 	}
 }
 
-WikiView.approve_succes = function(approve)
+WikiView.approve_succes = function(response)
 {
-	Notify.show_success("Wiki", "Éste contenido ha sido aprobado");
+	Notify.show_success("Wiki", response.msg);
 }
 
 
