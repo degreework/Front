@@ -66,6 +66,7 @@ URL_GET_ALL_QUESTION_MC = host+':8080/API/quiz/questions/listMultichoice';
 URL_UPDATE_QUESTION_MC = host+':8080/API/quiz/questions/updateMultichoice/'; // se le pega el id de la pregunta 
 
 URL_CREATE_ANSWER_MC = host+':8080/API/quiz/questions/createAnswerMultichoice';
+URL_CREATE_MULTIPLE_ANSWER_MC = host+':8080/API/quiz/questions/createMultipleAnswerMultichoice';
 URL_GET_ALL_ANSWER_MC = host+':8080/API/quiz/questions/MultichoiceAnswerList/'; // se le pega el id de la MC del q se quiere buscar las respuestas
 
 URL_DETAIL_QUESTION = host+':8080/API/quiz/questions/detail/';// se le pega el id de la question

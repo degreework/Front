@@ -12,31 +12,17 @@
 		<br><br>
 		<div class="col-md-7 col-sm-7 col-xs-7  ">
 			<form class="" id="form_mc" hidden>
-	      		<!--<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>-->
-	      	</form>
+				<div id="form_mc_answer" hidden>
+					<div class="list_answer"></div>
+					<button class="btn btn-default pull-right" type="button" id="add_input">Agregar</button>
+	      		</div>
+	      		
+				<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
+			</form>
 
 	      	<br><br>
 	      	<hr>
-
-	      	<h3 class="titulos">Opciones de respuesta</h3>
-	      	<!-- formulario para crear las respuestas -->
-	      	<a class="btn btn-default pull-right" id="agrega" >+</a>
-	      	<div class="col-md-12">
-		      	<form class="form-inline" id="form_mc_answer">
-		      		 <div class="form-group">
-		      		 	<input type="text" class="form-control" id="id_content" placeholder="Respuesta">
-		      		 </div>
-		      		 <div class="checkbox">
-		      		 	<label>
-		      		 		<input type="checkbox" name="correct" value="true">	
-		      		 	</label>
-		      		 	
-		      		 </div>
-		      		
-		      	</form>
-	      	</div>
-	      	<div class="col-md-12" id="nueva"></div>
-	      	<button class="btn btn-default pull-right" id="crear" type="submit" form="form_mc_answer form_mc_answer" name="action">Crear</button>
+	      	
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
 			<h4>Pregunta Multi-Opción</h4>
@@ -49,17 +35,40 @@
 	<script>
         jQuery(document).ready(function($) {
 			//
-			form = $("#form_mc")
-			EvaluationsView.initialize(form, URL_CREATE_QUESTION_MC);
-			EvaluationsView.create_mc(form)
+			form_mc = $("#form_mc")
+			form_mc_an = $("#form_mc_answer");
+			list_answers = $(".list_answer");
+			EvaluationsView.initialize(form_mc, URL_CREATE_QUESTION_MC);
+			EvaluationsView.create_mc(form_mc, ".list_answer")
 
-			$('#agrega').click(function (e){
-				console.log('agrega')
-				formCopy = $('#form_mc_answer').clone()
-				$(formCopy).css('margin-top', '10px')
-				$(formCopy).appendTo('#nueva')
+			
+			EvaluationsView.initialize(
+				list_answers,
+				URL_CREATE_ANSWER_MC,
+				function()
+				{
+					form_mc_an.show();
+					var counter_answers = 0;
+					document.getElementById("id_question").type = "hidden";
+
+					$(list_answers[0]).attr("id", "answer-"+counter_answers)
+
+					$("#add_input").click(function(e){
+						counter_answers += 1;
+						var new_answer = $(list_answers[0]).clone();
+						$(new_answer).attr("id", "answer-"+counter_answers)
+						$(new_answer).find("#id_content").val("");
+						form_mc_an.prepend(new_answer);
+						
+					});
+
+
+				});
+
+
 			})
 						
+
 		});
 	</script>
 	
