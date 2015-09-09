@@ -18,13 +18,17 @@ Login.login = function (form, url, callback)
 		/*
 		Login succesful, then do anything
 		*/
-		$.session.set("Token", JSON.stringify(response) );
-		console.log("Call get permissions")
+		//$.session.set("Token", JSON.stringify(response) );
+		
+		var s = StorageClass.getInstance();
+		s.storage.set("token", JSON.stringify(response));
+		console.log(s.storage.get("token"));
+
 		
 		$.ajax({
 			type: 'POST',
 			url: "http://127.0.0.1:8000/p",
-			data: {"Token": JSON.parse($.session.get("Token")).access_token},
+			data: {"Token": s.storage.get("token").access_token},
 		})
 		.done(function (response) {
 			console.log("response get Permissions")
@@ -34,7 +38,7 @@ Login.login = function (form, url, callback)
 			//console.log(s.get("permissions"))
 			var s = StorageClass.getInstance();
 			s.storage.set("permissions", response);
-			console.log(s.storage.get("permissions"));
+			//console.log(s.storage.get("permissions"));
 
 		})
 		if(callback)

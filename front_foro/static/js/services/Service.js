@@ -5,12 +5,17 @@ var Service = function () {
 Service.prototype.doGET = function(url, callback)
 {
 	//console.log('Service:doGET');
+	
+
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+
 	$.ajax({
 		type: 'GET',
 		url: url,
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		if(callback)
@@ -49,15 +54,19 @@ Service.prototype.doGET = function(url, callback)
 Service.prototype.doPOST = function(url, data, callback)
 {
 	//console.log('Service:doPOST');
+
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+
 	$.ajax({
 		type: 'POST',
 		url: url,
 		data: data,
 		processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		if(callback)
@@ -97,15 +106,19 @@ Service.prototype.doPOST = function(url, data, callback)
 Service.prototype.doPOST2 = function(url, data, callback)
 {
 	//console.log('Service:doPOST');
+
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+
 	$.ajax({
 		type: 'POST',
 		url: url,
 		data: data,
 		//processData: false, // tell jQuery not to process the data
     	//contentType: false, // tell jQuery not to set contentType
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		if(callback)
@@ -147,14 +160,16 @@ Service.prototype.doPUT = function(url, data, callback)
 {
 	//console.log('Service:doPUT');
 	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+	$.ajax({
 		type: 'PUT',
 		url: url,
 		data: data,
 		processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		if(callback)
@@ -194,14 +209,16 @@ Service.prototype.doPUT2 = function(url, data, callback)
 {
 	//console.log('Service:doPUT');
 	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+	$.ajax({
 		type: 'PUT',
 		url: url,
 		data: data,
 //		processData: false, // tell jQuery not to process the data
 //    	contentType: false, // tell jQuery not to set contentType
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		if(callback)
@@ -241,11 +258,13 @@ Service.prototype.doDELETE = function(url, div, callback)
 {
 	//console.log('Service:doGET');
 	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+	$.ajax({
 		type: 'DELETE',
 		url: url,
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		if(callback)

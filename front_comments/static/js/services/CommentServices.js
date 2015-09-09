@@ -12,14 +12,17 @@ CommentService.create =function(form, url, callback)
 	remove_all_errors(formSerialized);
 
 	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+
+	$.ajax({
 		type: 'POST',
 		url: url,
 		data: formData,
     	processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
-    	beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		/*
@@ -72,12 +75,15 @@ CommentService.get_Comments = function (url, callback) {
 	//$("#loader").show();
 
 	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+
+	$.ajax({
 		type: 'GET',
 		url: url,
 		async: true,
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		if(callback)
@@ -125,6 +131,12 @@ CommentService.update = function(form, url, callback)
 
 	//remove all errors from before
 	remove_all_errors($(form).serialize());
+
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
 
 	$.ajax({
 		type: 'PUT',
@@ -179,7 +191,12 @@ CommentService.update = function(form, url, callback)
 CommentService.delete_ = function(div, url, callback)
 {
 //	$("#loader").show();
-
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+    
 	$.ajax({
 		type: 'DELETE',
 		url: url,

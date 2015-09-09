@@ -346,7 +346,7 @@ function create_form(url, form, method, callback, params)
 	if (UserService.isAutenticated()) {
 		$.ajaxSetup({
 	    	beforeSend: function(xhr, settings) {
-	        xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+	        xhr.setRequestHeader( "Authorization", Token.token_type() +" "+ Token.acces_token() );
 	    	}
 		});
 	};

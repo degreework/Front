@@ -5,16 +5,16 @@ var UserService = {};
 */
 UserService.update_password = function(url, data, callback)
 {
-
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
 
 	$.ajax({
 		type: 'POST',
 		url: url,
 		data: data,
-		beforeSend : function( xhr ) {
-	        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-	    	}
-
 	})
 	.done(function(response){
 		console.log(response)
@@ -79,6 +79,13 @@ UserService.update_user = function(url, form)
 
 	data = new FormData(form.get(0));
 	remove_all_errors(formSerialized);
+
+
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
 	
 	$.ajax({
 		type: 'PUT',
@@ -86,10 +93,6 @@ UserService.update_user = function(url, form)
 		data: data,
 		processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
-		beforeSend : function( xhr ) {
-	        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-	    	}
-
 	})
 	.done(function(response){
 		
@@ -134,18 +137,24 @@ UserService.update_user = function(url, form)
 
 // trae la informacion para crear la sesion  (id, nicname, foto, nombre, apellido) de dropdowm
 UserService.get_mini_user = function (url) {
+
 	$.ajax({
 		type: 'GET',
 		url: url,
 		async: false,
 		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+        	xhr.setRequestHeader( "Authorization", Token.token_type() +" "+ Token.acces_token() );
     	}
 	})
 	.done(function(response){
 		console.log(response)
-		$.session.remove('user');
-		$.session.set('user', JSON.stringify(response));
+		//$.session.remove('user');
+		//$.session.set('user', JSON.stringify(response));
+
+		var s = StorageClass.getInstance();
+		s.storage.set("user", JSON.stringify(response));
+		console.log(s.storage.get("user"));
+
 	})
 	.fail(function(error){		
 		console.log(error);
@@ -180,12 +189,15 @@ UserService.get_mini_user = function (url) {
 UserService.getUser = function(id){
 
 	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+
+	$.ajax({
 		type: 'GET',
 		url: URL_DETAIL_USERS+id+"/",
 		async: true,
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		
@@ -224,15 +236,17 @@ UserService.getUser = function(id){
 }
 // trae todos los usuarios 
 UserService.get_users = function (callback) {
-
+	
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
 
 	$.ajax({
 		type: 'GET',
 		url: URL_BRING_ALL_USERS,
 		async: true,
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		if (callback) {
@@ -278,14 +292,17 @@ UserService.confirmPassword = function (url,form) {
 	remove_all_errors(formSerialized);
 
 	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+
+	$.ajax({
 		type: 'POST',
 		url: url,
 		data: formData,//formSerialized,
     	processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
-    	beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		/*
@@ -333,7 +350,7 @@ UserService.confirmPassword = function (url,form) {
 UserService.isAutenticated = function ()
 {
 
-	if($.session.get('user'))
+	if(User.exist())
 	{
 		return true;
 		//showCurrentUser();
@@ -353,9 +370,9 @@ UserService.deauthenticate = function (url) {
 	$.ajax({
 		type: 'POST',
 		url: url,
-		data: 'token='+JSON.parse($.session.get("Token"))+'&client_id='+CLIENT_ID+'&client_secret='+CLIENT_SECRET,
+		data: 'token='+Token.exist()+'&client_id='+CLIENT_ID+'&client_secret='+CLIENT_SECRET,
 		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+        	xhr.setRequestHeader( "Authorization", Token.token_type() +" "+ Token.acces_token() );
     	}
 	})
 	.done(function(response){

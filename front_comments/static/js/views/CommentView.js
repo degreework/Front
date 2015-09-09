@@ -70,7 +70,7 @@ CommentView.prototype.append_comment = function(response)
 			$(author).text(response[i].author.name)
 
 			//if isAuthor
-			if (response[i].author.id == JSON.parse($.session.get('user')).id)
+			if (response[i].author.id == User.get_id())
 			{
 				this.appentOptions(container)		
 			}

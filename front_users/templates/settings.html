@@ -24,7 +24,7 @@
 <script type="text/javascript">
 	$('document').ready(function() {
 
-		url_update = URL_UPDATE_USER+JSON.parse($.session.get('user')).id;
+		url_update = URL_UPDATE_USER+User.get_id();
 		//form update user
 		form_update_user = $("#form_update_user");
 		create_form(url_update, form_update_user, 'PUT', UserView.showSetting, url_update) ;

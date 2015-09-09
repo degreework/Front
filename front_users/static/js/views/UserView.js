@@ -32,6 +32,7 @@ UserView.verify = function ()
 
 UserView.showIndexUser = function ()
 {
+	console.log("UserView.showIndexUser")
 	//si el usuario esta autenticado
 	if (UserService.isAutenticated())
 	{
@@ -43,7 +44,7 @@ UserView.showIndexUser = function ()
 		$('.icon-menu').show();
 		$('.consult-user').show();
 		$('.menu').show();
-		$(".pic_profile").attr("src",'http://127.0.0.1:8080'+JSON.parse($.session.get('user')).thumb[1]);
+		$(".pic_profile").attr("src",'http://127.0.0.1:8080'+User.get_thumb(0));
 
 		UserView.showLoggedUser();
 	}
@@ -54,10 +55,11 @@ UserView.showIndexUser = function ()
 }
 
 UserView.showLoggedUser = function () {
+
 	$("#user_resume").show();
-	$(".resume_name").text(JSON.parse($.session.get('user')).first_name +" "+JSON.parse($.session.get('user')).last_name);	
-	$(".resume_profile").text(JSON.parse($.session.get('user')).first_name +" "+JSON.parse($.session.get('user')).last_name);	
-	$(".pic_resume").attr("src",'http://127.0.0.1:8080'+JSON.parse($.session.get('user')).thumb[0]);
+	$(".resume_name").text(User.get_first_name() +" "+User.get_last_name() );
+	$(".resume_profile").text(User.get_first_name() +" "+User.get_last_name() );	
+	$(".pic_resume").attr("src",'http://127.0.0.1:8080'+User.get_thumb(0));
 
 	//action event to logout
 	$("#button_logout").click(function(e){
@@ -115,7 +117,7 @@ UserView.showSetting = function (form, url)
 		type: 'GET',
 		url: url,
 		beforeSend : function( xhr ) {
-	        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
+	        	xhr.setRequestHeader( "Authorization", Token.token_type() +" "+ Token.acces_token()  );
 	    	}
 	})
 	.done(function(response){

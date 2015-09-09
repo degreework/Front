@@ -18,14 +18,18 @@ WikiService.doRequest = function (form, url, method, callback)
 
 	//remove all errors from before
 	remove_all_errors(formSerialized);
+	console.log(Token.get_RequestHeader())
+
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
 
 	$.ajax({
 		type: method,
 		url: url,
 		data: formSerialized,
-    	beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		/*
@@ -70,14 +74,15 @@ WikiService.get_page = function (url, callback) {
 
 	$("#preloader_2").show();
 
-	var auth = JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token;
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
 
 	$.ajax({
 		type: 'GET',
 		url: url,
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", auth );
-    	}
 	})
 	.done(function(response){
 		if(callback)
@@ -128,15 +133,16 @@ WikiService.approve_request = function (url, action,callback) {
 
 	$("#preloader_2").show();
 
-	var auth = JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token;
+	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
 
 	$.ajax({
 		type: 'POST',
 		url: url,
 		data: {'action': action},
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", auth );
-    	}
 	})
 	.done(function(response){
 		if(callback)
@@ -232,11 +238,14 @@ WikiService.update_page = function(url, data)
 WikiService.get_list = function (url, callback) {
 
 	$.ajax({
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
+    });
+    
+	$.ajax({
 		type: 'GET',
 		url: url,
-		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", JSON.parse($.session.get("Token")).token_type +" "+ JSON.parse($.session.get("Token")).access_token );
-    	}
 	})
 	.done(function(response){
 		if (callback) {callback(response)};			
