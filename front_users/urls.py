@@ -13,4 +13,6 @@ urlpatterns = patterns('',
 
         url(r'^p$', 'front_users.views.permissions', name='permissions'),
 
+        url(r'^password/reset/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)$', 'front_users.views.password_confirm')
+
 )

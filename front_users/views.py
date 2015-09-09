@@ -10,9 +10,6 @@ from decorators.ScopeRequired import ScopeRequired
 def index(request):
     return render_to_response('index.html', {'title': 'Name App'}, context_instance=RequestContext(request))
 
-def recoverPassword(request):
-    return render_to_response('recoverPassword.html', {'title': 'Contraseña | Name App'}, context_instance=RequestContext(request))
-
 @ScopeRequired(["users.change_user"])
 def changePassword(request):
     return render_to_response('changePassword.html', {'title': 'Contraseña | Name App'}, context_instance=RequestContext(request))
@@ -59,3 +56,10 @@ def permissions(request):
   print("session", request.session['scope'])
   print("expire date", request.session.get_expiry_date())
   return HttpResponse(p)
+
+
+def password_confirm(request, uidb64=None, token=None):
+  return render_to_response('password_confirm.html', {'title': 'Ajustes | Name App', 'uidb64':uidb64, 'token': token}, context_instance=RequestContext(request))
+
+def recoverPassword(request):
+    return render_to_response('password_reset.html', {'title': 'Contraseña | Name App'}, context_instance=RequestContext(request))

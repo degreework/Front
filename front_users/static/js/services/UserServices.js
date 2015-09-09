@@ -401,25 +401,22 @@ UserService.deauthenticate = function (url) {
 }
 
 
-UserService.recovery_password = function(url, form)
+UserService.recovery_password = function(url, csrftoken, form, callback)
 {
 	$("#preloader_2").show();
 
 	var data = $(form).serialize();
 
-	console.log(data)
-
 	$.ajax({
 		type: 'POST',
 		url: url,
-		data: data
+		data: data,
 	})
 	.done(function(response){
 		console.log(response)
 		if (callback) {
-			callback();
+			callback(response);
 		};
-		Notify.show_success("OK", "Revise su correo");
 	})
 	.fail(function(error){		
 		console.log(error);
