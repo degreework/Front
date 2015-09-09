@@ -17,10 +17,29 @@ EvaluationsView.create_essay = function(form)
 	
 }
 
-EvaluationsView.create_mc = function(form)
+EvaluationsView.create_mc = function(form, id_list_answers)
 {
 	form.submit(function (e) {
 			e.preventDefault();
+
+			//primero obtengo todas las repuestas y las paso a un JSON
+			var JSON_answers = {};
+			var key = 0;
+			
+			$(id_list_answers).each(function(){
+				
+				JSON_answers[key] = {
+					'content' : $(this).find("#id_content").val(),
+					'answer': $(this).find("#id_correct").is(":checked")
+				}
+				key += 1;
+			})
+			console.log(JSON_answers)
+			
+			//remuevo las respuestas del formulario o sino no me deja enviar la pregunta
+			$(form).find("."+id_list_answers).remove();
+
+
 
 			//Selecciona todas las opciones del contendor 
 			$("#id_quiz option").attr("selected","selected"); 
@@ -28,8 +47,35 @@ EvaluationsView.create_mc = function(form)
 			var questionService = new QuestionService();
 			var form = EvaluationsView.change_boolean(($(e.target).get(0)))
 			var data = new FormData(form);
-			questionService.create(URL_CREATE_QUESTION_MC, data, EvaluationsView.notifify_create_question)
-	})
+			console.log(data)
+			questionService.create(
+				URL_CREATE_QUESTION_MC,
+				data,
+				function(response)
+				{
+					var id_ask = response.id;
+					console.log("pregunta creada")
+					console.log(response.id)
+
+					//asigno a caada respuesta el id de la pregunta
+					$.each(JSON_answers, function(key, value){
+						JSON_answers[key]["id_ask"] = id_ask;
+					})
+					console.log(JSON_answers);
+
+					questionService.create(
+						URL_CREATE_MULTIPLE_ANSWER_MC,
+						JSON_answers,
+						function(response)
+						{
+							console.log("answers created");
+						}
+					);
+					
+					EvaluationsView.notifify_create_question()	
+				});
+
+	});//end submit
 	
 }
 

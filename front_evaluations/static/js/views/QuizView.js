@@ -4,7 +4,7 @@ var EvaluationsView = {};
 // trigger("reset");
 
 //inicializa los formularios 
-EvaluationsView.initialize = function(form, url, data, callback)
+EvaluationsView.initialize = function(form, url, callback)
 {
 	
 	/*
@@ -24,8 +24,7 @@ EvaluationsView.initialize = function(form, url, data, callback)
 		url,
 		EvaluationsView.form_create,
 		'OPTIONS',
-		callback,
-		data
+		callback
 	);
 
 	debug_info("3.4 - Show form")

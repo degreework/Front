@@ -54,6 +54,7 @@ Service.prototype.doGET = function(url, callback)
 Service.prototype.doPOST = function(url, data, callback)
 {
 	//console.log('Service:doPOST');
+	console.log(data)
 
 	$.ajax({
 		beforeSend : function( xhr ) {
