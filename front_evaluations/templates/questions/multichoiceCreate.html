@@ -7,23 +7,40 @@
 
 {% block evaluations_content %}
 	<div class="col-md-12">
+		<!-- formulario para la pregunta -->
+		<h3 class="titulos">Pregunta Multi-Opción</h3>
 		<br><br>
 		<div class="col-md-7 col-sm-7 col-xs-7  ">
 			<form class="" id="form_mc" hidden>
-	      		<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
+	      		<!--<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>-->
 	      	</form>
 
 	      	<br><br>
 	      	<hr>
 
+	      	<h3 class="titulos">Opciones de respuesta</h3>
 	      	<!-- formulario para crear las respuestas -->
-	      	<form class="" id="form_mc_answer" hidden>
-	      		<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
-	      	</form>
+	      	<a class="btn btn-default pull-right" id="agrega" >+</a>
+	      	<div class="col-md-12">
+		      	<form class="form-inline" id="form_mc_answer">
+		      		 <div class="form-group">
+		      		 	<input type="text" class="form-control" id="id_content" placeholder="Respuesta">
+		      		 </div>
+		      		 <div class="checkbox">
+		      		 	<label>
+		      		 		<input type="checkbox" name="correct" value="true">	
+		      		 	</label>
+		      		 	
+		      		 </div>
+		      		
+		      	</form>
+	      	</div>
+	      	<div class="col-md-12" id="nueva"></div>
+	      	<button class="btn btn-default pull-right" id="crear" type="submit" form="form_mc_answer form_mc_answer" name="action">Crear</button>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
-			<h4>Multichoice question</h4>
-			<p> pregunta tipo ensayo ..bla bla bla</p>
+			<h4>Pregunta Multi-Opción</h4>
+			<p> pregunta ..bla bla bla</p>
 		</div>
 	</div>
 {% endblock evaluations_content %}
@@ -36,9 +53,13 @@
 			EvaluationsView.initialize(form, URL_CREATE_QUESTION_MC);
 			EvaluationsView.create_mc(form)
 
-			form = $("#form_mc_answer")
-			EvaluationsView.initialize(form, URL_CREATE_ANSWER_MC);
-			
+			$('#agrega').click(function (e){
+				console.log('agrega')
+				formCopy = $('#form_mc_answer').clone()
+				$(formCopy).css('margin-top', '10px')
+				$(formCopy).appendTo('#nueva')
+			})
+						
 		});
 	</script>
 	

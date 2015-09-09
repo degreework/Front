@@ -155,19 +155,51 @@ EvaluationsView.render_every_quiz = function(response)
 {
 	console.log('entro')
 	console.log(response)
+
 	for (i = response.length-1; i >= 0; i--) { 		
 		
-		var div = $("#div_quiz").clone();
-		div.name = response[i].id
+		var div_quiz = document.createElement('div')
+		div_quiz.className = 'col-md-4'
 
-		var titulo = $(div).find('#title_quiz')
-		$(titulo).text(response[i].title)
-		
-		var description = $(div).find('#decription_quiz')
+		var div_title = document.createElement('div')
+		div_title.className = 'col-md-12'
+		title = document.createElement('h2')
+		$(title).text(response[i].title)
+		div_title.appendChild(title)
+
+
+		var div_description = document.createElement('div')
+		div_description.className = 'col-md-12'
+		description = document.createElement('p')
 		$(description).text(response[i].description)
+		div_description.appendChild(description)
 
-		$(div).show()
-		$('.container_quiz').prepend(div)
+		var div_enlance = document.createElement('div')
+		div_enlance.className = 'col-md-12'
+
+		var start_link = document.createElement('a')
+		start_link.className = 'btn-create'
+		start_link.id = 'btn-'+response[i].id
+		$(start_link).text('Empieza')
+
+		div_enlance.appendChild(start_link)
+
+
+		div_quiz.appendChild(div_title)
+		div_quiz.appendChild(div_description)
+		div_quiz.appendChild(div_enlance)
+		$('.container_quiz').prepend(div_quiz)
+		
+		$('#btn-'+response[i].id).click(function (e){
+			id = e.target.id
+			id = id.split("-");
+			id = id[1]
+
+			e.preventDefault();
+			var quizService = new QuizService();
+			var data = JSON.parse(localStorage.getItem('user'))
+			quizService.dispatch(URL_CREATE_SITTING+id+'/', data, EvaluationsView.create_sitting_session)
+		})
 	}
 }
 
@@ -190,6 +222,7 @@ EvaluationsView.update_quiz = function(form, id)
 }
 
 EvaluationsView.create_sitting_session = function(response){
+	//console.log(response)
 	sessionStorage.setItem('sitting', JSON.stringify(response));
 	$(location).attr('href', host+":"+location.port+"/evaluations/take/"+response.quiz); 
 }
@@ -202,7 +235,7 @@ EvaluationsView.get_Quiz = function(){
 	$('.btn-create').click(function(e){
 		e.preventDefault();
 		var quizService = new QuizService();
-		var data = JSON.parse($.session.get('user'))
+		var data = JSON.parse(localStorage.getItem('user'))
 		quizService.dispatch(URL_CREATE_SITTING+id+'/', data, EvaluationsView.create_sitting_session)
 	})
 
@@ -229,7 +262,10 @@ EvaluationsView.render_answer_mc = function(answers){
 	field_div.className = 'form-group';
 
 	for (i = 0; i < answers.length; i++) {
-	
+		
+		answer = answers[i]
+		answer = JSON.parse(answer)
+
 		var ul = document.createElement("ul");
 		ul.className = 'list-group'
 
@@ -238,12 +274,12 @@ EvaluationsView.render_answer_mc = function(answers){
 		li.className = 'list-group-item'
 
 		var label = document.createElement("spam");
-		$(label).text(' '+answers[i].content)
+		$(label).text(' '+answer.content)
 
 		var input = document.createElement("input");
 		input.type = 'radio';
 		input.name = 'answered';
-		input.value = answers[i].id;
+		input.value = answers.id;
 
 		li.appendChild(input)
 		li.appendChild(label)
@@ -294,7 +330,9 @@ EvaluationsView.render_form_question = function(question){
 	if(clase === 'Multiple Choice Question'){
 		
 		var quizService = new QuizService();
-		quizService.retrieve(URL_GET_ALL_ANSWER_MC+question.id+'/', EvaluationsView.render_answer_mc)
+
+		//quizService.retrieve(URL_GET_ALL_ANSWER_MC+question.id+'/', EvaluationsView.render_answer_mc)
+		EvaluationsView.render_answer_mc(question.answers)
 		input_clase.value = question.clase
 
 	}
@@ -361,7 +399,7 @@ EvaluationsView.render_question = function(question){
 	
 	$('#img-question').attr('src',question.figure)
 	$('#question_content').text(question.content)
-
+	console.log(question)
 	EvaluationsView.render_form_question(question)	
 }
 

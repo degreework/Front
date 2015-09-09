@@ -151,7 +151,14 @@ EvaluationsView.render_list_questions = function(parent_container, response)
 }
 
 EvaluationsView.show_table_questions = function(){
-	
+
+
+	button = document.createElement('button')
+	$(button).attr('type','submit')
+	$(button).attr('name','action')
+	$(button).text('Actualizar')
+	button.className = 'btn btn-default pull-right' 
+
 	$('#Essay').click(function(){
 				$('#table-essay').show()
 				$('#table-tf').hide()
@@ -165,6 +172,7 @@ EvaluationsView.show_table_questions = function(){
 				$('#form_update_tf').empty()
 				//$('#edit_mc').empty()
 				$('#form_update_e').empty()
+				$('#form_update_e').append(button)
 			})
 
 			$('#TF').click(function(){
@@ -201,6 +209,7 @@ EvaluationsView.show_table_questions = function(){
 
 EvaluationsView.update_question = function(form, id)
 {
+	console.log('update_question')
 	form.submit(function (e) {
 			e.preventDefault();
 
@@ -209,7 +218,7 @@ EvaluationsView.update_question = function(form, id)
 
 			var questionService = new QuestionService();
 
-			console.log(e.target.id)
+			
 			if (e.target.id === 'form_update_tf') {
 				
 				var form = EvaluationsView.change_boolean(($(e.target).get(0)))
