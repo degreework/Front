@@ -92,7 +92,7 @@ WikiView.create_succes = function(wiki)
 WikiView.slugter = function (str)
 {
 	str = str.replace(/\s/g,'-');
-	str = str.replace(/[^a-zA-Z0-9\s]/g,"-");
+	str = str.replace(/[^a-zA-Z0-9\s]/g,"");
 	str = str.toLowerCase();
 	return str;
 }
