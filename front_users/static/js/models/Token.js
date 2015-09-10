@@ -19,5 +19,5 @@ Token.token_type = function()
 
 Token.get_RequestHeader = function()
 {
-	return "Authorization" + Token.token_type() +" "+ Token.acces_token();
+	return Token.token_type() +" "+ Token.acces_token();
 }

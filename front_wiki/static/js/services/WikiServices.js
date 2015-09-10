@@ -133,16 +133,15 @@ WikiService.approve_request = function (url, action,callback) {
 
 	$("#preloader_2").show();
 
-	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
+    console.log("approve_request", Token.get_RequestHeader())
 
 	$.ajax({
 		type: 'POST',
 		url: url,
 		data: {'action': action},
+		beforeSend : function( xhr ) {
+        	xhr.setRequestHeader( "Authorization", Token.token_type() +" "+ Token.acces_token() );
+    	}
 	})
 	.done(function(response){
 		if(callback)
