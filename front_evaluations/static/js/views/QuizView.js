@@ -6,7 +6,7 @@ var EvaluationsView = {};
 //inicializa los formularios 
 EvaluationsView.initialize = function(form, url, callback)
 {
-	
+	console.log('entro')
 	/*
 	* 1 - Set form name
 	* 2 - Get form from service

@@ -11,24 +11,67 @@
 		<h3 class="titulos">Pregunta Multi-Opción</h3>
 		<br><br>
 		<div class="col-md-7 col-sm-7 col-xs-7  ">
-			<form class="" id="form_mc" hidden>
-				<div id="form_mc_answer" hidden>
-					<div class="list_answer"></div>
-					<button class="btn btn-default pull-right" type="button" id="add_input">Agregar</button>
-	      		</div>
-	      		
-				<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
-			</form>
+			<form  id="form_mc" hidden>
 
-	      	<br><br>
-	      	<hr>
-	      	
+				<br>
+	      		<h3 class="titulos">Respuestas</h3>
+	      		<br>
+	      		<div class="col-md-12" style="border-bottom:1px solid #ccc; margin-bottom: 20px;">
+	      		<div class="col-md-8" style=" ">
+	    			Contenido
+				</div>
+				<div class="col-md-4" style="text-align:center">
+	    			Correcta
+				</div>
+				</div>
+				<br>
+				<div id="form_mc_answer" >
+	      		
+	      		<div class="list_answer row">
+					<form class="form-inline">
+
+						<div class="form-group col-md-8">
+							 <input type="text" class="form-control" id="content_ans" placeholder="Jane Doe">
+						</div>
+						<div class="checkbox col-md-4" style="text-align:center">
+							 <input type="checkbox" id="id_correct">
+						</div>
+					</form>
+				</div>
+				</div>
+				<div class="col-md-12">
+					<button class="btn btn-default pull-right" type="button" id="add_input">Agregar</button>		
+				</div>
+				<div class="col-md-12">
+					<hr>
+					<button class="btn btn-default pull-right" type="submit" id="envia" form= "form_mc" name="action">Crear</button>	
+				</div>	
+			</form>  	
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
 			<h4>Pregunta Multi-Opción</h4>
 			<p> pregunta ..bla bla bla</p>
 		</div>
 	</div>
+
+
+	<div class="table-responsive">
+				<table class="table table-hover">
+	  				<thead>
+						<tr>
+							<th>#</th>
+							<th>Question</th>
+							<th>Categoria</th>
+							<th>Subcategoria</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody id="list-equestion">
+						
+					</tbody>
+				</table>
+			</div>
 {% endblock evaluations_content %}
 
 {% block scripts %}
@@ -41,7 +84,22 @@
 			EvaluationsView.initialize(form_mc, URL_CREATE_QUESTION_MC);
 			EvaluationsView.create_mc(form_mc, ".list_answer")
 
-			
+
+			var counter_answers = 0
+			$("#add_input").click(function(e){
+						counter_answers += 1;
+						console.log('click')
+						var new_answer = $(list_answers[0]).clone();
+						console.log(new_answer)
+						$(new_answer).attr("id", "answer-"+counter_answers)
+						$(new_answer).find("#id_content").val("");
+						form_mc_an.prepend(new_answer);
+						
+			});
+
+
+
+			/*
 			EvaluationsView.initialize(
 				list_answers,
 				URL_CREATE_ANSWER_MC,
@@ -63,13 +121,12 @@
 					});
 
 
-				});
+				});*/
 
 
 			})
 						
 
-		});
 	</script>
 	
 {% endblock scripts %}

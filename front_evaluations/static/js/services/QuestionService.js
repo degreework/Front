@@ -11,6 +11,10 @@ QuestionService.prototype.create = function (url, data, callback) {
 	this.doPOST(url, data, callback);
 }
 
+QuestionService.prototype.dispatch = function (url, data, callback) {
+	console.log("QuizService:create")
+	this.doPOST2(url, data, callback);
+}
 
 QuestionService.prototype.retrieve = function (url, callback) {
 	console.log("QuestionService:retrieve")

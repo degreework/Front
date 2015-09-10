@@ -25,29 +25,33 @@ EvaluationsView.create_mc = function(form, id_list_answers)
 			//primero obtengo todas las repuestas y las paso a un JSON
 			var JSON_answers = {};
 			var key = 0;
-			
+						
 			$(id_list_answers).each(function(){
-				
-				JSON_answers[key] = {
-					'content' : $(this).find("#id_content").val(),
-					'answer': $(this).find("#id_correct").is(":checked")
-				}
-				key += 1;
+				console.log($(this).find("#content_ans").val())	
+				if ($(this).find("#content_ans").val() !== "") {
+					JSON_answers[key]= {
+						'content' : $(this).find("#content_ans").val(),
+						'correct': $(this).find("#id_correct").is(":checked")
+					}
+					key += 1;
+				};
 			})
+
+			// asigna el numero de respuestas creadas a los datos 
+			JSON_answers['number'] = key
 			console.log(JSON_answers)
 			
 			//remuevo las respuestas del formulario o sino no me deja enviar la pregunta
 			$(form).find("."+id_list_answers).remove();
 
-
-
-			//Selecciona todas las opciones del contendor 
+			//Selecciona todas las opciones del contendor de los quiz
 			$("#id_quiz option").attr("selected","selected"); 
 
+			//crea la pregunta mc 
 			var questionService = new QuestionService();
 			var form = EvaluationsView.change_boolean(($(e.target).get(0)))
 			var data = new FormData(form);
-			console.log(data)
+	
 			questionService.create(
 				URL_CREATE_QUESTION_MC,
 				data,
@@ -57,13 +61,11 @@ EvaluationsView.create_mc = function(form, id_list_answers)
 					console.log("pregunta creada")
 					console.log(response.id)
 
-					//asigno a caada respuesta el id de la pregunta
-					$.each(JSON_answers, function(key, value){
-						JSON_answers[key]["id_ask"] = id_ask;
-					})
-					console.log(JSON_answers);
-
-					questionService.create(
+					// asigno el id de la pregunta a los datos 
+					JSON_answers['id_ask'] = id_ask;
+						
+					// despues de crear la pregunta envia el servicio para crear las respuestas 
+					questionService.dispatch(
 						URL_CREATE_MULTIPLE_ANSWER_MC,
 						JSON_answers,
 						function(response)
