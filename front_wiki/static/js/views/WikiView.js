@@ -135,7 +135,7 @@ WikiView.render_version = function(page)
 {
 	$("#wiki_title").text(page.title);
 	$("#wiki_version").text(page.version);
-	$("#markdown").html(markdown.toHTML(page.raw));
+	$("#markdown").html(markdown.toHTML(page.raw.raw));
 	var url = location.origin+'/wiki/'+page.slug;
 	
 	//to approve a request
