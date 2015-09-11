@@ -218,7 +218,8 @@ EvaluationsView.show_table_questions = function(){
 				$('#edit_e').hide()
 
 				$('#form_update_tf').empty()
-				//$('#edit_mc').empty()
+				$('#form_update_mc').empty()
+				$('#form_mc_answer').empty()
 				$('#form_update_e').empty()
 				$('#form_update_e').append(button)
 			})
@@ -234,7 +235,8 @@ EvaluationsView.show_table_questions = function(){
 				$('#edit_e').hide()
 
 				$('#form_update_tf').empty()
-				//$('#edit_mc').empty()
+				$('#form_update_mc').empty()
+				$('#form_mc_answer').empty()
 				$('#form_update_e').empty()
 			})
 
@@ -249,13 +251,16 @@ EvaluationsView.show_table_questions = function(){
 				$('#edit_e').hide()
 
 				$('#form_update_tf').empty()
-				//$('#edit_mc').empty()
+				$('#form_update_mc').empty()
+				$('#form_mc_answer').empty()
 				$('#form_update_e').empty()
+				
+
 			})
 }
 
 
-EvaluationsView.update_question = function(form, id)
+EvaluationsView.update_question = function(form, id, id_list_answers)
 {
 	console.log('update_question')
 	form.submit(function (e) {
@@ -275,11 +280,56 @@ EvaluationsView.update_question = function(form, id)
 			}
 
 			if (e.target.id === 'form_update_mc') {
+
+				//primero obtengo todas las repuestas y las paso a un JSON
+				var JSON_answers = {};
+				var key = 0;
+						
+				$(id_list_answers).each(function(){
+					//console.log('id': $(this).find("#id_answer"))
+					if ($(this).find("#content_ans").val() !== "") {
+						JSON_answers[key]= {
+							'id': $(this).find("#content_ans").attr("name"),
+							'content' : $(this).find("#content_ans").val(),
+							'correct': $(this).find("#id_correct").is(":checked")
+						}
+						key += 1;
+					};
+				})
+
+				// asigna el numero de respuestas creadas a los datos 
+				JSON_answers['number'] = key
+				console.log(JSON_answers)
+			
 				
+				//remuevo las respuestas del formulario o sino no me deja enviar la pregunta
+				$(form).find("."+id_list_answers).remove();
+
+				//Actualiza la pregunta mc 
+				var questionService = new QuestionService();
 				var form = EvaluationsView.change_boolean(($(e.target).get(0)))
 				var data = new FormData(form);
-				questionService.update(URL_UPDATE_QUESTION_MC+id+'/', data, EvaluationsView.update_mc)	
 				
+				questionService.update(
+					URL_UPDATE_QUESTION_MC+id+'/',
+					data,
+					function(response)
+					{
+						console.log("pregunta Actualizada")
+						var id_ask = response.id;
+						console.log(response.id)
+
+						// asigno el id de la pregunta a los datos 
+						JSON_answers['id_ask'] = id_ask;
+
+						// despues de crear la pregunta envia el servicio para Actualizar las respuestas 
+						questionService.dispatch(
+							URL_UPDATE_MULTIPLE_ANSWER_MC,
+							JSON_answers,
+							EvaluationsView.update_mc
+						);
+					}
+				)					
 			}
 
 			if (e.target.id === 'form_update_e') {
@@ -289,6 +339,13 @@ EvaluationsView.update_question = function(form, id)
 				
 			}
 	})
+
+	/*---------------------------------------------*/
+	form.submit(function (e) {
+			e.preventDefault();
+
+			
+	});//end submit
 }
 
 EvaluationsView.update_tf = function(response){
@@ -309,6 +366,7 @@ EvaluationsView.update_e = function(response){
 }
 
 EvaluationsView.update_mc = function(response){
+	
 	$('#edit_mc').hide()
 	$('#list-mcquestion').empty()
 	EvaluationsView.get_all_MCQuestions();

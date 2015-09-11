@@ -31,10 +31,10 @@
 					<form class="form-inline">
 
 						<div class="form-group col-md-8">
-							 <input type="text" class="form-control" id="content_ans" placeholder="Jane Doe">
+							 <input type="text" class="form-control" id="content_ans">
 						</div>
 						<div class="checkbox col-md-4" style="text-align:center">
-							 <input type="checkbox" id="id_correct">
+							 <input type="radio" name="verdict" id="id_correct">
 						</div>
 					</form>
 				</div>
@@ -54,24 +54,6 @@
 		</div>
 	</div>
 
-
-	<div class="table-responsive">
-				<table class="table table-hover">
-	  				<thead>
-						<tr>
-							<th>#</th>
-							<th>Question</th>
-							<th>Categoria</th>
-							<th>Subcategoria</th>
-							<th>Editar</th>
-							<th>Eliminar</th>
-						</tr>
-					</thead>
-					<tbody id="list-equestion">
-						
-					</tbody>
-				</table>
-			</div>
 {% endblock evaluations_content %}
 
 {% block scripts %}
@@ -92,39 +74,12 @@
 						var new_answer = $(list_answers[0]).clone();
 						console.log(new_answer)
 						$(new_answer).attr("id", "answer-"+counter_answers)
-						$(new_answer).find("#id_content").val("");
+						$(new_answer).find("#content_ans").val("");
 						form_mc_an.prepend(new_answer);
 						
 			});
 
-
-
-			/*
-			EvaluationsView.initialize(
-				list_answers,
-				URL_CREATE_ANSWER_MC,
-				function()
-				{
-					form_mc_an.show();
-					var counter_answers = 0;
-					document.getElementById("id_question").type = "hidden";
-
-					$(list_answers[0]).attr("id", "answer-"+counter_answers)
-
-					$("#add_input").click(function(e){
-						counter_answers += 1;
-						var new_answer = $(list_answers[0]).clone();
-						$(new_answer).attr("id", "answer-"+counter_answers)
-						$(new_answer).find("#id_content").val("");
-						form_mc_an.prepend(new_answer);
-						
-					});
-
-
-				});*/
-
-
-			})
+		})
 						
 
 	</script>
