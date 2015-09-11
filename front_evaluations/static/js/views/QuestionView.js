@@ -238,6 +238,7 @@ EvaluationsView.show_table_questions = function(){
 				$('#form_update_mc').empty()
 				$('#form_mc_answer').empty()
 				$('#form_update_e').empty()
+				$('#form_update_tf').append(button)
 			})
 
 			$('#MC').click(function(){
@@ -369,6 +370,7 @@ EvaluationsView.update_mc = function(response){
 	
 	$('#edit_mc').hide()
 	$('#list-mcquestion').empty()
+	$('#form_mc_answer').empty()
 	EvaluationsView.get_all_MCQuestions();
 	$('#show_').show()
 	$('#table-mc').show()
