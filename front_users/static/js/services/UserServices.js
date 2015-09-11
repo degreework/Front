@@ -5,16 +5,14 @@ var UserService = {};
 */
 UserService.update_password = function(url, data, callback)
 {
-	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
-
+	
 	$.ajax({
 		type: 'POST',
 		url: url,
 		data: data,
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
 	})
 	.done(function(response){
 		console.log(response)
@@ -81,11 +79,6 @@ UserService.update_user = function(url, form)
 	remove_all_errors(formSerialized);
 
 
-	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
 	
 	$.ajax({
 		type: 'PUT',
@@ -93,6 +86,9 @@ UserService.update_user = function(url, form)
 		data: data,
 		processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
+    	beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
 	})
 	.done(function(response){
 		
@@ -188,21 +184,19 @@ UserService.get_mini_user = function (url) {
 //trae la info de un solo usuario 
 UserService.getUser = function(id){
 
-	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
 
 	$.ajax({
 		type: 'GET',
 		url: URL_DETAIL_USERS+id+"/",
 		async: true,
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
+    	}
 	})
 	.done(function(response){
-		
+		console.log(response)
 		$('.resume_user_profile').text(response.first_name + " " + response.last_name);
-		$('.pic_user_profile').attr("src",'http://127.0.0.1:8080'+response.thumb[1]);
+		$('.pic_user_profile').attr("src",'http://127.0.0.1:8080'+response.thumb[0]);
 	})
 	.fail(function(error){		
 		console.log(error);
@@ -237,16 +231,15 @@ UserService.getUser = function(id){
 // trae todos los usuarios 
 UserService.get_users = function (callback) {
 	
-	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
+	
 
 	$.ajax({
 		type: 'GET',
 		url: URL_BRING_ALL_USERS,
 		async: true,
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader(  "Authorization",Token.get_RequestHeader() );
+    	}
 	})
 	.done(function(response){
 		if (callback) {
@@ -292,17 +285,14 @@ UserService.confirmPassword = function (url,form) {
 	remove_all_errors(formSerialized);
 
 	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
-
-	$.ajax({
 		type: 'POST',
 		url: url,
 		data: formData,//formSerialized,
     	processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
+    	beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
 	})
 	.done(function(response){
 		/*
