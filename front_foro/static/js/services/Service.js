@@ -6,16 +6,12 @@ Service.prototype.doGET = function(url, callback)
 {
 	//console.log('Service:doGET');
 	
-
-	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
-
 	$.ajax({
 		type: 'GET',
 		url: url,
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
+    	}
 	})
 	.done(function(response){
 		if(callback)
@@ -61,6 +57,9 @@ Service.prototype.doPOST = function(url, data, callback)
     		xhr.setRequestHeader( Token.get_RequestHeader() );
     	}
     });
+
+    console.log("do POST")
+    console.log(Token.get_RequestHeader())
 
 	$.ajax({
 		type: 'POST',
