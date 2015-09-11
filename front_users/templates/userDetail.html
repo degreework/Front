@@ -1,32 +1,15 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
-	<div class="col-md-12 capacity">
-
-		<!--<img class="pic_profile .img-responsive img-circle" src="">-->
-		<!--<div class="row nav_foro">
-			<img class="pic_user_profile .img-responsive img-circle" src="">
-			<h2 class="resume_user_profile"></h2>
-		</div>-->
-		<div class="row header_profile">
+	<div class="col-md-8 base capacity">
+		<br>
+		<div class="margen_contenido">
 			<div class="picture">
-				<img class="pic_profile .img-responsive img-rounded" src="">		
+				<img class="pic_user_profile .img-responsive img-rounded" src="">		
 			</div>
 			<div class="col-md-11 col-sm-11 col-md-offset-1 navigation">
 				<h2 class="resume_user_profile"></h2>			
 			</div>
-			
-		</div>
-		<br>
-		<div class="margen_contenido">
-			<div>
-				<form id="form-comment">
-					<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
-				</form>	
-			</div>
-			<div id="list-comment" class="col-md-9 col-md-offset-2">
-				
-			</div>
-			<br>
+
 			Actividad usuario detalle 
 		</div>
 
@@ -46,15 +29,7 @@
 		// se ontiene la informacion del usuario para el perfil 
 		UserService.getUser(id);
 		
-		//se traen los comentarios publicados en el perfil 
-		ForumService.get_Comments();
+	
 		
-		//formulario para publicar comentarios 
-		form_comment_ask = $("#form-comment");
-		create_form(URL_CREATE_COMMENT, form_comment_ask, 'OPTIONS');
-		form_comment_ask.submit(function (e) {
-			e.preventDefault();
-			CommentService.create(form_comment_ask, URL_CREATE_COMMENT, ForumService.append_comment_to_ask);
-		})
 </script>
 {% endblock scripts %}

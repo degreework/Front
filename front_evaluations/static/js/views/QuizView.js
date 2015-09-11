@@ -235,7 +235,8 @@ EvaluationsView.get_Quiz = function(){
 		e.preventDefault();
 		var quizService = new QuizService();
 		var data = JSON.parse(localStorage.getItem('user'))
-		quizService.dispatch(URL_CREATE_SITTING+id+'/', data, EvaluationsView.create_sitting_session)
+
+		//quizService.dispatch(URL_CREATE_SITTING+id+'/', data, EvaluationsView.create_sitting_session)
 	})
 
 	var quizService = new QuizService();
@@ -264,6 +265,7 @@ EvaluationsView.render_answer_mc = function(answers){
 		
 		answer = answers[i]
 		answer = JSON.parse(answer)
+		console.log(answer)
 
 		var ul = document.createElement("ul");
 		ul.className = 'list-group'
@@ -278,7 +280,7 @@ EvaluationsView.render_answer_mc = function(answers){
 		var input = document.createElement("input");
 		input.type = 'radio';
 		input.name = 'answered';
-		input.value = answers.id;
+		input.value = answer.id;
 
 		li.appendChild(input)
 		li.appendChild(label)
@@ -400,6 +402,15 @@ EvaluationsView.render_question = function(question){
 	$('#question_content').text(question.content)
 	console.log(question)
 	EvaluationsView.render_form_question(question)	
+
+	/*
+	if (question.clase === 'Essay style question') {
+		
+		$('#question-status').text('Esta es una pregunta abierta, la califica el docente ')
+		$('#container-continue').css('border', '1px solid #ccc')
+		$('#container-check').hide()
+		$('#container-continue').show()
+	};*/
 }
 
 // renderiza cuando califican una pregunta 
@@ -468,7 +479,7 @@ EvaluationsView.btn_check = function(form){
 			var quizService = new QuizService();
 			var data = ($(e.target).get(0))
 			data = $(data).serialize()
-			//console.log(data)
+			console.log(data)
 			
 			if (data.search('answered') !== -1) {
 				quizService.dispatch(URL_QUALIFY_QUIZ, data, EvaluationsView.render_check)
@@ -616,8 +627,9 @@ EvaluationsView.render_results = function(sitting){
 	answers = sitting.questions_with_user_answers
 	//console.log(answers)
 	
+	//verifico q la pregunta sea correcta o no en la lista de respuestas incorrectas
+	user_answers = JSON.parse(sitting.user_answers)
 
-	index = 0
 	$.each(answers, function(key, value) {
 
 		var container = document.createElement("tr");
@@ -631,20 +643,15 @@ EvaluationsView.render_results = function(sitting){
 
 		var qualify = document.createElement("td");
 		
-		 
-		//verifico q la pregunta sea correcta o no en la lista de respuestas incorrectas
-		user_answers = JSON.parse(sitting.user_answers)
-		dato = sitting.incorrect_questions.split(',')
-		dato = dato[index]
-		index++
+		// se verifica si es correcta o no la respuesta
 		$.each(user_answers, function(k, v) {
-			
-			if ( k === dato) {
-				$(qualify).text('incorrecta')
-				return false
-			}else{
-				$(qualify).text('correcta')
-			};
+			if ( v === value) {
+				if (sitting.incorrect_questions.search(k) === -1) {
+					$(qualify).text('correcta')
+				}else{
+					$(qualify).text('incorrecta')
+				}
+			}
 		})
 	
 		//se pega a los contenedores 

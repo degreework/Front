@@ -20,16 +20,14 @@ WikiService.doRequest = function (form, url, method, callback)
 	remove_all_errors(formSerialized);
 	console.log(Token.get_RequestHeader())
 
-	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
 
 	$.ajax({
 		type: method,
 		url: url,
 		data: formSerialized,
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
 	})
 	.done(function(response){
 		/*
@@ -75,14 +73,11 @@ WikiService.get_page = function (url, callback) {
 	$("#preloader_2").show();
 
 	$.ajax({
+		type: 'GET',
+		url: url,
 		beforeSend : function( xhr ) {
     		xhr.setRequestHeader( Token.get_RequestHeader() );
     	}
-    });
-
-	$.ajax({
-		type: 'GET',
-		url: url,
 	})
 	.done(function(response){
 		if(callback)
@@ -235,16 +230,13 @@ WikiService.update_page = function(url, data)
 
 
 WikiService.get_list = function (url, callback) {
-
-	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
     
 	$.ajax({
 		type: 'GET',
 		url: url,
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    	}
 	})
 	.done(function(response){
 		if (callback) {callback(response)};			
