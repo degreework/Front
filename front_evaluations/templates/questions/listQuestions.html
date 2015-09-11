@@ -119,8 +119,49 @@
 
 	<!-- formulario mc -->
 	<div class="col-md-12" id="edit_mc" hidden>
-		Formulario preguna y respuestas :/
-		form_update_mc
+		<br><br>
+		<div class="col-md-7 col-sm-7 col-xs-7  ">
+			<form  id="form_update_mc" hidden>
+			</form>  	
+				<br>
+	      		<h3 class="titulos">Respuestas</h3>
+	      		<br>
+	      		<div class="col-md-12" style="border-bottom:1px solid #ccc; margin-bottom: 20px;">
+	      		<div class="col-md-8" style=" ">
+	    			Contenido
+				</div>
+				<div class="col-md-4" style="text-align:center">
+	    			Correcta
+				</div>
+				</div>
+				<br>
+				<div id="form_mc_answer" >
+	      		
+	      		<!--<div class="list_answer row">
+					<form class="form-inline">
+
+						<div class="form-group col-md-8">
+							 <input type="text" class="form-control" id="content_ans" placeholder="">
+						</div>
+						<div class="checkbox col-md-4" style="text-align:center">
+							 <input type="radio" id="id_correct">
+						</div>
+					</form>
+				</div>-->
+				</div>
+				<!--<div class="col-md-12">
+					<button class="btn btn-default pull-right" type="button" id="add_input">Agregar</button>		
+				</div>-->
+				<div class="col-md-12">
+					<hr>
+					<button class="btn btn-default pull-right" type="submit" id="envia" form= "form_update_mc" name="action">Actualizar</button>	
+				</div>	
+			
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
+			<h4>Pregunta Multi-Opción</h4>
+			<p> pregunta ..bla bla bla</p>
+		</div>
 	</div>
 
 	
@@ -134,9 +175,9 @@
         jQuery(document).ready(function($) {
 			//form question essay
 			EvaluationsView.show_table_questions()
-			EvaluationsView.get_all_TFQuestions();
+			//EvaluationsView.get_all_TFQuestions();
 			EvaluationsView.get_all_MCQuestions();
-			EvaluationsView.get_all_EQuestions(); 
+			//EvaluationsView.get_all_EQuestions(); 
 
 			
 		});

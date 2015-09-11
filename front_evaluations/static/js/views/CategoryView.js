@@ -95,6 +95,53 @@ EvaluationsView.redirect_Categories = function(response){
 	location.reload();
 }
 
+EvaluationsView.render_form_answerMC = function(answers){
+	
+	
+
+	for (i = 0; i < answers.length; i++) {
+		
+		// se convierte la respuesta a Json 
+		answer = answers[i]
+		answer = JSON.parse(answer)
+
+		// se crea el formulario de las respuestas con los valores actuales 
+		form_div = document.createElement('div')
+		form_div.className = 'list_answer row'
+
+		form = document.createElement('form')
+
+		content_div = document.createElement('div')
+		content_div.className = 'form-group col-md-8'
+		content_input = document.createElement('input')
+		content_input.className = 'form-control'
+		content_input.id = 'content_ans'
+		content_input.type = 'text'
+		content_input.value = answer.content
+		content_input.name = answer.id
+		content_div.appendChild(content_input)
+
+
+		correct_div = document.createElement('div')
+		correct_div.className = 'checkbox col-md-4'
+		$(correct_div).css('text-align', 'center')
+		correct_input = document.createElement('input')
+		correct_input.id = 'id_correct'
+		correct_input.type = 'radio'
+		correct_input.name = 'verdict'
+		correct_div.appendChild(correct_input)
+
+		if (answer.correct == 'True') {
+			$(correct_input).prop('checked', true);
+		};
+
+		form_div.appendChild(content_div)
+		form_div.appendChild(correct_div)
+		$("#form_mc_answer").prepend(form_div);
+	}
+
+}
+
 EvaluationsView.render_parametros = function(form, response){
 
 	$.each(response, function(key, value) {	
@@ -108,6 +155,8 @@ EvaluationsView.render_parametros = function(form, response){
 							2.1.1 coloca el valor del atributo
 							2.1.2 verifica si el campo es quiz para seleccionar las opciones guardadas
 								selecciona las opciones guardadas
+							2.1.3 verifica si la pregunta tiene respuestas (MC_QUESTION)
+								llama funcion para renderizar las respuestas 
 						si no 
 						2.2 en el desplegable selecciona la opcion con el id del nombre 
 					si no 
@@ -140,6 +189,11 @@ EvaluationsView.render_parametros = function(form, response){
 							//las pasaal selector de elegidos
 							$('#id_quiz_from option:selected').appendTo("#id_quiz");
 						}
+
+						if (key == 'answers') {
+							console.log('toma tus respuestas')
+							EvaluationsView.render_form_answerMC(value)
+						};
 				
 					}else{
 						// desplegables categoria y sub_categoria
@@ -170,15 +224,15 @@ EvaluationsView.render_parametros = function(form, response){
 	}
 
 	if (form.selector === '#form_update_tf') {
-		EvaluationsView.update_question(form, response.id)
+		EvaluationsView.update_question(form, response.id, '')
 	}
 
 	if (form.selector === '#form_update_mc') {
-		EvaluationsView.update_question(form, response.id)
+		EvaluationsView.update_question(form, response.id, '.list_answer')
 	}
 
 	if (form.selector === '#form_update_e') {
-		EvaluationsView.update_question(form, response.id)
+		EvaluationsView.update_question(form, response.id, '')
 	}
 	
 }
