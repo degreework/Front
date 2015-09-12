@@ -1,0 +1,27 @@
+{% extends 'activities_parent.html' %}
+{% block contenido %}
+	<div class="col-md-10 col-md-offset-1 capacity">
+		<div id="activitie" hidden>
+		<button id="btn_active_send" class="btn btn-default" type="button">Enviar Actividad</button>
+		</div>
+
+		<div id="msg_succes" hidden>La actividad ha sido enviada</div>
+		<div id="send_activitie" hidden>
+			<form id="form_send_activitie">
+				<button class="btn btn-default pull-right" type="submit" name="action">Enviar</button>
+			</form>
+		</div>
+	</div>
+	
+{% endblock %}
+{% block scripts %}
+
+	<script>
+	var url = location.pathname.split("/");
+	ACTIVITIE_ID = url[url.length-1];
+
+	var activitie = new ActivitieParentView();
+	activitie.load_detail(ACTIVITIE_ID, $("#activitie"));
+
+	</script>
+{% endblock scripts %}

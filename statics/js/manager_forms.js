@@ -98,6 +98,10 @@ function render_form(method, form , response, callback, params)
 					//set max length to input
 					input.maxLength = 10;
 				}
+				else if( 'datetime' == value.type)
+				{
+					input.type = "datetime-local";
+				}
 				else if('choice' == value.type || 'plan' == key )
 				{
 
@@ -155,6 +159,22 @@ function render_form(method, form , response, callback, params)
 					label.id = 'imagen'
 					//set text to label
 					label.appendChild(document.createTextNode('Selecciona una foto de perfil'));
+					field_div.appendChild(label);
+					
+					input.type = 'file';
+
+					//set max length to input
+					input.maxLength = null
+					input.className = null;
+				}
+				else if('file upload' == value.type)
+				{
+
+					//creat label for input
+					var label = document.createElement("label");
+					label.id = 'file'
+					//set text to label
+					label.appendChild(document.createTextNode('Selecciona un archivo'));
 					field_div.appendChild(label);
 					
 					input.type = 'file';

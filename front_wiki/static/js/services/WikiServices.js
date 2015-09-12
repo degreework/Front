@@ -18,7 +18,6 @@ WikiService.doRequest = function (form, url, method, callback)
 
 	//remove all errors from before
 	remove_all_errors(formSerialized);
-	console.log(Token.get_RequestHeader())
 
 
 	$.ajax({
@@ -26,7 +25,7 @@ WikiService.doRequest = function (form, url, method, callback)
 		url: url,
 		data: formSerialized,
 		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    		xhr.setRequestHeader("Authorization", Token.get_RequestHeader() );
     	}
 	})
 	.done(function(response){
@@ -76,7 +75,7 @@ WikiService.get_page = function (url, callback) {
 		type: 'GET',
 		url: url,
 		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
     	}
 	})
 	.done(function(response){
@@ -128,14 +127,13 @@ WikiService.approve_request = function (url, action,callback) {
 
 	$("#preloader_2").show();
 
-    console.log("approve_request", Token.get_RequestHeader())
 
 	$.ajax({
 		type: 'POST',
 		url: url,
 		data: {'action': action},
 		beforeSend : function( xhr ) {
-        	xhr.setRequestHeader( "Authorization", Token.token_type() +" "+ Token.acces_token() );
+        	xhr.setRequestHeader( "Authorization", Token.get_RequestHeader());
     	}
 	})
 	.done(function(response){
@@ -235,7 +233,7 @@ WikiService.get_list = function (url, callback) {
 		type: 'GET',
 		url: url,
 		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
     	}
 	})
 	.done(function(response){

@@ -18,7 +18,7 @@ CommentService.create =function(form, url, callback)
     	processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
     	beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
     	}
 	})
 	.done(function(response){
@@ -76,7 +76,7 @@ CommentService.get_Comments = function (url, callback) {
 		url: url,
 		async: true,
 		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
     	}
 	})
 	.done(function(response){
@@ -133,7 +133,7 @@ CommentService.update = function(form, url, callback)
     	processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
     	beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
     	}
 	})
 	.done(function(response){
@@ -187,7 +187,7 @@ CommentService.delete_ = function(div, url, callback)
 		type: 'DELETE',
 		url: url,
 		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
     	}
 	})
 	.done(function(response){
