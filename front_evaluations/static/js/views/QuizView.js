@@ -36,11 +36,20 @@ EvaluationsView.initialize = function(form, url, callback)
 // cambia el valor de ON por un True en un campo tipo boolean 
 EvaluationsView.change_boolean = function(data){
 	
+	//$(data).find("#id_correct").val( $(data).find("#id_correct").is(":checked"))
 	for (i = 0; i < $(data).find('input').length; i++) {
-		if($(data).find('input')[i].value=== 'on'){
+		if($(data).find('input')[i].type === 'checkbox'){
 
-			$(data).find('input')[i].value =  true
-			//console.log($(data).find('input')[i].value)
+			//console.log( $($(data).find('input')[i]).is(':checked')   )
+			$(data).find('input')[i].value = $($(data).find('input')[i]).is(':checked') 
+			//$(data).find('input')[i].value =  true
+			/*if ($($(data).find('input')[i]).is(':checked')) {
+				console.log('entro')
+				$(data).find('input')[i].value =  true
+
+			}else{
+				$(data).find('input')[i].value =  false				
+			}*/
 		}
 	}
 	return data
@@ -216,6 +225,13 @@ EvaluationsView.update_quiz = function(form, id)
 			var quizService = new QuizService();
 			var form = EvaluationsView.change_boolean(($(e.target).get(0)))
 			var data = new FormData(form);
+			
+			data.append("exam_paper", $('#id_exam_paper').val());
+			data.append("random_order", $('#id_random_order').val());
+			data.append("answers_at_end", $('#id_answers_at_end').val());
+			data.append("single_attempt", $('#id_single_attempt').val());
+			data.append("correct", $('#id_draft').val());
+
 			quizService.update(URL_DETAIL_QUIZ+id+'/', data, EvaluationsView.redirect_Categories)
 	})
 }
@@ -398,7 +414,7 @@ EvaluationsView.render_form_question = function(question){
 //renderiza contenido e imagen de la pregunta 
 EvaluationsView.render_question = function(question){
 	
-	$('#img-question').attr('src',question.figure)
+	$('#img-question').attr('src','http://127.0.0.1:8080'+question.figure)
 	$('#question_content').text(question.content)
 	console.log(question)
 	EvaluationsView.render_form_question(question)	

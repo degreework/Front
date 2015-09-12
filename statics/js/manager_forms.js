@@ -193,6 +193,7 @@ function render_form(method, form , response, callback, params)
 					//field_div.appendChild(br);
 					input.type = 'checkbox';
 					input.className = 'pull-right';
+					input.value = false;
 
 					//set max length to input
 					//input.maxLength = 100
