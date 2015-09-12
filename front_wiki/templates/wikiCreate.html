@@ -6,14 +6,21 @@
 {% block wiki_content %}
 <div class="margen_contenido">
 
-	<div class="col-md-12 margen_contenido" id="editaded_page" hidden >
+
+
+	<div class="col-md-12 margen_contenido" >
 		
 		<div class="row">
 			<div class="col-md-12 base">
-				<div class="col-md-6">
+				<div class="col-md-6" id="editaded_page" hidden >
 					Gracias por contribuir a la enciclopedia, la página que acabas de crear pasará a revisión por el docente para ser aprobada.
 					Pueder ver el estado <a id="url_wiki_request" href="">aquí</a>
 				</div>
+				
+				<div class="col-md-6" id="editaded_page_admin" hidden >
+					Gracias por contribuir a la enciclopedia, la página que acabas de crear ya está disponible <a id="url_wiki_request" href="">aquí</a>
+				</div>
+
 			</div>
 		</div>
 

@@ -82,10 +82,22 @@ WikiView.create_succes = function(wiki)
 	//debug_info("- create_succes")
 	Notify.show_success("Wiki", "Página creada");
 
-	var url = wiki.page.slug+'..'+JSON.parse(wiki.page.extra_data).parent;
-	$("#url_wiki_request").attr('href', url);
-	$("#editaded_page").fadeIn();
 	$("#formContent").fadeOut()
+
+	var url = '';
+
+	//dependiendo de los permisos de usuario se muesttra un mensaje u otro
+	var s = StorageClass.getInstance();
+	if(-1 != s.storage.get("permissions").indexOf("wiki.delete_request")){
+		$("#editaded_page_admin").fadeIn();
+		$("#url_wiki_request_admin").attr('href', "WikiModel.generate_url(wiki.page.slug)");
+
+	}else
+	{
+		$("#editaded_page").fadeIn();
+		url = wiki.page.slug+'..'+JSON.parse(wiki.page.extra_data).parent;
+		$("#url_wiki_request").attr('href', url);
+	}
 
 }
 
@@ -166,8 +178,8 @@ WikiView.render_version = function(page)
 
 WikiView.render_page = function(page)
 {
-	console.log("render_page")
-	console.log(page)
+	//console.log("render_page")
+	//console.log(page)
 	$("#wiki_title").text(page.title);
 	$("#wiki_version").text(page.version);
 	$("#wiki_slug").text(page.slug)
@@ -183,7 +195,7 @@ WikiView.render_page = function(page)
 	edit.addEventListener(
 		'click',
 		function(e){
-			console.log("editar")
+			//console.log("editar")
 			create_form(
 				URL_CREATE_PAGE_WIKI,
 				$("#form_create_wiki"),
@@ -196,24 +208,25 @@ WikiView.render_page = function(page)
 	
 	//comments
 	var comentariosWiki = new CommentView(
-		page.id_thread,
+		page.thread,
 		$("#form-comment-wiki"),
 		$('#list-comment-wiki'),
 		$(".load-comment-wiki")
 	);		
 	
 	comentariosWiki.load();
-	comentariosWiki.load_create_comment(page.id_thread);
+	comentariosWiki.load_create_comment(page.thread);
 
 }
 
 function call()
 {
-	console.log("form creatted para ");
+	//console.log("form creatted para ");
 	var slug = $("#wiki_slug").text();
 	//oculta los campos que no se necesitan
 	$("#id_slug").remove();
 	$("#id_raw").hide();
+	$("#id_raw").val($("#markdown").text())
 
 	//asigna el valor actual del titulo al input para el titulo
 	$("#id_title").val($("#wiki_title").text())
@@ -235,9 +248,24 @@ function call()
 		var url = URL_UPDATE_PAGE_WIKI.replace(/\%slug%/g, slug);
 		WikiService.edit_page(e.target, url,
 			function(response){
+				
 				$("#form_create_wiki").fadeOut();
-				$("#editaded_page").fadeIn();
-				var url = response.page.slug+'..'+JSON.parse(response.page.extra_data).parent;
+				var url = '';
+
+				//dependiendo de los permisos de usuario se muesttra un mensaje u otro
+				var s = StorageClass.getInstance();
+				if(-1 != s.storage.get("permissions").indexOf("wiki.delete_request")){
+					$("#editaded_page_admin").fadeIn();
+					url = WikiModel.generate_url(response.page.slug)
+
+				}else
+				{
+					$("#editaded_page").fadeIn();
+					url = response.page.slug+'..'+JSON.parse(response.page.extra_data).parent;
+				}
+				
+
+
 				$("#url_wiki_request").attr('href', url);
 			})
 
@@ -261,7 +289,7 @@ WikiView.render_list = function(parent_container, response)
 {
 	for (i = 0; i < response.length; i++) { 		
 		// se crea el html   
-		console.log(response[i])  		
+		//console.log(response[i])  		
 
 		var container = document.createElement("div");
 		container.className = 'col-md-12 page_list'
@@ -299,7 +327,7 @@ WikiView.show_all_request = function(container)
 
 WikiView.render_request = function(list)
 {
-	console.log(list)
+	//console.log(list)
 	for (i = 0; i < list.length; i++) {
 
 		var id = list[i].id;
@@ -356,8 +384,8 @@ WikiView.show_all_history = function(container)
 
 WikiView.render_history = function(list)
 {
-	console.log("WikiView:render_history")
-	console.log(list)
+	//console.log("WikiView:render_history")
+	//console.log(list)
 
 	for (i = 0; i < list.length; i++) {
 
