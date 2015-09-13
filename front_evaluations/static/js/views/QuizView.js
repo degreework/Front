@@ -705,21 +705,136 @@ EvaluationsView.render_marking_quiz = function(parent_container, response)
 
 		var quiz = document.createElement("td");
 		$(quiz).text(response[i].quiz)
-
-
-		var complete = document.createElement("td");
-		$(complete).text(jQuery.timeago(response[i].end))
-
 				
 		var score = document.createElement("td");
 		$(score).text(response[i].get_percent_correct)
 
+		var pendientes = document.createElement("td");
+		console.log(response[i].qualify)
+		preguntas = response[i].qualify
+		
+
+		var btn_qualify = document.createElement("td");
+
+		if (preguntas.length > 0) {
+			$(pendientes).text('si')
+			
+			
+			content_qualify = document.createElement('a') 
+			content_qualify.className = 'btn btn-default'
+			$(content_qualify).text('Calificar')
+			content_qualify.name = i
+			content_qualify.addEventListener('click', function(e){ EvaluationsView.render_change_qualify(response, e.target.name) }, false);
+			btn_qualify.appendChild(content_qualify)
+
+		}else{
+			$(pendientes).text('no')
+		}
+		
 		//se pega a los contenedores 
 		container.appendChild(user);
 		container.appendChild(quiz);
-		container.appendChild(complete);
+		//container.appendChild(complete);
 		container.appendChild(score);
-		
+		container.appendChild(pendientes)
+		container.appendChild(btn_qualify)
 		parent_container.prepend(container);
 	}
+}
+
+EvaluationsView.render_change_qualify = function(response, index){
+	sitting = response[index]
+	console.log(sitting.qualify)
+	preguntas = sitting.qualify
+	
+	user_answers = JSON.parse(sitting.user_answers)
+	answers = sitting.questions_with_user_answers
+
+	title_quiz = document.createElement('h3')
+	$(title_quiz).text('Quiz: '+sitting.quiz)
+	$(title_quiz).prependTo('#title')
+
+	$.each(answers, function(key, value) {
+		$.each(user_answers, function(k, v) {
+			if ( v === value) {
+				if (sitting.qualify.search(k) !== -1) {
+					
+					console.log(value)
+
+					var div_question = document.createElement('div')
+					div_question.className = 'col-md-12'
+					div_question.id = 'request-'+k
+					/*
+					padding: 5px 5px 35px 5px;
+    				border-bottom: 1px solid #ccc;
+					*/
+					label = document.createElement('h4')
+					$(label).text('Pregunta:')
+					question = document.createElement('p')
+					$(question).text(key)
+
+					label1 = document.createElement('h4')
+					$(label1).text('Respuesta de ' + sitting.user)
+					answer = document.createElement('p')
+					$(answer).text(value)
+
+					label2 = document.createElement('h4')
+					$(label2).text('Calificar')
+					btn_correct  = document.createElement('button')
+					btn_correct  .className = 'btn btn-default'
+					btn_correct.name = '#request-'+k
+					$(btn_correct).text('correcta')
+					$(btn_correct).css('margin-right', '20px')
+					btn_correct.addEventListener('click', function(e){ EvaluationsView.change_qualify(sitting, e.target.name, 'correcta') }, false);
+					  
+
+					btn_incorrect = document.createElement('button')
+					btn_incorrect.className = 'btn btn-default'
+					btn_incorrect.name = '#request-'+k
+					$(btn_incorrect).text('incorrecta')
+					btn_incorrect.addEventListener('click', function(e){ EvaluationsView.change_qualify(sitting, e.target.name, 'incorrecta') }, false);
+
+					div_question.appendChild(label)
+					div_question.appendChild(question)
+					div_question.appendChild(label1)
+					div_question.appendChild(answer)
+					div_question.appendChild(label2)
+					div_question.appendChild(btn_correct)
+					div_question.appendChild(btn_incorrect)
+					$('#container_request').prepend(div_question)
+
+
+				}
+			}
+		})
+	})
+
+	$('#marking').hide()
+	$('#container_qualify').show()
+}
+
+EvaluationsView.change_qualify = function(sitting, div , qualify){
+
+	id_question = div.split('-')
+	id_question = id_question[1]
+	console.log(id_question)
+
+	console.log('change_qualify')
+	if (qualify === 'correcta') {
+		var quizService = new QuizService();
+		var data = JSON.parse('{ "id_sitting":'+sitting.id+', "id_question":'+id_question+' }')
+		quizService.dispatch(
+			URL_CHANGE_QUALIFY_QUIZ ,
+			data,
+			function(response)
+						{
+							$(div).fadeOut()
+						}
+			)
+
+		
+	}else{
+		console.log('incorrecta')
+		$(div).fadeOut()
+	};
 }
