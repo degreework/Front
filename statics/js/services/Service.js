@@ -256,15 +256,13 @@ Service.prototype.doPUT2 = function(url, data, callback)
 
 Service.prototype.doDELETE = function(url, div, callback)
 {
-	//console.log('Service:doGET');
-	$.ajax({
-		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
-    	}
-    });
+	//console.log('Service:doDELETE');
 	$.ajax({
 		type: 'DELETE',
 		url: url,
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
+    	}
 	})
 	.done(function(response){
 		if(callback)

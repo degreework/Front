@@ -4,7 +4,7 @@
 
 	<div class="col-md-12 capacity">
 		
-		<div class="list_activities">
+		<div id="activitie" class="list_activities">
 
 		</div>
 	</div>
@@ -13,5 +13,7 @@
 
 {% block scripts %}
 	<script>
+		var activitie = new ActivitieParentView();
+		activitie.list(URL_ALL_ACTIVITIE_PARENT);
 	</script>
 {% endblock scripts %}

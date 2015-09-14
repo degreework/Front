@@ -2,12 +2,16 @@
 {% block contenido %}
 	<div class="col-md-12 capacity">
 		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-1 margen_contenido">
-		<div id="msg_succes" hidden>
-			La actividad ha sido publicada
-		</div>
-			<form id="form_create_activitie">
-				<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
-			</form>
+		
+	<!--aqui se muestran los mensajes de succes-->
+		<div id="msg_succes" hidden></div>
+		
+
+	<!--formulario para crear una actividad (parent)-->
+		<form id="form_create_activitie" hidden>
+			<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
+		</form>
+		
 		</div>
 	</div>
 
@@ -16,7 +20,9 @@
 {% block scripts %}
 	<script>
 	var activitie = new ActivitieParentView();
-	var formAvtivitie = new ActivitieParentForm($("#form_create_activitie"))
+	var formAvtivitie = new ActivitieParentForm(
+		$("#form_create_activitie"),
+		ActivitieParentView.prototype.handler_created_form)
 	
 	</script>
 {% endblock scripts %}

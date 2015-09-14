@@ -1,16 +1,44 @@
 {% extends 'activities_parent.html' %}
 {% block contenido %}
 	<div class="col-md-10 col-md-offset-1 capacity">
-		<div id="activitie" hidden>
-		<button id="btn_active_send" class="btn btn-default" type="button">Enviar Actividad</button>
-		</div>
+		
+	<!--aqui se renderiza la actividad-->
+		<div id="activitie" hidden></div>
 
-		<div id="msg_succes" hidden>La actividad ha sido enviada</div>
+
+	<!--formulario para editar actividad (parent)-->
+		<form id="form_edit_activitie" hidden>
+				<button class="btn btn-default pull-right" type="submit" name="action">Guardar</button>
+		</form>
+
+	<!--aqui se muestran los mensajes de succes-->
+		<div id="msg_succes" hidden></div>
+		
+	<!--boton para enviar una actividad (child)-->
+		<button id="btn_active_send" class="btn btn-default" type="button">Enviar Actividad</button>
+
+	<!--formulario para enviar una actividad (child)-->
 		<div id="send_activitie" hidden>
 			<form id="form_send_activitie">
 				<button class="btn btn-default pull-right" type="submit" name="action">Enviar</button>
 			</form>
 		</div>
+
+	<!--Aqui se pegan los comentarios-->
+		<div id="list-comment-act">	</div>
+
+	<!-- formulario para crear el comentario -->
+		<form id="form-comment-act" hidden>
+			<div class="form-group">
+				<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
+			</div>
+			<div class="form-group">
+				<input type="hidden" id="id_parent" name="parent">
+			</div>
+
+			<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
+		</form>	
+
 	</div>
 	
 {% endblock %}
@@ -21,7 +49,22 @@
 	ACTIVITIE_ID = url[url.length-1];
 
 	var activitie = new ActivitieParentView();
-	activitie.load_detail(ACTIVITIE_ID, $("#activitie"));
+	url = URL_RETREIVE_ACTIVITIE_PARENT+ACTIVITIE_ID;
+	activitie.load_detail(url, $("#activitie"));
+
+
+	//###   COMMENT   ###
+	console.log("parent: "+ACTIVITIE_ID)
+	var comentarios = new CommentView(
+		ACTIVITIE_ID,
+		$("#form-comment-act"),
+		$('#list-comment-act'),
+		$(".load-comment-act")
+	);		
+	comentarios.load();
+	comentarios.load_create_comment(ACTIVITIE_ID);
+	//###   end COMMENT   ###
+
 
 	</script>
 {% endblock scripts %}

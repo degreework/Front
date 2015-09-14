@@ -21,7 +21,8 @@ ActivitieChildView.prototype.handler_created_form = function(form){
 ActivitieChildView.prototype.succes_create = function(response)
 {
 	$("#send_activitie").fadeOut();
-	$("#msg_succes").show();
+	$("#msg_succes").append("<span>La actividad ha sido enviada</span>");
+	$("#msg_succes").fadeIn()
 }
 
 /*
