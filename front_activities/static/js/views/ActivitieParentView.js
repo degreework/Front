@@ -31,6 +31,7 @@ ActivitieParentView.prototype.handler_edit_form = function(form){
 	var cont_desc = $("#activitie").find("#id_description")[0];
 	var cont_die = $("#activitie").find("#id_die_at")[0];
 
+
 	var _activitie_id = $(cont_id).val()
 	var _activitie_name = $(cont_name).text()
 	var _activitie_desc = $(cont_desc).text()
@@ -40,22 +41,9 @@ ActivitieParentView.prototype.handler_edit_form = function(form){
 	var url = URL_CREATE_ACTIVITIE_PARENT+"/"+_activitie_id;
 
 	//asigna los atributos al formulario
-	//console.log(_activitie_id, _activitie_name, _activitie_desc, _activitie_die)
 	$($(form).find("#id_name")[0]).val(_activitie_name)
-	$($(form).find("#id_description")[0]).val(_activitie_desc)
-	//console.log($($(form).find("#id_die_at")[0]))
-
-	var date = new Date(_activitie_die)
-
-	var year = date.getFullYear();
-	var month = date.getMonth()+1;
-	var day = date.getDate();
-
-	var date_picker = month+"/"+day+"/"+year
-	console.log(year, month, day)
-	console.log(date_picker)
-	
-	$($(form).find("#id_die_at")[0]).val(date_picker)
+	$($(form).find("#id_description")[0]).val(_activitie_desc)	
+	$($(form).find("#id_die_at")[0]).val(_activitie_die.replace('Z', ''))
 	
 	$("#activitie").fadeOut();
 
