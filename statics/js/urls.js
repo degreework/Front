@@ -104,5 +104,8 @@ URL_PROGRESS_EXAMS_QUIZ = host+':8080/API/quiz/progress/exams/'; // se le pega e
 
 //Activitie
 
-URL_CREATE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/'
+URL_CREATE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/new'
+URL_ALL_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/all'
+URL_RETREIVE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/'
+
 URL_CREATE_ACTIVITIE_CHILD = host+':8080/API/activitie/'
