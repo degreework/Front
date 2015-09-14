@@ -166,7 +166,9 @@ EvaluationsView.render_parametros = function(form, response){
 			console.log(key +'=='+ value)
 
 			if (value === true) { 
-				$('#id_'+key).prop("checked", true);
+				//$('#id_'+key).prop("checked", true);
+				$('#id_'+key).attr('checked', 'checked')
+				$('#id_'+key).val(true);
 			}else{
 				
 				if (value !== null) {

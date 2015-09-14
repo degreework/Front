@@ -275,9 +275,12 @@ EvaluationsView.update_question = function(form, id, id_list_answers)
 			
 			if (e.target.id === 'form_update_tf') {
 				
+				var questionService = new QuestionService();
 				var form = EvaluationsView.change_boolean(($(e.target).get(0)))
 				var data = new FormData(form);
-				questionService.update(URL_UPDATE_QUESTION_TF+id+'/', data, EvaluationsView.update_tf )
+				data.append("correct", $('#id_correct').val());
+				//console.log($('#id_correct').val())
+				questionService.update(URL_UPDATE_QUESTION_TF+id+'/', data, EvaluationsView.redirect_Categories)
 			}
 
 			if (e.target.id === 'form_update_mc') {
@@ -327,7 +330,7 @@ EvaluationsView.update_question = function(form, id, id_list_answers)
 						questionService.dispatch(
 							URL_UPDATE_MULTIPLE_ANSWER_MC,
 							JSON_answers,
-							EvaluationsView.update_mc
+							EvaluationsView.redirect_Categories
 						);
 					}
 				)					
@@ -336,7 +339,7 @@ EvaluationsView.update_question = function(form, id, id_list_answers)
 			if (e.target.id === 'form_update_e') {
 	
 				var data = new FormData(($(e.target).get(0)));
-				questionService.update(URL_UPDATE_QUESTION_ESSAY+id+'/', data,  EvaluationsView.update_e)	
+				questionService.update(URL_UPDATE_QUESTION_ESSAY+id+'/', data,  EvaluationsView.redirect_Categories)	
 				
 			}
 	})
@@ -349,20 +352,29 @@ EvaluationsView.update_question = function(form, id, id_list_answers)
 	});//end submit
 }
 
+/*
 EvaluationsView.update_tf = function(response){
 	$('#edit_tf').hide()
 	$('#list-tfquestion').empty()
-	EvaluationsView.get_all_TFQuestions();
+	$('#form_update_tf').empty()
+	$('#form_update_mc').empty()
+	$('#form_mc_answer').empty()
+	$('#form_update_e').empty()
 	$('#show_').show()
 	$('#table-tf').show()
+	//EvaluationsView.get_all_TFQuestions();
 }
 
 EvaluationsView.update_e = function(response){
 	$('#edit_e').hide()
 	$('#list-equestion').empty()
-	EvaluationsView.get_all_EQuestions(); 
+	$('#form_update_tf').empty()
+	$('#form_update_mc').empty()
+	$('#form_mc_answer').empty()
+	$('#form_update_e').empty()
 	$('#show_').show()
 	$('#table-essay').show()
+	//EvaluationsView.get_all_EQuestions(); 
 	
 }
 
@@ -371,7 +383,13 @@ EvaluationsView.update_mc = function(response){
 	$('#edit_mc').hide()
 	$('#list-mcquestion').empty()
 	$('#form_mc_answer').empty()
-	EvaluationsView.get_all_MCQuestions();
+	$('#form_update_tf').empty()
+	$('#form_update_mc').empty()
+	$('#form_mc_answer').empty()
+	$('#form_update_e').empty()
+	
+	//EvaluationsView.get_all_MCQuestions();
 	$('#show_').show()
 	$('#table-mc').show()
 }
+*/

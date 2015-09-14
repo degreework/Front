@@ -89,6 +89,7 @@ URL_DETAIL_QUIZ = host+':8080/API/quiz/detail/'; // se le pega el id del quiz al
 
 
 URL_QUALIFY_QUIZ = host+':8080/API/quiz/qualify';
+URL_CHANGE_QUALIFY_QUIZ = host+':8080/API/quiz/changeQualify'; 
 URL_CHECK_PASSED_QUIZ = host+':8080/API/quiz/checkPassed';
 
 
