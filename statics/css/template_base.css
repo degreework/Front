@@ -318,6 +318,14 @@ margin-top: 100px;
     display: none;
 }
 
+#container-check{
+	padding: 15px;
+    /*height: 80px;*/
+    margin-top: 20px;
+    display: block;
+    /*background-color: #eee;*/
+}
+
 #score{
 	font-size: 33px
 }

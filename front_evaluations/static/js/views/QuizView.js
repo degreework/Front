@@ -252,7 +252,7 @@ EvaluationsView.get_Quiz = function(){
 		var quizService = new QuizService();
 		var data = JSON.parse(localStorage.getItem('user'))
 
-		//quizService.dispatch(URL_CREATE_SITTING+id+'/', data, EvaluationsView.create_sitting_session)
+		quizService.dispatch(URL_CREATE_SITTING+id+'/', data, EvaluationsView.create_sitting_session)
 	})
 
 	var quizService = new QuizService();
@@ -338,8 +338,11 @@ EvaluationsView.render_form_question = function(question){
 		input.name = "answered"
 		input.className = "form-control";
 		input.maxLength = 100000
+		//input.required=true
+		//$(input).attr('placeholder' ,  '')
 		field_div.appendChild(input)
 
+		
 		input_clase.value = question.clase
 	}
 
@@ -419,14 +422,14 @@ EvaluationsView.render_question = function(question){
 	console.log(question)
 	EvaluationsView.render_form_question(question)	
 
-	/*
+	
+	// si la pregunta es tipo ensayo 
 	if (question.clase === 'Essay style question') {
 		
-		$('#question-status').text('Esta es una pregunta abierta, la califica el docente ')
-		$('#container-continue').css('border', '1px solid #ccc')
-		$('#container-check').hide()
-		$('#container-continue').show()
-	};*/
+		$('#btn-check').text('guardar')
+		$('#essay_explication').text('Esta es una pregunta abierta, guarda tu respuesta para que la califique el docente')
+		$('#container-check').css('border', '1px solid #ccc')
+	};
 }
 
 // renderiza cuando califican una pregunta 
@@ -448,14 +451,17 @@ EvaluationsView.render_check = function(response){
 		sitting.current_score++
 		
 	}else{
-		
-		$('#question-status').text('tu respuesta es incorrecta')
-		$('#question-status').attr('class', 'text-danger')
 
-		$('#question-explication').text(response.explanation)
-		$('#question-explication').attr('class', 'text-danger')
+		if(response.clase === 'Essay style question'){
+			$('#question-status').text('tu respuesta ha sido guardada')			
+		}else{
 
-		$('#container-continue').attr('class', 'col-md-12 bg-danger')
+			$('#question-status').text('tu respuesta es incorrecta')
+			$('#question-status').attr('class', 'text-danger')
+			$('#question-explication').text(response.explanation)
+			$('#question-explication').attr('class', 'text-danger')
+			$('#container-continue').attr('class', 'col-md-12 bg-danger')
+		}
 		
 		sitting.incorrect_questions += response.id+','
 	}
@@ -495,9 +501,14 @@ EvaluationsView.btn_check = function(form){
 			var quizService = new QuizService();
 			var data = ($(e.target).get(0))
 			data = $(data).serialize()
+			if (data.search('=&') !== -1) {
+				data = data.replace('answered=&','')
+			};
+	
 			console.log(data)
 			
 			if (data.search('answered') !== -1) {
+				
 				quizService.dispatch(URL_QUALIFY_QUIZ, data, EvaluationsView.render_check)
 			}
 			else{
@@ -643,7 +654,6 @@ EvaluationsView.render_results = function(sitting){
 	answers = sitting.questions_with_user_answers
 	//console.log(answers)
 	
-	//verifico q la pregunta sea correcta o no en la lista de respuestas incorrectas
 	user_answers = JSON.parse(sitting.user_answers)
 
 	$.each(answers, function(key, value) {
@@ -665,7 +675,13 @@ EvaluationsView.render_results = function(sitting){
 				if (sitting.incorrect_questions.search(k) === -1) {
 					$(qualify).text('correcta')
 				}else{
-					$(qualify).text('incorrecta')
+
+					if (sitting.qualify.search(k) === -1) {
+						$(qualify).text('incorrecta')	
+					}else{
+						$(qualify).text('Pendiente a calificar')	
+					}
+					
 				}
 			}
 		})
