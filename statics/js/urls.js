@@ -110,3 +110,5 @@ URL_ALL_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/all'
 URL_RETREIVE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/'
 
 URL_CREATE_ACTIVITIE_CHILD = host+':8080/API/activitie/'
+URL_ALL_ACTIVITIE_CHILD = host+':8080/API/activitie/all/%id%'
+URL_CHECK_ACTIVITIE_CHILD = host+':8080/API/activitie/check/%id%'
