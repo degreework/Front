@@ -112,3 +112,16 @@ URL_RETREIVE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/'
 URL_CREATE_ACTIVITIE_CHILD = host+':8080/API/activitie/'
 URL_ALL_ACTIVITIE_CHILD = host+':8080/API/activitie/all/%id%'
 URL_CHECK_ACTIVITIE_CHILD = host+':8080/API/activitie/check/%id%'
+
+
+//Notification
+
+URL_ALL_NOTIFICATION = host+':8080/API/inbox/notifications/all';
+URL_UNREAD_NOTIFICATION = host+':8080/API/inbox/notifications/unread';
+
+URL_MARK_ALL_READ_NOTIFICATION = host+':8080/API/inbox/notifications/mark-all-as-read';
+
+URL_MARK_AS_UNREAD_NOTIFICATION = host+':8080/API/inbox/notifications/mark-as-unread/%id%/';
+URL_MARK_AS_READ_NOTIFICATION = host+':8080/API/inbox/notifications/mark-as-read/%id%/';
+
+URL_DELETE_NOTIFICATION = host+':8080/API/inbox/notifications/delete/%id%/';
