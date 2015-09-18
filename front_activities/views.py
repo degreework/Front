@@ -21,10 +21,9 @@ def edit(request):
 
 
 #Child Activities
-"""
-def detail(request,id):
-    return render_to_response('parent/activity_parent_Detail.html', {'title': 'Detail Activiti | Name App'}, context_instance=RequestContext(request))
-"""
+
+def list(request, id):
+    return render_to_response('child/list_activities_child.html', {'title': 'Detail Activiti | Name App'}, context_instance=RequestContext(request))
 
 def send(request):
     return render_to_response('child/activity_child_Create.html', {'title': 'Create Activitie | Name App'}, context_instance=RequestContext(request))

@@ -2,6 +2,86 @@ var ActivitieChildView = function()
 {
 }
 
+ActivitieChildView.prototype.list = function(url)
+{
+	var activitieService = new ActivitieChildService();
+	activitieService.list(url, this.render_list);
+}
+
+ActivitieChildView.prototype.render_list = function(response)
+{
+	console.log(response)
+	if (0 == response.count)
+	{
+		$("#msg_list_activitie").empty()
+		$("<span>Aún no hay envíos</span>").appendTo( "#msg_list_activitie" );
+	}
+	for (var i=0, len=response.results.length; i<len;i++) {
+		console.log(response.results[i])
+		ActivitieChildView.prototype.render_activitie(response.results[i])
+		$("<br>").appendTo( "#list_activitie" );
+	};
+
+}
+
+ActivitieChildView.prototype.render_activitie = function(response)
+{
+	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#list_activitie" );
+	$("<a href='"+response.file+"' ><p id='id_name'>Archivo</p></a>" ).appendTo( "#list_activitie" );
+	//$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
+
+	//dependiendo de los permisos de usuario se muesttra un boton para eliminar
+	var s = StorageClass.getInstance();
+	if(-1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
+			
+			var reject = document.createElement("a");
+			reject.className = "pull-right"
+			var reject_msg = document.createElement("span");
+			reject_msg.className = "glyphicon glyphicon-remove"
+			reject.appendChild(reject_msg);
+			
+			reject.addEventListener('click', function(e){
+				ActivitieChildView.prototype.check(
+					response.id,
+					"rejected");
+				
+			}, false);
+			$("#list_activitie").append(reject)
+
+
+			var approve = document.createElement("a");
+			approve.className = "pull-right"
+			var approve_msg = document.createElement("span");
+			approve_msg.className = "glyphicon glyphicon-ok"
+			approve.appendChild(approve_msg);
+			
+			approve.addEventListener('click', function(e){
+				ActivitieChildView.prototype.check(
+					response.id,
+					"approved");
+				
+			}, false);
+			$("#list_activitie").append(approve)
+	}
+
+
+}
+
+ActivitieChildView.prototype.check = function(id, data)
+{
+	var url = URL_CHECK_ACTIVITIE_CHILD.replace(/\%id%/g, id);
+	data = {'action': data}
+
+	var activitieService = new ActivitieChildService();
+	activitieService.check(
+		url,
+		data,
+		function(e){
+			Notify.show_success("Actividades", "Actividad "+e.msg);
+		});
+
+}
+
 ActivitieChildView.prototype.handler_created_form = function(form){
 	$($("#id_parent")[0]).val(ACTIVITIE_ID);
 	$($("#id_parent")[0]).hide();

@@ -150,7 +150,6 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 				var url = URL_CREATE_ACTIVITIE_PARENT+'/'+response.id;
 				var activitieService = new ActivitieParentService();
 				activitieService.delete(url , function(e){
-					console.log("borrado");
 					window.location.href = Site.geRootUrl()+"/activity"
 				});
 				console.log('handle_delete')
@@ -166,7 +165,27 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		}, false);
 		$("#activitie").append(del)
 	}
-	
+
+	if(!show_edit && -1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
+
+		//buttom list child activities and event
+		var list = document.createElement("a");
+		list.className = "pull-right"
+		var list_msg = document.createElement("span");
+		list_msg.className = "glyphicon glyphicon-list-alt"
+		list.appendChild(list_msg);
+		list.addEventListener('click', function(e){
+			console.log("listo todas las actividades de "+response.id)
+			//URL_ALL_ACTIVITIE_CHILD
+			//window.location.href = ActivitieParentModel.get_list_child_url(response.id)
+			var activitie = new ActivitieChildView();
+			var url = URL_ALL_ACTIVITIE_CHILD.replace(/\%id%/g, response.id);
+			$("#title_list_activitie").fadeIn()
+			activitie.list(url);
+		
+		}, false);
+		$("#activitie").append(list)
+	}
 
 	$("#activitie").fadeIn();
 
