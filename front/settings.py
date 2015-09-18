@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'front_activities',
     'front_evaluations',
     'front_resource',
+    'front_notifications',
 
 )
 
