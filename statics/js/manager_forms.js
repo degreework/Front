@@ -203,7 +203,7 @@ function render_form(method, form , response, callback, params)
 					input = document.createElement("select");
 					input.className = "form-control";
 
-					if (key ==='quiz') {
+					if (key ==='quiz' || key === 'prerequisites') {
 						
 						// etiqueta
 						var label = document.createElement("label");					

@@ -21,6 +21,7 @@ function register(form, url)
 		/*
 		Register succesful, then do anything
 		*/
+		console.log(response)
 		form.trigger("reset");
 		Notify.show_success("OK", "Has sido registrado");
 	})

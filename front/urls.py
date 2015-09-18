@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^', include('front_activities.urls', namespace='front_activities')),
     url(r'^', include('front_evaluations.urls', namespace='front_evaluations')),
     url(r'^', include('front_resource.urls', namespace='front_resource')),
+    url(r'^', include('front_gamification.urls', namespace='front_gamification')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

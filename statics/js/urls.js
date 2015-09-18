@@ -110,3 +110,16 @@ URL_ALL_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/all'
 URL_RETREIVE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/'
 
 URL_CREATE_ACTIVITIE_CHILD = host+':8080/API/activitie/'
+
+
+// Gamificaion
+
+URL_CREATE_BADGE = host+':8080/API/gamification/badge'
+URL_ALL_BADGE = host+':8080/API/gamification/badge/all'
+
+URL_CREATE_AWARD = host+':8080/API/gamification/award'
+
+URL_CREATE_PROGRESS_USER = host+':8080/API/gamification/badge/progress'
+
+URL_SCORES = host + ':8080/API/gamification/scores/'
+
