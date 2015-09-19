@@ -143,9 +143,7 @@ UserService.get_mini_user = function (url) {
     	}
 	})
 	.done(function(response){
-		console.log(response)
-		//$.session.remove('user');
-		//$.session.set('user', JSON.stringify(response));
+		//console.log(response)
 
 		var s = StorageClass.getInstance();
 		s.storage.set("user", JSON.stringify(response));
@@ -371,8 +369,7 @@ UserService.deauthenticate = function (url) {
 		*/
 		var s = StorageClass.getInstance();
 		s.storage.removeAll();
-		$.session.remove('user');
-		$.session.remove('Token');
+		
 		$(location).attr('href',"/");  
 
 	})

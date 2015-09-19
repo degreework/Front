@@ -29,3 +29,8 @@ User.get_thumb = function(id)
 	
 	return this.s.storage.get("user").thumb[id];
 }
+
+User.get_url = function(id)
+{
+	return Site.geRootUrl()+"/users/detail/"+id;
+}

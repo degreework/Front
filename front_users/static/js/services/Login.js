@@ -23,6 +23,7 @@ Login.login = function (form, url, callback)
 		var s = StorageClass.getInstance();
 		s.storage.set("token", JSON.stringify(response));
 		console.log(s.storage.get("token"));
+		NotificationView.get_notifications();
 
 		
 		$.ajax({

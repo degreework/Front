@@ -81,6 +81,7 @@ UserView.showLoginForm = function()
 	//form login
 	UserView.form_login.submit(function (e) {
 		e.preventDefault();
+		e.stopImmediatePropagation();
 		Login.login(UserView.form_login, URL_LOGIN, UserView.loginCallback);
 	})
 }
