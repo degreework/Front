@@ -1,0 +1,54 @@
+{% extends "gamification_parent.html" %}
+{% comment %}
+	template for create a quiz
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block gamification_content %}
+	<div class="col-md-12">
+		<div class="col-md-12">
+			<div class="col-md-12">
+				<a id="edit"><span class="glyphicon glyphicon-edit"></span>	</a>
+			</div>
+			
+			<div class="col-md-4">
+				<h4>Puntos por aprobar un quiz</h4>
+				<h4 id="score_quiz"> </h4>
+			</div>
+			<div class="col-md-4">
+				<h4> Puntos por tener contenido en la wiki </h4>
+				<h4 id="score_wiki"> </h4>
+			</div>
+			<div class="col-md-4">
+				<h4> Puntos por aprobar una actividad</h4>
+				<h4 id="score_activity"> </h4>
+			</div>
+		</div>
+		
+		<div class="col-md-12" hidden>
+			<form id="form_update_score">
+				<br>
+	      		<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
+			</form>
+		</div>
+		
+	</div>
+{% endblock gamification_content %}
+
+{% block scripts %}
+	<script>
+        jQuery(document).ready(function($) {
+
+        	var gamificationView = new GamificationView();
+        	gamificationView.get_scores()
+
+        	$('#edit').click(function(e){
+        		e.preventDefault();
+        		form = $('#form_update_score')
+        	})
+			
+		});
+	</script>
+	
+{% endblock scripts %}

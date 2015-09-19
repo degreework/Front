@@ -36,20 +36,10 @@ EvaluationsView.initialize = function(form, url, callback)
 // cambia el valor de ON por un True en un campo tipo boolean 
 EvaluationsView.change_boolean = function(data){
 	
-	//$(data).find("#id_correct").val( $(data).find("#id_correct").is(":checked"))
 	for (i = 0; i < $(data).find('input').length; i++) {
 		if($(data).find('input')[i].type === 'checkbox'){
 
-			//console.log( $($(data).find('input')[i]).is(':checked')   )
-			$(data).find('input')[i].value = $($(data).find('input')[i]).is(':checked') 
-			//$(data).find('input')[i].value =  true
-			/*if ($($(data).find('input')[i]).is(':checked')) {
-				console.log('entro')
-				$(data).find('input')[i].value =  true
-
-			}else{
-				$(data).find('input')[i].value =  false				
-			}*/
+			$(data).find('input')[i].value = $($(data).find('input')[i]).is(':checked') 			
 		}
 	}
 	return data
@@ -80,7 +70,7 @@ EvaluationsView.create_quiz = function(form)
 EvaluationsView.notifify_create_quiz = function(){
 	
 	//Notify.show_success("quiz creado", "el quiz fue creado con exito");
-	location.href =  host+":"+location.port+"/evaluations/"; 
+	//location.href =  host+":"+location.port+"/evaluations/"; 
 }
 
 
