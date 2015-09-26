@@ -11,3 +11,10 @@ Site.geRootUrl = function()
 	var root = host+(location.port ? ':'+location.port: '');
 	return root;
 }
+
+Site.getPermissionsUrl = function()
+{
+	var url = Site.geRootUrl() + '/p';
+	console.log(url)
+	return url;
+}

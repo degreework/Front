@@ -69,6 +69,10 @@ AnswerView.prototype.render_list = function (data){
 	var data_list_asks = data.results;
 	var to_comment = [];
 
+	//votes
+	var voteManager = new VoteView();
+	//end votes
+
 	for (i=0, len=data_list_asks.length; i < len; i++) {
 
 		// se crea el html
@@ -132,6 +136,12 @@ AnswerView.prototype.render_list = function (data){
 		$(AnswerView.prototype.container_list_answers).append(container);
 
 		to_comment.push(container);
+
+		//votes
+		///#### vote
+		voteManager.render_btn(container, id);
+		voteManager.render_votes(container, id);
+		//## end vote
 
 	}
 
