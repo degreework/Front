@@ -1,7 +1,11 @@
 var main = function(){
 	UserView.verify();
 	$("#preloader_2").hide();
-	NotificationView.get_notifications();
+
+	if(User.exist())
+	{
+		NotificationView.get_notifications();
+	}
 
 	/*//notifications every page reload
 	var s = StorageClass.getInstance();
