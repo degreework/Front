@@ -28,7 +28,7 @@ Login.login = function (form, url, callback)
 		
 		$.ajax({
 			type: 'POST',
-			url: "http://127.0.0.1:8000/p",
+			url: Site.getPermissionsUrl(),
 			data: {"Token": s.storage.get("token").access_token},
 		})
 		.done(function (response) {

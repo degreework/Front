@@ -11,7 +11,7 @@ UserService.update_password = function(url, data, callback)
 		url: url,
 		data: data,
 		beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
     	}
 	})
 	.done(function(response){
@@ -87,7 +87,7 @@ UserService.update_user = function(url, form)
 		processData: false, // tell jQuery not to process the data
     	contentType: false, // tell jQuery not to set contentType
     	beforeSend : function( xhr ) {
-    		xhr.setRequestHeader( Token.get_RequestHeader() );
+    		xhr.setRequestHeader( "Authorization", Token.get_RequestHeader() );
     	}
 	})
 	.done(function(response){
@@ -194,7 +194,7 @@ UserService.getUser = function(id){
 	.done(function(response){
 		console.log(response)
 		$('.resume_user_profile').text(response.first_name + " " + response.last_name);
-		$('.pic_user_profile').attr("src",'http://127.0.0.1:8080'+response.thumb[0]);
+		$('.pic_user_profile').attr("src",Site.geRootUrl()+response.thumb[0]);
 	})
 	.fail(function(error){		
 		console.log(error);

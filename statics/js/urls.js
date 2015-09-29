@@ -139,3 +139,6 @@ URL_CREATE_PROGRESS_USER = host+':8080/API/gamification/badge/progress'
 
 URL_SCORES = host + ':8080/API/gamification/scores/'
 
+//Votes 
+URL_GIVE_VOTE = host + ':8080/API/gamification/vote';
+URL_LIST_VOTE = host + ':8080/API/gamification/vote/detail/%id%';

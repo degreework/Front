@@ -1,3 +1,11 @@
 #user-notify li{
 	font-size: 12px;
 }
+
+#user-notify{
+	width: 400px;
+}
+
+#user-notify span{
+	color: black;
+}
