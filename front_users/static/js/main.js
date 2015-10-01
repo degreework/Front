@@ -5,6 +5,12 @@ var main = function(){
 	if(User.exist())
 	{
 		NotificationView.get_notifications();
+
+		// progreso de la medalla del usuario 
+		user = JSON.parse(localStorage.getItem('user'))
+		var gamificationView = new GamificationView();
+		gamificationView.get_progress_user(user.id)
+
 	}
 
 	/*//notifications every page reload
