@@ -235,10 +235,41 @@ GamificationView.prototype.redirect_badges = function(response){
 //---------------
 
 
-GamificationView.prototype.get_all_award = function()
-{
+GamificationView.prototype.get_all_award_user = function(send, id_user){
+
+	
+	var id = id_user;
+
+	if (send === 'profile') {
+		user = JSON.parse(localStorage.getItem('user'))
+		id = user.id
+	};
+
+	var gamificationService = new GamificationService();
+	gamificationService.retrieve(URL_GET_AWARDS_USER+id, GamificationView.prototype.render_awards)
+}
+
+GamificationView.prototype.render_awards = function(response){
+	
+	for (var i = 0; i < response.length; i++) {
+		
+		var container = document.createElement('div')
+		container.className = 'col-md-4'
+		var title_award = document.createElement('h4')
+		$(title_award).text(response[i].badge.title)
+		var pic_award = document.createElement('img')
+		$(pic_award).attr('src' , 'http://127.0.0.1:8080'+response[i].badge.img)
+		pic_award.className = 'img-circle img-responsive'
+		
+
+		container.appendChild(title_award)
+		container.appendChild(pic_award)
+		$('.container_awards').append(container)
+	};
+	
 
 }
+
 
 
 //---------------
@@ -261,7 +292,7 @@ GamificationView.prototype.setSession = function(response){
 	$('.progress-bar').text(gamification.percent+'%')
 	$('.progress-bar').css('width',gamification.percent+'%')
 	$('#badge').text(gamification.badge.title)
-	$('#badge_pic').attr('src', gamification.badge.img)
+	$('#badge_pic').attr('src', 'http://127.0.0.1:8080'+gamification.badge.img)
 }
 
 

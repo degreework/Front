@@ -10,6 +10,14 @@
 				<h2 class="resume_user_profile"></h2>			
 			</div>
 
+			<div class="col-md-4">
+				<h3>Logros recientes</h3>
+				<div class="col-md-12 container_awards">
+				
+				</div>
+				
+			</div>
+
 			Actividad usuario detalle 
 		</div>
 
@@ -28,6 +36,10 @@
 
 		// se ontiene la informacion del usuario para el perfil 
 		UserService.getUser(id);
+
+		// medallas del usuario
+		var gamificationView = new GamificationView();
+		gamificationView.get_all_award_user('', id)
 		
 	
 		

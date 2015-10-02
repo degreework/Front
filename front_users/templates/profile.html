@@ -4,7 +4,17 @@
 		
 		<br>
 		<div class="margen_contenido">
-			My activity	
+			<div class="col-md-4">
+				<h3>Logros recientes</h3>
+				<div class="col-md-12 container_awards">
+				
+				</div>
+				
+			</div>
+			<div class="col-md-8">
+				My activity		
+			</div>
+			
 		</div>
 	</div>
 {% endblock %}
@@ -13,5 +23,9 @@
 <script type="text/javascript">
 
 	$(".pic_profile").attr("src",'http://127.0.0.1:8080'+User.get_thumb(1));
+
+	// medallas del usuario
+	var gamificationView = new GamificationView();
+	gamificationView.get_all_award_user('profile')
 </script>
 {% endblock scripts %}
