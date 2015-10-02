@@ -1,13 +1,20 @@
-<div class="col-md-12">
+{% load staticfiles %}
+<div class="col-md-6 col-sm-6 col-xs-6">
+	<div class="col-md-12">
+	    <div >
+	    	<h2>Regístrate</h2>
+	     	<p>Aprende algoritmia</p>
 
-    <div class="base" style="min-height:400px;">
-    	<h2>Regístrate</h2>
-     	<p>Aprende algoritmia</p>
-
-     	<div class="col-md-6 col-md-offset-3">
-	     	<form id="form_register">
-	      		<button class="btn btn-default pull-right" type="submit" name="action">Registrar</button>
-	      	</form>
+	     	<div class="col-md-6 col-md-offset-3">
+		     	<form id="form_register">
+		      		<button class="btn btn-default pull-right" type="submit" name="action">Registrar</button>
+		      	</form>
+		    </div>
 	    </div>
-    </div>
+	</div>
 </div>
+
+<div class="col-md-6 col-sm-6 col-xs-6">
+	<img class="img-circle img-responsive introduction-pic" src="{% static 'img/2.png' %}">   
+</div>
+<!--style="min-height:400px;"-->

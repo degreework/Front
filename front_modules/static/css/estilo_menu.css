@@ -1,27 +1,23 @@
 
 /* Initial menu */
 .menu {
-  background: rgba(238,238,238,1); 
-  opacity: 1;
-  border-right: 5px solid  #ccc;
-  /*left: -190px;  /* start off behind the scenes */
-  
+
+  left: -280px;  /* start off behind the scenes */
   z-index: 2;
-  /*width: 190px;
-  height: 460px;
-  position: fixed;*/
 }
 
 /* Basic styling */
 .menu ul {
-  border-top: 1px solid #636366;
+  border-top: 1px solid #ccc;
   list-style: none;
   margin: 40px 0 0 0;
-  padding: 0;
+  padding: 10px 0 0 0;
+  font-size: 18px;
+  text-align: center;
 }
 
 .menu li {
-  border-bottom: 1px solid #636366;
+  border-bottom: 1px solid #ccc;
   line-height: 45px;
   padding-bottom: 3px;
   padding-left: 20px;
@@ -35,9 +31,14 @@
 }
 
 .icon-close {
+  color: #D51B23; 
+  text-align: center;
   cursor: pointer;
-  padding-left: 10px;
-  padding-top: 10px;
+  font-size: 20px;
+  margin-top: 0px;
+  padding-top: 5px;
+  text-decoration: none;
+  display: none;
 }
 
 .icon-menu {
@@ -48,8 +49,6 @@
   margin-top: 0px;
   padding-top: 5px;
   text-decoration: none;
-  /*z-index: 2;
-  position: fixed;*/
 }
 
 .icon-menu i {

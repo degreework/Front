@@ -1,21 +1,27 @@
 var main = function(){
   
   $('.icon-menu').click(function() {
-    $('.menu ul').slideToggle('slow')
-    //$('.menu').
-    /*$('.menu').animate({
+    //$('.menu ul').slideToggle('slow')
+    $('.menu').animate({
       left: '0px'
-    }, 200);*/
+    }, 300);
+
+    $('.icon-menu').hide()
+    $('.icon-close').show()
     
   });
   
-  /*$('.menu').mouseleave(function(){
+  $('.icon-close').click(function(){
     $('.menu').animate({
-        left:'-190px'
-    },200);
-    //$('.menu').toggle('slow')
-    $('.menu ul').fadeOut();  
-  });*/
+        left:'-280px'
+    },300);
+    
+    $('.icon-menu').show()
+    $('.icon-close').hide()  
+
+  });
+
+  
 };
  
 $(document).ready(main);

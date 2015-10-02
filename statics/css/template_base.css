@@ -74,6 +74,7 @@ hr{
 }*/
 
 .resume_profile{
+	
 	font-size: 18px;
 }
 
@@ -87,9 +88,11 @@ hr{
 }
 
 .picture{
-	width: 102px;
-	height: 102px;
+	width: 100px;
+	height: 100px;
 	margin-top: 20px;
+	margin-left: auto;
+    margin-right: auto;
 	background-color: #eee;
 	/*display: flex;
   	position: absolute;

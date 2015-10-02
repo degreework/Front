@@ -11,6 +11,15 @@ var main = function(){
 		var gamificationView = new GamificationView();
 		gamificationView.get_progress_user(user.id)
 
+
+		window.setInterval(
+			function(){
+				console.log("exe")
+				NotificationView.get_notifications();
+			}, 5*60*1000);
+		//(min) * (seconds) * (milliseconds)
+		//this case 5*60*1000 = 5 min
+
 	}
 
 	/*//notifications every page reload

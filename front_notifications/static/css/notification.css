@@ -1,11 +1,25 @@
 #user-notify li{
 	font-size: 12px;
+	margin-top: 5px;
 }
 
 #user-notify{
+	color: black;
 	width: 400px;
+	padding: 10px;
+}
+
+
+#noti_container{
+	margin-top: 10px;	
+	border-bottom: 1px solid #eee;
+	padding: 10px;
 }
 
 #user-notify span{
 	color: black;
+}
+
+#btn-mark-all{
+	border-bottom: 1px solid #eee;
 }

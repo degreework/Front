@@ -22,35 +22,11 @@
 
 
 
-
+<!-- template autheticated -->
 <div class="collapse navbar-collapse" id="hola">
 
-
-<!-- template autheticated -->
-
-  <!--<ul class="nav navbar-nav navbar-left">
-    <li>
-      <span>
-        <a href="#">inicio</a>  
-      </span>
-    </li>
-    <li>
-      <span>
-        <a href="#">Estudiantes</a>  
-      </span>
-    </li>
-  </ul>-->
-
   <ul class="nav navbar-nav navbar-right" id="user_resume" hidden>
-    <!--<li>
-      <span>
-        <a href="#">Estudiantes</a>  
-      </span>
-      
-    </li>-->
-    <li>
-      <!--<img class="pic_resume .img-responsive img-rounded"> -->
-    </li>
+  
     <li>
       <span class="resume_name"></span>
     </li>
@@ -60,10 +36,17 @@
       <span class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">  
           <span id="user-bell-notify" class="glyphicon glyphicon-bell"></span>
       </span>
+      <ul class="dropdown-menu" id="user-notify">
+        <div id="btn-mark-all" hidden>
+          Notificaciones
+          <a id="btn-all-readed" class="pull-right"><span>Marcar como leídos</span></a>
+        </div>
+        <li>
+        </li>
 
-      {% include "notifications.html" %}
-
+      </ul>
     </li>
+
     
     
     <li class="dropdown">
@@ -77,51 +60,6 @@
       </ul>
     </li>
     
+
   </ul>
 </div>
-<!--
-<div class="col-md-12 pull-right" id="user_resume" hidden>
-  
-  <div class="col-md-6 col-md-offset-6" style="text-align:center; border-bottom: 1px solid">  
-      <img class="pic_resume .img-responsive img-rounded"> 
-      <span class="resume_name"></span>
-      
-  </div>
-  <div class="col-md-6 col-md-offset-6">
-    <nav class="navbar navbar-default section-user">
-      <div class="container-fluid">
-        
-        <div class="navbar-header">
-        
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-          <ul class="nav navbar-nav">
-             <li><a href="#"><span class = "glyphicon glyphicon-book"></span></a></li>
-              <li><a href="#">Ptos</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="{% url 'front_users:profile' %}">Perfil</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="{% url 'front_users:settings' %}">Ajustes</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#" id="button_logout">Salir</a></li>
-                </ul>
-              </li>
-
-          </ul>
-        </div>
-
-      </div>
-    </nav>
-  
-  </div>
-
-</div>-->
