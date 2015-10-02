@@ -55,30 +55,19 @@ NotificationView.render = function(notification)
 	console.log(notification)
 
 	var li = $("<li class='a-noti'></li>");
-	$("<hr>").appendTo(li);
+	var container = $("<div id =  'noti_container'></div>");
 
-	$("<a href='"+User.get_url(notification.actor.id)+"'><span>"+notification.actor.name+"</span></a>").appendTo(li);
-	$("<span>"+notification.verb+"</span>").appendTo(li)
-
+	var id_as_readed = "btn-as-readed-"+notification.id;
+	$("<a id='"+id_as_readed+"' class='noti-action-readed pull-right'><span class='glyphicon glyphicon-ok'></span></a>").appendTo(container);
 
 	if("Request" == notification.target.type)
 	{
 		var url = WikiModel.generate_url_request(notification.target.detail.page.slug, notification.target.detail.page.commit)
-		console.log(url)
-		$("<a href='"+url+"'><span>Aquí</span></a>" ).appendTo(li);
+		$("<a href='"+url+"'><span><strong>"+notification.actor.name+" </strong></span><span>"+notification.verb+"</span></a>" ).appendTo(container);
 	}
 	
-	//$("<p id='id_die_at'>"+response.die_at+"</p>" ).appendTo( "#activitie" );
-
-
-	var id_as_readed = "btn-as-readed-"+notification.id;
-	//var id_remove = "btn-remove-"+notification.id;
-
-	$("<a id='"+id_as_readed+"' class='noti-action-readed'><span class='glyphicon glyphicon-ok'></span></a>").appendTo(li);
-	//$("<a id='"+id_remove+"' class='noti-action-remove'><span class='glyphicon glyphicon-remove'></span></a>").appendTo(li);
-		
-
-
+	
+	$(container).appendTo(li)
 	$(li).appendTo($("#user-notify"))
 
 }
@@ -129,5 +118,5 @@ NotificationView.remove_all_rendered = function(count)
 		$("#user-bell-notify").append(count);
 	}
 	
-	$("#user-notify").empty()
+	//$("#user-notify").empty()
 }

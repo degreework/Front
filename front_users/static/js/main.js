@@ -6,6 +6,12 @@ var main = function(){
 	{
 		NotificationView.get_notifications();
 
+		// progreso de la medalla del usuario 
+		user = JSON.parse(localStorage.getItem('user'))
+		var gamificationView = new GamificationView();
+		gamificationView.get_progress_user(user.id)
+
+
 		window.setInterval(
 			function(){
 				console.log("exe")
@@ -13,6 +19,7 @@ var main = function(){
 			}, 5*60*1000);
 		//(min) * (seconds) * (milliseconds)
 		//this case 5*60*1000 = 5 min
+
 	}
 
 	/*//notifications every page reload

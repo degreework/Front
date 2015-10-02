@@ -245,6 +245,25 @@ GamificationView.prototype.get_all_award = function()
 // SCORES
 //---------------
 
+GamificationView.prototype.get_progress_user = function(id_user){
+	console.log('get_progress_user')
+	var gamificationService = new GamificationService();
+	gamificationService.retrieve(URL_GET_PROGRESS_GAMIFICATION+id_user, GamificationView.prototype.setSession)
+}
+
+GamificationView.prototype.setSession = function(response){
+	console.log('setSession')
+	var s = StorageClass.getInstance();
+	s.storage.set("badgeProgress", JSON.stringify(response));
+	console.log(s.storage.get("badgeProgress"));
+
+	gamification = JSON.parse(localStorage.getItem('badgeProgress'))
+	$('.progress-bar').text(gamification.percent+'%')
+	$('.progress-bar').css('width',gamification.percent+'%')
+	$('#badge').text(gamification.badge.title)
+	$('#badge_pic').attr('src', gamification.badge.img)
+}
+
 
 GamificationView.prototype.get_scores = function()
 {

@@ -133,9 +133,9 @@ URL_DELETE_NOTIFICATION = host+':8080/API/inbox/notifications/delete/%id%/';
 URL_CREATE_BADGE = host+':8080/API/gamification/badge'
 URL_ALL_BADGE = host+':8080/API/gamification/badge/all'
 
-URL_CREATE_AWARD = host+':8080/API/gamification/award'
 
-URL_CREATE_PROGRESS_USER = host+':8080/API/gamification/badge/progress'
+//URL_CREATE_PROGRESS_USER = host+':8080/API/gamification/badge/progress'
+URL_GET_PROGRESS_GAMIFICATION = host+':8080/API/gamification/badge/progress/detail/'
 
 URL_SCORES = host + ':8080/API/gamification/scores/'
 
