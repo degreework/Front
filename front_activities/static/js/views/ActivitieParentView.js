@@ -42,8 +42,9 @@ ActivitieParentView.prototype.handler_edit_form = function(form){
 
 	//asigna los atributos al formulario
 	$($(form).find("#id_name")[0]).val(_activitie_name)
-	$($(form).find("#id_description")[0]).val(_activitie_desc)	
-	$($(form).find("#id_die_at")[0]).val(_activitie_die.replace('Z', ''))
+	$($(form).find("#id_description")[0]).val(_activitie_desc)
+	console.log(_activitie_die.replace('Z', ''))	
+	$($(form).find("#id_die_at")[0]).val(_activitie_die)
 	
 	$("#activitie").fadeOut();
 
@@ -97,16 +98,13 @@ ActivitieParentView.prototype.render_list = function(response)
 	for (var i=0, len=response.results.length; i<len;i++) {
 		console.log(response.results[i])
 		ActivitieParentView.prototype.render_activite(response.results[i], true)
-		$("<br>").appendTo( "#activitie" );
+
 	};
 }
 
 ActivitieParentView.prototype.render_activite = function(response, show_edit)
 {
-	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
-	$("<a href='"+response.id+"' ><p id='id_name'>"+response.name+"</p></a>" ).appendTo( "#activitie" );
-	$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
-	$("<p id='id_die_at'>"+response.die_at+"</p>" ).appendTo( "#activitie" );
+	
 
 	//dependiendo de los permisos de usuario se muesttra un boton para eliminar
 	var s = StorageClass.getInstance();
@@ -164,15 +162,24 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 			})
 		}, false);
 		$("#activitie").append(del)
+
+
+
+		$("<a href='"+response.id+"' ><h4 id='id_name'>"+response.name+" </h4></a>" ).appendTo( "#activitie" );
+		$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
+		$("<p>Fecha de entrega: <span id='id_die_at'>"+response.die_at.replace('Z', '')+"</span></p>" ).appendTo( "#activitie" );
+		$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
+		$("<hr>" ).appendTo( "#activitie" );
 	}
 
 	if(!show_edit && -1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
 
 		//buttom list child activities and event
 		var list = document.createElement("a");
-		list.className = "pull-right"
+		//list.className = "pull-right"
 		var list_msg = document.createElement("span");
-		list_msg.className = "glyphicon glyphicon-list-alt"
+		$(list).text('Ver soluciones enviadas')
+		list_msg.className = "glyphicon glyphicon-list-alt pull-left"
 		list.appendChild(list_msg);
 		list.addEventListener('click', function(e){
 			console.log("listo todas las actividades de "+response.id)
@@ -181,10 +188,11 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 			var activitie = new ActivitieChildView();
 			var url = URL_ALL_ACTIVITIE_CHILD.replace(/\%id%/g, response.id);
 			$("#title_list_activitie").fadeIn()
+			//$("#list_activitie").fadeIn()
 			activitie.list(url);
 		
 		}, false);
-		$("#activitie").append(list)
+		$("#list_activitie").append(list)
 	}
 
 	$("#activitie").fadeIn();

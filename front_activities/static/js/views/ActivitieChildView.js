@@ -19,15 +19,18 @@ ActivitieChildView.prototype.render_list = function(response)
 	for (var i=0, len=response.results.length; i<len;i++) {
 		console.log(response.results[i])
 		ActivitieChildView.prototype.render_activitie(response.results[i])
-		$("<br>").appendTo( "#list_activitie" );
+		//$("<br>").appendTo( "#list_activitie" );
 	};
 
 }
 
 ActivitieChildView.prototype.render_activitie = function(response)
 {
-	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#list_activitie" );
-	$("<a href='"+response.file+"' ><p id='id_name'>Archivo</p></a>" ).appendTo( "#list_activitie" );
+	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#list_activities" );
+	$("<div class='col-md-12 result'><span>Nombre del estudiante</span><a href='"+response.file+"'><p id='id_name'>Archivo</p></a><p>Calificar</></div>").appendTo( "#list_activitie" );
+	
+
+	//$("<a href='"+response.file+"' ><p id='id_name'>Archivo</p></a>" ).appendTo( "#list_activitie" );
 	//$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
 
 	//dependiendo de los permisos de usuario se muesttra un boton para eliminar
@@ -35,7 +38,7 @@ ActivitieChildView.prototype.render_activitie = function(response)
 	if(-1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
 			
 			var reject = document.createElement("a");
-			reject.className = "pull-right"
+			//0reject.className = "pull-right"
 			var reject_msg = document.createElement("span");
 			reject_msg.className = "glyphicon glyphicon-remove"
 			reject.appendChild(reject_msg);
@@ -46,11 +49,11 @@ ActivitieChildView.prototype.render_activitie = function(response)
 					"rejected");
 				
 			}, false);
-			$("#list_activitie").append(reject)
+			$(".result").append(reject)
 
 
 			var approve = document.createElement("a");
-			approve.className = "pull-right"
+			//approve.className = "pull-right"
 			var approve_msg = document.createElement("span");
 			approve_msg.className = "glyphicon glyphicon-ok"
 			approve.appendChild(approve_msg);
@@ -61,7 +64,7 @@ ActivitieChildView.prototype.render_activitie = function(response)
 					"approved");
 				
 			}, false);
-			$("#list_activitie").append(approve)
+			$(".result").append(approve)
 	}
 
 

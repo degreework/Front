@@ -28,6 +28,13 @@ var main = function(){
 	if (notifications){
 		NotificationView.render_notifications(notifications, true);
 	}*/
+
+
+
+	(function () {
+  		$('[data-toggle="popover"]').popover();
+	})
+	();
 };
 
 $(document).ready(main);

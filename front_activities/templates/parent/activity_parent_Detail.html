@@ -1,51 +1,68 @@
 {% extends 'activities_parent.html' %}
 {% block contenido %}
-	<div class="col-md-10 col-md-offset-1 capacity">
+	<div class="col-md-8 capacity">
 		
 	<!--aqui se renderiza la actividad-->
-		<div id="activitie" hidden></div>
+		<div class="col-md-12" id="activitie" hidden></div>
+		
 
-	<!--aqui se renderizan las actividades enviadas-->
-	<div id="title_list_activitie" hidden>Recibidos</div>
-	<div id="list_activitie"></div>
+		<div class="col-md-12">
+			<div class="col-md-4 col-md-offset-4" style="text-align:center">
+				<!--boton para enviar una actividad (child)-->
+				<button id="btn_active_send" class="btn btn-default" type="button">Enviar Actividad</button>
 
-	<!--aqui se renderizan los mensajes de la lista de actividades (child)-->
-	<div id="msg_list_activitie"></div>
+				<!--formulario para enviar una actividad (child)-->
+				<div id="send_activitie" hidden>
+					<form id="form_send_activitie">
+						<button class="btn btn-default " type="submit" name="action">Enviar</button>
+					</form>
+				</div>
 
+				<!--formulario para editar actividad (parent)-->
+				<form id="form_edit_activitie" hidden>
+						<button class="btn btn-default pull-right" type="submit" name="action">Guardar</button>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<hr>
+		</div>
+		<!--aqui se renderizan las actividades enviadas-->	
+		<div class="col-md-12">
 
-	<!--formulario para editar actividad (parent)-->
-		<form id="form_edit_activitie" hidden>
-				<button class="btn btn-default pull-right" type="submit" name="action">Guardar</button>
-		</form>
+			<div id="list_activitie" >
+				<div id="title_list_activitie" >Soluciones Enviadas</div>	
 
+			</div>
+
+			<!--aqui se renderizan los mensajes de la lista de actividades (child)-->
+			<div id="msg_list_activitie"></div>
+		 
+		</div>
+		<div class="col-md-12">
+			<hr>
+		</div>
 	<!--aqui se muestran los mensajes de succes-->
 		<div id="msg_succes" hidden></div>
 		
-	<!--boton para enviar una actividad (child)-->
-		<button id="btn_active_send" class="btn btn-default" type="button">Enviar Actividad</button>
+	
+		<div class="col-md-8 col-md-offset-2">
+		<!--Aqui se pegan los comentarios-->
+			<div id="list-comment-act">	</div>
 
-	<!--formulario para enviar una actividad (child)-->
-		<div id="send_activitie" hidden>
-			<form id="form_send_activitie">
-				<button class="btn btn-default pull-right" type="submit" name="action">Enviar</button>
-			</form>
+		<!-- formulario para crear el comentario -->
+			
+			<form id="form-comment-act" hidden>
+				<div class="form-group">
+					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
+				</div>
+				<div class="form-group">
+					<input type="hidden" id="id_parent" name="parent">
+				</div>
+
+				<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
+			</form>	
 		</div>
-
-	<!--Aqui se pegan los comentarios-->
-		<div id="list-comment-act">	</div>
-
-	<!-- formulario para crear el comentario -->
-		<form id="form-comment-act" hidden>
-			<div class="form-group">
-				<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
-			</div>
-			<div class="form-group">
-				<input type="hidden" id="id_parent" name="parent">
-			</div>
-
-			<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
-		</form>	
-
 	</div>
 	
 {% endblock %}

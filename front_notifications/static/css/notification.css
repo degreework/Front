@@ -1,17 +1,31 @@
 #user-notify li{
 	font-size: 12px;
 	margin-top: 5px;
+	margin-right: 0;
 }
 
 #user-notify{
 	color: black;
-	width: 400px;
-	padding: 10px;
+	width: 400px; 
 }
 
+ul #user-notify{
+	margin-right: 0;
+
+}
+
+ul #btn-mark-all{
+	color: black;
+	font-size: 13px;
+    padding: 5px;
+}
+
+#btn-all-readed{
+	color: black;
+}
 
 #noti_container{
-	margin-top: 10px;	
+	/*margin-top: 10px;	*/
 	border-bottom: 1px solid #eee;
 	padding: 10px;
 }
@@ -22,4 +36,40 @@
 
 #btn-mark-all{
 	border-bottom: 1px solid #eee;
+}
+
+.badge{
+	background-color: transparent;
+	font-size: initial;
+}
+
+.a-noti{
+	margin: 0;
+}
+
+
+/*
+*/
+
+.dropdown-menu:before {
+  position: absolute;
+  top: -8px;
+  right: 3px;
+  display: inline-block;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #ccc;
+  border-left: 10px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.dropdown-menu:after {
+  position: absolute;
+  top: -8px;
+  right: 3px;
+  display: inline-block;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #ffffff;
+  border-left: 10px solid transparent;
+  content: '';
 }

@@ -1,5 +1,5 @@
 var main = function(){
-  
+  /*
   $('.icon-menu').click(function() {
     //$('.menu ul').slideToggle('slow')
     $('.menu').animate({
@@ -20,7 +20,7 @@ var main = function(){
     $('.icon-close').hide()  
 
   });
-
+*/
   
 };
  

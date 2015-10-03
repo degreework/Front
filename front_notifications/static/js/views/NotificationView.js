@@ -118,5 +118,6 @@ NotificationView.remove_all_rendered = function(count)
 		$("#user-bell-notify").append(count);
 	}
 	
-	//$("#user-notify").empty()
+	//$("#a-noti").empty()
+	$("#user-notify").empty()
 }
