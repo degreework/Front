@@ -31,6 +31,19 @@ GamificationView.prototype.initialize = function(form, url, callback)
 
 }
 
+// cambia el valor de ON por un True en un campo tipo boolean 
+GamificationView.change_boolean = function(data){
+	
+	console.log('change_boolean gamification')
+	for (i = 0; i < $(data).find('input').length; i++) {
+		if($(data).find('input')[i].type === 'checkbox'){
+
+			$(data).find('input')[i].value = $($(data).find('input')[i]).is(':checked') 			
+		}
+	}
+	return data
+}
+
 
 GamificationView.render_parametros = function(form, response){
 
@@ -140,7 +153,9 @@ GamificationView.prototype.create_badge = function(form)
 			$("#id_prerequisites option").attr("selected","selected"); 
 
 			var gamificationService = new GamificationService();
-			var data = new FormData(($(e.target).get(0)));
+			var formu = GamificationView.change_boolean(($(e.target).get(0)))
+			console.log(formu)
+			var data = new FormData(formu);
 			gamificationService.create(URL_CREATE_BADGE, data, GamificationView.prototype.notifify_create_badge)
 	})
 	
@@ -218,6 +233,14 @@ GamificationView.prototype.update_badges = function(form, id)
 			e.preventDefault();
 			//Selecciona todas las opciones del contendor 
 			$("#id_prerequisites option").attr("selected","selected"); 
+
+			//si el usaurio no puso foto en el input, que remueva el dato del input para el envio
+			
+			if("" == $("#id_image").val())
+			{
+				console.log('entro')
+				$("#id_image").remove()  
+			}
 
 
 			var gamificationService = new GamificationService();

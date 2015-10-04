@@ -11,9 +11,10 @@ VoteView.prototype.render_vote_votes  = function(container, thread_id)
 	service.list(
 		url,
 		function(response){
-			var div = $("<div></div>");
-			var div_up = $("<span class='glyphicon glyphicon-triangle-top' aria-hidden='true'></span><span>"+response[0].up_votes+"<span>");
-			var div_down = $("<span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true'></span><span>"+response[0].down_votes+"<span>");
+			var div = $("<div class='col-md-1 ' style='margin-top:15px'></div>");
+			var div_up = $("<h5> <span class='glyphicon glyphicon-triangle-top' aria-hidden='true'>"+response[0].up_votes+"</span></h5>");
+			var div_down = $("<h5> <span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true'>"+response[0].down_votes+"</span> </h5>");
+
 
 			$(div).append(div_up)
 			$(div).append(div_down)
@@ -26,19 +27,34 @@ VoteView.prototype.render_votes  = function(container, thread_id)
 	/*Render votes when is a ask's detail */
 	var url = URL_LIST_VOTE.replace(/\%id%/g, thread_id);
 	var service = new VoteService();
+	var _this = this;
 	service.list(
 		url,
 		function(response){
-			var div = $("<div></div>");
-			var div_up = $("<span id='id_"+thread_id+"' class='up-vote'>"+response[0].up_votes+"</span>");
-			var div_down = $("<span id='id_"+thread_id+"' class='down-vote'>"+response[0].down_votes+"</span>");
+			var div = $("<div style='text-align:center'></div>");
+			var div_up = $("<h4> <span id='id_"+thread_id+"' class='glyphicon glyphicon-triangle-top up-vote'>"+response[0].up_votes+"</span><h4>");
+			var div_down = $("<h4><span id='id_"+thread_id+"' class='glyphicon glyphicon-triangle-bottom down-vote'>"+response[0].down_votes+"</span><h4>");
 
 			$(div).append(div_up)
 			$(div).append(div_down)
 			$(container).append(div)
+
+			$(div_up).click(function(e){
+				console.log("click up")
+				_this.do_vote({'thread':thread_id, 'vote':0})
+				$(this).off()
+			})
+			$(div_down).click(function(e){
+				console.log("click down")
+				_this.do_vote({'thread':thread_id, 'vote':1})
+				$(this).off()
+			})
 	});
+
+
 }
 
+/*
 VoteView.prototype.render_btn = function(container, thread_id)
 {
 
@@ -64,7 +80,7 @@ VoteView.prototype.render_btn = function(container, thread_id)
 
 	$(container).append(div)
 }
-
+*/
 VoteView.prototype.do_vote  = function(data)
 {
 	var url = URL_GIVE_VOTE;

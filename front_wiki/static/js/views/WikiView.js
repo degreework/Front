@@ -370,7 +370,8 @@ WikiView.render_request = function(list)
 
 WikiView.approve_succes = function(response)
 {
-	Notify.show_success("Wiki", response.msg);
+	location.href =  host+":"+location.port+"/wiki/"; 
+	//Notify.show_success("Wiki", response.msg);
 }
 
 

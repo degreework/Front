@@ -238,7 +238,7 @@ CommentView.prototype.appentOptions = function(div_contenedor){
 
 	//icono
 	var icon = document.createElement('span')
-	icon.className = 'glyphicon glyphicon-triangle-bottom' 
+	icon.className = 'glyphicon glyphicon-cog' 
 
 	div_dropdow_toggle.appendChild(icon)
 

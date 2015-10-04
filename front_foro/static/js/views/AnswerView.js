@@ -139,8 +139,8 @@ AnswerView.prototype.render_list = function (data){
 
 		//votes
 		///#### vote
-		voteManager.render_btn(container, id);
-		voteManager.render_votes(container, id);
+		//voteManager.render_btn(info_user, id);
+		voteManager.render_votes(info_user, id);
 		//## end vote
 
 	}
@@ -218,7 +218,7 @@ AnswerView.prototype.appentOptions = function(div_contenedor){
 
 	//icono
 	var icon = document.createElement('span')
-	icon.className = 'glyphicon glyphicon-triangle-bottom' 
+	icon.className = 'glyphicon glyphicon-cog' 
 
 	div_dropdow_toggle.appendChild(icon)
 

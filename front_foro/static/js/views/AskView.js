@@ -63,15 +63,15 @@ AskView.prototype.render_list = function (data){
 	for (i = 0, len = data_list_asks.length; i < len; i++) { 
 		// se crea el html     		
 		var container = document.createElement("div");
-		container.className = 'question';
+		container.className = 'question col-md-12';
 
+		var container2 = document.createElement("div");
+		container2.className = 'col-md-11 pull-right';
 
 		var link = document.createElement("a");
 		var id = data_list_asks[i].id;
 		
-		///#### vote
-		voteManager.render_vote_votes(container, id);
-		//## end vote
+		
 
 		//
 		$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
@@ -90,12 +90,19 @@ AskView.prototype.render_list = function (data){
 		$(summarys).text(', '+jQuery.timeago(data_list_asks[i].added_at))
 		$(author).text(data_list_asks[i].author.name)
 			
+		///#### vote
+		voteManager.render_vote_votes(container, id);
+		//## end vote
+
 		//se pega a los contenedores 
 		link.appendChild(titles);
-		container.appendChild(link);
-		container.appendChild(author);
-		container.appendChild(summarys);
-		container.appendChild(count);
+		container2.appendChild(link);
+		container2.appendChild(author);
+		container2.appendChild(summarys);
+		container2.appendChild(count);
+		container.appendChild(container2)
+
+		
 
 			
 		$(AskView.prototype.container_list_ask).prepend(container);
@@ -129,9 +136,9 @@ AskView.prototype.render_ask = function (data){
 
 	//votes
 	var vote = new VoteView();
-	vote.render_btn($(AskView.prototype.container_title_ask), data.id);
+	//vote.render_btn($('.info_ask'), data.id);
 
-	vote.render_votes($(AskView.prototype.container_title_ask), data.id)
+	vote.render_votes($('.info_ask'), data.id)
 
 }
 

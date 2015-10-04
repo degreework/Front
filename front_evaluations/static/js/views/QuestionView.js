@@ -81,6 +81,9 @@ EvaluationsView.create_mc = function(form, id_list_answers)
 	
 }
 
+
+
+
 EvaluationsView.create_tf = function(form)
 {
 	form.submit(function (e) {
@@ -98,7 +101,7 @@ EvaluationsView.create_tf = function(form)
 }
 
 EvaluationsView.notifify_create_question = function(){
-	Notify.show_success("question create", "the question was create succesful");
+	location.href =  host+":"+location.port+"/evaluations/questions/"; 
 }
 
 
@@ -269,6 +272,12 @@ EvaluationsView.update_question = function(form, id, id_list_answers)
 
 			//Selecciona todas las opciones del contendor 
 			$("#id_quiz option").attr("selected","selected"); 
+
+			if("" == $("#id_figure").val())
+			{
+				console.log('entro')
+				$("#id_figure").remove()  
+			}
 
 			var questionService = new QuestionService();
 

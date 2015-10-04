@@ -270,10 +270,12 @@ function render_form(method, form , response, callback, params)
 						// eventos para mover las opciones de un selector a otro 
 						$(a).click(function(){
 							$('#id_quiz option:selected').appendTo("#id_quiz_from");
+							$('#id_prerequisites option:selected').appendTo("#id_quiz_from");
 						})
 
 						$(a2).click(function(){
 							$('#id_quiz_from option:selected').appendTo("#id_quiz");
+							$('#id_quiz_from option:selected').appendTo("#id_prerequisites");
 						})
 
 					}else

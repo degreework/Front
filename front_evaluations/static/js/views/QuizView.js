@@ -62,15 +62,14 @@ EvaluationsView.create_quiz = function(form)
 			var quizService = new QuizService();
 			var formu = EvaluationsView.change_boolean(($(e.target).get(0)))
 			var data = new FormData(formu);
-			quizService.create(URL_CREATE_QUIZ, data, EvaluationsView.notifify_create_question)
+			quizService.create(URL_CREATE_QUIZ, data, EvaluationsView.notifify_create_quiz)
 	})
 	
 }
 
 EvaluationsView.notifify_create_quiz = function(){
-	
-	//Notify.show_success("quiz creado", "el quiz fue creado con exito");
-	//location.href =  host+":"+location.port+"/evaluations/"; 
+
+	location.href =  host+":"+location.port+"/evaluations/list/"; 
 }
 
 

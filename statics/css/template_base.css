@@ -6,6 +6,10 @@ body{
 	font-family: 'OpenSans-Regular.ttf';
 }
 
+.glyphicon{
+	cursor: pointer;
+}
+
 .page-header{
 	background-image: url("../../static/img/overlay2.png"), url("../../static/img/overlay3.svg"), linear-gradient(45deg, #EF0909 5%, #E02C2C 50%, #EF0909 ); /*#F48080*/
 	background-position: top left,	center center,	center center;

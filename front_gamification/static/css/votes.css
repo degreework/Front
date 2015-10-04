@@ -1,9 +1,11 @@
 .up-vote
 {
 	color: green;
+	cursor: pointer;
 }
 
 .down-vote
 {
 	color: red;
+	cursor: pointer;
 }
