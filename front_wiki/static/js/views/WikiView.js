@@ -148,7 +148,8 @@ WikiView.render_version = function(page)
 	$("#wiki_title").text(page.title);
 	$("#wiki_version").text(page.version);
 	$("#markdown").html(markdown.toHTML(page.raw.raw));
-	var url = location.origin+'/wiki/'+page.slug;
+	//var mod_slug come from html template
+	var url = location.origin+'/'+mod_slug+'/wiki/'+page.slug;
 	
 	//to approve a request
 	var s = StorageClass.getInstance();
@@ -298,7 +299,8 @@ WikiView.render_list = function(parent_container, response)
 		var link = document.createElement("a");
 		var id = response[i].page.id;
 		var slug = response[i].page.slug;
-		$(link).attr('href', host+":"+location.port+"/wiki/"+slug);
+		//$(link).attr('href', host+":"+location.port+"/wiki/"+slug);
+		$(link).attr('href', slug);
 
 		var title_page = document.createElement("span");
 		$(title_page).css('font-size','24px')
@@ -370,7 +372,7 @@ WikiView.render_request = function(list)
 
 WikiView.approve_succes = function(response)
 {
-	location.href =  host+":"+location.port+"/wiki/"; 
+	location.href =  host+":"+location.port+"/"+mod_slug+"/wiki/"; 
 	//Notify.show_success("Wiki", response.msg);
 }
 

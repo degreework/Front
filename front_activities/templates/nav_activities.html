@@ -1,16 +1,18 @@
 {% extends 'nav.html' %}
 {% block title %}
-	<span class="navbar-brand" id='title-nav' href="#">Activities module name</span>
+	<a href="{% url 'front_activities:activities' mod_slug %}" >
+		<span class="navbar-brand" id='title-nav'>Activities <span id="module_name"></span></span>
+	</a>
 {% endblock title %}		
 
 {% block items %}
 
 	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_activities:activities' %}">actividades</a>
+		<a href="{% url 'front_activities:activities' mod_slug%}">actividades</a>
 	</li>
 
 	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_activities:create' %}">Crea una nueva actividad</a>
+		<a href="{% url 'front_activities:create' mod_slug %}">Crea una nueva actividad</a>
 	</li>
 
 {% endblock items %}
@@ -18,6 +20,13 @@
 {% block scripts %}
 	<script>
 		active();
+		
+		var slug = "{{mod_slug}}";
+		var module = new ModuleView();
+		module.render_module_name(
+			slug,
+			$("#module_name")
+		);
 	</script>
 {% endblock scripts %}
 

@@ -163,13 +163,6 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		}, false);
 		$("#activitie").append(del)
 
-
-
-		$("<a href='"+response.id+"' ><h4 id='id_name'>"+response.name+" </h4></a>" ).appendTo( "#activitie" );
-		$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
-		$("<p>Fecha de entrega: <span id='id_die_at'>"+response.die_at.replace('Z', '')+"</span></p>" ).appendTo( "#activitie" );
-		$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
-		$("<hr>" ).appendTo( "#activitie" );
 	}
 
 	if(!show_edit && -1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
@@ -194,6 +187,13 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		}, false);
 		$("#list_activitie").append(list)
 	}
+
+	
+	$("<a href='"+response.id+"' ><h4 id='id_name'>"+response.name+" </h4></a>" ).appendTo( "#activitie" );
+	$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
+	$("<p>Fecha de entrega: <span id='id_die_at'>"+response.die_at.replace('Z', '')+"</span></p>" ).appendTo( "#activitie" );
+	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
+	$("<hr>" ).appendTo( "#activitie" );
 
 	$("#activitie").fadeIn();
 

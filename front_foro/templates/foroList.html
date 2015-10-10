@@ -21,6 +21,8 @@
 	var ask = new AskView();
 	ask.list(URL_LIST_ASKS_FORO);
 
+	var mod_slug = "{{mod_slug}}";
+
 	$(window).scroll(function() {
     if($(window).scrollTop() == $(document).height() - $(window).height()) {
 			ask.scroll_list(URL_LIST_ASKS_FORO);          

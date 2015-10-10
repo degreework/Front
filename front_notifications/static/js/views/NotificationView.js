@@ -22,7 +22,7 @@ NotificationView.render_notifications = function(notifications, saved)
 	var s = StorageClass.getInstance();
 	s.storage.set("notifications", JSON.stringify(notifications));
 	
-	console.log(notifications)
+	//console.log(notifications)
 
 	if(notifications.count>0)
 	{
@@ -52,7 +52,7 @@ NotificationView.render_notifications = function(notifications, saved)
 NotificationView.render = function(notification)
 {
 	/*render a notification*/
-	console.log(notification)
+	//console.log(notification)
 
 	var li = $("<li class='a-noti'></li>");
 	var container = $("<div id =  'noti_container'></div>");

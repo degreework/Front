@@ -9,29 +9,29 @@
 		<div class="col-md-12">
 		<div class="col-md-4">
 		<p>Preguntas</p>
-		<a href="{% url 'front_evaluations:questions' %}">lista de preguntas</a><br>
-		<a href="{% url 'front_evaluations:createEssay' %}">crear pregunta ensayo</a><br>
-		<a href="{% url 'front_evaluations:createMultichoice' %}">crear pregunta multiopcion</a><br>
-		<a href="{% url 'front_evaluations:createTrueFalse' %}">crear pregunta verdadero/falso</a><br>
+		<a href="{% url 'front_evaluations:questions' mod_slug %}">lista de preguntas</a><br>
+		<a href="{% url 'front_evaluations:createEssay' mod_slug %}">crear pregunta ensayo</a><br>
+		<a href="{% url 'front_evaluations:createMultichoice' mod_slug %}">crear pregunta multiopcion</a><br>
+		<a href="{% url 'front_evaluations:createTrueFalse' mod_slug %}">crear pregunta verdadero/falso</a><br>
 		<br>	
 		</div>
 		<div class="col-md-4">
 		<p>Categorias</p>
-		<a href="{% url 'front_evaluations:category' %}">lista categorias</a><br>
-		<a href="{% url 'front_evaluations:createCategory' %}">crear categorias</a><br>
+		<a href="{% url 'front_evaluations:category' mod_slug %}">lista categorias</a><br>
+		<a href="{% url 'front_evaluations:createCategory' mod_slug %}">crear categorias</a><br>
 		<br>
 		<p>SubCategorias</p>
-		<a href="{% url 'front_evaluations:subcategory' %}">lista de subcategorias</a><br>
-		<a href="{% url 'front_evaluations:createsubCategory' %}">crear subactegoria</a><br>
+		<a href="{% url 'front_evaluations:subcategory' mod_slug %}">lista de subcategorias</a><br>
+		<a href="{% url 'front_evaluations:createsubCategory' mod_slug %}">crear subactegoria</a><br>
 		<br>
 			
 		</div>
 		<div class="col-md-4">
 		<p>Quices</p>
-		<a href="{% url 'front_evaluations:quiz' %}">quiz usuarios</a><br>
-		<a href="{% url 'front_evaluations:quizAdmin' %}">quiz admin</a><br>
-		<a href="{% url 'front_evaluations:createQuiz' %}">crear un quiz</a><br>
-		<a href="{% url 'front_evaluations:markingQuiz' %}">quices terminado</a><br>
+		<a href="{% url 'front_evaluations:quiz' mod_slug %}">quiz usuarios</a><br>
+		<a href="{% url 'front_evaluations:quizAdmin' mod_slug %}">quiz admin</a><br>
+		<a href="{% url 'front_evaluations:createQuiz' mod_slug %}">crear un quiz</a><br>
+		<a href="{% url 'front_evaluations:markingQuiz' mod_slug %}">quices terminado</a><br>
 		</div>
 		</div>
 		<div class=" col-md-12 container_quiz">

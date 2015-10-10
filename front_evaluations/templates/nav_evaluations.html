@@ -1,12 +1,14 @@
 {% extends 'nav.html' %}
 {% block title %}
-	<span class="navbar-brand" id='title-nav' href="#">Evaluaciones module name</span>
+	<a href="{% url 'front_evaluations:quiz' mod_slug %}" >
+		<span class="navbar-brand" id='title-nav'>Tests <span id="module_name"></span></span>
+	</a>
 {% endblock title %}		
 
 {% block items %}
 
 	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_evaluations:quiz' %}">evaluaciones</a>
+		<a href="{% url 'front_evaluations:quiz' mod_slug %}">evaluaciones</a>
 	</li>
 
 	<!--<li class="section-nav" role="presentation">
@@ -34,5 +36,12 @@
 {% block scripts %}
 	<script>
 		active();
+
+		var slug = "{{mod_slug}}";
+		var module = new ModuleView();
+		module.render_module_name(
+			slug,
+			$("#module_name")
+		);
 	</script>
 {% endblock scripts %}

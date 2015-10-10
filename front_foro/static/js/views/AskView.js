@@ -74,7 +74,7 @@ AskView.prototype.render_list = function (data){
 		
 
 		//
-		$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
+		$(link).attr('href', Site.geRootUrl()+"/"+mod_slug+"/forum/detail/"+id);
 		var titles = document.createElement("h3");
 		var summarys = document.createElement("span");
 		//summarys.className = 'pull-right';
