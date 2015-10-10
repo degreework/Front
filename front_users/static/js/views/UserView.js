@@ -1,5 +1,7 @@
 var UserView = {};
 
+
+
 UserView.initializeRegister = function(div_register)
 {
 	UserView.form_register = div_register.find("form");
@@ -109,6 +111,11 @@ UserView.loginCallback = function ()
 	user = JSON.parse(localStorage.getItem('user'))
 	var gamificationView = new GamificationView();
 	gamificationView.get_progress_user(user.id)
+
+	// se conecta al servidor para el chat y agrega
+	console.log('agregate omee')
+	chatSocked.emmit('addUser', user)
+
 }
 
 

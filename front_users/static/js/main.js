@@ -35,6 +35,17 @@ var main = function(){
   		$('[data-toggle="popover"]').popover();
 	})
 	();
+
+	/*
+		CHAT
+	*/
+
+	//ChatSocked.prototype.socked.emit('listChatUpdate');
+
+	chatSocked.emmit('listChatUpdate');
+	// trae los usuarios conectados al servidor del chat 
+	chatSocked.listen();
+
 };
 
 $(document).ready(main);
