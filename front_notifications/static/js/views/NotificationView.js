@@ -65,6 +65,12 @@ NotificationView.render = function(notification)
 		var url = WikiModel.generate_url_request(notification.target.detail.page.slug, notification.target.detail.page.commit)
 		$("<a href='"+url+"'><span><strong>"+notification.actor.name+" </strong></span><span>"+notification.verb+"</span></a>" ).appendTo(container);
 	}
+
+	if("Ask" == notification.target.type)
+	{
+		var url = AskModel.generate_url(notification.target.id)
+		$("<a href='"+url+"'><span><strong>"+notification.actor.name+" </strong></span><span>"+notification.target.detail+", "+notification.verb+"</span></a>" ).appendTo(container);
+	}
 	
 	
 	$(container).appendTo(li)

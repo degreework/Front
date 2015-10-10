@@ -27,7 +27,7 @@ ActivitieChildView.prototype.render_list = function(response)
 ActivitieChildView.prototype.render_activitie = function(response)
 {
 	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#list_activities" );
-	$("<div class='col-md-12 result'><span>Nombre del estudiante</span><a href='"+response.file+"'><p id='id_name'>Archivo</p></a><p>Calificar</></div>").appendTo( "#list_activitie" );
+	$("<div class='col-md-12 result'><a href='"+UserView.getUrl(response.author.id)+"'><span>"+response.author.name+"</span></a><a href='"+response.file+"'><p id='id_name'>Archivo</p></a><p>Calificar</></div>").appendTo( "#list_activitie" );
 	
 
 	//$("<a href='"+response.file+"' ><p id='id_name'>Archivo</p></a>" ).appendTo( "#list_activitie" );
