@@ -18,10 +18,11 @@
 	asks.create(URL_CREATE_ASK_FORO, {})
 	*/
 
-	var ask = new AskView();
-	ask.list(URL_LIST_ASKS_FORO);
-
 	var mod_slug = "{{mod_slug}}";
+
+	var url = URL_ALL_ASK_MODULE.replace(/\%slug%/g, mod_slug);
+	var ask = new AskView();
+	ask.list(url);//URL_LIST_ASKS_FORO
 
 	$(window).scroll(function() {
     if($(window).scrollTop() == $(document).height() - $(window).height()) {
