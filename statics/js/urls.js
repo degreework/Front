@@ -148,3 +148,10 @@ URL_LIST_VOTE = host + ':8080/API/gamification/vote/detail/%id%';
 URL_ALL_MODULES = host + ':8080/API/module/all';
 URL_CREATE_MODULE = host + ':8080/API/module/new';
 URL_RETRIEVE_MODULE = host + ':8080/API/module/detail/%slug%';
+//forum
+URL_ALL_ASK_MODULE = host + ':8080/API/module/%slug%/forum/all';
+//wiki
+URL_CREATE_PAGE_WIKI_MODULE = host + ':8080/API/module/%slug%/wiki/new';
+//Activitie
+URL_CREATE_ACTIVITIE_MODULE = host + ':8080/API/module/%slug%/activitie/new';
+URL_ALL_ACTIVITIE_MODULE = host + ':8080/API/module/%slug%/activitie/all';

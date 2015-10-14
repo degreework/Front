@@ -14,8 +14,11 @@ ActivitieParentView.prototype.handler_created_form = function(form){
 		e.preventDefault();
 		
 		var data = new FormData($(e.target).get(0));
+		var url = URL_CREATE_ACTIVITIE_MODULE.replace(/\%slug%/g, slug);
 		var activitieService = new ActivitieParentService();
-		activitieService.create(URL_CREATE_ACTIVITIE_PARENT, data, ActivitieParentView.prototype.succes_create);
+		//URL_CREATE_ACTIVITIE_PARENT
+		activitieService.create(url, data, ActivitieParentView.prototype.succes_create);
+		//Te Amo, Isabella
 	});
 
 }
@@ -61,9 +64,10 @@ ActivitieParentView.prototype.handler_edit_form = function(form){
 ActivitieParentView.prototype.succes_create = function(response)
 {
 	$(ActivitieParentView.prototype.form_create).fadeOut();
+	var url = Site.geRootUrl()+"/"+slug+ActivitieParentModel.get_detail_url(response.id);
 	$("#msg_succes")
 	.append(
-		"<span>La actividad ha sido publicada <a href='"+ActivitieParentModel.get_detail_url(response.id)+"'>aqui</a></span>")
+		"<span>La actividad ha sido publicada <a href='"+url+"'>aqui</a></span>")
 	$("#msg_succes").fadeIn()
 
 }
