@@ -69,7 +69,7 @@ EvaluationsView.create_quiz = function(form)
 
 EvaluationsView.notifify_create_quiz = function(){
 
-	location.href =  host+":"+location.port+"/evaluations/list/"; 
+	location.href =  Site.geRootUrl()+"/"+slug+"/evaluations/list/"; 
 }
 
 
@@ -596,7 +596,9 @@ EvaluationsView.take_quiz = function(btn_continue){
 
 				//se guarda en la BD
 				var quizService = new QuizService();
-				quizService.update2( URL_UPDATE_SITTING+sitting.id+'/', sitting, EvaluationsView.redirect_results)
+				var url = URL_UPDATE_SITTING.replace(/\%slug%/g, slug);
+
+				quizService.update2( url+sitting.id+'/', sitting, EvaluationsView.redirect_results)
 			}
 		})
 

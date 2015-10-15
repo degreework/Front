@@ -7,9 +7,9 @@ var main = function(){
 		NotificationView.get_notifications();
 
 		// progreso de la medalla del usuario 
-		user = JSON.parse(localStorage.getItem('user'))
-		var gamificationView = new GamificationView();
-		gamificationView.get_progress_user(user.id)
+		//user = JSON.parse(localStorage.getItem('user'))
+		//var gamificationView = new GamificationView();
+		//gamificationView.get_progress_user(user.id)
 
 
 		window.setInterval(

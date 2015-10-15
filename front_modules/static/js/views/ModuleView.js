@@ -42,6 +42,7 @@ ModuleView.succes_create_form = function(form)
 		var action = e.target.action.split("/");
 		action = action[action.length-1];
 		
+		console.log($(this).get(0))
 		var data = new FormData($(this).get(0));
 		var service = new ModuleService();
 		var url = "";

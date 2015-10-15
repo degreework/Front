@@ -101,7 +101,7 @@ EvaluationsView.create_tf = function(form)
 }
 
 EvaluationsView.notifify_create_question = function(){
-	location.href =  host+":"+location.port+"/evaluations/questions/"; 
+	location.href =  Site.geRootUrl()+'/'+slug+"/evaluations/questions/"; 
 }
 
 

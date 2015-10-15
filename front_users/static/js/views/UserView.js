@@ -112,8 +112,8 @@ UserView.loginCallback = function ()
 
 	// progreso de la medalla del usuario 
 	user = JSON.parse(localStorage.getItem('user'))
-	var gamificationView = new GamificationView();
-	gamificationView.get_progress_user(user.id)
+	//var gamificationView = new GamificationView();
+	//gamificationView.get_progress_user(user.id)
 
 	// se conecta al servidor para el chat y agrega
 	console.log('agregate omee')
