@@ -23,6 +23,9 @@ UserView.verify = function ()
 
 	if (UserService.isAutenticated())
 	{
+		user = JSON.parse(localStorage.getItem('user'))
+		console.log(user)
+		chatSocked.emmit('listChatUpdate',user);
 		UserView.showLoggedUser();		
 	}
 	else

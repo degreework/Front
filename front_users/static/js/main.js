@@ -41,8 +41,7 @@ var main = function(){
 	*/
 
 	//ChatSocked.prototype.socked.emit('listChatUpdate');
-
-	chatSocked.emmit('listChatUpdate');
+	
 	// trae los usuarios conectados al servidor del chat 
 	chatSocked.listen();
 
