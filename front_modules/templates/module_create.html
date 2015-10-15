@@ -6,8 +6,8 @@
 		Crear modulo
 		<div>
 		</div>
-		<form id="form_create_module">
-			<button class="btn btn-default pull-right" type="submit" name="action" id="btn-module">Crear</button>
+		<form id="form_create_module" action="create" hidden>
+			<button class="btn btn-default pull-right" type="submit" name="create" id="btn-module">Crear</button>
 		</form>
 	</div>
 
@@ -16,7 +16,7 @@
 {% block scripts %}
 	<script>
 		jQuery(document).ready(function($) {
-			var module = new ModuleView()
+			var module = new ModuleView();
 			module.initialize($("#form_create_module"));
     });
 	</script>

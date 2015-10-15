@@ -146,6 +146,7 @@ URL_LIST_VOTE = host + ':8080/API/gamification/vote/detail/%id%';
 //Modules
 URL_ALL_MODULES = host + ':8080/API/module/all';
 URL_CREATE_MODULE = host + ':8080/API/module/new';
+URL_UPDATE_MODULE = host + ':8080/API/module/new/%slug%';
 URL_RETRIEVE_MODULE = host + ':8080/API/module/detail/%slug%';
 //forum
 URL_CREATE_ASK_FORO_MODULE = host+":8080/API/module/%slug%/forum/new";

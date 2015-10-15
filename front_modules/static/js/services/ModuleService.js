@@ -10,6 +10,10 @@ ModuleService.prototype.create = function (url, data, callback) {
 	this.doPOST(url, data, callback);
 }
 
+ModuleService.prototype.update = function (url, data, callback) {
+	this.doPUT(url, data, callback);
+}
+
 ModuleService.prototype.retrieve = function (url, callback) {
 	this.doGET(url, callback);
 }

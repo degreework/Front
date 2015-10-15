@@ -3,15 +3,24 @@
 {% load staticfiles %}
 	<div class="col-md-8 base capacity">
 			
+		<!--Info about Module is rendered here-->
 		<div class="col-md-5 info-module">
 			<!--Title is rendered here-->
 			<h1 id="module_title"></h1>
+			<span id="module_actions"> editar</span>
 			<hr>
 			<div class="col-md-12">
 				<!--Description is rendered here-->
 				<span id="module_description"></span>
 			</div>
+
+			<form id="form_edit_module" action="edit" hidden>
+			<button class="btn btn-default pull-right" type="submit" name="update" id="btn-module">Guardar</button>
+			</form>
+
 		</div>
+		<!--end Info-->
+
 		<div class="col-md-7" style="margin-bottom:40px">
 			<div class="col-md-12 section-module">
 				<div class="col-md-3">
@@ -77,15 +86,20 @@
 	<script>
 		jQuery(document).ready(function($) {
 
-			var slug = location.pathname.split("/");
-			slug = slug[slug.length-1];
+			//var slug = location.pathname.split("/");
+			//slug = slug[slug.length-1];
+			var slug = "{{mod_slug}}";
+			var SLUG = slug;
 			
 			var module = new ModuleView();
 			module.render_module_detail(
 				slug,
 				$("#module_title"),
-				$("#module_description")
+				$("#module_description"),
+				$("#module_actions"),
+				$("#form_edit_module")
 			);
+
 		});
 	</script>
 {% endblock scripts %}
