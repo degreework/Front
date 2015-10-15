@@ -59,12 +59,13 @@ WikiView.succes_create_form = function()
 		$('#id_slug').hide()
 
 	    //-> onsubmit
+	    var url = URL_CREATE_PAGE_WIKI_MODULE.replace(/\%slug%/g, slug);
         WikiView.form_create.submit(function(e){
 			e.preventDefault();
 			
 			WikiService.create_page(
 				e.target,
-				URL_CREATE_PAGE_WIKI,
+				url,
 				WikiView.create_succes
 			);
         
