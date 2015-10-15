@@ -228,7 +228,7 @@ EvaluationsView.update_quiz = function(form, id)
 EvaluationsView.create_sitting_session = function(response){
 	//console.log(response)
 	sessionStorage.setItem('sitting', JSON.stringify(response));
-	$(location).attr('href', host+":"+location.port+"/evaluations/take/"+response.quiz); 
+	$(location).attr('href', Site.geRootUrl()+"/"+slug+"/evaluations/take/"+response.quiz); 
 }
 
 EvaluationsView.get_Quiz = function(){
@@ -562,7 +562,7 @@ EvaluationsView.redirect_results = function(sitting){
 	$.session.remove('sitting');
 
 	// redirige a mostrar los resultados 
-	location.href =  host+":"+location.port+"/evaluations/marking/detail/"+sitting.id; 
+	location.href =  Site.geRootUrl()+"/"+slug+"/evaluations/marking/detail/"+sitting.id; 
 }
 
 // se ejecuta mientras hace el quiz 

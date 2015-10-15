@@ -74,7 +74,7 @@ AskView.prototype.render_list = function (data){
 		
 
 		//
-		$(link).attr('href', host+":"+location.port+"/forum/detail/"+id);
+		$(link).attr('href', Site.geRootUrl()+"/"+mod_slug+"/forum/detail/"+id);
 		var titles = document.createElement("h3");
 		var summarys = document.createElement("span");
 		//summarys.className = 'pull-right';
@@ -223,7 +223,11 @@ AskForm.prototype.handler_created_form = function(){
 		
 		if(e.target.baseURI.indexOf("create") !== -1)
 		{
-			askService.create(URL_CREATE_ASK_FORO, data, AskForm.prototype.succes_create)
+			var url = URL_CREATE_ASK_FORO_MODULE.replace(/\%slug%/g, slug);
+			//URL_CREATE_ASK_FORO
+			//Isabella
+			console.log(url, slug)
+			askService.create(url, data, AskForm.prototype.succes_create)
 		}
 		else
 		{
@@ -257,8 +261,8 @@ AskForm.prototype.succes_update = function (response, form){
 }
 
 AskForm.prototype.succes_create = function(response){
-	console.log('AskForm:succes_create');
-	console.log(response)
-	var new_url = host+":"+location.port+"/forum/detail/"+response.id;
-	location.href =  new_url
+	//console.log('AskForm:succes_create');
+	//console.log(response)
+	var new_url = Site.geRootUrl()+"/"+slug+"/forum/detail/"+response.id;
+	location.href =  new_url;
 }

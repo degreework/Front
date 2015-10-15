@@ -14,8 +14,11 @@ ActivitieParentView.prototype.handler_created_form = function(form){
 		e.preventDefault();
 		
 		var data = new FormData($(e.target).get(0));
+		var url = URL_CREATE_ACTIVITIE_MODULE.replace(/\%slug%/g, slug);
 		var activitieService = new ActivitieParentService();
-		activitieService.create(URL_CREATE_ACTIVITIE_PARENT, data, ActivitieParentView.prototype.succes_create);
+		//URL_CREATE_ACTIVITIE_PARENT
+		activitieService.create(url, data, ActivitieParentView.prototype.succes_create);
+		//Te Amo, Isabella
 	});
 
 }
@@ -61,9 +64,10 @@ ActivitieParentView.prototype.handler_edit_form = function(form){
 ActivitieParentView.prototype.succes_create = function(response)
 {
 	$(ActivitieParentView.prototype.form_create).fadeOut();
+	var url = Site.geRootUrl()+"/"+slug+ActivitieParentModel.get_detail_url(response.id);
 	$("#msg_succes")
 	.append(
-		"<span>La actividad ha sido publicada <a href='"+ActivitieParentModel.get_detail_url(response.id)+"'>aqui</a></span>")
+		"<span>La actividad ha sido publicada <a href='"+url+"'>aqui</a></span>")
 	$("#msg_succes").fadeIn()
 
 }
@@ -163,13 +167,6 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		}, false);
 		$("#activitie").append(del)
 
-
-
-		$("<a href='"+response.id+"' ><h4 id='id_name'>"+response.name+" </h4></a>" ).appendTo( "#activitie" );
-		$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
-		$("<p>Fecha de entrega: <span id='id_die_at'>"+response.die_at.replace('Z', '')+"</span></p>" ).appendTo( "#activitie" );
-		$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
-		$("<hr>" ).appendTo( "#activitie" );
 	}
 
 	if(!show_edit && -1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
@@ -194,6 +191,13 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		}, false);
 		$("#list_activitie").append(list)
 	}
+
+	
+	$("<a href='"+response.id+"' ><h4 id='id_name'>"+response.name+" </h4></a>" ).appendTo( "#activitie" );
+	$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
+	$("<p>Fecha de entrega: <span id='id_die_at'>"+response.die_at.replace('Z', '')+"</span></p>" ).appendTo( "#activitie" );
+	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
+	$("<hr>" ).appendTo( "#activitie" );
 
 	$("#activitie").fadeIn();
 

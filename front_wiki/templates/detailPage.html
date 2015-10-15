@@ -50,6 +50,8 @@
 		*/
 		//key[key.length-1] = version
 		//key[key.length-2] = slug
+		//dont remove mod_slug var, is used at WikiView.render_version
+		var mod_slug = '{{mod_slug}}';
 		WikiView.load_version(key[key.length-1], key[key.length-2])
 	}
 	else if(1 == key.length)

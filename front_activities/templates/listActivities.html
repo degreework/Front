@@ -13,7 +13,11 @@
 
 {% block scripts %}
 	<script>
+
+		var url = URL_ALL_ACTIVITIE_MODULE.replace(/\%slug%/g, "{{mod_slug}}");
+		
 		var activitie = new ActivitieParentView();
-		activitie.list(URL_ALL_ACTIVITIE_PARENT);
+		activitie.list(url);
+		//URL_ALL_ACTIVITIE_PARENT
 	</script>
 {% endblock scripts %}

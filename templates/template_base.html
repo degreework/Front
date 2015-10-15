@@ -33,8 +33,14 @@
 	<script src="{% static 'js/Storage.js' %}" ></script>
 	<script src="{% static 'js/models/Token.js' %}" ></script>
 	<script src="{% static 'js/models/User.js' %}" ></script>
+	<script src="{% static 'js/models/Module.js' %}" ></script>
 	
 	<script src="{% static 'js/services/Service.js' %}" ></script><!-- de este heredan lo otros -->
+
+	<!--Modules-->
+	<script src="{% static 'js/services/ModuleService.js' %}" ></script>
+	<script src="{% static 'js/views/ModuleView.js' %}" ></script>
+	<!--end modules-->
 
 	<script src="{% static 'js/models/WikiModel.js' %}" ></script>
 	<script src="{% static 'js/models/AskModel.js' %}" ></script>
@@ -150,6 +156,12 @@
 		UserView.verify();
 		
 		UserView.showIndexUser();
+
+		/*loas modules*/
+		var module = new ModuleView();
+		module.render_modules($("#id_list_modules"))
+
+
 	});
 
 </script>

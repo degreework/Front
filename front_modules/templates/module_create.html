@@ -1,0 +1,23 @@
+{% extends 'template_base.html' %}
+{% block contenido %}
+{% load staticfiles %}
+	
+	<div>
+		Crear modulo
+		<div>
+		</div>
+		<form id="form_create_module" action="create" hidden>
+			<button class="btn btn-default pull-right" type="submit" name="create" id="btn-module">Crear</button>
+		</form>
+	</div>
+
+{% endblock %}
+
+{% block scripts %}
+	<script>
+		jQuery(document).ready(function($) {
+			var module = new ModuleView();
+			module.initialize($("#form_create_module"));
+    });
+	</script>
+{% endblock scripts %}

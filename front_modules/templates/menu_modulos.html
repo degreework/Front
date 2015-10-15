@@ -1,11 +1,11 @@
     
   <div class=" col-md-12">
     <!-- Menu -->
-    <ul> Modulos
-        <li><a href="http://127.0.0.1:8000/modules/detail/1">Modulo 1</a></li>
-        <li><a href="http://127.0.0.1:8000/modules/detail/1">Modulo 2</a></li>
-        <li><a href="http://127.0.0.1:8000/modules/detail/1">Modulo 3</a></li>
+    <ul id="id_list_modules"> Modulos
+        <!--Modules's name are rendered here-->
 
     </ul>
+
+    <a href="{% url 'front_modules:create' %}">Create module</a>
 
   </div>

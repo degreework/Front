@@ -19,8 +19,9 @@
 
 {% block scripts %}
 	<script>
+	var slug = "{{mod_slug}}";
 	var activitie = new ActivitieParentView();
-	var formAvtivitie = new ActivitieParentForm(
+	var formActivitie = new ActivitieParentForm(
 		$("#form_create_activitie"),
 		ActivitieParentView.prototype.handler_created_form)
 	
