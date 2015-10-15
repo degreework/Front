@@ -157,11 +157,11 @@ EvaluationsView.render_list_questions = function(parent_container, response)
 		$(content).text(response[i].content)
 
 
-		var category = document.createElement("td");
-		$(category).text(response[i].category.nombre)
+		//var category = document.createElement("td");
+		//$(category).text(response[i].category.nombre)
 
-		var subcategory = document.createElement("td");
-		$(subcategory).text(response[i].sub_category.nombre)
+		//var subcategory = document.createElement("td");
+		//$(subcategory).text(response[i].sub_category.nombre)
 
 
 		var col_edit = document.createElement("td");
@@ -191,8 +191,8 @@ EvaluationsView.render_list_questions = function(parent_container, response)
 		//se pega a los contenedores 
 		container.appendChild(number);
 		container.appendChild(content);
-		container.appendChild(category);
-		container.appendChild(subcategory);
+		//container.appendChild(category);
+		//container.appendChild(subcategory);
 		container.appendChild(col_edit);
 		container.appendChild(col_del);
 		

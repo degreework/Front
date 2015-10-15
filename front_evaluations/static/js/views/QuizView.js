@@ -252,7 +252,7 @@ EvaluationsView.get_Quiz = function(){
 EvaluationsView.render_quiz = function(response){
 	
 	$('.titulos').text(response.title)
-	$('.category').text('Categoria: '+response.category.nombre)
+	//$('.category').text('Categoria: '+response.category.nombre)
 	$('.description').text('Descripción: '+response.description)
 }
 

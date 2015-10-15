@@ -1,6 +1,8 @@
 //---------------
 // CATEGORY
 //---------------
+
+/*
 EvaluationsView.create_category = function(form)
 {
 	form.submit(function (e) {
@@ -29,6 +31,7 @@ EvaluationsView.render_all_categories = function (response)
 	//console.log(response)
 	EvaluationsView.render_list_categories($('#list-categories'), response);
 }
+
 
 EvaluationsView.render_list_categories = function(parent_container, response)
 {
@@ -87,7 +90,7 @@ EvaluationsView.update_categories = function(form, id)
 			var data = new FormData(($(e.target).get(0)));
 			categoryService.update(URL_UPDATE_CATEGORY+id+'/', data, EvaluationsView.redirect_Categories)
 	})
-}
+}*/
 
 EvaluationsView.redirect_Categories = function(response){
 
@@ -212,6 +215,7 @@ EvaluationsView.render_parametros = function(form, response){
 
 	$(form).show()
 
+	/*
 	if (form.selector === '#form_update_category') {
 		EvaluationsView.update_categories(form, response.id)
 	}
@@ -219,6 +223,7 @@ EvaluationsView.render_parametros = function(form, response){
 	if (form.selector === '#form_update_subcategory') {
 		EvaluationsView.update_subCategories(form, response.id)
 	}
+	*/
 
 	if (form.selector === '#form_update_quiz') {
 		//console.log('quiz')
@@ -268,7 +273,7 @@ EvaluationsView.handle_edit = function(response, index, tipo){
 		create_form(URL_CREATE_QUESTION_ESSAY, form, 'OPTIONS', EvaluationsView.render_parametros, response)
 	};
 
-
+	/*
 	if (tipo == 'category') {
 
 		form = $("#form_update_category")
@@ -281,7 +286,7 @@ EvaluationsView.handle_edit = function(response, index, tipo){
 		form = $("#form_update_subcategory")		
 		create_form(URL_CREATE_SUBCATEGORY, form, 'OPTIONS', EvaluationsView.render_parametros, response)
 	};
-
+	*/
 
 	if (tipo == 'quiz') {
 		form = $("#form_update_quiz")		
@@ -289,6 +294,7 @@ EvaluationsView.handle_edit = function(response, index, tipo){
 	};
 }
 
+/*
 EvaluationsView.create_subcategory = function(form)
 {
 	form.submit(function (e) {
@@ -304,7 +310,7 @@ EvaluationsView.create_subcategory = function(form)
 EvaluationsView.notifify_create_subcategory = function(response){
 	location.href =  host+":"+location.port+"/evaluations/subcategory"; 
 }
-
+*/
 
 EvaluationsView.handle_delete = function(response, index, tipo, row){
 	console.log('handle_delete')
@@ -339,7 +345,7 @@ EvaluationsView.handle_delete = function(response, index, tipo, row){
 			notify.close()	
 		};
 		
-		
+		/*
 		if (tipo == 'categoria') {
 
 			var categoryService = new CategoryService();
@@ -352,7 +358,7 @@ EvaluationsView.handle_delete = function(response, index, tipo, row){
 			var categoryService = new CategoryService();
 			categoryService.delete(URL_UPDATE_SUBCATEGORY+id+'/', row, EvaluationsView.hide_div)
 			notify.close()	
-		}
+		}*/
 
 		if (tipo == 'quiz') {
 		
@@ -372,7 +378,7 @@ EvaluationsView.hide_div= function(response, row){
 	row.fadeOut()
 }
 
-
+/*
 EvaluationsView.get_all_subCategories = function()
 {
 	var categoryService = new CategoryService();
@@ -446,6 +452,6 @@ EvaluationsView.update_subCategories = function(form, id)
 			var data = new FormData(($(e.target).get(0)));
 			categoryService.update(URL_UPDATE_SUBCATEGORY+id+'/', data, EvaluationsView.redirect_Categories)
 	})
-}
+}*/
 
 

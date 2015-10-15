@@ -11,14 +11,14 @@ urlpatterns = patterns('',
         url(r'^(?P<mod_slug>.+)/evaluations/questions/truefalse/create$', 'front_evaluations.views.createTrueFalse', name='createTrueFalse'),
 
 	#Category
-	url(r'^(?P<mod_slug>.+)/evaluations/category/$', 'front_evaluations.views.category', name='category'),
+	#url(r'^(?P<mod_slug>.+)/evaluations/category/$', 'front_evaluations.views.category', name='category'),
         #url(r'^evaluations/category/detail/$', 'front_evaluations.views.detailCategory', name='detailCategory'),
-        url(r'^(?P<mod_slug>.+)/evaluations/category/create$', 'front_evaluations.views.createCategory', name='createCategory'),
+        #url(r'^(?P<mod_slug>.+)/evaluations/category/create$', 'front_evaluations.views.createCategory', name='createCategory'),
 
         #Subcategory
-        url(r'^(?P<mod_slug>.+)/evaluations/subcategory/$', 'front_evaluations.views.subcategory', name='subcategory'),
+        #url(r'^(?P<mod_slug>.+)/evaluations/subcategory/$', 'front_evaluations.views.subcategory', name='subcategory'),
         #url(r'^evaluations/category/detail/$', 'front_evaluations.views.detailSubcategory', name='detailCategory'),
-        url(r'^(?P<mod_slug>.+)/evaluations/subcategory/create$', 'front_evaluations.views.createSubcategory', name='createsubCategory'),
+        #url(r'^(?P<mod_slug>.+)/evaluations/subcategory/create$', 'front_evaluations.views.createSubcategory', name='createsubCategory'),
 
         #Quiz
         url(r'^(?P<mod_slug>.+)/evaluations/$', 'front_evaluations.views.quiz', name='quiz'),
