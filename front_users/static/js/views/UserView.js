@@ -1,5 +1,7 @@
 var UserView = {};
 
+
+
 UserView.initializeRegister = function(div_register)
 {
 	UserView.form_register = div_register.find("form");
@@ -21,6 +23,9 @@ UserView.verify = function ()
 
 	if (UserService.isAutenticated())
 	{
+		user = JSON.parse(localStorage.getItem('user'))
+		console.log(user)
+		chatSocked.emmit('listChatUpdate',user);
 		UserView.showLoggedUser();		
 	}
 	else
@@ -107,8 +112,13 @@ UserView.loginCallback = function ()
 
 	// progreso de la medalla del usuario 
 	user = JSON.parse(localStorage.getItem('user'))
-	var gamificationView = new GamificationView();
-	gamificationView.get_progress_user(user.id)
+	//var gamificationView = new GamificationView();
+	//gamificationView.get_progress_user(user.id)
+
+	// se conecta al servidor para el chat y agrega
+	console.log('agregate omee')
+	chatSocked.emmit('addUser', user)
+
 }
 
 

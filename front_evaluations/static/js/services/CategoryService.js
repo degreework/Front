@@ -1,3 +1,4 @@
+/*
 function CategoryService() {
 	//console.log("AskService:instance created")
   	Service.call(this);
@@ -33,3 +34,4 @@ CategoryService.prototype.delete = function (url, div, callback) {
 	console.log("CategoryService:delete")
 	this.doDELETE(url, div, callback);
 }
+*/

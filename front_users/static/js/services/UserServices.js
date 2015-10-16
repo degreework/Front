@@ -367,10 +367,14 @@ UserService.deauthenticate = function (url) {
 		/*
 		Logout succesful, then do anything
 		*/
+		user = JSON.parse(localStorage.getItem('user'))
+		chatSocked.emmit('leave', user)
+
 		var s = StorageClass.getInstance();
 		s.storage.removeAll();
 		
 		$(location).attr('href',"/");  
+		
 
 	})
 	.fail(function(error){		

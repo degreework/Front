@@ -26,6 +26,7 @@ def createTrueFalse(request, mod_slug):
 #---------------
 # CATEGORY
 #---------------
+"""
 def category(request, mod_slug):
     return render_to_response('listCategory.html', {'title': ' category | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
@@ -40,7 +41,7 @@ def subcategory(request, mod_slug):
 
 def createSubcategory(request, mod_slug):
     return render_to_response('subcategoryCreate.html', {'title': 'create subcategory | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
-
+"""
 
 #---------------
 # QUIZ

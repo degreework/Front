@@ -50,6 +50,13 @@
 	<script src="{% static 'js/services/GamificationServices.js' %}" ></script>  <!-- Gamification-->
 	<script src="{% static 'js/views/GamificationView.js' %}" ></script>
 
+	
+	<!--chat -->
+	<script src="http://localhost:4000/socket.io/socket.io.js" ></script>
+	<script src="{% static 'js/ChatSocked.js' %}" ></script>
+	<!--<script src="http://localhost:4000/script.js " ></script>	-->
+	
+
 	<script src="{% static 'js/services/Login.js' %}" ></script>
 	<script src="{% static 'js/services/UserServices.js' %}" ></script>
 	<script src="{% static 'js/services/CommentServices.js' %}"></script>
@@ -113,8 +120,8 @@
 
 		
 		<div class="col-md-12" style="margin-top:100px;">
-			{% include 'resumeProfile-menu.html' %}
 			
+			{% include 'resumeProfile-menu.html' %}
 
 				<div id="preloader_2">
 	    			<span></span>
@@ -126,6 +133,9 @@
 			  	{% block contenido %}
 					
 				{% endblock %}
+
+			{% include 'listChat.html' %}
+
 		</div>
 		
 

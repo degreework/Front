@@ -351,3 +351,49 @@ margin-top: 100px;
     margin-right: auto;
 }
 
+/*----------------
+	CHAT
+------------------*/
+#title_chat{
+	background: #D51B23;
+    padding: 5px;
+    margin: 0px;
+    color: white;
+}
+
+.room{
+	border: 1px solid #ccc;
+}
+
+.chatEntries{
+	height: 200px;
+	overflow-y: auto
+}
+
+.message{
+	padding: 20px;
+	overflow: hidden;
+	text-align: left;
+	-webkit-animation-name: flip;
+    -webkit-animation-duration: 500ms;	
+}
+
+.messageInput{
+	width: 90.4%;
+    bottom: 0%;
+    position: absolute;
+}
+
+.self{
+	background-color: #eee;
+	text-align: right;
+}
+
+@-webkit-keyframes flip {
+	0% {
+		-webkit-transform: rotateX( 90deg );
+	}
+	100% {
+		-webkit-transform: rotateX( 0deg );
+	}
+}

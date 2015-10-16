@@ -41,6 +41,7 @@ Login.login = function (form, url, callback)
 			s.storage.set("permissions", response);
 			//console.log(s.storage.get("permissions"));
 
+			
 		})
 		if(callback)
 		{

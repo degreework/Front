@@ -94,7 +94,7 @@ URL_CHECK_PASSED_QUIZ = host+':8080/API/quiz/checkPassed';
 
 
 URL_CREATE_SITTING = host+':8080/API/quiz/sitting/'; // se le pega el id del quiz al final 
-URL_UPDATE_SITTING = host+':8080/API/quiz/updateSitting/'; // se le pega el id del sitting al final 
+URL_UPDATE_SITTING = host+':8080/API/quiz/%slug%/updateSitting/'; // se le pega el id del sitting al final 
 URL_ALL_SITTING = host+':8080/API/quiz/allSitting';
 URL_MARKING_QUIZ = host+':8080/API/quiz/marking';
 URL_MARKING_DETAIL_QUIZ = host+':8080/API/quiz/marking/detail/'; // se le pega el id del sitting al final 
