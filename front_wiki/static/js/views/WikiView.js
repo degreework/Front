@@ -279,7 +279,9 @@ function call()
 
 WikiView.get_all_Pages = function()
 {
-	WikiService.get_list(URL_GET_LIST_APPROVED_PAGES, WikiView.render_all_pages);
+	var url = URL_PUBLISHED_PAGE_WIKI_MODULE.replace(/\%slug%/g, slug);
+	//URL_GET_LIST_APPROVED_PAGES
+	WikiService.get_list(url, WikiView.render_all_pages);
 }
 
 WikiView.render_all_pages = function (response)
@@ -289,6 +291,7 @@ WikiView.render_all_pages = function (response)
 
 WikiView.render_list = function(parent_container, response)
 {
+	response = response.results;
 	for (i = 0; i < response.length; i++) { 		
 		// se crea el html   
 		//console.log(response[i])  		
@@ -324,13 +327,16 @@ WikiView.render_list = function(parent_container, response)
 /* REQUESTS */
 WikiView.show_all_request = function(container)
 {
-	WikiService.get_list(URL_GET_ALL_WIKI_REQUEST, WikiView.render_request)
+	var url = URL_REQUEST_PAGE_WIKI_MODULE.replace(/\%slug%/g, slug);
+	//URL_GET_ALL_WIKI_REQUESTeAmosIabella
+	WikiService.get_list(url, WikiView.render_request)
 	WikiView.list_request = container;
 }
 
 WikiView.render_request = function(list)
 {
 	//console.log(list)
+	list = list.results;
 	for (i = 0; i < list.length; i++) {
 
 		var id = list[i].id;
@@ -382,7 +388,9 @@ WikiView.approve_succes = function(response)
 
 WikiView.show_all_history = function(container)
 {
-	WikiService.get_list(URL_GET_ALL_WIKI_HISTORY, WikiView.render_history)
+	var url = URL_HISTORY_PAGE_WIKI_MODULE.replace(/\%slug%/g, slug);;
+	//URL_GET_ALL_WIKI_HISTORY
+	WikiService.get_list(url , WikiView.render_history)
 	WikiView.list_history = container;
 }
 
@@ -390,6 +398,7 @@ WikiView.render_history = function(list)
 {
 	//console.log("WikiView:render_history")
 	//console.log(list)
+	list = list.results;
 
 	for (i = 0; i < list.length; i++) {
 
