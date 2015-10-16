@@ -153,6 +153,9 @@ URL_CREATE_ASK_FORO_MODULE = host+":8080/API/module/%slug%/forum/new";
 URL_ALL_ASK_MODULE = host + ':8080/API/module/%slug%/forum/all';
 //wiki
 URL_CREATE_PAGE_WIKI_MODULE = host + ':8080/API/module/%slug%/wiki/new';
+URL_REQUEST_PAGE_WIKI_MODULE = host + ':8080/API/module/%slug%/wiki/requests';
+URL_HISTORY_PAGE_WIKI_MODULE = host + ':8080/API/module/%slug%/wiki/history';
+URL_PUBLISHED_PAGE_WIKI_MODULE = host + ':8080/API/module/%slug%/wiki/published';
 //Activitie
 URL_CREATE_ACTIVITIE_MODULE = host + ':8080/API/module/%slug%/activitie/new';
 URL_ALL_ACTIVITIE_MODULE = host + ':8080/API/module/%slug%/activitie/all';
