@@ -18,7 +18,11 @@ ChatSocked.prototype.connect = function(){
 // funcion para emitir pedidos 
 ChatSocked.prototype.emmit = function(name, data){
 
-	ChatSocked.prototype.socked.emit(name, data);
+	try{
+		ChatSocked.prototype.socked.emit(name, data);
+	}catch(err) {
+	console.log(err)
+}
 }
 
 
@@ -32,6 +36,7 @@ ChatSocked.prototype.sentMessage = function(tipo, data){
 // funcion donde renderiza la lista de usuarios y escucha los mensajes enviados s
 ChatSocked.prototype.listen = function(){
 	
+	try{
 	ChatSocked.prototype.socked.on('nbUsers', function(msg) {
 		
 		console.log(msg)
@@ -68,7 +73,8 @@ ChatSocked.prototype.listen = function(){
 			})
 		};
 	});
-
+	}catch(err) {
+	console.log(err)}
 
 	$('#messageInputAll').keypress(function (e) {
 		if (e.which == 13) {
@@ -81,6 +87,7 @@ ChatSocked.prototype.listen = function(){
 	});
 
 	//escucha el mensaje
+	try{
 	ChatSocked.prototype.socked.on('message', function(msg) {
 		
 		console.log('me llego el mensaje');
@@ -89,7 +96,10 @@ ChatSocked.prototype.listen = function(){
 		ChatSocked.prototype.addMessageP2P(data, msg['pseudo'], new Date().toISOString(), false);
 		
 	});
+	}catch(err) {
+	console.log(err)}
 
+	try{
 	ChatSocked.prototype.socked.on('messageAll', function(msg) {
 		
 		console.log('me llego el mensajeAll');
@@ -98,6 +108,8 @@ ChatSocked.prototype.listen = function(){
 		ChatSocked.prototype.addMessage(msg['message'], msg['pseudo'], new Date().toISOString(), false);
 		
 	});
+	}catch(err) {
+	console.log(err)}
 }
 
 ChatSocked.prototype.chat = function(id){
@@ -165,6 +177,10 @@ ChatSocked.prototype.addMessageP2P = function(msg, sender, date, self) {
 //chatHistory[socket.room].splice(0,1);
 //else
 //chatHistory[socket.room].push(people[socket.id].name + ": " + msg);
-
-var chatSocked = new ChatSocked()
-chatSocked.connect()
+	
+	var chatSocked = new ChatSocked()
+try {
+	chatSocked.connect()
+}catch(err) {
+	console.log(err)
+}
