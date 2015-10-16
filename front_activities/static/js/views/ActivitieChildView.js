@@ -73,6 +73,9 @@ ActivitieChildView.prototype.render_activitie = function(response)
 ActivitieChildView.prototype.check = function(id, data)
 {
 	var url = URL_CHECK_ACTIVITIE_CHILD.replace(/\%id%/g, id);
+	url = url.replace(/\%slug%/g, slug);
+	console.log(url)
+
 	data = {'action': data}
 
 	var activitieService = new ActivitieChildService();

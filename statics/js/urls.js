@@ -82,7 +82,7 @@ URL_GET_ALL_SUBCATEGORY = host+':8080/API/quiz/category/listSubcategory';
 URL_UPDATE_SUBCATEGORY = host+':8080/API/quiz/category/updateSubCategory/'; // se le pega el id de la Categoria 
 
 // Quiz
-URL_CREATE_QUIZ = host+':8080/API/quiz/createQuiz';
+URL_CREATE_QUIZ = host+':8080/API/quiz/%slug%/createQuiz';
 URL_GET_ALL_QUIZ = host+':8080/API/quiz/listQuiz';
 URL_GET_QUIZ_BY_CATEGORY = host+':8080/API/quiz/listQuizbyCategory/'; // se le pega el nombre de la categoria al final
 URL_DETAIL_QUIZ = host+':8080/API/quiz/detail/'; // se le pega el id del quiz al final 
@@ -105,14 +105,14 @@ URL_PROGRESS_EXAMS_QUIZ = host+':8080/API/quiz/progress/exams/'; // se le pega e
 
 //Activitie
 
-URL_CREATE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/new'
+URL_CREATE_ACTIVITIE_PARENT = host+':8080/API/activitie/%slug%/parent/new'
 URL_ALL_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/all'
 URL_RETREIVE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/'
 
 URL_CREATE_ACTIVITIE_CHILD = host+':8080/API/activitie/'
 
 URL_ALL_ACTIVITIE_CHILD = host+':8080/API/activitie/all/%id%'
-URL_CHECK_ACTIVITIE_CHILD = host+':8080/API/activitie/check/%id%'
+URL_CHECK_ACTIVITIE_CHILD = host+':8080/API/activitie/%slug%/check/%id%'
 
 
 //Notification
