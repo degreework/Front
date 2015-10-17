@@ -1,4 +1,5 @@
 var ModuleView = function(){
+	console.info("ModuleView")
 	this.service = new ModuleService();
 }
 ModuleView.prototype.initialize = function(form)
@@ -76,6 +77,7 @@ ModuleView.succes_create_form = function(form)
 
 ModuleView.prototype.render_modules = function(container)
 {
+	console.info(container)
 	this.service.list(
 		URL_ALL_MODULES,
 		function(response){

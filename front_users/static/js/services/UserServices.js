@@ -367,18 +367,12 @@ UserService.deauthenticate = function (url) {
 		/*
 		Logout succesful, then do anything
 		*/
-		user = JSON.parse(localStorage.getItem('user'))
-		chatSocked.emmit('leave', user)
-
-		var s = StorageClass.getInstance();
-		s.storage.removeAll();
-		
-		$(location).attr('href',"/");  
-		
+		remove_user_from_browser();
 
 	})
 	.fail(function(error){		
 		console.log(error);
+		console.log('deauthenticate()')
 		//if status ==0  -> can't connect to server
 		if(0 == error.status)
 		{
@@ -386,14 +380,14 @@ UserService.deauthenticate = function (url) {
 		}
 
 		//if BAD REQUEST -> show error response in fields form
-		if(400 == error.status || 401 == error.status)
+		if(400 == error.status)
 		{
 			
 		}
 		// if UNAUTHORIZED ->
 		else if(401 == error.status)
 		{
-			
+			remove_user_from_browser();
 		}
 		//if INTERNAL SERVER ERROR
 		else if(500 == error.status)
@@ -406,6 +400,17 @@ UserService.deauthenticate = function (url) {
 		//console.log("always");
 		$("#preloader_2").hide();
 	});
+
+	function remove_user_from_browser()
+	{
+		user = JSON.parse(localStorage.getItem('user'))
+		chatSocked.emmit('leave', user)
+
+		var s = StorageClass.getInstance();
+		s.storage.removeAll();
+		
+		$(location).attr('href',"/"); 
+	}
 }
 
 

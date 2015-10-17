@@ -153,15 +153,17 @@
 </html>
 <script>
 	jQuery(document).ready(function() {
-		UserView.verify();
+		//UserView.verify();
+		if(User.exist())
+		{
+			/*loas modules*/
+			var module = new ModuleView();
+			module.render_modules($("#id_list_modules"))
+		}
 		
 		UserView.showIndexUser();
 
-		/*loas modules*/
-		var module = new ModuleView();
-		module.render_modules($("#id_list_modules"))
-
 
 	});
-
+$(document).ready(main);
 </script>

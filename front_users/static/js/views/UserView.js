@@ -107,6 +107,11 @@ UserView.showRegisterForm = function()
 
 UserView.loginCallback = function ()
 {
+	//WARNING
+	//si no se recarga la página, no se carga la lista de módulos
+	//location.reload();
+	console.log("login Callback")
+	main();
 	UserService.get_mini_user(URL_CURRENT_USER);
 	UserView.showIndexUser();
 
