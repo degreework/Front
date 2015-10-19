@@ -19,6 +19,8 @@ URL_DETAIL_USERS = host+":8080/API/users/detail/";
 URL_RECOVERY_PASSWORD = host+":8080/API/users/password/reset/";
 URL_RECOVERY_PASSWORD_CONFIRM = host+":8080/API/users/password/reset/%uidb%/%token%";
 
+URL_STREAM_USER = host + ':8080/API/users/wall/%id%';
+
 //Degree == Plan
 URL_GET_DEGREE = host+":8080/API/degree/all";
 

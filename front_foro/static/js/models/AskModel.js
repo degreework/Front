@@ -1,7 +1,6 @@
 var AskModel = {};
 
-AskModel.generate_url = function(slug)
+AskModel.generate_url = function(slug, id)
 {
-	console.log("GENERA")
-	return host+":"+location.port+'/forum/detail/'+slug;
+	return Site.geRootUrl()+'/'+slug+'/forum/'+id;
 }
