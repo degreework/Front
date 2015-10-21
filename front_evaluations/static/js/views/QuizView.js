@@ -50,19 +50,19 @@ EvaluationsView.change_boolean = function(data){
 //---------------
 EvaluationsView.create_quiz = function(form)
 {
-	console.log('create_quiz')
-	
+	//console.info('create_quiz')
 
 	form.submit(function (e) {
 			e.preventDefault();
-			
 			//Selecciona todas las opciones del contendor 
 			$("#id_quiz option").attr("selected","selected"); 
 
 			var quizService = new QuizService();
 			var formu = EvaluationsView.change_boolean(($(e.target).get(0)))
 			var data = new FormData(formu);
-			quizService.create(URL_CREATE_QUIZ, data, EvaluationsView.notifify_create_quiz)
+			var url = URL_CREATE_QUIZ_MODULE.replace(/\%slug%/g, slug);
+			//URL_CREATE_QUIZ
+			quizService.create(url, data, EvaluationsView.notifify_create_quiz)
 	})
 	
 }
@@ -75,8 +75,10 @@ EvaluationsView.notifify_create_quiz = function(){
 
 EvaluationsView.get_all_Quiz = function()
 {
+	var url = URL_ALL_QUIZ_MODULE.replace(/\%slug%/g, slug);;
+	//URL_GET_ALL_QUIZ
 	var quizService = new QuizService();
-	quizService.retrieve(URL_GET_ALL_QUIZ, EvaluationsView.render_all_quiz)	
+	quizService.retrieve(url, EvaluationsView.render_all_quiz)	
 }
 
 EvaluationsView.render_all_quiz = function (response)
@@ -86,6 +88,8 @@ EvaluationsView.render_all_quiz = function (response)
 
 EvaluationsView.render_list_quiz = function(parent_container, response)
 {
+	response = response.results;
+
 	for (i = response.length-1; i >= 0; i--) { 		
 		
 		// se crea el html     		
@@ -103,7 +107,7 @@ EvaluationsView.render_list_quiz = function(parent_container, response)
 		var link = document.createElement("a");
 		var id = response[i].id;
 	
-		$(link).attr('href', host+":"+location.port+"/evaluations/detail/"+id);
+		$(link).attr('href', Site.geRootUrl()+"/"+slug+"/evaluations/detail/"+id);
 		$(link).text('ver detalles')
 		col_link.appendChild(link)
 
@@ -144,14 +148,17 @@ EvaluationsView.render_list_quiz = function(parent_container, response)
 
 EvaluationsView.get_all_Quiz_Users = function()
 {
+	var url = URL_ALL_QUIZ_MODULE.replace(/\%slug%/g, slug);
+	//URL_GET_ALL_QUIZ
 	var quizService = new QuizService();
-	quizService.retrieve(URL_GET_ALL_QUIZ, EvaluationsView.render_every_quiz)	
+	quizService.retrieve(url, EvaluationsView.render_every_quiz)	
 }
 
 EvaluationsView.render_every_quiz = function(response)
 {
-	console.log('entro')
-	console.log(response)
+	//console.log('entro')
+	//console.log(response)
+	response = response.results;
 
 	for (i = response.length-1; i >= 0; i--) { 		
 		

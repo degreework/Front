@@ -3,7 +3,7 @@ var Module = function()
 
 }
 
-Module.getURL = function(slug)
+Module.getURL_from_slug = function(slug)
 {
 	return Site.geRootUrl() + '/modules/detail/'+slug;
 }
