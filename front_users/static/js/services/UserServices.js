@@ -368,7 +368,10 @@ UserService.deauthenticate = function (url) {
 		Logout succesful, then do anything
 		*/
 		user = JSON.parse(localStorage.getItem('user'))
+		main_chat_user_offline_new (user.id)
 		chatSocked.emmit('leave', user)
+
+		//main_chat_disconnect()
 
 		var s = StorageClass.getInstance();
 		s.storage.removeAll();

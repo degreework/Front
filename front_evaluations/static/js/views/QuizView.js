@@ -62,7 +62,8 @@ EvaluationsView.create_quiz = function(form)
 			var quizService = new QuizService();
 			var formu = EvaluationsView.change_boolean(($(e.target).get(0)))
 			var data = new FormData(formu);
-			quizService.create(URL_CREATE_QUIZ, data, EvaluationsView.notifify_create_quiz)
+			var url = URL_CREATE_QUIZ.replace(/\%slug%/g, slug);
+			quizService.create(url, data, EvaluationsView.notifify_create_quiz)
 	})
 	
 }

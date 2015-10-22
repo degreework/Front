@@ -2,6 +2,7 @@
 <html>
 	<head>				 
 		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'css/AdminLTE.css' %}">
 		<link type="text/css" rel="stylesheet" href="{% static  'libs/bootstrap/css/bootstrap.min.css' %}"  media="screen,projection"/>
 
 		<link rel="stylesheet" href="{% static 'css/template_base.css' %}">
@@ -52,9 +53,23 @@
 
 	
 	<!--chat -->
+	<link id='theme' rel='stylesheet' />
+	
+	<link rel="stylesheet" href="{% static 'css/tipsy.css' %}">
+	<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+	
 	<script src="http://localhost:4000/socket.io/socket.io.js" ></script>
-	<script src="{% static 'js/ChatSocked.js' %}" ></script>
-	<!--<script src="http://localhost:4000/script.js " ></script>	-->
+	
+	
+    <!--<script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>-->
+    <script src="{% static 'js/jquery-ui-1.10.4.custom.min.js' %}"></script>
+    <script src="{% static 'js/ChatSocked.js' %}" ></script>
+    <script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'js/jquery.tipsy.js' %}"></script>
+    <script src="{% static 'js/config.js' %}"></script>
+    <script src="{% static 'js/i18n_en.js' %}"></script>
+    <script src="{% static 'js/jquery.main.js' %}"></script>
+    
 	
 
 	<script src="{% static 'js/services/Login.js' %}" ></script>

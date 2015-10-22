@@ -24,7 +24,8 @@ UserView.verify = function ()
 	if (UserService.isAutenticated())
 	{
 		user = JSON.parse(localStorage.getItem('user'))
-		console.log(user)
+		
+		main_chat_status( 'conectado' , "online" );
 		chatSocked.emmit('listChatUpdate',user);
 		UserView.showLoggedUser();		
 	}
@@ -50,7 +51,8 @@ UserView.showIndexUser = function ()
 		$('.consult-user').show();
 		$('.menu').show();
 		$(".pic_profile").attr("src",'http://127.0.0.1:8080'+User.get_thumb(0));
-
+		$("#main").show()
+		$('.footer').hide()
 		UserView.showLoggedUser();
 	}
 	else
@@ -66,11 +68,16 @@ UserView.showLoggedUser = function () {
 	$(".resume_profile").text(User.get_first_name() +" "+User.get_last_name() );	
 	$(".pic_resume").attr("src",'http://127.0.0.1:8080'+User.get_thumb(0));
 
+	
+	
+
 	//action event to logout
 	$("#button_logout").click(function(e){
 		e.preventDefault();
 		UserService.deauthenticate(URL_LOGOUT);
 		//UserView.showIndexUser();
+		
+		$("#main").hide()
 	});
 }
 
@@ -116,8 +123,12 @@ UserView.loginCallback = function ()
 	//gamificationView.get_progress_user(user.id)
 
 	// se conecta al servidor para el chat y agrega
-	console.log('agregate omee')
+	chat_join();
+	//main_set_dialog( user.id );
+	//main_append_dialog( user.id );
 	chatSocked.emmit('addUser', user)
+	chatSocked.emmit('listChatUpdate',user);
+
 
 }
 

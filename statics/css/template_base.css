@@ -354,22 +354,6 @@ margin-top: 100px;
 /*----------------
 	CHAT
 ------------------*/
-#title_chat{
-	background: #D51B23;
-    padding: 5px;
-    margin: 0px;
-    color: white;
-}
-
-.room{
-	border: 1px solid #ccc;
-}
-
-.chatEntries{
-	height: 200px;
-	overflow-y: auto
-}
-
 .message{
 	padding: 20px;
 	overflow: hidden;
@@ -378,8 +362,9 @@ margin-top: 100px;
     -webkit-animation-duration: 500ms;	
 }
 
-.messageInput{
-	width: 90.4%;
+#messageInputAll{
+	left: 0px;
+    width: 99.4%;
     bottom: 0%;
     position: absolute;
 }

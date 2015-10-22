@@ -31,16 +31,15 @@ var main = function(){
 
 
 
-	(function () {
+	/*(function () {
   		$('[data-toggle="popover"]').popover();
 	})
-	();
+	();*/
 
 	/*
 		CHAT
 	*/
 
-	//ChatSocked.prototype.socked.emit('listChatUpdate');
 	
 	// trae los usuarios conectados al servidor del chat 
 	chatSocked.listen();
