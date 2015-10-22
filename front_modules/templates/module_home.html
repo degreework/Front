@@ -1,0 +1,13 @@
+{% extends 'template_module.html' %}
+{% block module %}
+		<div class="col-md-12">
+		<span id="module_actions"> editar</span>
+			<!--Description is rendered here-->
+			<span id="module_description"></span>
+		</div>
+
+
+		<form id="form_edit_module" action="edit" hidden>
+			<button class="btn btn-default pull-right" type="submit" name="update" id="btn-module">Guardar</button>
+		</form>
+{% endblock module %}
