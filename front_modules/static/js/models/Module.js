@@ -5,7 +5,7 @@ var Module = function()
 
 Module.getURL_from_slug = function(slug)
 {
-	return Site.geRootUrl() + '/modules/detail/'+slug;
+	return Site.geRootUrl() + '/modules/'+slug;
 }
 
 Module.getURL = function(slug, module, id)

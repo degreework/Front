@@ -17,8 +17,8 @@ body{
 	background-color: #D51B23;
     color:  white;
     margin-top: 0;
-    height: 60px;	
-    border-bottom: 10px solid  #7F1015;
+    /*height: 60px;	
+    border-bottom: 10px solid  #7F1015;*/
     margin-bottom: 0px;
 }
 
@@ -40,6 +40,7 @@ body{
     margin-top: 50px;
     margin-bottom: 0;
     height: 77px;
+    width: 100%;
 }
 
 .footer .container{
@@ -152,14 +153,14 @@ hr{
 }
 
 /*MODULOS*/
-
+/*
 .info-module{
 	min-height: 655px;
 	background-color: #b79350;
 	color: white;
 	padding: 20px;
 
-}
+}*/
 
 .section-module{
 	min-height: 100px;
@@ -181,6 +182,7 @@ hr{
 
 /* square of info */
 .base{
+	margin-top: 76px;
 	box-shadow:	1px 1px 3px #888888;
 	padding: 10px;
 }

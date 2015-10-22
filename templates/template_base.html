@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html>
-	<head>				 
-		{% load staticfiles %}
-		<link type="text/css" rel="stylesheet" href="{% static  'libs/bootstrap/css/bootstrap.min.css' %}"  media="screen,projection"/>
+<head>				 
+<meta charset='utf-8'>
+<!--mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{% static  'libs/bootstrap/css/bootstrap.min.css' %}"  media="screen,projection"/>
 
-		<link rel="stylesheet" href="{% static 'css/template_base.css' %}">
-		<link rel="stylesheet" href="{% static 'css/estilo_menu.css' %}">
-		<link rel="stylesheet" href="{% static 'css/loader.css' %}">
+	<link rel="stylesheet" href="{% static 'css/template_base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/estilo_menu.css' %}">
+	<link rel="stylesheet" href="{% static 'css/loader.css' %}">
 
-		<!--CDN
+	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+  	<link rel="stylesheet" href="{% static 'css/notification.css' %}">
+
+	<!--CDN
 	<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   	-->
+	
 	<script src="{% static 'libs/jquery/jquery.min.js' %}" ></script>
 	<script src="{% static 'libs/jquery/jquerysession.js' %}" ></script>
 	<script src="{% static 'libs/jquery/jquery.cookie.js' %}" ></script>
 	<script src="{% static 'libs/jquerystorageAPI/jquery.storageapi.min.js' %}"></script>
+	<script src="{% static 'libs/jquery/jquery.timeago.js' %}" ></script>
+	<script src="{% static 'libs/jquery/jquery.timeago.es.js' %}" ></script>
 
 	<script src="{% static 'libs/bootstrap/js/bootstrap.js' %}" ></script>
 	<script src="{% static 'libs/bootstrap-notify/bootstrap-notify.min.js' %}" ></script>
-	<script src="{% static 'libs/jquery/jquery.timeago.js' %}" ></script>
-	<script src="{% static 'libs/jquery/jquery.timeago.es.js' %}" ></script>
+
 
 	<!-- scripts de nostros -->	
 	<script src="{% static 'js/debug.js' %}" ></script>
 
-	<script src="{% static 'js/Site.js' %}" ></script>
-
 	<script src="{% static 'js/urls.js' %}" ></script>
+	
+	<script src="{% static 'js/Site.js' %}" ></script>
 	<script src="{% static 'js/Notify.js' %}" ></script>
 	<script src="{% static 'js/Error.js' %}" ></script>
+	
 	<script src="{% static 'js/Storage.js' %}" ></script>
+	
 	<script src="{% static 'js/models/Token.js' %}" ></script>
 	<script src="{% static 'js/models/User.js' %}" ></script>
 	<script src="{% static 'js/models/Module.js' %}" ></script>
 	
-	<script src="{% static 'js/services/Service.js' %}" ></script><!-- de este heredan lo otros -->
+	<!-- de éste heredan los Servicios -->
+	<script src="{% static 'js/services/Service.js' %}" ></script>
 
 	<!--Modules-->
 	<script src="{% static 'js/services/ModuleService.js' %}" ></script>
@@ -44,11 +55,16 @@
 
 	<script src="{% static 'js/models/WikiModel.js' %}" ></script>
 	<script src="{% static 'js/models/AskModel.js' %}" ></script>
+	
+	<!-- Notificaciones-->
 	<script src="{% static 'js/services/NotificationService.js' %}" ></script>
 	<script src="{% static 'js/views/NotificationView.js' %}" ></script>
+	<!-- end Notificaciones-->
 
-	<script src="{% static 'js/services/GamificationServices.js' %}" ></script>  <!-- Gamification-->
+	<!-- Gamification-->
+	<script src="{% static 'js/services/GamificationServices.js' %}" ></script> 
 	<script src="{% static 'js/views/GamificationView.js' %}" ></script>
+	<!-- end Gamification-->
 
 	
 	<!--chat -->
@@ -59,11 +75,12 @@
 
 	<script src="{% static 'js/services/Login.js' %}" ></script>
 	<script src="{% static 'js/services/UserServices.js' %}" ></script>
-	<script src="{% static 'js/services/CommentServices.js' %}"></script>
-	
-	
 	<script src="{% static 'js/views/UserView.js' %}" ></script>
+	
+	<script src="{% static 'js/services/CommentServices.js' %}"></script>
 	<script src="{% static 'js/views/CommentView.js' %}" ></script>
+	
+	
 	
 	<script src="{% static 'js/animacion_menu.js' %}" ></script> <!-- este es -->
 	<script src="{% static 'js/manager_forms.js' %}" ></script>
@@ -72,85 +89,85 @@
 	<script src="{% static 'js/forms/ChangePasswordForm.js' %}" ></script>
 
 	
-
-
-	
 	<script src="{% static 'js/main.js' %}" ></script>
 
 	
 	
-		{% block head %}			
-		{% endblock head %}
+	{% block head %}
+	{% endblock head %}
 	
-		 <!-- CDN 
-  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" media="screen,projection">
+	<link href="{% static 'libs/fonts/OpenSans-Regular.ttf' %}">
 
-  		
-		-->
-		<link href="{% static 'libs/fonts/OpenSans-Regular.ttf' %}">
-
-
-		<meta charset='utf-8'>
-		<!--mobile-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
-		<title>{{title}}</title>
-	</head>
-	<body>
-		<nav class="navbar navbar-default head navbar-fixed-top">
-			<header class="page-header ">
-				<div class="container container-header">
-					<div class="navbar-header">
-						<span>
-							<a class="navbar-brand" id="name-app" href="/">Name app</a>
-						</span>
-						<!-- mobile -->
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#hola" aria-expanded="false">
-            				<span class="sr-only">Toggle navigation</span>
-            				<span class="icon-bar"></span>
-            				<span class="icon-bar"></span>
-            				<span class="icon-bar"></span>
-          				</button>
-					</div>
+	<title>{{title}}</title>
+	
+</head>
+<body>
+<div class="row">
+	<nav class="navbar navbar-default head navbar-fixed-top">
+		<header class="page-header">
+			<div class="container container-header">
+				<div class="navbar-header">
+					<span>
+					<a class="navbar-brand" id="name-app" href="/">Name app</a>
+					</span>
 					
-					{% include 'login.html' %}
-				</div>
-			</header>
-		</nav>
-
-		
-		<div class="col-md-12" style="margin-top:100px;">
-			
-			{% include 'resumeProfile-menu.html' %}
-
-				<div id="preloader_2">
-	    			<span></span>
-	    			<span></span>
-	    			<span></span>
-	    			<span></span>
+					<!-- mobile -->
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#hola" aria-expanded="false">
+	        			<span class="sr-only">Toggle navigation</span>
+	        			<span class="icon-bar"></span>
+	        			<span class="icon-bar"></span>
+	        			<span class="icon-bar"></span>
+	      			</button>
 				</div>
 				
-			  	{% block contenido %}
+				{% include 'include_login.html' %}
 					
-				{% endblock %}
+			</div>
+		</header>
+	</nav>
+</div>
 
-			{% include 'listChat.html' %}
-
+<div class="row">
+	<div class="col-md-3 col-xs-12">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				{% include 'resumeProfile-menu.html' %}
+			</div>
+			<div class="col-md-12 col-xs-12">
+				{% include 'menu_modulos.html' %}
+			</div>
 		</div>
-		
+	</div>
 
-		<div class=" col-md-12 footer">
-    		<div class="container">
-    			Universidad del Valle sede Tuluá
-    		</div>
-		</div>
-	
+	<div class="col-md-9 col-xs-12">
 
-	
-	{% block scripts %}
-	{% endblock scripts %}
-	</body>
-</html>
+	{% block contenido %}
+	{% endblock %}
+	</div>
+
+</div>
+
+<!--Loader-->
+<div id="preloader_2">
+	<span></span>
+	<span></span>
+	<span></span>
+	<span></span>
+</div>
+<!--end Loader-->
+
+
+<div class="row">
+    <div class="col-md-12">
+		{% include "include_footer.html" %}
+	</div>
+</div>
+
+
+
+</body>
+{% block scripts %}
+{% endblock scripts %}
 <script>
 	jQuery(document).ready(function() {
 		//UserView.verify();
@@ -167,3 +184,4 @@
 	});
 $(document).ready(main);
 </script>
+</html>
