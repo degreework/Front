@@ -1,13 +1,14 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
 {% load staticfiles %}
+
 <div class="base capacity">
 			
 	<div class="row">
 		
 		<!--Title is rendered here-->
 		<div class="col-md-3">
-			<h1 id="module_title"></h1>
+			<h1 id="module_name"></h1>
 			<span id="module_actions"> editar</span>
 		</div>
 		<!--end title-->
@@ -46,44 +47,46 @@
 
 	</div><!--end Info-->
 
+	<div class="row">
+		{% block module %}
+		{% endblock module %}
+	</div>
+
 </div>
 
-{% block module %}
-	
-{% endblock module %}
+
+<script>
+	//initialize buttons events
+	$("#open_wiki").click(function (e) {
+		window.location.href = "{% url 'front_wiki:wiki' mod_slug %}";
+	});
+
+	$("#open_forum").click(function (e) {
+		window.location.href = "{% url 'front_foro:foro' mod_slug %}";
+	})
+
+	$("#open_activities").click(function (e) {
+		window.location.href = "{% url 'front_activities:activities' mod_slug %}";
+	})
+
+	$("#open_evaluations").click(function (e) {
+		window.location.href = "{% url 'front_evaluations:quiz' mod_slug %}";
+	})
+</script>
 
 {% endblock %}
 
 {% block scripts %}
 <script>
 	jQuery(document).ready(function($) {
-
-		//initialize buttons events
-		$("#open_wiki").click(function (e) {
-			window.location.href = "{% url 'front_wiki:wiki' mod_slug %}";
-		});
-
-		$("#open_forum").click(function (e) {
-			window.location.href = "{% url 'front_foro:foro' mod_slug %}";
-		})
-
-		$("#open_activities").click(function (e) {
-			window.location.href = "{% url 'front_activities:activities' mod_slug %}";
-		})
-
-		$("#open_evaluations").click(function (e) {
-			window.location.href = "{% url 'front_evaluations:quiz' mod_slug %}";
-		})
-
-		//var slug = location.pathname.split("/");
-		//slug = slug[slug.length-1];
+		
 		var slug = "{{mod_slug}}";
 		var SLUG = slug;
 		
 		var module = new ModuleView();
 		module.render_module_detail(
 			slug,
-			$("#module_title"),
+			$("#module_name"),
 			$("#module_description"),
 			$("#module_actions"),
 			$("#form_edit_module")
