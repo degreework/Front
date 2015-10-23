@@ -603,7 +603,7 @@ EvaluationsView.take_quiz = function(btn_continue){
 				//se guarda en la BD
 				var quizService = new QuizService();
 				var url = URL_UPDATE_SITTING.replace(/\%slug%/g, slug);
-
+				console.log(sitting)
 				quizService.update2( url+sitting.id+'/', sitting, EvaluationsView.redirect_results)
 			}
 		})
