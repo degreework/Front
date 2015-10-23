@@ -1,0 +1,66 @@
+{% extends "template_wiki_parent.html" %}
+{% comment %}
+	template for view a wiki page
+{% endcomment %}
+
+
+{% block wiki_content %}
+	<div class="col-md-12">
+		{% include "wiki_form.html" %}
+		{% include "page_wiki.html" %}
+
+	</div>
+
+	<div class="col-md-12"><hr></div>
+
+	<div id="list-comment-wiki"></div>
+	<div class="load-comment-wiki" hidden><a>Ver más</a></div>
+
+	<div class="col-md-6 col-sm-offset-2">
+		<!-- formulario para crear el comentario -->
+			<form id="form-comment-wiki" hidden>
+				<div class="form-group">
+					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
+				</div>
+				<div class="form-group">
+					<input type="hidden" id="id_parent" name="parent">
+				</div>
+
+				<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
+			</form>	
+		
+	</div>
+		
+	
+{% endblock wiki_content %}
+
+{% block scripts %}
+
+<script type="text/javascript">
+
+	//get url tokens
+	var id = location.pathname.split("/");
+
+	var key = id[id.length-1].split("..");
+
+	if(2 == key.length)
+	{
+		/*
+		*Is a Verion
+		*/
+		//key[key.length-1] = version
+		//key[key.length-2] = slug
+		//dont remove mod_slug var, is used at WikiView.render_version
+		var mod_slug = '{{mod_slug}}';
+		WikiView.load_version(key[key.length-1], key[key.length-2])
+	}
+	else if(1 == key.length)
+	{
+		/*
+		*Is a Page
+		*/
+		WikiView.load_page(key[key.length-1])
+	}
+		
+</script>
+{% endblock scripts %}

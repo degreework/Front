@@ -114,6 +114,11 @@ UserView.showRegisterForm = function()
 
 UserView.loginCallback = function ()
 {
+	//WARNING
+	//si no se recarga la página, no se carga la lista de módulos
+	//location.reload();
+	console.log("login Callback")
+	main();
 	UserService.get_mini_user(URL_CURRENT_USER);
 	UserView.showIndexUser();
 
@@ -124,10 +129,11 @@ UserView.loginCallback = function ()
 
 	// se conecta al servidor para el chat y agrega
 	chat_join();
-	//main_set_dialog( user.id );
-	//main_append_dialog( user.id );
 	chatSocked.emmit('addUser', user)
-	chatSocked.emmit('listChatUpdate',user);
+	//chatSocked.emmit('listChatUpdate',user);
+
+	//crea sesion para guardar los chats abiertos
+	sessionStorage.setItem('currentChats', '{"chats":[]}');
 
 
 }
@@ -236,5 +242,67 @@ UserView.renderListUsers = function (response){
 		//}
 			
 	}
+
+}
+
+UserView.load_wall = function (user_id, container) {
+	var url = URL_STREAM_USER.replace(/\%id%/g, user_id);
+	UserService.get_stream(
+		url,
+		function  (response) {
+		 	UserView.render_activities(response, container)
+		 }
+	);
+}
+
+UserView.render_activities = function (data, container) {
+	console.info(data)
+
+	if(0 == data.count)
+	{
+		$( "<div>No hay actividad</div>" ).appendTo( $(container) );		
+	}
+	$.each(data.results, function(k, v){
+		console.info(v.module)
+		var post = "<div>";
+		post += "<p id=''>he "+v.verb;
+		post += " \""+v.object.detail+"\"";
+		
+		var url = '';
+		var detail = '';
+		if (v.target)
+		{
+			if("ask-type" == v.target.type)
+			{
+				url = Module.getURL(v.module.slug, 'forum', v.target.id);
+			}
+			else if("answer-type" == v.target.type)
+			{
+				url = Module.getURL(v.module.slug, 'forum', v.target.id);	
+			}
+			
+			detail = v.target.detail;
+		}
+		else
+		{
+			if("ask-type" == v.object.type)
+			{
+				url = Module.getURL(v.module.slug, 'forum', v.object.id);
+			}
+
+			detail = v.module.name;
+
+		}
+
+		post += " en <a href='"+url+"'>"+detail+"</a>";
+
+		post += "<span id=''> "+jQuery.timeago(v.timestamp)+"</span>";
+		
+		post += "</p>";
+		post += "</div>";
+
+		( $(post) ).appendTo( $(container) );
+
+	})
 
 }

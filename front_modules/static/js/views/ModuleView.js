@@ -1,4 +1,5 @@
 var ModuleView = function(){
+	console.info("ModuleView")
 	this.service = new ModuleService();
 }
 ModuleView.prototype.initialize = function(form)
@@ -54,7 +55,7 @@ ModuleView.succes_create_form = function(form)
 			url,
 			data,
 			function(response){
-				window.location.href = Module.getURL(response.slug);
+				window.location.href = Module.getURL_from_slug(response.slug);
 				}
 			);
 		}
@@ -65,7 +66,7 @@ ModuleView.succes_create_form = function(form)
 			url,
 			data,
 			function(response){
-				window.location.href = Module.getURL(response.slug);
+				window.location.href = Module.getURL_from_slug(response.slug);
 				}
 			);
 		}
@@ -76,6 +77,7 @@ ModuleView.succes_create_form = function(form)
 
 ModuleView.prototype.render_modules = function(container)
 {
+	console.info(container)
 	this.service.list(
 		URL_ALL_MODULES,
 		function(response){
@@ -86,7 +88,7 @@ ModuleView.prototype.render_modules = function(container)
 
 ModuleView._render_module = function(container, module)
 {
-	$(container).append("<li id='id_mod-"+module.id+"'><a href='"+Module.getURL(module.slug)+"'>"+module.name+"</a></li>")
+	$(container).append("<li id='id_mod-"+module.id+"'><a href='"+Module.getURL_from_slug(module.slug)+"'>"+module.name+"</a></li>")
 }
 
 ModuleView.slugter = function (str)

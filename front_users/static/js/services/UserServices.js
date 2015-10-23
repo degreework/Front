@@ -367,21 +367,13 @@ UserService.deauthenticate = function (url) {
 		/*
 		Logout succesful, then do anything
 		*/
-		user = JSON.parse(localStorage.getItem('user'))
-		main_chat_user_offline_new (user.id)
-		chatSocked.emmit('leave', user)
+		remove_user_from_browser();
 
-		//main_chat_disconnect()
-
-		var s = StorageClass.getInstance();
-		s.storage.removeAll();
-		
-		$(location).attr('href',"/");  
-		
 
 	})
 	.fail(function(error){		
 		console.log(error);
+		console.log('deauthenticate()')
 		//if status ==0  -> can't connect to server
 		if(0 == error.status)
 		{
@@ -389,14 +381,14 @@ UserService.deauthenticate = function (url) {
 		}
 
 		//if BAD REQUEST -> show error response in fields form
-		if(400 == error.status || 401 == error.status)
+		if(400 == error.status)
 		{
 			
 		}
 		// if UNAUTHORIZED ->
 		else if(401 == error.status)
 		{
-			
+			remove_user_from_browser();
 		}
 		//if INTERNAL SERVER ERROR
 		else if(500 == error.status)
@@ -409,6 +401,21 @@ UserService.deauthenticate = function (url) {
 		//console.log("always");
 		$("#preloader_2").hide();
 	});
+
+	function remove_user_from_browser()
+	{
+		user = JSON.parse(localStorage.getItem('user'))
+		main_chat_user_offline_new (user.id)
+		$.session.remove('currentChats');
+		chatSocked.emmit('leave', user)
+
+
+		var s = StorageClass.getInstance();
+		s.storage.removeAll();
+
+		
+		$(location).attr('href',"/"); 
+	}
 }
 
 
@@ -457,5 +464,51 @@ UserService.recovery_password = function(url, csrftoken, form, callback)
 	.always(function(){
 		//console.log("always");
 		$("#preloader_2").hide();
+	});
+}
+
+
+// 
+UserService.get_stream = function (url, callback) {
+
+	$.ajax({
+		type: 'GET',
+		url: url,
+		beforeSend : function( xhr ) {
+    		xhr.setRequestHeader(  "Authorization",Token.get_RequestHeader() );
+    	}
+	})
+	.done(function(response){
+		if (callback) {
+			callback(response);
+		};
+	})
+	.fail(function(error){		
+		console.log(error);
+		//if status ==0  -> can't connect to server
+		if(0 == error.status)
+		{
+			Error.server_not_found();
+		}
+
+		//if BAD REQUEST -> show error response in fields form
+		if(400 == error.status || 401 == error.status)
+		{
+			
+		}
+		// if UNAUTHORIZED ->
+		else if(401 == error.status)
+		{
+			
+		}
+		//if INTERNAL SERVER ERROR
+		else if(500 == error.status)
+		{
+			//if url is incorret
+			Error.server_internal_error();
+		}
+	})
+	.always(function(){
+		console.log("always");
 	});
 }

@@ -27,8 +27,14 @@
         jQuery(document).ready(function($) {
 			//
 			form = $("#form_quiz")
+			//var url = URL_CREATE_QUIZ.replace(/\%slug%/g, slug);
+			//var url = URL_CREATE_QUIZ_MODULE.replace(/\%slug%/g, slug);
+			console.log(URL_CREATE_QUIZ)
+			EvaluationsView.initialize(
+				form,
+				URL_CREATE_QUIZ
+				);
 			
-			EvaluationsView.initialize(form, URL_CREATE_QUIZ);
 			EvaluationsView.create_quiz(form)
 		});
 	</script>

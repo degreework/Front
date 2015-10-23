@@ -11,8 +11,8 @@
 				</div>
 				
 			</div>
-			<div class="col-md-8">
-				My activity		
+			<div id="user-activity" class="col-md-8">
+				<h4>My activity</h4>
 			</div>
 			
 		</div>
@@ -27,5 +27,8 @@
 	// medallas del usuario
 	var gamificationView = new GamificationView();
 	gamificationView.get_all_award_user('profile')
+
+	//Wall
+	UserView.load_wall(User.get_id(), $("#user-activity"))
 </script>
 {% endblock scripts %}

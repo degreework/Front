@@ -7,3 +7,26 @@
 	</div>
 	
 </div>
+
+{% block scripts %}
+	<script>
+        jQuery(document).ready(function($) {
+			
+			// se pegan los boones en la barrita cuando se recarga la pagina 
+			currentChats = JSON.parse(sessionStorage.getItem('currentChats'))
+             	if (UserService.isAutenticated()){
+	             	for (var i = 0; i < currentChats.chats.length; i++) {
+	             		
+	             		var chat = JSON.parse(currentChats.chats[i])
+	             		
+	             		if ( $( "#users-button-bar" ).parent().find( "#user-button-" + chat.to ).length == 0 ) {
+					        $( "#users-button-bar" ).append( "<button id='user-button-" + chat.to + "' class='user-button' style='font-size: 65%;'><li class='" + 'stat' + "'>" + chat.nameTo + "</li></button>" );
+					        $( ".user-button" ).button();
+					     }
+	            	}	
+            	}
+			
+		});
+	</script>
+	
+{% endblock scripts %}

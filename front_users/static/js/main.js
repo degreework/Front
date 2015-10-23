@@ -4,6 +4,7 @@ var main = function(){
 
 	if(User.exist())
 	{
+		
 		NotificationView.get_notifications();
 
 		// progreso de la medalla del usuario 
@@ -20,6 +21,15 @@ var main = function(){
 		//(min) * (seconds) * (milliseconds)
 		//this case 5*60*1000 = 5 min
 
+		/*
+		CHAT
+		*/
+
+		//ChatSocked.prototype.socked.emit('listChatUpdate');
+		
+		// trae los usuarios conectados al servidor del chat 
+		//chatSocked.listen();
+
 	}
 
 	/*//notifications every page reload
@@ -35,15 +45,12 @@ var main = function(){
   		$('[data-toggle="popover"]').popover();
 	})
 	();*/
-
 	/*
 		CHAT
 	*/
-
-	
 	// trae los usuarios conectados al servidor del chat 
 	chatSocked.listen();
 
+
 };
 
-$(document).ready(main);

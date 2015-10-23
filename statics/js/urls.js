@@ -19,6 +19,8 @@ URL_DETAIL_USERS = host+":8080/API/users/detail/";
 URL_RECOVERY_PASSWORD = host+":8080/API/users/password/reset/";
 URL_RECOVERY_PASSWORD_CONFIRM = host+":8080/API/users/password/reset/%uidb%/%token%";
 
+URL_STREAM_USER = host + ':8080/API/users/wall/%id%';
+
 //Degree == Plan
 URL_GET_DEGREE = host+":8080/API/degree/all";
 
@@ -82,7 +84,7 @@ URL_GET_ALL_SUBCATEGORY = host+':8080/API/quiz/category/listSubcategory';
 URL_UPDATE_SUBCATEGORY = host+':8080/API/quiz/category/updateSubCategory/'; // se le pega el id de la Categoria 
 
 // Quiz
-URL_CREATE_QUIZ = host+':8080/API/quiz/%slug%/createQuiz';
+URL_CREATE_QUIZ = host+':8080/API/quiz/createQuiz';
 URL_GET_ALL_QUIZ = host+':8080/API/quiz/listQuiz';
 URL_GET_QUIZ_BY_CATEGORY = host+':8080/API/quiz/listQuizbyCategory/'; // se le pega el nombre de la categoria al final
 URL_DETAIL_QUIZ = host+':8080/API/quiz/detail/'; // se le pega el id del quiz al final 
@@ -159,3 +161,6 @@ URL_PUBLISHED_PAGE_WIKI_MODULE = host + ':8080/API/module/%slug%/wiki/published'
 //Activitie
 URL_CREATE_ACTIVITIE_MODULE = host + ':8080/API/module/%slug%/activitie/new';
 URL_ALL_ACTIVITIE_MODULE = host + ':8080/API/module/%slug%/activitie/all';
+//Evaluations
+URL_CREATE_QUIZ_MODULE = host + ':8080/API/module/%slug%/quiz/new';
+URL_ALL_QUIZ_MODULE = host + ':8080/API/module/%slug%/quiz/all';

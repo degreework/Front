@@ -14,7 +14,7 @@ def wiki(request, mod_slug, *args, **kwargs):
 
 @ScopeRequired(["waliki.view_page"])
 def detail(request, mod_slug, *args, **kwargs):
-    return render_to_response('detailPage.html', {'title': 'Wiki page | Name App', 'mod_slug': mod_slug}, context_instance=RequestContext(request))
+    return render_to_response('wikiPage.html', {'title': 'Wiki page | Name App', 'mod_slug': mod_slug}, context_instance=RequestContext(request))
 
 @ScopeRequired(["waliki.add_page"])
 def create(request, mod_slug):
@@ -26,7 +26,7 @@ def request(request, mod_slug):
 
 @ScopeRequired(["waliki.view_page"])
 def history(request, mod_slug):
-    return render_to_response('historyPage.html', {'title': 'History | Name App', 'mod_slug': mod_slug}, context_instance=RequestContext(request))
+    return render_to_response('wikiHistoryPage.html', {'title': 'History | Name App', 'mod_slug': mod_slug}, context_instance=RequestContext(request))
 
 def no_found(request):
     return render_to_response('404.html', {'title': 'No encontrado | Name App'}, context_instance=RequestContext(request))

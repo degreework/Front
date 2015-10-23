@@ -1,0 +1,18 @@
+{% extends 'template_module.html' %}
+
+{% block head %}
+	{% include "header_wiki.html" %}
+{% endblock head %}
+
+
+{% block module %}
+
+	{% include 'nav_wiki.html' %}
+		
+	<div class="margen_contenido">
+		{% block wiki_content %}
+	
+		{% endblock wiki_content %}
+	</div>
+
+{% endblock %}

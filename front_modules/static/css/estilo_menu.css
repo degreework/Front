@@ -4,6 +4,8 @@
 
   /*left: -280px;  /* start off behind the scenes */
   z-index: 2;
+  margin-top: 76px;
+  border-right: 5px solid  #ccc;
 }
 
 /* Basic styling */
@@ -53,4 +55,10 @@
 
 .icon-menu i {
   margin-right: 5px;
+}
+
+
+#horizontal-bar{
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
