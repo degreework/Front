@@ -263,6 +263,6 @@ AskForm.prototype.succes_update = function (response, form){
 AskForm.prototype.succes_create = function(response){
 	//console.log('AskForm:succes_create');
 	//console.log(response)
-	var new_url = Site.geRootUrl()+"/"+slug+"/forum/detail/"+response.id;
+	var new_url = AskModel.generate_url(slug, response.id);
 	location.href =  new_url;
 }

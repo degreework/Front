@@ -1,8 +1,8 @@
-{% extends 'activities_parent.html' %}
-{% block activities_content %}
+{% extends 'template_activities_parent.html' %}
 {% load staticfiles %}
+
+{% block module %}
 	<div class="col-md-8 capacity">
-		hola
 	<!--aqui se renderiza la actividad-->
 		<div class="col-md-12" id="activitie" hidden></div>
 		
@@ -66,7 +66,7 @@
 		</div>
 	</div>
 	
-{% endblock activities_content%}
+{% endblock module %}
 {% block scripts %}
 
 	<script>

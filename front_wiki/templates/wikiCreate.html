@@ -2,16 +2,14 @@
 {% comment %}
 	template for create a page of wiki
 {% endcomment %}
+{% block section_title %}
+	<h3 class="sub-section">Crear</h3>
+{% endblock section_title %}
 
-{% block wiki_content %}
-<div class="margen_contenido">
-
-
-
-	<div class="col-md-12 margen_contenido" >
+{% block module %}
 		
 		<div class="row">
-			<div class="col-md-12 base">
+			<div class="col-md-12">
 				<div class="col-md-6" id="editaded_page" hidden >
 					Gracias por contribuir a la enciclopedia, la página que acabas de crear pasará a revisión por el docente para ser aprobada.
 					Pueder ver el estado <a id="url_wiki_request" href="">aquí</a>
@@ -24,9 +22,6 @@
 			</div>
 		</div>
 
-		<div id="row margen_contenido">	
-		</div>
-	</div>
 	
 
 	<div class="col-md-12" id="formContent">
@@ -41,11 +36,8 @@
 				<p>Crea nuevos temas dentro de la wiki, estos seran aprobados o no dependiendo de la informacion ...bla bla bla</p>
 		</div>
 	</div>	
-	
-		      	
-</div>
 
-{% endblock wiki_content %}
+{% endblock module %}
 
 {% block scripts %}
 <script>

@@ -1,11 +1,11 @@
-{% extends "evaluations_parent.html" %}
+{% extends "template_evaluations_parent.html" %}
 {% comment %}
 	template for create a quiz
 {% endcomment %}
 
 {% load staticfiles %}
 
-{% block evaluations_content %}
+{% block module %}
 	<div class="col-md-12">
 		<!-- formulario para la pregunta -->
 		<h3 class="titulos">Pregunta Multi-Opción</h3>
@@ -54,7 +54,7 @@
 		</div>
 	</div>
 
-{% endblock evaluations_content %}
+{% endblock module %}
 
 {% block scripts %}
 	<script>

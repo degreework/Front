@@ -1,11 +1,11 @@
-{% extends "evaluations_parent.html" %}
+{% extends "template_evaluations_parent.html" %}
 {% comment %}
 	template for create a quiz
 {% endcomment %}
 
 {% load staticfiles %}
 
-{% block evaluations_content %}
+{% block module %}
 	<div class="col-md-12">
 		<h3 class="titulos">Pregunta Verdadero-Falso</h3>
 		<br><br>
@@ -19,7 +19,7 @@
 			<p> pregunta ..bla bla bla</p>
 		</div>
 	</div>
-{% endblock evaluations_content %}
+{% endblock module %}
 
 {% block scripts %}
 	<script>

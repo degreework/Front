@@ -1,18 +1,17 @@
 {% extends 'nav.html' %}
-{% block title %}
-	<a href="{% url 'front_activities:activities' mod_slug %}" >
-		<span class="navbar-brand" id='title-nav'>Activities <span id="module_name"></span></span>
-	</a>
-{% endblock title %}		
-
+		
 {% block items %}
 
 	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_activities:activities' mod_slug%}">actividades</a>
+		<a href="{% url 'front_activities:activities' mod_slug%}">
+			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+		</a>
 	</li>
 
 	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_activities:create' mod_slug %}">Crea una nueva actividad</a>
+		<a href="{% url 'front_activities:create' mod_slug %}">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</a>
 	</li>
 
 {% endblock items %}

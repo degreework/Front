@@ -1,23 +1,25 @@
-{% extends 'template_base.html' %}
-{% block contenido %}
-{% load staticfiles %}
-	
-	<div>
-		Crear modulo
-		<div>
-		</div>
+{% extends 'template_module_parent.html' %}
+
+{% block section_title %}
+	<h3 class="sub-section">Crear</h3>
+{% endblock section_title %}
+
+
+{% block module %}
+		
 		<form id="form_create_module" action="create" hidden>
 			<!--<label>Selecciona una imagen</label>
 			<input type="file" id="id_image" name="image" required />-->
 			<button class="btn btn-default pull-right" type="submit" name="create" id="btn-module">Crear</button>
 		</form>
-	</div>
+	
 
-{% endblock %}
+{% endblock module %}
 
 {% block scripts %}
 	<script>
 		jQuery(document).ready(function($) {
+			$(".sections").fadeOut();
 			var module = new ModuleView();
 			module.initialize($("#form_create_module"));
     });

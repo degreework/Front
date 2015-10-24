@@ -1,11 +1,11 @@
-{% extends "evaluations_parent.html" %}
+{% extends "template_evaluations_parent.html" %}
 {% comment %}
 	template for list all questions
 {% endcomment %}
 
 {% load staticfiles %}
 
-{% block evaluations_content %}
+{% block module %}
 	<div class="col-md-12">
 		
 		<!-- tabla con la lista de quices terminados -->
@@ -41,7 +41,7 @@
 			
 		</div>
 	</div>
-{% endblock evaluations_content %}
+{% endblock module %}
 
 {% block scripts %}
 	<script>

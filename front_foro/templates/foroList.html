@@ -1,14 +1,18 @@
-{% extends "foro_parent.html" %}
+{% extends "template_foro_parent.html" %}
 
 {% comment %}
 	template for listing wiki pages
 {% endcomment %}
 
-{% block foro_content %}
+{% block section_title %}
+	<h3 class="sub-section">Inicio</h3>
+{% endblock section_title %}
+
+{% block module %}
 	<div class="col-md-12 asks">
 	</div>
 
-{% endblock foro_content %}
+{% endblock module %}
 
 {% block scripts %}
 	<script>

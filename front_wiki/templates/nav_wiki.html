@@ -9,16 +9,17 @@
 	</li>
 
 	<li class="section-nav" role="presentation">
+		<a href="{% url 'front_wiki:create' mod_slug %}">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</a>
+	</li>
+	
+	<li class="section-nav" role="presentation">
 		<a href="{% url 'front_wiki:history' mod_slug %}">
 			<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
 		</a>
 	</li>
 
-	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_wiki:create' mod_slug %}">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-		</a>
-	</li>
 
 	<li class="section-nav" role="presentation">
 		<a href="{% url 'front_wiki:request' mod_slug %}">

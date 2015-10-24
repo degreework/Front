@@ -1,11 +1,11 @@
-{% extends "evaluations_parent.html" %}
+{% extends "template_evaluations_parent.html" %}
 {% comment %}
 	template for list all questions
 {% endcomment %}
 
 {% load staticfiles %}
 
-{% block evaluations_content %}
+{% block module %}
 	<div class="col-md-12">
 		<h3>Selecciona un tipo de pregunta para ver la lista</h3>
 		<div class="col-md-4" style="text-align:center">
@@ -168,7 +168,7 @@
 	
 	
 
-{% endblock evaluations_content %}
+{% endblock module %}
 
 {% block scripts %}
 	<script>

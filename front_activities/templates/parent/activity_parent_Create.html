@@ -1,23 +1,17 @@
-{% extends 'activities_parent.html' %}
-{% block activities_content %}
-{% load staticfiles %}
-	<div class="col-md-8 capacity">
+{% extends 'template_activities_parent.html' %}
 
-		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-1 margen_contenido">
+{% block module %}
 		
 	<!--aqui se muestran los mensajes de succes-->
-		<div id="msg_succes" hidden></div>
+	<div id="msg_succes" hidden></div>
 		
 
 	<!--formulario para crear una actividad (parent)-->
 		<form id="form_create_activitie" hidden>
 			<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
 		</form>
-		
-		</div>
-	</div>
 
-{% endblock activities_content%}
+{% endblock module %}
 
 {% block scripts %}
 	<script>

@@ -2,12 +2,15 @@
 {% comment %}
 	template for listing wiki pages
 {% endcomment %}
+{% block section_title %}
+	<h3 class="sub-section">Inicio</h3>
+{% endblock section_title %}
 
-{% block wiki_content %}
+{% block module%}
 	
-	<div class="col-md-12 margen_contenido pages"></div>
+	<div class="col-md-12 pages"></div>
 
-{% endblock wiki_content %}
+{% endblock module %}
 
 {% block scripts %}
 <script>

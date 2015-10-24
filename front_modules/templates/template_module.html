@@ -37,8 +37,25 @@
 	</div><!--end Info-->
 
 	<div class="row">
-		{% block module %}
-		{% endblock module %}
+		<div class="navbar navbar-default">
+		
+			<div class="row">
+				<div class="col-md-2 col-xs-4">
+					{% block section_title %}
+					{% endblock section_title%}
+				</div>
+				
+				<div class="col-md-10">
+					{% block nav %}
+					{% endblock nav %}
+				</div>
+			</div>
+		
+		</div>
+		<div class="margen_contenido">
+			{% block module %}
+			{% endblock module %}
+		</div>
 	</div>
 
 </div>

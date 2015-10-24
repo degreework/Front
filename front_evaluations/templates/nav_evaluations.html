@@ -1,14 +1,12 @@
 {% extends 'nav.html' %}
-{% block title %}
-	<a href="{% url 'front_evaluations:quiz' mod_slug %}" >
-		<span class="navbar-brand" id='title-nav'>Tests <span id="module_name"></span></span>
-	</a>
-{% endblock title %}		
+
 
 {% block items %}
 
 	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_evaluations:quiz' mod_slug %}">evaluaciones</a>
+		<a href="{% url 'front_evaluations:quiz' mod_slug %}">
+			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+		</a>
 	</li>
 
 	<!--<li class="section-nav" role="presentation">

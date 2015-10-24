@@ -1,18 +1,17 @@
 {% extends 'nav.html' %}
-{% block title %}
-	<a href="{% url 'front_foro:foro' mod_slug %}" >
-		<span class="navbar-brand" id='title-nav'>Foro <span id="module_name"></span></span>
-	</a>
-{% endblock title %}		
-
+		
 {% block items %}
 
 	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_foro:foro' mod_slug %}">discusiones</a>
+		<a href="{% url 'front_foro:foro' mod_slug %}">
+			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+		</a>
 	</li>
 
 	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_foro:create' mod_slug %}">Crea una nueva discusión</a>
+		<a href="{% url 'front_foro:create' mod_slug %}">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</a>
 	</li>
 
 {% endblock items %}
