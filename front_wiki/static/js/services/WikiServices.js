@@ -106,7 +106,7 @@ WikiService.get_page = function (url, callback) {
 		else if(404 == error.status)
 		{
 			Notify.show_error('404', 'No se encontró')
-			var url = location.origin+'/wiki/404';
+			var url = Site.geRootUrl()+'/wiki/404';
 			window.location.replace(url);
 		}
 		//if INTERNAL SERVER ERROR

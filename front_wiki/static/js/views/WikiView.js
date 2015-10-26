@@ -56,7 +56,7 @@ WikiView.succes_create_form = function()
 	        var url = $('input#id_slug');
 	        $($("input[name=slug]")[0]).val(WikiView.slugter(title));
 	    });
-		$('#id_slug').hide()
+		//$('#id_slug').hide()
 
 	    //-> onsubmit
 	    var url = URL_CREATE_PAGE_WIKI_MODULE.replace(/\%slug%/g, slug);
@@ -105,7 +105,7 @@ WikiView.create_succes = function(wiki)
 WikiView.slugter = function (str)
 {
 	str = str.replace(/\s/g,'-');
-	str = str.replace(/[^a-zA-Z0-9\s]/g,"");
+	str = str.replace(/[^a-zA-Z0-9]/g,"");
 	str = str.toLowerCase();
 	return str;
 }
@@ -258,7 +258,7 @@ function call()
 				var s = StorageClass.getInstance();
 				if(-1 != s.storage.get("permissions").indexOf("wiki.delete_request")){
 					$("#editaded_page_admin").fadeIn();
-					url = WikiModel.generate_url(response.page.slug)
+					url = WikiModel.generate_url(slug, response.page.slug)
 
 				}else
 				{
@@ -309,6 +309,7 @@ WikiView.render_list = function(parent_container, response)
 		var title_page = document.createElement("span");
 		$(title_page).css('font-size','24px')
 		var date = document.createElement("span");
+		date.className = "time-ago";
 		//se asigna el texto 
 		$(title_page).text(response[i].page.title)
 		$(date).text("Última edición "+jQuery.timeago(response[i].author.created_at));
@@ -328,14 +329,16 @@ WikiView.render_list = function(parent_container, response)
 WikiView.show_all_request = function(container)
 {
 	var url = URL_REQUEST_PAGE_WIKI_MODULE.replace(/\%slug%/g, slug);
-	//URL_GET_ALL_WIKI_REQUESTeAmosIabella
-	WikiService.get_list(url, WikiView.render_request)
-	WikiView.list_request = container;
+	//URL_GET_ALL_WIKI_REQUESTeAmosIsabella
+	WikiService.get_list(url,
+		function  (response) {
+			WikiView.render_request(response, container)
+		})
 }
 
-WikiView.render_request = function(list)
+WikiView.render_request = function(list, global_container)
 {
-	//console.log(list)
+	console.log(list)
 	list = list.results;
 	for (i = 0; i < list.length; i++) {
 
@@ -373,7 +376,7 @@ WikiView.render_request = function(list)
 		div.appendChild(link);
 		container.appendChild(div)
 		
-		WikiView.list_request.prepend(div);
+		global_container.prepend(div);
 	}
 }
 
