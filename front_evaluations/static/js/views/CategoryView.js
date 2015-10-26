@@ -363,7 +363,8 @@ EvaluationsView.handle_delete = function(response, index, tipo, row){
 		if (tipo == 'quiz') {
 		
 			var quizService = new QuizService();
-			quizService.delete(URL_DETAIL_QUIZ+id+'/', row, EvaluationsView.hide_div)
+			var url = URL_DETAIL_QUIZ.replace(/\%slug%/g, slug);;
+			quizService.delete(url+id+'/', row, EvaluationsView.hide_div)
 			notify.close()	
 		}
 

@@ -22,7 +22,7 @@ NotificationView.render_notifications = function(notifications, saved)
 	var s = StorageClass.getInstance();
 	s.storage.set("notifications", JSON.stringify(notifications));
 	
-	//console.log(notifications)
+	console.log(notifications)
 
 	if(notifications.count>0)
 	{
@@ -54,6 +54,7 @@ NotificationView.render = function(notification)
 	/*render a notification*/
 	//console.log(notification)
 
+
 	var li = $("<li class='a-noti'></li>");
 	var container = $("<div id =  'noti_container'></div>");
 
@@ -71,6 +72,11 @@ NotificationView.render = function(notification)
 		var url = AskModel.generate_url(notification.target.id)
 		$("<a href='"+url+"'><span><strong>"+notification.actor.name+" </strong></span><span>"+notification.target.detail+", "+notification.verb+"</span></a>" ).appendTo(container);
 	}
+
+	if ('Badge' == notification.target.type) {
+		console.log('medalla')
+		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+": <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+	};
 	
 	
 	$(container).appendTo(li)
