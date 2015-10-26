@@ -227,7 +227,8 @@ EvaluationsView.update_quiz = function(form, id)
 			data.append("single_attempt", $('#id_single_attempt').val());
 			data.append("correct", $('#id_draft').val());
 
-			quizService.update(URL_DETAIL_QUIZ+id+'/', data, EvaluationsView.redirect_Categories)
+			var url = URL_DETAIL_QUIZ.replace(/\%slug%/g, slug);;
+			quizService.update(url+id+'/', data, EvaluationsView.redirect_Categories)
 	})
 }
 
@@ -251,7 +252,8 @@ EvaluationsView.get_Quiz = function(){
 	})
 
 	var quizService = new QuizService();
-	quizService.retrieve(URL_DETAIL_QUIZ+id+'/', EvaluationsView.render_quiz)	
+	var url = URL_DETAIL_QUIZ.replace(/\%slug%/g, slug);;
+	quizService.retrieve(url+id+'/', EvaluationsView.render_quiz)	
 }
 
 
