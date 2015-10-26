@@ -1,0 +1,23 @@
+{% extends "template_material_parent.html" %}
+
+{% comment %}
+	template for listing wiki pages
+{% endcomment %}
+
+{% block section_title %}
+	<h3 class="sub-section">Inicio</h3>
+{% endblock section_title %}
+
+{% block module %}
+	<div id="material" class="col-md-12 pages"></div>
+{% endblock module %}
+
+{% block scripts %}
+<script>
+		var url = URL_LIST_MATERIAL_MODULE.replace(/\%slug%/g, "{{mod_slug}}");
+		
+		var material = new MaterialView();
+		material.list(url, $("#material"));
+		//URL_LIST_MATERIAL
+	</script>
+{% endblock scripts %}

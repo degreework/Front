@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^', include('front_modules.urls', namespace='front_modules')),
     # this packages are of modules, by now is for test 
     url(r'^', include('front_foro.urls', namespace='front_foro')),
+    url(r'^(?P<mod_slug>.+)/material/', include('front_material.urls', namespace='front_material')),
     url(r'^', include('front_wiki.urls', namespace='front_wiki')),
     url(r'^', include('front_comments.urls', namespace='front_comments')),
     url(r'^', include('front_activities.urls', namespace='front_activities')),

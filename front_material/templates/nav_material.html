@@ -1,0 +1,32 @@
+{% extends 'nav.html' %}
+		
+{% block items %}
+
+	<li class="section-nav" role="presentation">
+		<a href="{% url 'front_material:home' mod_slug %}">
+			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+		</a>
+	</li>
+
+	<li class="section-nav" role="presentation">
+		<a href="{% url 'front_material:create' mod_slug %}">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</a>
+	</li>
+
+{% endblock items %}
+	
+{% block scripts %}
+	<script>
+		active();
+
+	var slug = "{{mod_slug}}";
+
+	var module = new ModuleView();
+	module.render_module_name(
+		slug,
+		$("#module_name")
+	);
+	</script>
+{% endblock scripts %}
+

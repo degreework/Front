@@ -24,6 +24,11 @@ URL_STREAM_USER = host + ':8080/API/users/wall/%id%';
 //Degree == Plan
 URL_GET_DEGREE = host+":8080/API/degree/all";
 
+//Material
+URL_LIST_MATERIAL = host + ":8080/API/material/all";
+URL_CREATE_MATERIAL = host + ":8080/API/material/new";
+URL_GET_MATERIAL = host + ':8080/API/material/';
+
 //Foro
 URL_CREATE_ASK_FORO = host+":8080/API/forum/ask/";
 URL_LIST_ASKS_FORO = host+":8080/API/forum/ask/all";
@@ -164,3 +169,6 @@ URL_ALL_ACTIVITIE_MODULE = host + ':8080/API/module/%slug%/activitie/all';
 //Evaluations
 URL_CREATE_QUIZ_MODULE = host + ':8080/API/module/%slug%/quiz/new';
 URL_ALL_QUIZ_MODULE = host + ':8080/API/module/%slug%/quiz/all';
+//Material
+URL_LIST_MATERIAL_MODULE = host + ":8080/API/module/%slug%/material/all";
+URL_CREATE_MATERIAL_MODULE = host + ":8080/API/module/%slug%/material/new";
