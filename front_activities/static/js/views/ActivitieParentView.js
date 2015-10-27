@@ -1,3 +1,4 @@
+//
 var ActivitieParentView = function()
 {
 }
@@ -41,7 +42,8 @@ ActivitieParentView.prototype.handler_edit_form = function(form){
 	var _activitie_die = $(cont_die).text()
 
 	//se crea la url
-	var url = URL_CREATE_ACTIVITIE_PARENT+"/"+_activitie_id;
+	var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
+	url = url+"/"+_activitie_id;
 
 	//asigna los atributos al formulario
 	$($(form).find("#id_name")[0]).val(_activitie_name)
@@ -124,7 +126,8 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 			edit.appendChild(edit_msg);
 			edit.addEventListener('click', function(e){			
 				//console.log("edit")
-				var url = URL_CREATE_ACTIVITIE_PARENT+'/'+response.id;
+				var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
+				url = url+'/'+response.id;
 
 				var formActivitie = new ActivitieParentForm(
 					$("#form_edit_activitie"),
@@ -149,7 +152,8 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 
 			$('#erase').click(function(){
 				// se obtiene el id de la respuesta para colocarlo en la url 
-				var url = URL_CREATE_ACTIVITIE_PARENT+'/'+response.id;
+				var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
+				url = url+'/'+response.id;
 				var activitieService = new ActivitieParentService();
 				activitieService.delete(url , function(e){
 					window.location.href = Site.geRootUrl()+"/activity"
@@ -208,8 +212,9 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 }
 
 var ActivitieParentForm = function(form, callback){
+	//var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
 	create_form(
-		URL_CREATE_ACTIVITIE_PARENT,
+		URL_CREATE_ACTIVITIE_PARENT2,
 		form,
 		'OPTIONS',
 		callback

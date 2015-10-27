@@ -122,7 +122,7 @@ ChatSocked.prototype.listen = function(){
 	// escucha los mensajes del chat global 
 	ChatSocked.prototype.socked.on('messageAll', function(msg) {
 		
-		//console.log('me llego el mensajeAll');
+		console.log('me llego el mensajeAll');
 		//console.log(msg);
 		
 		ChatSocked.prototype.addMessage(msg['message'], msg['pseudo'], new Date().toISOString(), msg['thumb'][0], false);
@@ -138,7 +138,6 @@ ChatSocked.prototype.listen = function(){
 
 		$('#chatAll').empty();
 		for (var i = 0; i < msgs.length; i++) {
-			//msgs[i]
 			ChatSocked.prototype.addMessage(msgs[i].message, msgs[i].nameSender, msgs[i].date, msgs[i].thumb, false);
 		};
 		
@@ -176,7 +175,7 @@ ChatSocked.prototype.addMessage = function(msg, sender, date, thumb, self) {
 
 	if(self) var classDiv = " message self";
 	else var classDiv = " message";
-	
+	console.log(msg)
 	$("#chatAll").append("\
           <div class='direct-chat-msg right' id='me'>\
             <div class='direct-chat-info clearfix'>\
