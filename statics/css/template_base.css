@@ -51,6 +51,7 @@ body{
 
 /*donde va el contenido*/
 .capacity{
+	margin-top: 76px;
 	min-height: 400px;
 	/*margin: 0 0 3% 0;*/
 
@@ -63,7 +64,7 @@ hr{
 
 
 .margen_contenido{
-	margin-top: 30px;
+	/*margin-top: 30px;*/
 }
 
 .btn-create{
@@ -182,7 +183,7 @@ hr{
 
 /* square of info */
 .base{
-	margin-top: 76px;
+	/*margin-top: 76px;*/
 	box-shadow:	1px 1px 3px #888888;
 	padding: 10px;
 }
@@ -246,9 +247,10 @@ hr{
 /*answer*/
 
 .titulos{
+	margin-top: 0px;
+	padding: 15px;
 	background-color: #eee;
 	border-bottom: 1px solid #ccc;
-	padding: 15px;
 }
 
 .content_answer{
@@ -275,23 +277,6 @@ hr{
 	padding: 10px 10px 10px 30px;
 }
 
-/*comentarios*/
-#list-comment{
-	margin-top: 20px;
-	border-top: 1px solid #ccc;
-}
-
-.comments{
-	margin: 10px;
-	border-bottom: 1px solid #ccc;
-}
-
-.link_comment{
-	margin-top: 20px;
-}
-
-
-/*--------*/
 
 .confirmation-delete{
 margin-top: 100px;
@@ -383,4 +368,16 @@ margin-top: 100px;
 	100% {
 		-webkit-transform: rotateX( 0deg );
 	}
+}
+
+.time-ago{
+	color: darkgray;
+}
+
+#formContent{
+	margin-top: 10px;
+}
+
+.jum-404{
+	margin-top: 76px;
 }

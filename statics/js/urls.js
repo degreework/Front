@@ -26,7 +26,8 @@ URL_GET_DEGREE = host+":8080/API/degree/all";
 
 //Material
 URL_LIST_MATERIAL = host + ":8080/API/material/all";
-URL_CREATE_MATERIAL = host + ":8080/API/material/new";
+URL_CREATE_MATERIAL = host + ":8080/API/material/f/new";
+URL_CREATE_MATERIAL_LINK = host + ":8080/API/material/l/new";
 URL_GET_MATERIAL = host + ':8080/API/material/';
 
 //Foro
