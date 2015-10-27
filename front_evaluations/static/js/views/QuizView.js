@@ -536,6 +536,7 @@ EvaluationsView.get_first_question = function(question_list){
 	//console.log(question_list)
 
 	var quizService = new QuizService();
+	console.info(URL_DETAIL_QUESTION)
 	quizService.retrieve(URL_DETAIL_QUESTION+question_id+'/', EvaluationsView.render_question)
 }
 
