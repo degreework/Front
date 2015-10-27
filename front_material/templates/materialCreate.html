@@ -10,14 +10,16 @@
 
 {% block module %}
 
-	<!--aqui se muestran los mensajes de succes-->
-	<div id="msg_succes" hidden></div>
 
-	<!--formulario para subir material-->
-	<form id="form_create_material" enctype="multipart/form-data" hidden>
-    	{% csrf_token %}
-    	<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
-	</form>
+
+		<!--aqui se muestran los mensajes de succes-->
+		<div id="msg_succes" hidden></div>
+
+		<!--formulario para subir material-->
+		<form id="form_create_material" enctype="multipart/form-data" hidden>
+	    	{% csrf_token %}
+	    	<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
+		</form>
 
 {% endblock module %}
 
@@ -25,10 +27,19 @@
 <script>
 	var slug = "{{mod_slug}}";
 	var material = new MaterialView();
-	var formMaterial = new MaterialForm(
-		$("#form_create_material"),
-		MaterialView.prototype.handler_created_form
-		)
+
+	if(window.location.hash) {
+	  	// Fragment exists
+		var formMaterial = new MaterialForm(
+			$("#form_create_material"),
+			window.location.hash,
+			MaterialView.prototype.handler_created_form
+			)
+	} else {
+	  	// Fragment doesn't exist
+	  	console.info("no hast")
+	  	window.history.back();
+	}
 	
 	</script>
 {% endblock scripts %}

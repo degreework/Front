@@ -9,9 +9,17 @@
 	</li>
 
 	<li class="section-nav" role="presentation">
-		<a href="{% url 'front_material:create' mod_slug %}">
+		<a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 		</a>
+		
+		<ul class="dropdown-menu" aria-labelledby="dLabel">
+    		<li>
+    		<a href="{% url 'front_material:create' mod_slug %}#file">Archivo</a></li>
+    		
+    		<li>
+    		<a href="{% url 'front_material:create' mod_slug %}#link">Enlace</a></li>
+  		</ul>
 	</li>
 
 {% endblock items %}
@@ -27,6 +35,8 @@
 		slug,
 		$("#module_name")
 	);
+
+
 	</script>
 {% endblock scripts %}
 

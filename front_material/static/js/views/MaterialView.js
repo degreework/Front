@@ -88,12 +88,16 @@ MaterialView.prototype.load_detail = function(url)
 	activitieService.retrieve(
 		url,
 		function  (response) {
-			console.info(response)
-			console.info(response.content.type)
-			$("#id_title").text(response.title)
-			$("#id_description").text(response.description)
 
-			if("link" == response.content.type)
+			$("#id_title").text(response.title).fadeIn()
+			$("#id_description").text(response.description).fadeIn()
+			
+			if("file" == response.content.type)
+			{
+				$("#id_file").attr('href', response.content.url).fadeIn();
+			}
+
+			else if("link" == response.content.type)
 			{
 				var index_yt = response.content.url.indexOf("//www.youtube.com/watch?v=");
 				var index_vm = response.content.url.indexOf("//vimeo.com/");
@@ -120,16 +124,13 @@ MaterialView.prototype.load_detail = function(url)
 					div += '</div>';
 					div += '</div><!-- /video-wrapper -->';
 
-					$("#id_link").append(div);
+					$("#id_link").append(div).fadeIn();
 				}
 				//if link isn't a video
 				else{
-
+					$("#id_link_hyp").attr('href', response.content.url).fadeIn();
+					$("#id_link").fadeIn();
 				}
-			}
-			else if( "file" == response.content.type)
-			{	
-				$("#id_file").attr('href', response.content.url);
 			}
 		}
 	);
@@ -242,9 +243,18 @@ MaterialView.prototype.render_material = function(response, global_container)
 
 }
 
-var MaterialForm = function(form, callback){
+var MaterialForm = function(form, hash ,callback){
+	var url = "";
+	if("#link" == hash)
+	{
+		url = URL_CREATE_MATERIAL_LINK;
+	}
+	else if("#file" == hash)
+	{
+		url = URL_CREATE_MATERIAL;
+	}
 	create_form(
-		URL_CREATE_MATERIAL,
+		url,
 		form,
 		'OPTIONS',
 		callback
