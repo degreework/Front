@@ -1,0 +1,22 @@
+/*comentarios*/
+#list-comment{
+	margin-top: 20px;
+	border-top: 1px solid #ccc;
+}
+
+.comments{
+	/*margin: 10px;*/
+	border-bottom: 1px solid #ccc;
+}
+
+.link_comment{
+	margin-top: 20px;
+}
+
+
+.cmt-text
+{
+	margin-left: 5px;
+}
+
+/*--------*/
