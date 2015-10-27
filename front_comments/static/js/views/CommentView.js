@@ -56,18 +56,29 @@ CommentView.prototype.append_comment = function(response)
 			
 			// se crea el html     		
 			var container = document.createElement("div");
-			container.className = 'comments';
+			container.className = 'comments row';
+
+			var container_head = document.createElement("div");
+			container_head.className = 'col-md-6';
+
+			var container_foot = document.createElement("div");
+			container_foot.className = 'col-md-6';
+
 			var link = document.createElement("a");
 			var id = response[i].id;
 			$(link).attr('href', UserView.getUrl(response[i].author.id));
 			container.id = 'cmt-'+id;
-			var text = document.createElement("p");
+			var text = document.createElement("span");
 			var author = document.createElement("span");
+			var date = document.createElement("span");
+			text.className = "cmt-text";
+			date.className = "time-ago";
 
 			
 			//se asigna el texto 
 			$(text).text(response[i].text+"")
-			$(author).text(response[i].author.name)
+			$(author).text(response[i].author.name+":")
+			$(date).text(jQuery.timeago(response[i].added_at));
 
 			//if isAuthor
 			if (response[i].author.id == User.get_id())
@@ -76,9 +87,15 @@ CommentView.prototype.append_comment = function(response)
 			}
 			//se pega a los contenedores 
 			link.appendChild(author);
-			container.appendChild(link);
-			container.appendChild(text);
+			
+			container_head.appendChild(link);
+			container_head.appendChild(text);
+			container_foot.appendChild(date);
+
+			container.appendChild(container_head);
+			container.appendChild(container_foot);
 			//container.appendChild(document.createElement("hr"));
+			//console.log(container)
 			
 			$(this.container_list).append(container);
 		}

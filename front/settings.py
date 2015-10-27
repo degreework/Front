@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'front_users',
     'front_modules',
     'front_foro',
+    'front_material',
     'front_wiki',
     'front_comments',
     'front_activities',

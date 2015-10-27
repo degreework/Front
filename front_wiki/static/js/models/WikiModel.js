@@ -1,10 +1,9 @@
 var WikiModel = {};
 
 
-WikiModel.generate_url = function(slug)
+WikiModel.generate_url = function(mod_slug, page_slug)
 {
-	console.log("GENERA")
-	return host+":"+location.port+'/wiki/'+slug;
+	return Site.geRootUrl()+'/'+mod_slug+'/wiki/'+page_slug;
 }
 
 WikiModel.generate_url_request =function(slug, version)

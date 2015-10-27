@@ -1,0 +1,50 @@
+{% extends "template_material_parent.html" %}
+
+{% comment %}
+	template for listing wiki pages
+{% endcomment %}
+
+{% block section_title %}
+	<h3 class="sub-section">Ver</h3>
+{% endblock section_title %}
+
+{% block module %}
+
+
+		<h4 id="id_title" hidden></h4><!--Title is rendered here-->
+		
+		<a id="id_file" hidden><!--File link is rendered here-->
+			<span class='glyphicon glyphicon-download-alt' aria-hidden='true'></span>
+		</a>
+		
+		<p id="id_description" hidden></p><!--Description is rendered here-->
+		
+		<div id="id_link" hidden>
+			 <a id="id_link_hyp" target="_blank" hidden>
+			 	<span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+			 </a>
+
+		</div><!--Link is rendered here-->
+
+
+
+{% endblock module %}
+	
+{% block scripts %}
+<script>
+	var id = function ()
+	{
+		//Se obtiene el id 
+		var id = location.pathname.split("/");
+		id = id[id.length-1];
+		//console.log(id)
+		return id;
+	}
+
+	var url = URL_GET_MATERIAL+id();
+
+	var material = new MaterialView();
+	material.load_detail(url);
+
+</script>
+{% endblock scripts %}

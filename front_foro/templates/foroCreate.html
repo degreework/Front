@@ -3,9 +3,12 @@
 	template for create a ask 
 {% endcomment %}
 
+{% block section_title %}
+	<h3 class="sub-section">Crear</h3>
+{% endblock section_title %}
+
 {% block module %}
-	<div class="col-md-12">
-		<br><br>
+	<br>
 		<div class="col-md-7 col-sm-7 col-xs-7  ">
 			<form class="" id="form_ask_edit_foro" hidden>
 				<textarea id="id_textarea" name="content" data-provide="markdown" rows="10"></textarea>
@@ -18,7 +21,7 @@
 			<p>Esto es sobre algoritmia
 			Se específico, detalla bien tu duda o inconveniente, la comunidad está para ayudarte y tu eres parte de ella...bla bla bla</p>
 		</div>
-	</div>
+	
 
 {% endblock module %}
 

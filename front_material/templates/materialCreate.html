@@ -1,0 +1,45 @@
+{% extends "template_material_parent.html" %}
+
+{% comment %}
+	template for listing wiki pages
+{% endcomment %}
+
+{% block section_title %}
+	<h3 class="sub-section">Crear</h3>
+{% endblock section_title %}
+
+{% block module %}
+
+
+
+		<!--aqui se muestran los mensajes de succes-->
+		<div id="msg_succes" hidden></div>
+
+		<!--formulario para subir material-->
+		<form id="form_create_material" enctype="multipart/form-data" hidden>
+	    	{% csrf_token %}
+	    	<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
+		</form>
+
+{% endblock module %}
+
+{% block scripts %}
+<script>
+	var slug = "{{mod_slug}}";
+	var material = new MaterialView();
+
+	if(window.location.hash) {
+	  	// Fragment exists
+		var formMaterial = new MaterialForm(
+			$("#form_create_material"),
+			window.location.hash,
+			MaterialView.prototype.handler_created_form
+			)
+	} else {
+	  	// Fragment doesn't exist
+	  	console.info("no hast")
+	  	window.history.back();
+	}
+	
+	</script>
+{% endblock scripts %}
