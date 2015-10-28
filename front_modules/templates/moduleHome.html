@@ -4,6 +4,7 @@
 		<div class="col-md-12">
 		<span id="module_actions"> editar</span>
 			<!--Description is rendered here-->
+			<img id="module_image" class="img-responsive" alt="Module">
 			<span id="module_description"></span>
 		</div>
 
@@ -12,3 +13,24 @@
 			<button class="btn btn-default pull-right" type="submit" name="update" id="btn-module">Guardar</button>
 		</form>
 {% endblock module %}
+
+{% block scripts %}
+<script>
+	jQuery(document).ready(function($) {
+		
+		var slug = "{{mod_slug}}";
+		var SLUG = slug;
+		
+		var module = new ModuleView();
+		module.render_module_detail(
+			slug,
+			$("#module_name"),
+			$("#module_description"),
+			$("#module_actions"),
+			$("#module_image"),
+			$("#form_edit_module")
+		);
+
+	});
+</script>
+{% endblock scripts %}

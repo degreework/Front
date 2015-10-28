@@ -14,7 +14,7 @@ ModuleView.prototype.initialize = function(form)
 
 ModuleView.succes_create_form = function(form)
 {
-	//console.log("create_form")
+	//console.info("create_form")
 	// -> generate slug
 	$($("input[name=name]")[0]).keyup( function(){
 		var title = $(this).val();
@@ -23,14 +23,15 @@ ModuleView.succes_create_form = function(form)
     });
 
     //render values (if there is any)
-    var name = $($("#module_title")[0]).text();
+    var name = $($("#module_name")[0]).text();
     var description = $($("#module_description")[0]).text();
+
     if (name)
     {	$($("input[name=name]")[0]).val( name )
     	$($("input[name=description]")[0]).val( description )
  	   	var slug = location.pathname.split("/");
 		slug = slug[slug.length-1];
-    	$($("input[name=slug]")[0]).val(slug);
+    	$($("input[name=slug]")[0]).remove();
 	}
     
     //end render
@@ -39,6 +40,9 @@ ModuleView.succes_create_form = function(form)
 
     form.submit(function(e){
 		e.preventDefault();
+		//remove all empty fields from form
+		$(this).find(":input").filter(function(){ return !this.value; }).remove()
+		//end remove
 		
 		var action = e.target.action.split("/");
 		action = action[action.length-1];
@@ -55,7 +59,7 @@ ModuleView.succes_create_form = function(form)
 			url,
 			data,
 			function(response){
-				window.location.href = Module.getURL_from_slug(response.slug);
+				window.location.href = Module.getURL_from_slug(slug);
 				}
 			);
 		}
@@ -77,7 +81,7 @@ ModuleView.succes_create_form = function(form)
 
 ModuleView.prototype.render_modules = function(container)
 {
-	console.info(container)
+	//console.info(container)
 	this.service.list(
 		URL_ALL_MODULES,
 		function(response){
@@ -88,6 +92,7 @@ ModuleView.prototype.render_modules = function(container)
 
 ModuleView._render_module = function(container, module)
 {
+	/*render list of modules*/
 	$(container).append("<li id='id_mod-"+module.id+"'><a href='"+Module.getURL_from_slug(module.slug)+"'>"+module.name+"</a></li>")
 }
 
@@ -100,7 +105,7 @@ ModuleView.slugter = function (str)
 }
 
 
-ModuleView.prototype.render_module_detail = function(slug, cnt_title, cnt_description, cnt_actions, form_edit)
+ModuleView.prototype.render_module_detail = function(slug, cnt_title, cnt_description, cnt_actions, cnt_image, form_edit)
 {
 	var url = URL_RETRIEVE_MODULE.replace(/\%slug%/g, slug);
 	var THIS = this;
@@ -110,6 +115,7 @@ ModuleView.prototype.render_module_detail = function(slug, cnt_title, cnt_descri
 		function(response){
 			$(cnt_title).text(response.name);
 			$(cnt_description).text(response.description);
+			$(cnt_image).attr('src', response.photo)
 
 			$(cnt_actions).click(function (e) {
 				e.preventDefault();
