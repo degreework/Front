@@ -53,7 +53,8 @@ NotificationView.render = function(notification)
 {
 	/*render a notification*/
 	//console.log(notification)
-
+	console.log(notification.target)
+	console.log(notification.actor.name)
 
 	var li = $("<li class='a-noti'></li>");
 	var container = $("<div id =  'noti_container'></div>");
@@ -74,10 +75,19 @@ NotificationView.render = function(notification)
 	}
 
 	if ('Badge' == notification.target.type) {
-		console.log('medalla')
+
 		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+": <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
 	};
 	
+	if ('Quiz' == notification.target.type) {
+		
+		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" el Quiz: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+	};
+
+	if ('Activitie' == notification.target.type) {
+		
+		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" la Actividad: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+	};
 	
 	$(container).appendTo(li)
 	$(li).appendTo($("#user-notify"))
