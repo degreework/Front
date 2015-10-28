@@ -94,21 +94,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-	jQuery(document).ready(function($) {
-		
-		var slug = "{{mod_slug}}";
-		var SLUG = slug;
-		
-		var module = new ModuleView();
-		module.render_module_detail(
-			slug,
-			$("#module_name"),
-			$("#module_description"),
-			$("#module_actions"),
-			$("#form_edit_module")
-		);
 
-	});
-</script>
 {% endblock scripts %}
