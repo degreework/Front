@@ -133,7 +133,8 @@ UserView.loginCallback = function ()
 	//chatSocked.emmit('listChatUpdate',user);
 
 	//crea sesion para guardar los chats abiertos
-	sessionStorage.setItem('currentChats', '{"chats":[]}');
+	var s = StorageClass.getInstance();
+	s.storage.set('currentChats', '{"chats":[]}');
 
 
 }

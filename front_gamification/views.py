@@ -15,10 +15,6 @@ def badgeDetail(request,id):
     return render_to_response('detailBadge.html', {'title': 'gamification | Name App'}, context_instance=RequestContext(request))
 
 
-def badgeCreate(request):
-    return render_to_response('createBadges.html', {'title': 'gamification | Name App'}, context_instance=RequestContext(request))
-
-
 def award(request):
     return render_to_response('listAwards.html', {'title': 'gamification | Name App'}, context_instance=RequestContext(request))
 

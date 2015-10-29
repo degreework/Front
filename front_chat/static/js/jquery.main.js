@@ -631,7 +631,7 @@ $( document ).ready(function() {
               
               var iduser = main.attr( "id" ).substring( ( "Dialog".length ) );
 
-              currentChats = JSON.parse(sessionStorage.getItem('currentChats'))
+              currentChats = JSON.parse(localStorage.getItem('currentChats'))
               for (var i = 0; i < currentChats.chats.length; i++) {
                 
                 var chat = JSON.parse(currentChats.chats[i])
@@ -644,7 +644,7 @@ $( document ).ready(function() {
               };
               //console.log(currentChats)
               //console.log(currentChats.chats)
-              sessionStorage.setItem('currentChats', JSON.stringify(currentChats)); 
+              localStorage.setItem('currentChats', JSON.stringify(currentChats)); 
 
               
               $( "#user-button-" + iduser ).remove();

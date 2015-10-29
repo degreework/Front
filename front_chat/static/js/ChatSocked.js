@@ -42,7 +42,7 @@ ChatSocked.prototype.listen = function(){
 		console.log(msg)
 		
 		// envia las peticiones de historial cuando recarga la pagina
-		currentChats = JSON.parse(sessionStorage.getItem('currentChats'))
+		currentChats = JSON.parse(localStorage.getItem('currentChats'))
      	for (var i = 0; i < currentChats.chats.length; i++) {
      		var chat = JSON.parse(currentChats.chats[i])
      		ChatSocked.prototype.sentMessage('chat_history', {'room': chat.from+','+chat.to, 'to':chat.to, 'from':chat.from})
@@ -122,7 +122,7 @@ ChatSocked.prototype.listen = function(){
 	// escucha los mensajes del chat global 
 	ChatSocked.prototype.socked.on('messageAll', function(msg) {
 		
-		//console.log('me llego el mensajeAll');
+		console.log('me llego el mensajeAll');
 		//console.log(msg);
 		
 		ChatSocked.prototype.addMessage(msg['message'], msg['pseudo'], new Date().toISOString(), msg['thumb'][0], false);
@@ -138,7 +138,6 @@ ChatSocked.prototype.listen = function(){
 
 		$('#chatAll').empty();
 		for (var i = 0; i < msgs.length; i++) {
-			//msgs[i]
 			ChatSocked.prototype.addMessage(msgs[i].message, msgs[i].nameSender, msgs[i].date, msgs[i].thumb, false);
 		};
 		
@@ -176,7 +175,7 @@ ChatSocked.prototype.addMessage = function(msg, sender, date, thumb, self) {
 
 	if(self) var classDiv = " message self";
 	else var classDiv = " message";
-	
+	console.log(msg)
 	$("#chatAll").append("\
           <div class='direct-chat-msg right' id='me'>\
             <div class='direct-chat-info clearfix'>\
@@ -193,7 +192,7 @@ ChatSocked.prototype.addMessage = function(msg, sender, date, thumb, self) {
 // funcion que actualiza la sesion con los chat abiertos 
 ChatSocked.prototype.add_current_chat = function(from, to, nameTo){
 	
-	currentChats = JSON.parse(sessionStorage.getItem('currentChats'))
+	currentChats = JSON.parse(localStorage.getItem('currentChats'))
 	//console.log(currentChats.chats.indexOf('{"from":"'+from+'", "to":"'+to+'", "nameTo":"'+nameTo+'"}'))
 	if(currentChats.chats.indexOf('{"from":"'+from+'", "to":"'+to+'", "nameTo":"'+nameTo+'"}' )=== -1){
 		currentChats.chats.push('{"from":"'+from+'", "to":"'+to+'", "nameTo":"'+nameTo+'"}')
@@ -201,7 +200,7 @@ ChatSocked.prototype.add_current_chat = function(from, to, nameTo){
 	}
 	//console.log(currentChats)
 	//console.log(currentChats.chats)
-	sessionStorage.setItem('currentChats', JSON.stringify(currentChats)); 
+	localStorage.setItem('currentChats', JSON.stringify(currentChats)); 
 }
 	
 	// se crea el objeto para manejar los chats 

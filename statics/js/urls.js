@@ -113,7 +113,8 @@ URL_PROGRESS_EXAMS_QUIZ = host+':8080/API/quiz/progress/exams/'; // se le pega e
 
 //Activitie
 
-URL_CREATE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/new'
+URL_CREATE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/%slug%/new'
+URL_CREATE_ACTIVITIE_PARENT2 = host+':8080/API/activitie/parent/new'
 URL_ALL_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/all'
 URL_RETREIVE_ACTIVITIE_PARENT = host+':8080/API/activitie/parent/'
 
@@ -137,15 +138,15 @@ URL_DELETE_NOTIFICATION = host+':8080/API/inbox/notifications/delete/%id%/';
 
 
 // Gamificaion
-
-URL_CREATE_BADGE = host+':8080/API/gamification/badge'
 URL_ALL_BADGE = host+':8080/API/gamification/badge/all'
 
 
-URL_GET_AWARDS_USER = host+':8080/API/gamification/award/all/'
-URL_GET_PROGRESS_GAMIFICATION = host+':8080/API/gamification/badge/progress/detail/'
+URL_GET_AWARDS_USER = host+':8080/API/gamification/award/all/' // trae las medallas del usuario para el perfil si se le pega el id, si no trae todos los awards
+
+URL_GET_PROGRESS_GAMIFICATION = host+':8080/API/gamification/badge/progress/detail/'// se le pega el id del usuario por el q se pide el progreso
 
 URL_SCORES = host + ':8080/API/gamification/scores/'
+URL_SCORES_ALL = host + ':8080/API/gamification/scores/all'
 
 //Votes 
 URL_GIVE_VOTE = host + ':8080/API/gamification/vote';

@@ -15,9 +15,8 @@
   				<thead>
 					<tr>
 						<th>#</th>
-						<th></th>
-						<th>Editar</th>
-						<th>Eliminar</th>
+						<th>Usuario</th>
+						<th>Medalla</th>
 					</tr>
 				</thead>
 				<tbody id="list-award">
@@ -50,8 +49,8 @@
 	<script>
         jQuery(document).ready(function($) {
 			
-			
-			
+			var gamificationView = new GamificationView();
+			gamificationView.get_all_award()
 		});
 	</script>
 	

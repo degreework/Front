@@ -14,7 +14,7 @@
 			
 			// se pegan los boones en la barrita cuando se recarga la pagina 
              	if (UserService.isAutenticated()){
-             		currentChats = JSON.parse(sessionStorage.getItem('currentChats'))
+             		currentChats = JSON.parse(localStorage.getItem('currentChats'))
 	             	for (var i = 0; i < currentChats.chats.length; i++) {
 	             		
 	             		var chat = JSON.parse(currentChats.chats[i])
