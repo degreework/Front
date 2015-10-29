@@ -81,12 +81,12 @@ NotificationView.render = function(notification)
 	
 	if ('Quiz' == notification.target.type) {
 		
-		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" el Quiz: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" un Quiz: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
 	};
 
 	if ('Activitie' == notification.target.type) {
 		
-		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" la Actividad: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" una Actividad: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
 	};
 	
 	$(container).appendTo(li)

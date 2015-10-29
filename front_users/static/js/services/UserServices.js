@@ -406,7 +406,7 @@ UserService.deauthenticate = function (url) {
 	{
 		user = JSON.parse(localStorage.getItem('user'))
 		main_chat_user_offline_new (user.id)
-		$.session.remove('currentChats');
+		//$.session.remove('currentChats');
 		chatSocked.emmit('leave', user)
 
 

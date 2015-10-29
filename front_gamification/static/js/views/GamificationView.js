@@ -9,6 +9,14 @@ GamificationView.render_parametros = function(form, response){
 	console.log('gamification render_parametros')
 	console.log(form)
 	console.log(response)
+	$.each(response, function(key, value) {	
+		console.log(key +'=='+ value)
+		//$('#id_'+key).attr('value', value);
+		$('#id_'+key).val(value);
+	})
+
+	//$(form).find('#id_event')
+	$(form).show()
 }
 
 GamificationView.prototype.handle_edit = function(response, index, tipo){
@@ -20,14 +28,31 @@ GamificationView.prototype.handle_edit = function(response, index, tipo){
 
 	if (tipo == 'medalla') {
 
-		form = $("#form_update_badge")
+		form = $("#form_update_e")
 		create_form(URL_SCORES, form, 'OPTIONS', GamificationView.render_parametros, response)
 	};
+
+
+	if (form.selector === '#form_update_e') {
+		GamificationView.prototype.update_score(form, response.id)
+	}
 }
 
+GamificationView.prototype.redirect = function(response){
+	console.log(response)
+	//location.reload();
+}
 
-GamificationView.prototype.hide_div= function(response, row){
-	row.fadeOut()
+GamificationView.prototype.update_score = function(form, id){
+	console.log('update_score')
+	form.submit(function (e) {
+		e.preventDefault();
+		console.log('submit')
+		var gamificationService = new GamificationService();
+		var data = new FormData($(e.target).get(0));
+		console.log(data)
+		gamificationService.update(URL_SCORES+id, data, GamificationView.prototype.redirect)
+	})	
 }
 
 
@@ -218,7 +243,7 @@ GamificationView.prototype.render_scores = function(response){
 		$(number).text(i+1)
 
 		var name = document.createElement("td");
-		$(name).text(response[i].id_event)
+		$(name).text(response[i].id_event.name)
 
 		var score = document.createElement("td");
 		$(score).text(response[i].score)
@@ -265,57 +290,32 @@ GamificationView.prototype.show_table_questions = function(){
 	$(button).attr('type','submit')
 	$(button).attr('name','action')
 	$(button).text('Actualizar')
-	button.className = 'btn btn-default pull-right' 
+	button.className = 'btn btn-default pull-right'  
 
 	$('#Essay').click(function(){
-				$('#table-essay').show()
-				$('#table-tf').hide()
-				//$('#table-mc').hide()
-
-				$('#show_').show()
-				$('#edit_tf').hide()
-				//$('#edit_mc').hide()
-				$('#edit_e').hide()
-
-				$('#form_update_tf').empty()
-				//$('#form_update_mc').empty()
-				//$('#form_mc_answer').empty()
+								
 				$('#form_update_e').empty()
 				$('#form_update_e').append(button)
+				
+				$('#table-essay').show()
+				$('#table-tf').hide()
+
+				$('#show_').show()
+				$('#edit_').hide()
+	
 			})
 
 			$('#TF').click(function(){
+				
+				$('#form_update_e').empty()
+				$('#form_update_e').append(button)
+				
 				$('#table-essay').hide()
 				$('#table-tf').show()
-				//$('#table-mc').hide()
 
 				$('#show_').show()
-				$('#edit_tf').hide()
-				//$('#edit_mc').hide()
-				$('#edit_e').hide()
+				$('#edit_').hide()
 
-				$('#form_update_tf').empty()
-				//$('#form_update_mc').empty()
-				//$('#form_mc_answer').empty()
-				$('#form_update_e').empty()
-				$('#form_update_tf').append(button)
 			})
 
-			/*$('#MC').click(function(){
-				$('#table-essay').hide()
-				$('#table-tf').hide()
-				$('#table-mc').show()
-
-				$('#show_').show()
-				$('#edit_tf').hide()
-				$('#edit_mc').hide()
-				$('#edit_e').hide()
-
-				$('#form_update_tf').empty()
-				$('#form_update_mc').empty()
-				$('#form_mc_answer').empty()
-				$('#form_update_e').empty()
-				
-
-			})*/
 }
