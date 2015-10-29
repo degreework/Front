@@ -199,12 +199,69 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
 	$("<hr>" ).appendTo( "#activitie" );
 
+	ActivitieParentView.render_current_child(response.child, $("#id_current_activitie"));
+	
 	$("#activitie").fadeIn();
 
 	$("#btn_active_send").click(function(e){
 		var form = new ActivitieChildForm($("#form_send_activitie"));
 		$(e.target).fadeOut();
 	})
+}
+
+
+ActivitieParentView.render_current_child = function(child, container){
+	$(container).append(ActivitieParentView.create_html_activitie(child));
+}
+
+ActivitieParentView.create_html_activitie = function(child){
+	var html = '';
+	if(child)
+	{
+		html = '<div id="id_activitie-'+child.id+'">';
+		html += '<a href="'+User.get_url(child.author.id)+'"><span>'+child.author.name+'</span></a>';
+		html += '<a id="id_activitie-'+child.id+'" href="'+child.file+'">';
+		html += '<span id="id_gly" class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>';
+		html += '<span>Entregado '+jQuery.timeago(child.sent_at)+'</span>';
+		html += '<span id="id_activitie_status" class="label label-default status-'+child.status[0]+'">'+child.status[1]+'</span></div>';
+
+		//dependiendo de los permisos de usuario se muesttra un boton para eliminar
+		var s = StorageClass.getInstance();
+		if(-1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
+			console.info("Check")
+
+			html +='<a class="action-remove"><span class="glyphicon glyphicon-remove"></span></a>';
+			
+			html +='<a><span class="glyphicon glyphicon-ok"></span></a>';
+			
+			
+			
+			console.info(html)
+			
+			$(".action-remove").addEventListener('click', function(e){
+				console.info("click")
+				ActivitieChildView.prototype.check(
+					response.id,
+					"approved");
+				
+			}, false);
+			/*
+			reject.addEventListener('click', function(e){
+				ActivitieChildView.prototype.check(
+					response.id,
+					"rejected");
+				
+			}, false);*/
+		}
+
+		return html;
+	}
+	else
+	{
+		html += '<span id="id_activitie_status" class="label label-default status-0">No enviado</span></div>';
+		return html;
+	}
+	
 }
 
 var ActivitieParentForm = function(form, callback){

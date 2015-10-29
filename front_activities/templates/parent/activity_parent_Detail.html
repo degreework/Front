@@ -2,37 +2,37 @@
 {% load staticfiles %}
 
 {% block module %}
-	<div class="col-md-8 capacity">
 	<!--aqui se renderiza la actividad-->
-		<div class="col-md-12" id="activitie" hidden></div>
-		
+		<div id="activitie" hidden></div>
 
-		<div class="col-md-12">
-			<div class="col-md-4 col-md-offset-4" style="text-align:center">
-				<!--boton para enviar una actividad (child)-->
-				<button id="btn_active_send" class="btn btn-default" type="button">Enviar Actividad</button>
+		<div class="col-md-4 col-md-offset-4" style="text-align:center">
+			<!--boton para enviar una actividad (child)-->
+			<button id="btn_active_send" class="btn btn-default" type="button">Enviar Actividad</button>
 
-				<!--formulario para enviar una actividad (child)-->
-				<div id="send_activitie" hidden>
-					<form id="form_send_activitie">
-						<button class="btn btn-default " type="submit" name="action">Enviar</button>
-					</form>
-				</div>
-
-				<!--formulario para editar actividad (parent)-->
-				<form id="form_edit_activitie" hidden>
-						<button class="btn btn-default pull-right" type="submit" name="action">Guardar</button>
+			<!--formulario para enviar una actividad (child)-->
+			<div id="send_activitie" hidden>
+				<form id="form_send_activitie">
+					<button class="btn btn-default " type="submit" name="action">Enviar</button>
 				</form>
 			</div>
+
+			<!--formulario para editar actividad (parent)-->
+			<form id="form_edit_activitie" hidden>
+					<button class="btn btn-default pull-right" type="submit" name="action">Guardar</button>
+			</form>
 		</div>
-		<div class="col-md-12">
-			<hr>
-		</div>
+
+		<div class="col-md-12"><hr></div>
+
 		<!--aqui se renderizan las actividades enviadas-->	
 		<div class="col-md-12">
 
 			<div id="list_activitie" >
-				<div id="title_list_activitie" >Soluciones Enviadas</div>	
+				<div id="title_list_activitie" >Soluciones Enviadas</div>
+				
+				<div id="id_current_activitie"></div>
+
+
 
 			</div>
 
@@ -53,7 +53,7 @@
 
 		<!-- formulario para crear el comentario -->
 			
-			<form id="form-comment-act" hidden>
+			<form id="form-comment-act" status-'+child.status[0]hidden>
 				<div class="form-group">
 					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
 				</div>
@@ -64,7 +64,7 @@
 				<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
 			</form>	
 		</div>
-	</div>
+	
 	
 {% endblock module %}
 {% block scripts %}
