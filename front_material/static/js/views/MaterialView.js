@@ -94,6 +94,14 @@ MaterialView.prototype.load_detail = function(url)
 			
 			if("file" == response.content.type)
 			{
+
+				var ext = response.content.url.split('.').pop();
+				if("png" == ext || "jpg" == ext)
+				{
+					<!--IMPORTANTE: la url no puede estar quemada, durante el desarrollo debe estar asi, pero para producción debe quitarse-->
+					$("#id_file").append("<img src='http://127.0.0.1:8080"+response.content.url+"' class='img-responsive' alt='"+response.title+"'>")
+				}
+				
 				$("#id_file").attr('href', response.content.url).fadeIn();
 			}
 
