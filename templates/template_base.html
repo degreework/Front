@@ -146,25 +146,24 @@
 </div>
 
 <div class="row">
-	<div class="col-md-3 col-xs-12">
-		<div class="row">
-			<div class="col-md-12 col-xs-12">
-				{% include 'resumeProfile-menu.html' %}
-			</div>
-			<div class="col-md-12 col-xs-12">
-				{% include 'menu_modulos.html' %}
-			</div>
-		</div>
-	</div>
+	<div class="col-md-12">
 
-	<div class="col-md-9 col-xs-12">
+		<div class="col-md-3 col-xs-12" style="margin-top:76px">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					{% include 'resumeProfile-menu.html' %}
+				</div>
+				<div class="col-md-12 col-xs-12">
+					{% include 'menu_modulos.html' %}
+				</div>
+			</div>
+		</div>  
 
-	{% block contenido %}
-	{% endblock %}
-	</div>
+		{% block contenido %}
+		{% endblock %}
 
 	{% include 'listChat.html' %}
-
+	</div>
 </div>
 
 <!--Loader-->

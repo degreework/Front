@@ -1,40 +1,72 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
-	<div class="col-md-8 base capacity">
-		<div class="col-md-12 navigation">
-			<h2>Ajustes</h2>	
-		</div>
+	<div class="col-md-9 capacity">
 		
-		<br>
+		<h2>Configuración</h2>
+		
+		<hr><br>
+		
+		<h4>Informacion Basica</h4>	
+		<p>Actualiza tu informacion personal</p>
 		<div class="col-md-12">
-			<h4>Actualiza tu informacion personal</h4>	
-		</div>
-		
-		<div class="col-md-6 col-sm-6 col-xs-8 col-sm-offset-3 margen_contenido">
-		
+			<div class="col-md-6 col-sm-offset-3">
 
-			<form id="form_update_user" >      
-        		<button class="btn btn-default" type="submit" name="action">Guardar Cambios</button>
-     			<a class="pull-right" href="{% url 'front_users:changePassword' %}">Cambiar contraseña</a>
-      		</form>	
+				<form id="form_update_user" >      
+	        		<button class="btn btn-default pull-right" type="submit" name="action">Guardar Cambios</button>
+	     			<!--<a class="pull-right" href="{% url 'front_users:changePassword' %}">Cambiar contraseña</a>-->
+	      		</form>	
+			</div>	
 		</div>
+		
+		<div class="col-md-12" style="padding:0">
+		<hr>
+		</div>
+
+		{% include 'changePassword.html' %}
+
+
 	</div>
 {% endblock %}
+
+
 {% block scripts %}
 <script type="text/javascript">
 	$('document').ready(function() {
 
+		// informacio basica 
 		url_update = URL_UPDATE_USER+User.get_id();
-		//form update user
+		
 		form_update_user = $("#form_update_user");
 		create_form(url_update, form_update_user, 'PUT', UserView.showSetting, url_update) ;
 		
-		//form_update_user.show();
+	
 		form_update_user.submit(function (e) {
 			e.preventDefault();
 			UserService.update_user(url_update, form_update_user);
 		});
+
 		
+
+		// cambio de contraseña
+		form_update_password = $("#form_update_password");
+
+		function succes_change()
+		{
+			$("#form_update_password").reset();	
+		}
+		
+		
+		//user = 
+		url_update = URL_UPDATE_USER_PASSWORD+JSON.parse(localStorage.getItem('user')).id;
+
+		form_update_password.submit(function (e) {
+			e.preventDefault();
+			//UserService.confirmPassword(url_confirm, form_update_password);
+			ChangePasswordForm.udpate_password(
+				url_update,
+				form_update_password,
+				succes_change)
+		});
 	});
 
 	</script>

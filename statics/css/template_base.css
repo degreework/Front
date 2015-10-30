@@ -6,6 +6,10 @@ body{
 	font-family: 'OpenSans-Regular.ttf';
 }
 
+thead {
+	background-color: #eee;
+}
+
 .glyphicon{
 	cursor: pointer;
 }
@@ -17,8 +21,8 @@ body{
 	background-color: #D51B23;
     color:  white;
     margin-top: 0;
-    /*height: 60px;	
-    border-bottom: 10px solid  #7F1015;*/
+    /*height: 60px;	*/
+    border-bottom: 5px solid  #7F1015;
     margin-bottom: 0px;
 }
 
@@ -37,8 +41,6 @@ body{
 {
 	background-color: #D51B23;
     color:  white;
-    margin-top: 50px;
-    margin-bottom: 0;
     height: 77px;
     width: 100%;
 }
@@ -51,11 +53,11 @@ body{
 
 /*donde va el contenido*/
 .capacity{
-	margin-top: 76px;
+	margin-top: 90px;
 	min-height: 400px;
 	/*margin: 0 0 3% 0;*/
 
-	margin-bottom: 3%;
+	/*margin-bottom: 3%;*/
 }
 
 hr{
@@ -78,6 +80,31 @@ hr{
 .header_profile{
 	min-height: 180px
 }*/
+/*
+.oval-half-red {
+     width: 50px;
+     height: 50px;
+     -moz-border-radius: 0 50% / 0 100%;
+     -webkit-border-radius: 0 50% / 0 100%;
+     border-radius: 0 50% / 0 100%;
+     background: #5cb85c;
+     border: 3px solid #555;
+}*/
+.badges_profile{
+	margin-top: 76px;
+	border: 1px solid #ccc;
+	/*box-shadow:	1px 1px 3px #888888;*/
+	padding-bottom: 20px;
+}
+
+.activitie_user{
+	/*height: 55px;*/
+    border: 1px solid #eee;
+    /*padding: inherit;*/
+  	padding-top: 10px;
+  	margin-top: 10px;
+
+}
 
 .resume_profile{
 	
@@ -122,19 +149,13 @@ hr{
   
 
 /*introduccion*/
-.slide2{
-	background-image: url("../../static/img/overlay1.png");
-	background-color: rgba(0,0,0,0.7);
-}
 
 .intro-img{
 	margin-top: 10px;
     margin-bottom: 10px;
     padding: 10px;
 }
-.intro-img:hover{
-	background-color: #eee;
-}
+
 
 .introduction-pic{
 	width: 50%;
@@ -144,13 +165,17 @@ hr{
 
 #form_update_user{
 	margin-bottom:50px;
-	margin-top: 50px;
-	margin-right: 20px;
+	margin-top: 10px;
+	/*margin-right: 20px;*/
 }
 
 
 #div_form_login{
 	margin-left: 20px;
+}
+
+#hola{
+	padding-top: 10px;
 }
 
 /*MODULOS*/
@@ -183,9 +208,10 @@ hr{
 
 /* square of info */
 .base{
-	/*margin-top: 76px;*/
-	box-shadow:	1px 1px 3px #888888;
-	padding: 10px;
+	margin-top: 76px;
+	border: 1px solid #ccc;
+	/*box-shadow:	1px 1px 3px #888888;*/
+	padding-bottom: 20px;
 }
 
 
@@ -201,8 +227,9 @@ hr{
 	padding: 15px 15px;
 }
 .navbar-brand {
+
 	font-size: 30px;
-	padding: 0;
+	padding: 10px;
 }
 
 
@@ -331,6 +358,12 @@ margin-top: 100px;
 /*----------------
 	BADGES
 ------------------*/
+.award_user{
+	box-shadow: 1px 2px 2px rgba(0,0,0,0.05);
+    border: 1px ridge #eee;
+    padding-bottom: 15px;
+}
+
 
 #badge_pic{
 	width: 30%;

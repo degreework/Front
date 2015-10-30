@@ -160,7 +160,8 @@ GamificationView.prototype.render_awards = function(response){
 	for (var i = 0; i < response.length; i++) {
 		
 		var container = document.createElement('div')
-		container.className = 'col-md-4'
+		container.className = 'col-md-1 award_user'
+
 		var title_award = document.createElement('h4')
 		$(title_award).text(response[i].badge.title)
 		var pic_award = document.createElement('img')

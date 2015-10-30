@@ -261,12 +261,15 @@ UserView.render_activities = function (data, container) {
 
 	if(0 == data.count)
 	{
-		$( "<div>No hay actividad</div>" ).appendTo( $(container) );		
+		$( "<div class='bg-danger'>No hay actividad</div>" ).appendTo( $(container) );		
 	}
+
 	$.each(data.results, function(k, v){
-		console.info(v.module)
-		var post = "<div>";
-		post += "<p id=''>he "+v.verb;
+		//console.info(v.module)
+		var post = "<div class='activitie_user'>";
+		//post += "<div class='pull-left oval-half-red '></div>"
+		post += "<span> "+jQuery.timeago(v.timestamp)+"</span>";
+		post += "<p id=''>"+v.verb;
 		post += " \""+v.object.detail+"\"";
 		
 		var url = '';
@@ -296,8 +299,6 @@ UserView.render_activities = function (data, container) {
 		}
 
 		post += " en <a href='"+url+"'>"+detail+"</a>";
-
-		post += "<span id=''> "+jQuery.timeago(v.timestamp)+"</span>";
 		
 		post += "</p>";
 		post += "</div>";

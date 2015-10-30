@@ -193,8 +193,8 @@ UserService.getUser = function(id){
 	})
 	.done(function(response){
 		console.log(response)
-		$('.resume_user_profile').text(response.first_name + " " + response.last_name);
-		$('.pic_user_profile').attr("src",'http://127.0.0.1:8080'+response.thumb[1]);
+		$('.resume_user_detail').text(response.first_name + " " + response.last_name);
+		$('.pic_user_detail').attr("src",'http://127.0.0.1:8080'+response.thumb[1]);
 	})
 	.fail(function(error){		
 		console.log(error);
