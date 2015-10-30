@@ -68,25 +68,30 @@ NotificationView.render = function(notification)
 		$("<a href='"+url+"'><span><strong>"+notification.actor.name+" </strong></span><span>"+notification.verb+"</span></a>" ).appendTo(container);
 	}
 
-	if("Ask" == notification.target.type)
+	else if("Ask" == notification.target.type)
 	{
 		var url = AskModel.generate_url(notification.target.id)
 		$("<a href='"+url+"'><span><strong>"+notification.actor.name+" </strong></span><span>"+notification.target.detail+", "+notification.verb+"</span></a>" ).appendTo(container);
 	}
 
-	if ('Badge' == notification.target.type) {
+	else if ('Badge' == notification.target.type) {
 
 		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+": <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
-	};
+	}
 	
-	if ('Quiz' == notification.target.type) {
+	else if ('Quiz' == notification.target.type) {
 		
 		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" un Quiz: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
-	};
+	}
 
-	if ('Activitie' == notification.target.type) {
+	else if ('Activitie' == notification.target.type) {
 		
 		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" una Actividad: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+	}
+
+	else if ('Module' == notification.target.type) {
+		var url = Module.getURL_from_slug(notification.target.slug);
+		$("<a href='"+url+"'><span>Se "+notification.verb+" llamado </span><span><strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
 	};
 	
 	$(container).appendTo(li)
