@@ -52,14 +52,20 @@ NotificationView.render_notifications = function(notifications, saved)
 NotificationView.render = function(notification)
 {
 	/*render a notification*/
-	//console.log(notification)
-	console.log(notification.target)
-	console.log(notification.actor.name)
+	console.info("notification")
+	console.info(notification)
+
+	var url;
+	var name;
+	var	verb;
+	var detail;
+	
 
 	var li = $("<li class='a-noti'></li>");
-	var container = $("<div id =  'noti_container'></div>");
+	var container = $("<div id='noti_container'></div>");
 
 	var id_as_readed = "btn-as-readed-"+notification.id;
+
 	$("<a id='"+id_as_readed+"' class='noti-action-readed pull-right'><span class='glyphicon glyphicon-ok'></span></a>").appendTo(container);
 
 	if("Request" == notification.target.type)
@@ -85,14 +91,19 @@ NotificationView.render = function(notification)
 	}
 
 	else if ('Activitie' == notification.target.type) {
-		
-		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" una Actividad: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+		url = Module.getURL_section_from_slug(notification.target.module.slug) + ActivitieParentModel.get_detail_url(notification.target.id);
+		name = notification.actor.name;
+		verb = notification.verb;
+		detail = notification.target.detail;
 	}
 
 	else if ('Module' == notification.target.type) {
 		var url = Module.getURL_from_slug(notification.target.slug);
-		$("<a href='"+url+"'><span>Se "+notification.verb+" llamado </span><span><strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+		$("<a href='"+url+"'><span>Se "+notification.verb+" llamado </span><span><strong>"+detail+"</strong></span></a>" ).appendTo(container);
 	};
+
+	
+	$("<a href='"+url+"'><span><strong>"+name+"</strong></span><span>"+", "+verb+" una Actividad: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
 	
 	$(container).appendTo(li)
 	$(li).appendTo($("#user-notify"))

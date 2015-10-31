@@ -257,20 +257,21 @@ UserView.load_wall = function (user_id, container) {
 }
 
 UserView.render_activities = function (data, container) {
-	console.info(data)
 
 	if(0 == data.count)
 	{
 		$( "<div>No hay actividad</div>" ).appendTo( $(container) );		
 	}
+	console.info("Stream")
 	$.each(data.results, function(k, v){
-		console.info(v.module)
+		console.info(v)
 		var post = "<div>";
 		post += "<p id=''>he "+v.verb;
 		post += " \""+v.object.detail+"\"";
 		
 		var url = '';
 		var detail = '';
+
 		if (v.target)
 		{
 			if("ask-type" == v.target.type)

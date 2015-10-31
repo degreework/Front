@@ -1,5 +1,4 @@
 var ModuleView = function(){
-	console.info("ModuleView")
 	this.service = new ModuleService();
 }
 ModuleView.prototype.initialize = function(form)
