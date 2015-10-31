@@ -78,18 +78,24 @@ NotificationView.render = function(notification)
 
 	else if("Ask" == notification.target.type)
 	{
-		var url = AskModel.generate_url(notification.target.id)
-		$("<a href='"+url+"'><span><strong>"+notification.actor.name+" </strong></span><span>"+notification.target.detail+", "+notification.verb+"</span></a>" ).appendTo(container);
+		url = AskModel.generate_url(notification.target.id)
+		name = notification.actor.name;
+		verb = notification.verb;
+		detail = notification.target.detail;
 	}
 
 	else if ('Badge' == notification.target.type) {
-
-		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+": <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+		url = '';
+		name = notification.actor.name;
+		verb = notification.verb;
+		detail = notification.target.detail;
 	}
 	
 	else if ('Quiz' == notification.target.type) {
-		
-		$("<a href='"+url+"'><span><strong>"+notification.actor.name+"</strong></span><span>"+", "+notification.verb+" un Quiz: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+		url = Module.getURL_section_from_slug(notification.target.module.slug)+Quiz.get_url(notification.target.id);
+		name = notification.actor.name;
+		verb = notification.verb;
+		detail = notification.target.detail;
 	}
 
 	else if ('Activitie' == notification.target.type) {
