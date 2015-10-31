@@ -1,17 +1,35 @@
 {% extends 'template_module_parent.html' %}
 
 {% block module %}
-		<div class="col-md-12">
-		<span id="module_actions"> editar</span>
+		<div class="col-md-12" style="padding-bottom:100px" id="container_module_detail">
+			
+			<span id="module_actions"> editar</span>
 			<!--Description is rendered here-->
-			<img id="module_image" class="img-responsive" alt="Module">
-			<span id="module_description"></span>
+			<div class="col-md-6" style="padding:15px;margin-top:30px">
+				
+				<span id="module_description"></span>	
+			</div>
+			<div class="col-md-6" style="border-left:1px solid #ccc;padding:15px;margin-top:30px">
+				
+					<img id="module_image" class="img-responsive img-rounded" alt="Module" style="margin-left:auto; margin-right:auto ">		
+				
+			</div>
+
+		</div>
+
+		<!-- para editar el modulo -->
+		<div class="col-md-12" hidden id="module_edit" style="padding-bottom:100px">
+			<h2>Edita el módulo</h2>
+			<hr><br>
+			<div class="col-md-6 col-sm-offset-3">
+				<form id="form_edit_module" action="edit" hidden>
+					<button class="btn btn-default pull-right" type="submit" name="update" id="btn-module">Guardar</button>
+				</form>
+			</div>
+			
 		</div>
 
 
-		<form id="form_edit_module" action="edit" hidden>
-			<button class="btn btn-default pull-right" type="submit" name="update" id="btn-module">Guardar</button>
-		</form>
 {% endblock module %}
 
 {% block scripts %}

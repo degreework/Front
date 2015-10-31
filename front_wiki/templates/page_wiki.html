@@ -1,4 +1,18 @@
-	<div >
+	
+		<!-- mensaje cuando edita un estudiante -->
+		<div class="col-md-10" id="editaded_page" hidden>
+		<span>Gracias por contribuir a la enciclopedia, la página que acabas de editar pasará a revisión por un docente para ser aprobada.</span>
+			<a id="url_wiki_request">aquí</a>
+		</div>
+
+		<!-- mensaje cuando edita un profesor/admin -->
+		<div class="col-md-10" id="editaded_page_admin" hidden>
+		<span>Gracias por contribuir a la enciclopedia, la página que acabas de editar, ya está disponible.</span>
+			<a id="url_wiki_request_admin">aquí</a>		
+		</div>
+		
+		<br><br>
+		<!-- botones para aprobar o rechazar -->
 		<div class="pull-right" id="submit_approved" hidden style="padding: 23px;">
 			<a class="btn-create" href="#">Aprobar</a>
 		</div>
@@ -7,23 +21,18 @@
 			<a class="btn-create" href="#">Rechazar</a>
 		</div>
 
-		<div id="editaded_page" hidden>
-		<span>Gracias por contribuir a la enciclopedia, la página que acabas de editar pasará a revisión por un docente para ser aprobada.</span>
-			<a id="url_wiki_request">aquí</a>
-		</div>
-
-		<div id="editaded_page_admin" hidden>
-		<span>Gracias por contribuir a la enciclopedia, la página que acabas de editar, ya está disponible.</span>
-			<a id="url_wiki_request_admin">aquí</a>		
-		</div>
-		
 		<h2 id="wiki_title" class="titulos"></h2>
-		<span id="wiki_version"></span>
+				
+		<!--<span id="wiki_version"></span>-->
+		
 		<div hidden>
 			<span id="wiki_slug"></span>
 		</div>
+		
+		<!-- contenido de la wiki-->
+		<div id="markdown"></div>
+
 		<div id="show_current" hidden>
 			<a href="#">Ir a la versión actual</a>
 		</div>
-		<div id="markdown" class="margen_contenido"></div>
-	</div>
+	

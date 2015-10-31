@@ -1,17 +1,25 @@
 {% extends 'template_module_parent.html' %}
 
 {% block section_title %}
-	<h3 class="sub-section">Crear</h3>
+	
+	<!--<h3 class="sub-section">Crear</h3>-->
 {% endblock section_title %}
 
 
 {% block module %}
+	<h2>Crea un módulo</h2>	
+	<hr><br>
 		
-		<form id="form_create_module" action="create" hidden>
-			<!--<label>Selecciona una imagen</label>
-			<input type="file" id="id_image" name="image" required />-->
-			<button class="btn btn-default pull-right" type="submit" name="create" id="btn-module">Crear</button>
-		</form>
+	<div class="col-md-12">
+		<div class="col-md-6 col-sm-offset-3">
+			<form id="form_create_module" action="create" hidden>
+				<!--<label>Selecciona una imagen</label>
+				<input type="file" id="id_image" name="image" required />-->
+				<button class="btn btn-default pull-right" type="submit" name="create" id="btn-module">Crear</button>
+			</form>
+		</div>
+	</div>
+		
 	
 
 {% endblock module %}
@@ -20,6 +28,7 @@
 	<script>
 		jQuery(document).ready(function($) {
 			$(".sections").fadeOut();
+			$("#nav_module").fadeOut();
 			var module = new ModuleView();
 			module.initialize($("#form_create_module"));
     });

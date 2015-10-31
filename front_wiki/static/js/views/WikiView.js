@@ -352,7 +352,7 @@ WikiView.render_request = function(list, global_container)
 		var container = document.createElement("li");
 		
 		var div = document.createElement("div");
-		div.className = 'col-md-12 page_list'
+		div.className = 'col-md-10 page_list'
 
 		var title = document.createElement("span");
 		$(title).text(page.title);

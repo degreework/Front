@@ -201,7 +201,8 @@ hr{
 /* ::FORO:: */
 /*list ask*/
 .number_answer{
-	margin-top: -20px;
+	margin-right: 10px;
+	margin-top: -30px;
 	padding: 10px;
 	background-color: #ccc;
 }
@@ -241,7 +242,7 @@ hr{
 	color: black;
 	border:none;
 	background-color: transparent;
-	border-bottom: 1px solid #eee;
+	/*border-bottom: 1px solid #eee;*/
 	padding: 0px;
 }
 
@@ -322,7 +323,7 @@ margin-top: 100px;
 	WIKI
 ------------------*/
 .page_list{
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #ccc;
 	padding: 10px;
 }
 
@@ -413,4 +414,75 @@ margin-top: 100px;
 
 .jum-404{
 	margin-top: 76px;
+}
+
+
+/*-----------------*/
+.tabs {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	
+}
+
+/* Nav */
+.tabs nav {
+	text-align: center;
+}
+
+.tabs nav ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: inline-block;
+}
+
+.tabs nav ul li {
+	border-right: 1px solid #becbd2;
+	border-left: 1px solid #becbd2;
+	border-bottom: none;
+	display: block;
+	float: left;
+	position: relative;
+}
+
+.tabs nav li.tab-current {
+	border-right: 1px solid #47a3da;
+	box-shadow: inset 0 2px #47a3da;
+	border-bottom: none;
+	z-index: 100;
+}
+
+.tabs nav li.tab-current:before,
+.tabs nav li.tab-current:after {
+	content: '';
+	position: absolute;
+	height: 1px;
+	right: 100%;
+	bottom: 0;
+	width: 1000px;
+	background: #47a3da;
+}
+
+.tabs nav li.tab-current:after {
+	right: auto;
+	left: 100%;
+	width: 4000px;
+}
+
+.tabs nav a {
+	color: #becbd2;
+	display: block;
+	font-size: 14px;
+	line-height: 2.5;
+	padding: 0 1.25em;
+	white-space: nowrap;
+}
+
+.tabs nav a:hover {
+	color: #768e9d;
+}
+
+.tabs nav li.tab-current a {
+	color: #47a3da;
 }

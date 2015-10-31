@@ -11,13 +11,13 @@ VoteView.prototype.render_vote_votes  = function(container, thread_id)
 	service.list(
 		url,
 		function(response){
-			var div = $("<div class='col-md-1 ' style='margin-top:15px'></div>");
-			var div_up = $("<h5> <span class='glyphicon glyphicon-triangle-top' aria-hidden='true'>"+response[0].up_votes+"</span></h5>");
-			var div_down = $("<h5> <span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true'>"+response[0].down_votes+"</span> </h5>");
+			var div = $("<span class='pull-right number_answer'></span>");
+			//var div_up = $("<h5> <span class='glyphicon glyphicon-triangle-top' aria-hidden='true'>"+response[0].up_votes+"</span></h5>");
+			//var div_down = $("<h5> <span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true'>"+response[0].down_votes+"</span> </h5>");
+			$(div).text('Votos: '+(response[0].up_votes+response[0].down_votes))
 
-
-			$(div).append(div_up)
-			$(div).append(div_down)
+			//$(div).append(div_up)
+			//$(div).append(div_down)
 			$(container).append(div)
 	});
 }

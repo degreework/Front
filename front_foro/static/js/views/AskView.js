@@ -49,12 +49,8 @@ AskView.prototype.render_list = function (data){
 	//console.log('AskView:render_list');
 	//console.log(data)
 
-	//######
 	//Votes
-
 	var voteManager = new VoteView();
-
-	//####
 	//end votes
 
 
@@ -65,19 +61,14 @@ AskView.prototype.render_list = function (data){
 		var container = document.createElement("div");
 		container.className = 'question col-md-12';
 
-		var container2 = document.createElement("div");
-		container2.className = 'col-md-11 pull-right';
 
 		var link = document.createElement("a");
 		var id = data_list_asks[i].id;
 		
-		
 
-		//
 		$(link).attr('href', AskModel.generate_url(mod_slug, id) );
 		var titles = document.createElement("h3");
 		var summarys = document.createElement("span");
-		//summarys.className = 'pull-right';
 		var author = document.createElement("a");
 		$(author).attr('href', UserView.getUrl(data_list_asks[i].author.id));
 		var count = document.createElement("span");
@@ -90,20 +81,16 @@ AskView.prototype.render_list = function (data){
 		$(summarys).text(', '+jQuery.timeago(data_list_asks[i].added_at))
 		$(author).text(data_list_asks[i].author.name)
 			
-		///#### vote
-		voteManager.render_vote_votes(container, id);
-		//## end vote
 
 		//se pega a los contenedores 
 		link.appendChild(titles);
-		container2.appendChild(link);
-		container2.appendChild(author);
-		container2.appendChild(summarys);
-		container2.appendChild(count);
-		container.appendChild(container2)
-
+		container.appendChild(link);
+		container.appendChild(author);
+		container.appendChild(summarys);
+		container.appendChild(count);
+		// vote
+		voteManager.render_vote_votes(container, id);
 		
-
 			
 		$(AskView.prototype.container_list_ask).prepend(container);
 	}

@@ -2,9 +2,9 @@
 {% block contenido %}
 {% load staticfiles %}
 
-<div class="capacity">
+<div class="col-md-9 capacity">
 			
-	<div class="row">
+	<div class="col-md-12 sections">
 		
 		<!--Title is rendered here-->
 		<div class="col-md-3">
@@ -12,7 +12,9 @@
 		</div>
 		<!--end title-->
 
-		<div class="col-md-5 sections">
+		<div class="col-md-6 ">
+
+			
 			<div class="btn-group btn-group-justified" role="group" aria-label="...">
 				  <div class="btn-group" role="group">
 				    <button id="open_material" type="button" class="btn btn-sm btn-default">Material</button>
@@ -32,6 +34,9 @@
 			</div>
 
 		</div>
+		<div class="col-md-3">
+			progreso
+		</div>
 
 		<div class="col-md-12">
 		<hr id="horizontal-bar">
@@ -39,30 +44,31 @@
 
 	</div><!--end Info-->
 
-	<div class="row">
-		<div class="navbar navbar-default" style="margin-left: 15px;margin-bottom: 0px;">
+	<div class="col-md-12">
+		<div class="navbar navbar-default" style="margin-left: 15px;margin-bottom: 0px;" id="nav_module">
 		
 			<div class="row">
-				<div class="col-md-2 col-xs-4">
+				<div class="col-md-5 col-xs-4">
 					{% block section_title %}
 					{% endblock section_title%}
 				</div>
 				
-				<div class="col-md-10">
+				<div class="col-md-7">
 					{% block nav %}
 					{% endblock nav %}
 				</div>
 			</div>
 		
 		</div>
-		<div class="margen_contenido">
-			<div class="col-md-12">
-				<div class="page_content">
-					{% block module %}
-					{% endblock module %}
-				</div>
+
+		
+		<div class="col-md-12">
+			<div class="page_content">
+				{% block module %}
+				{% endblock module %}
 			</div>
 		</div>
+		
 	</div>
 
 </div>

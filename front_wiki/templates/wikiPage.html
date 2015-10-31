@@ -3,25 +3,40 @@
 	template for view a wiki page
 {% endcomment %}
 
+{% block section_title %}
+	<h3 class="sub-section">Página de la wiki</h3>
+{% endblock section_title %}
 
 {% block module %}
 	<div class="col-md-12">
-		{% include "wiki_form.html" %}
+
 		{% include "page_wiki.html" %}
+		<br><br>
+		{% include "wiki_form.html" %}
 
 	</div>
 
-	<!--page footer-->
-	<div class="col-md-12"><hr></div>
+	<!--page footer
+	<div class="col-md-12"><hr></div>-->
 
-	<div id="list-comment-wiki" class="col-md-12"></div>
+	<div  class="col-md-12" style="padding-bottom:20px;">
+		<hr>
+		<h4 class="titulos">Comentarios</h4>
+		<div class="col-md-8" id="list-comment-wiki">
+			
+		</div>
+		
+		
+	</div>
+	
 	<div class="load-comment-wiki" hidden><a>Ver más</a></div>
 
-	<div class="col-md-12">
-		<!-- formulario para crear el comentario -->
+	
+	<div class="col-md-6" style="padding-bottom:100px;">
+		<!-- formulario para el comentario -->
 			<form id="form-comment-wiki" hidden>
 				<div class="form-group">
-					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
+					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text" placeholder="Escribe un comentario">
 				</div>
 				<div class="form-group">
 					<input type="hidden" id="id_parent" name="parent">

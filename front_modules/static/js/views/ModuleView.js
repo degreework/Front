@@ -119,7 +119,10 @@ ModuleView.prototype.render_module_detail = function(slug, cnt_title, cnt_descri
 
 			$(cnt_actions).click(function (e) {
 				e.preventDefault();
-				THIS.initialize(form_edit);				
+				THIS.initialize(form_edit);
+				$('#module_edit').show();
+				$('#container_module_detail').hide();
+				
 			})
 		})
 }

@@ -178,7 +178,7 @@ function render_form(method, form , response, callback, params)
 					field_div.appendChild(label);
 					
 					input.type = 'file';
-
+					
 					//set max length to input
 					input.maxLength = null
 					input.className = null;
