@@ -399,8 +399,8 @@ WikiView.show_all_history = function(container)
 
 WikiView.render_history = function(list)
 {
-	//console.log("WikiView:render_history")
-	//console.log(list)
+	//console.info("WikiView:render_history")
+	//console.info(list)
 	list = list.results;
 
 	for (i = 0; i < list.length; i++) {

@@ -22,7 +22,6 @@ NotificationView.render_notifications = function(notifications, saved)
 	var s = StorageClass.getInstance();
 	s.storage.set("notifications", JSON.stringify(notifications));
 	
-	console.log(notifications)
 
 	if(notifications.count>0)
 	{
@@ -52,8 +51,8 @@ NotificationView.render_notifications = function(notifications, saved)
 NotificationView.render = function(notification)
 {
 	/*render a notification*/
-	console.info("notification")
-	console.info(notification)
+	//console.info("notification")
+	//console.info(notification)
 
 	var url;
 	var name;
@@ -68,10 +67,13 @@ NotificationView.render = function(notification)
 
 	$("<a id='"+id_as_readed+"' class='noti-action-readed pull-right'><span class='glyphicon glyphicon-ok'></span></a>").appendTo(container);
 
+
 	if("Request" == notification.target.type)
 	{
-		var url = WikiModel.generate_url_request(notification.target.detail.page.slug, notification.target.detail.page.commit)
-		$("<a href='"+url+"'><span><strong>"+notification.actor.name+" </strong></span><span>"+notification.verb+"</span></a>" ).appendTo(container);
+		url = Module.getURL_section_from_slug(notification.target.module.slug)+WikiModel.generate_url_request(notification.target.detail.page.slug, notification.target.detail.page.commit)
+		name = notification.actor.name;
+		verb = notification.verb;
+		detail = notification.target.detail.page.title;
 	}
 
 	else if("Ask" == notification.target.type)
@@ -99,11 +101,13 @@ NotificationView.render = function(notification)
 
 	else if ('Module' == notification.target.type) {
 		var url = Module.getURL_from_slug(notification.target.slug);
-		$("<a href='"+url+"'><span>Se "+notification.verb+" llamado </span><span><strong>"+detail+"</strong></span></a>" ).appendTo(container);
+		name = notification.actor.name;
+		verb = notification.verb;
+		detail = notification.target.detail;
 	};
 
 	
-	$("<a href='"+url+"'><span><strong>"+name+"</strong></span><span>"+", "+verb+" una Actividad: <strong>"+notification.target.detail+"</strong></span></a>" ).appendTo(container);
+	$("<a href='"+url+"'><span><strong>"+name+"</strong></span><span>"+", "+verb+": <strong>"+detail+"</strong></span></a>" ).appendTo(container);
 	
 	$(container).appendTo(li)
 	$(li).appendTo($("#user-notify"))
