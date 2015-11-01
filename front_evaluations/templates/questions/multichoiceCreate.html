@@ -5,55 +5,54 @@
 
 {% load staticfiles %}
 
+{% block section_title %}
+	<h3 class="sub-section">Crea una pregunta de opcion multiple</h3>
+{% endblock section_title %}
+
 {% block module %}
-	<div class="col-md-12">
-		<!-- formulario para la pregunta -->
-		<h3 class="titulos">Pregunta Multi-Opción</h3>
-		<br><br>
-		<div class="col-md-7 col-sm-7 col-xs-7  ">
-			<form  id="form_mc" hidden>
+	
+	<!-- formulario para la pregunta -->
+	
+	<br><br>
+	<div class="col-md-6 col-sm-offset-3" style="padding-bottom:100px;">
+		<form  id="form_mc" hidden>
 
-				<br>
-	      		<h3 class="titulos">Respuestas</h3>
-	      		<br>
-	      		<div class="col-md-12" style="border-bottom:1px solid #ccc; margin-bottom: 20px;">
-	      		<div class="col-md-8" style=" ">
-	    			Contenido
-				</div>
-				<div class="col-md-4" style="text-align:center">
-	    			Correcta
-				</div>
-				</div>
-				<br>
-				<div id="form_mc_answer" >
-	      		
-	      		<div class="list_answer row">
-					<form class="form-inline">
+			<br>
+      		<h3 class="title">Respuestas</h3>
+      		<br>
+      		<div class="col-md-12 header_answers" >
+      		<div class="col-md-9">
+    			Contenido
+			</div>
+			<div class="col-md-3" style="text-align:center; border-left: 1px solid #ccc;">
+    			Correcta
+			</div>
+			</div>
+			<br>
+			<div id="form_mc_answer" >
+      		
+      		<div class="list_answer row">
+				<form class="form-inline">
 
-						<div class="form-group col-md-8">
-							 <input type="text" class="form-control" id="content_ans">
-						</div>
-						<div class="checkbox col-md-4" style="text-align:center">
-							 <input type="radio" name="verdict" id="id_correct">
-						</div>
-					</form>
-				</div>
-				</div>
-				<div class="col-md-12">
-					<button class="btn btn-default pull-right" type="button" id="add_input">Agregar</button>		
-				</div>
-				<div class="col-md-12">
-					<hr>
-					<button class="btn btn-default pull-right" type="submit" id="envia" form= "form_mc" name="action">Crear</button>	
-				</div>	
-			</form>  	
-		</div>
-		<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
-			<h4>Pregunta Multi-Opción</h4>
-			<p> pregunta ..bla bla bla</p>
-		</div>
+					<div class="form-group col-md-8">
+						 <input type="text" class="form-control" id="content_ans">
+					</div>
+					<div class="checkbox col-md-4" style="text-align:center">
+						 <input type="radio" name="verdict" id="id_correct">
+					</div>
+				</form>
+			</div>
+			</div>
+			<div class="col-md-12">
+				<button class="btn btn-default pull-right" type="button" id="add_input">Agregar</button>		
+			</div>
+			<div class="col-md-12">
+				<hr>
+				<button class="btn btn-default pull-right" type="submit" id="envia" form= "form_mc" name="action">Crear</button>	
+			</div>	
+		</form>  	
 	</div>
-
+		
 {% endblock module %}
 
 {% block scripts %}

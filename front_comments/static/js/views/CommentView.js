@@ -56,13 +56,13 @@ CommentView.prototype.append_comment = function(response)
 			
 			// se crea el html     		
 			var container = document.createElement("div");
-			container.className = 'comments row';
+			container.className = 'comments col-md-12';
 
 			var container_head = document.createElement("div");
-			container_head.className = 'col-md-6';
+			container_head.className = 'col-md-12';
 
 			var container_foot = document.createElement("div");
-			container_foot.className = 'col-md-6';
+			container_foot.className = 'col-md-12';
 
 			var link = document.createElement("a");
 			var id = response[i].id;
@@ -76,8 +76,8 @@ CommentView.prototype.append_comment = function(response)
 
 			
 			//se asigna el texto 
-			$(text).text(response[i].text+"")
-			$(author).text(response[i].author.name+":")
+			$(text).text(response[i].text+" - ")
+			$(author).text(response[i].author.name +" | ")
 			$(date).text(jQuery.timeago(response[i].added_at));
 
 			//if isAuthor
@@ -88,12 +88,12 @@ CommentView.prototype.append_comment = function(response)
 			//se pega a los contenedores 
 			link.appendChild(author);
 			
-			container_head.appendChild(link);
 			container_head.appendChild(text);
-			container_foot.appendChild(date);
+			container_head.appendChild(link);
+			container_head.appendChild(date);
 
 			container.appendChild(container_head);
-			container.appendChild(container_foot);
+			//container.appendChild(container_foot);
 			//container.appendChild(document.createElement("hr"));
 			//console.log(container)
 			

@@ -69,6 +69,7 @@ AskView.prototype.render_list = function (data){
 		$(link).attr('href', AskModel.generate_url(mod_slug, id) );
 		var titles = document.createElement("h3");
 		var summarys = document.createElement("span");
+		summarys.className =  'time-ago'
 		var author = document.createElement("a");
 		$(author).attr('href', UserView.getUrl(data_list_asks[i].author.id));
 		var count = document.createElement("span");
@@ -137,7 +138,7 @@ AskView.prototype.render_ask = function (data){
 AskView.prototype.handle_edit = function(e)
 {
 	console.log('AskView:handle_edit');
-
+	$('.sub-section').text('Edita la discusión')
 	$(e.target).hide();
 
 	/*

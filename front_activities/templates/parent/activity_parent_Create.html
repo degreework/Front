@@ -1,20 +1,23 @@
 {% extends 'template_activities_parent.html' %}
 
 {% block section_title %}
-	<h3 class="sub-section">Crear</h3>
+	<h3 class="sub-section">Crear una nueva actividad</h3>
 {% endblock section_title %}
 
 {% block module %}
 	
 	<br>
 	<!--aqui se muestran los mensajes de succes-->
-	<div id="msg_succes" hidden></div>
+	<!--<div id="msg_succes" hidden></div>-->
 		
 
 	<!--formulario para crear una actividad (parent)-->
+	<div class="col-md-6 col-sm-offset-3">
 		<form id="form_create_activitie" hidden>
 			<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
 		</form>
+	</div>
+		
 
 {% endblock module %}
 

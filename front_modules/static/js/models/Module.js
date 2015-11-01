@@ -3,6 +3,12 @@ var Module = function()
 
 }
 
+
+Module.getURL_section_from_slug = function(slug)
+{
+	return Site.geRootUrl() + '/' +slug;	
+}
+
 Module.getURL_from_slug = function(slug)
 {
 	return Site.geRootUrl() + '/modules/'+slug;

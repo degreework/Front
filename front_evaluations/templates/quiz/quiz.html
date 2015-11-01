@@ -1,68 +1,35 @@
 {% extends 'template_evaluations_parent.html' %}
 
 {% block section_title %}
-	<h3 class="sub-section">Inicio</h3>
+	<h3 class="sub-section">Quices</h3>
 {% endblock section_title %}
 
 {% block module %}
 		
-		<h3 class="titulos">Quizzes</h3>
-		<br>
-		<div class="col-md-12">
-		<div class="col-md-4">
-		<p>Preguntas</p>
-		<a href="{% url 'front_evaluations:questions' mod_slug %}">lista de preguntas</a><br>
-		<a href="{% url 'front_evaluations:createEssay' mod_slug %}">crear pregunta ensayo</a><br>
-		<a href="{% url 'front_evaluations:createMultichoice' mod_slug %}">crear pregunta multiopcion</a><br>
-		<a href="{% url 'front_evaluations:createTrueFalse' mod_slug %}">crear pregunta verdadero/falso</a><br>
-		<br>	
-		</div>
-		
-		<div class="col-md-4">
-		<p>Quices</p>
-		<a href="{% url 'front_evaluations:quiz' mod_slug %}">quiz usuarios</a><br>
-		<a href="{% url 'front_evaluations:quizAdmin' mod_slug %}">quiz admin</a><br>
-		<a href="{% url 'front_evaluations:createQuiz' mod_slug %}">crear un quiz</a><br>
-		<a href="{% url 'front_evaluations:markingQuiz' mod_slug %}">quices terminado</a><br>
-		</div>
-		</div>
-		<div class=" col-md-12 container_quiz">
-			
-		</div>
-		
-<!--
-		<div class="col-md-4" id="div_quiz" hidden >
-			<div class="col-md-12">
-				<h2 id="title_quiz"></h2>
-			</div>
-			<div class="col-md-12">
-				<strong>Descripcion</strong>
-				<p id="decription_quiz"></p>
-			</div>	
-			<div class="col-md-12" id="container-button">
-			</div>	
-		</div>
 	
-		<div class="table-responsive" id="show_">
-			<table class="table table-hover">
-  				<thead>
-					<tr>
-						<th>#</th>
-						<th>Titulo</th>
-						<th></th>
-						<th>Editar</th>
-						<th>Eliminar</th>
-					</tr>
-				</thead>
-				<tbody id="list-quiz">
-					
-				</tbody>
-			</table>
-		</div>
--->
-
-
-
+	<br><br>
+	<div class="col-md-12">
+	<div class="col-md-4">
+	<p>Preguntas</p>
+	<a href="{% url 'front_evaluations:questions' mod_slug %}">lista de preguntas</a><br>
+	<a href="{% url 'front_evaluations:createEssay' mod_slug %}">crear pregunta ensayo</a><br>
+	<a href="{% url 'front_evaluations:createMultichoice' mod_slug %}">crear pregunta multiopcion</a><br>
+	<a href="{% url 'front_evaluations:createTrueFalse' mod_slug %}">crear pregunta verdadero/falso</a><br>
+	<br>	
+	</div>
+	
+	<div class="col-md-4">
+	<p>Quices</p>
+	<a href="{% url 'front_evaluations:quiz' mod_slug %}">quiz usuarios</a><br>
+	<a href="{% url 'front_evaluations:quizAdmin' mod_slug %}">quiz admin</a><br>
+	<a href="{% url 'front_evaluations:createQuiz' mod_slug %}">crear un quiz</a><br>
+	<a href="{% url 'front_evaluations:markingQuiz' mod_slug %}">quices terminado</a><br>
+	</div>
+	</div>
+	<div class=" col-md-12 container_quiz">
+		
+	</div>
+		
 {% endblock module %}
 
 {% block scripts %}

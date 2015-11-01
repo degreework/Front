@@ -12,25 +12,26 @@
 {% block module %}
 	<div class="col-md-12">
 
-		<div class="row">
-
+		<div class="row" >
+		<br><br>
 			<!-- se pega el titulo de la pregunta -->
-			<h3 class="ask_title titulos"></h3>
-			<h3 class="ask_edit titulos" hidden>edita tu pregunta</h3>
+			<h3 class="ask_title title"></h3>
+			<!--<h3 class="ask_edit title" hidden>edita tu pregunta</h3>-->
 			
 			<div class="col-md-9 content_ask">
 
 				<!--formulario oculto en caso de editar -->
-				<form class="margen_contenido" id="form_ask_edit_foro" hidden>
+				<form  id="form_ask_edit_foro" hidden style="padding-bottom:50px;">
 					<textarea id="id_textarea_ask" name="content" data-provide="markdown" rows="10"></textarea>
 					<br>
 	      			<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
 	      		</form>
+	      		
 				
 				<!-- se pega el contenido de la pregunta -->
-				<p class="ask_summary"></p>
+				<div class="ask_summary col-md-12"> ></div>
 
-				<div class="col-md-10 col-sm-offset-1">
+				<div class="col-md-8 col-sm-offset-2">
 
 					<!-- contenedor de los comentarios -->
 					<div id="list-comment-ask">	</div>
@@ -39,11 +40,12 @@
 				</div>
 
 				
-				<div class="col-md-10 col-sm-offset-1">
+				<div class="col-md-8 col-sm-offset-2">
 					<!-- formulario para crear el comentario -->
+						<br>
 						<form id="form-comment-ask" hidden>
 							<div class="form-group">
-								<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
+								<input class="form-control" autocomplete="off" type="text" id="id_text" name="text" placeholder="Escribe un comentario">
 							</div>
 							<div class="form-group">
 								<input type="hidden" id="id_parent" name="parent">
@@ -58,25 +60,22 @@
 
 			<!-- contenedor con info sobre la pregunta -->
 			<div class="col-md-3 info_ask">
-				<p>
-					Preguntado por:
-				</p>
 						<a class="ask_author_link">
 							<span class="ask_author"></span>
 						</a>
 				
-				<p class="ask_added_at"></p>
+				<p class="ask_added_at time-ago"></p>
 			</div>
 		</div>
 
 		<!-- contenedor con las respuestas de la pregunta -->
 		<div class="row">
 			
-			<h3 class="titulos"><span class="count-answer"></span></h3>
+			<h3 class="title"><span class="count-answer"></span></h3>
 			
 			<div class="answer"></div>
 			
-			<div class="">
+			<div class="col-md-12">
 				<nav style="text-align:center">
 		  			<ul class="pagination">
 		    			<li id="answer_next">
@@ -90,20 +89,19 @@
 			
 			<form id="form-comment-clone" hidden>
 				<div class="form-group">
-					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
+					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text" placeholder="Escribe un comentario">
 				</div>
 				<div class="form-group">
 					<input type="hidden" id="id_parent" name="parent">
 				</div>
-
-
 				<button id="btn-comment" class="btn btn-default pull-right" type="submit" name="action">Comentar</button>
 			</form>
+			
 		</div>
 
 		<!-- contenedor con el formulario para dejar mi respuesta -->
 		<div class="row your_answer">
-			<h3 class="titulos">Tu respuesta</h3>
+			<h3 class="title">Tu respuesta</h3>
 
 			<div class="col-md-8 col-sm-8 col-xs-8 col-sm-offset-2">
 				<form class="" id="form_answer_foro" hidden>
@@ -132,7 +130,6 @@
 		//Se obtiene el id 
 		var id = location.pathname.split("/");
 		id = id[id.length-1];
-		//console.log(id)
 		return id;
 	}
 
@@ -157,6 +154,8 @@
 	);		
 	comentariosAsk.load();
 	comentariosAsk.load_create_comment(id());
+	
+
 	//###   end COMMENT   ###
 
 

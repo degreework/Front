@@ -122,6 +122,10 @@ UserView.loginCallback = function ()
 	UserService.get_mini_user(URL_CURRENT_USER);
 	UserView.showIndexUser();
 
+	// trae los modulos creados
+	var module = new ModuleView();
+	module.render_modules($("#id_list_modules"))
+
 	// progreso de la medalla del usuario 
 	user = JSON.parse(localStorage.getItem('user'))
 	//var gamificationView = new GamificationView();
@@ -257,23 +261,25 @@ UserView.load_wall = function (user_id, container) {
 }
 
 UserView.render_activities = function (data, container) {
-	console.info(data)
 
 	if(0 == data.count)
 	{
 		$( "<div class='bg-danger'>No hay actividad</div>" ).appendTo( $(container) );		
 	}
 
+	console.info("Stream")
 	$.each(data.results, function(k, v){
 		//console.info(v.module)
 		var post = "<div class='activitie_user'>";
 		//post += "<div class='pull-left oval-half-red '></div>"
-		post += "<span> "+jQuery.timeago(v.timestamp)+"</span>";
+		post += "<span class='pull-right time-ago'> "+jQuery.timeago(v.timestamp)+"</span>";
 		post += "<p id=''>"+v.verb;
+
 		post += " \""+v.object.detail+"\"";
 		
 		var url = '';
 		var detail = '';
+
 		if (v.target)
 		{
 			if("ask-type" == v.target.type)

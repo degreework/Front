@@ -6,7 +6,10 @@
 
 .comments{
 	/*margin: 10px;*/
+	word-wrap: break-word;
 	border-bottom: 1px solid #ccc;
+	margin-bottom: 5px;
+	/*padding: 10px;*/
 }
 
 .link_comment{

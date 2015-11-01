@@ -30,6 +30,10 @@ AnswerView.prototype.set_scroll_list = function(url){
 	}
 	else
 	{
+		if (AnswerView.prototype.next_page === undefined) {
+			paginator.disable();		
+		};
+		
 		//console.log("There is more Answers")
 		//console.log(AnswerView.prototype.next_page);
 	}
@@ -52,12 +56,6 @@ NonPaginator.prototype.disable = function()
 	$(this.btn_next).remove();
 }
 
-/*
-AnswerView.prototype.retrieve = function (url) {
-	console.log('AnswerView:retrieve');
-	this.service.retrieve(url,this.render_ask);
-}
-*/
 
 /*
 * View render manager functions
@@ -77,17 +75,19 @@ AnswerView.prototype.render_list = function (data){
 
 		// se crea el html
 		var container = document.createElement("div");
-		container.className = 'col-md-12 response';
+		container.className = 'row response';
 		var id = data_list_asks[i].id;
 		container.id = 'ans-'+id;
 
 		
 		//informacion de la persona q creo la respuesta
 		var info_user = document.createElement("div");
-		info_user.className = "col-md-2";
+		info_user.className = "col-md-3 info_answer";
 		var link = document.createElement("a");
 		var date = document.createElement("p");
-		var autor = document.createElement("p");
+		date.className = 'time-ago'
+		var autor = document.createElement("span");
+
 		
 		$(autor).text(data_list_asks[i].author.name)
 		$(link).attr('href', UserView.getUrl(data_list_asks[i].author.id));
@@ -104,7 +104,7 @@ AnswerView.prototype.render_list = function (data){
 	
 		//repuesta como tal 
 		var summarys = document.createElement("div");
-		summarys.className = "col-md-9"
+		summarys.className = "col-md-9 content_answer"
 		
 
 		content_summary = document.createElement("div");
@@ -115,7 +115,7 @@ AnswerView.prototype.render_list = function (data){
 
 		//comentarios 
 		var div_comments = document.createElement("div");
-		div_comments.className = "col-md-10 col-sm-offset-1 comment-answer"
+		div_comments.className = "col-md-9 col-sm-offset-2 comment-answer"
 		
 		// contenedor para listar los comentarios 
 		var list_comments = document.createElement("div");
@@ -155,7 +155,7 @@ AnswerView.prototype.render_list = function (data){
 	//load comments
 	$(to_comment).each(function(index, value)
 	{
-		console.log(value)
+		//console.log(value)
 		var thread = $(value).attr("id").split('-')[1]
 		var container_comment = $(value).find(".comment-answer")[0]
 
@@ -170,8 +170,9 @@ AnswerView.prototype.render_list = function (data){
 		
 		div_load_comments.className = 'load-comment-ans-'+thread;
 		$(load_comments_a).text("Ver más comentarios")
+		
 		div_load_comments.appendChild(load_comments_a)
-
+	
 		container_comment.appendChild(div_load_comments);
 
 
@@ -186,6 +187,7 @@ AnswerView.prototype.render_list = function (data){
 		);
 		comentariosAnswer.load();
 		comentariosAnswer.load_create_comment(thread);
+
 		
 		//link to load
 		container_comment.appendChild(container_list_comments)
@@ -193,14 +195,6 @@ AnswerView.prototype.render_list = function (data){
 	});
 
 }
-/*
-
-AnswerView.prototype.render_answer = function (data){
-	console.log('AnswerView:render_answer');
-	console.log(data)
-
-}
-*/
 
 AnswerView.prototype.appentOptions = function(div_contenedor){
 
@@ -313,12 +307,25 @@ AnswerView.prototype.handle_edit = function(e)
 	//remove all elements of parent
 	$(parent).children().hide();
 
+
+
 	//change comment form location
+
+	var title = document.createElement('h4')
+	$(title).text('Edita tu respuesta')
+	var container_title = document.createElement('div')
+	container_title.className = 'col-md-12'
+	container_title.appendChild(title)
+
+
+	$(container_title).appendTo('#'+target_id);
+
 	var new_form = $(AnswerForm.prototype.form).clone();
 	$(new_form).attr('id', 'edit_answer_form_'+target_id);
-	
-	$(new_form).appendTo('#'+target_id);
-	
+
+	$(container_title).append(new_form)
+	//$(new_form).appendTo('#'+target_id);
+	$(new_form).attr('class', 'col-md-8 col-md-offset-2')
 	//set current content of answer to form
 	//$("#edit_answer_form_"+target_id).find("#id_text").val(current_answer);
 
@@ -328,6 +335,8 @@ AnswerView.prototype.handle_edit = function(e)
 	
 	$('#textarea-'+target_id).text(current_answer)
 	//show form
+	var container = document.createElement("div");
+
 	$(new_form).fadeIn()
 
 

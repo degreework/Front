@@ -175,6 +175,13 @@ WikiView.render_version = function(page)
 
 	$("#show_current > a").attr('href', url)
 	$("#show_current").show();
+
+	// se oculta todo lo relacionado con los comentarios
+	$('#title_edit').show()
+	$('#list-comment-wiki').hide()
+	$('#load-comment-wiki').hide()
+	$('.titulos').hide()
+	$('.comment').hide()
 }
 
 
@@ -197,7 +204,17 @@ WikiView.render_page = function(page)
 	edit.addEventListener(
 		'click',
 		function(e){
-			//console.log("editar")
+			
+			// se oculta todo lo de los comentarios
+			$('#title_edit').show()
+			$('#list-comment-wiki').hide()
+			$('#load-comment-wiki').hide()
+			$('.titulos').hide()
+			$('.comment').hide()
+
+			// se cambia el titulo en la barra de navegacion
+			$('.sub-section').text('Edita la página')
+			
 			create_form(
 				URL_CREATE_PAGE_WIKI,
 				$("#form_create_wiki"),
@@ -378,6 +395,7 @@ WikiView.render_request = function(list, global_container)
 		
 		global_container.prepend(div);
 	}
+
 }
 
 WikiView.approve_succes = function(response)
@@ -399,8 +417,8 @@ WikiView.show_all_history = function(container)
 
 WikiView.render_history = function(list)
 {
-	//console.log("WikiView:render_history")
-	//console.log(list)
+	//console.info("WikiView:render_history")
+	//console.info(list)
 	list = list.results;
 
 	for (i = 0; i < list.length; i++) {
@@ -412,10 +430,19 @@ WikiView.render_history = function(list)
 		var url = 'create/'+page.slug+'..'+commit;
 		
 
-		var container = document.createElement("li");
+		//var container = document.createElement("li");
 		
 		var div = document.createElement("div");
 		div.className = 'col-md-12 page_list'
+
+		var div_create = document.createElement("div");
+		div_create.className = 'col-md-5'
+
+		var div_aprovate = document.createElement("div");
+		div_aprovate.className = 'col-md-5'
+
+		var div_title = document.createElement("div");
+		div_title.className = 'col-md-12'		
 
 		//var title = document.createElement("span");
 		//$(title).text(page.title);
@@ -423,26 +450,41 @@ WikiView.render_history = function(list)
 
 		var description_author = document.createElement("span");
 		var description_reviewed = document.createElement("span");
-
-
-		$(description_author).text('Creado por '+list[i].author.fullname+' '+jQuery.timeago(list[i].author.created_at));
-		$(description_reviewed).text('Aprobado por '+list[i].review.reviewer.fullname+' '+jQuery.timeago(list[i].review.approved.approved_at));
 		
+		var date = document.createElement("span");
+		date.className = "time-ago";
+		$(date).text(jQuery.timeago(list[i].author.created_at))
+
+		var date2 = document.createElement("span");
+		date2.className = "time-ago";
+		$(date2).text(jQuery.timeago(list[i].review.approved.approved_at))
+
+		$(description_author).text('Creado por: '+list[i].author.fullname);
+		$(description_reviewed).text('Aprobado por: '+list[i].review.reviewer.fullname);
+
 		var br = document.createElement('br')
 		var link = document.createElement("a");
-		
+		//link.className = "pull-left"
 		$(link).attr('href', url);
-		
+		$(link).css('font-size', '20px');
 		//se asigna el texto 
 		$(link).text(page.title)
 
 		//div.appendChild(title);
-		div.appendChild(link)
-		div.appendChild(br.cloneNode(true));
-		div.appendChild(description_author);
-		div.appendChild(br);
-		div.appendChild(description_reviewed)
-		container.appendChild(div)
+		div_title.appendChild(link)
+		div.appendChild(div_title);
+
+		div_create.appendChild(description_author);
+		div_create.appendChild(br.cloneNode(true));
+		div_create.appendChild(date);
+		div.appendChild(div_create)
+		//div.appendChild(br.cloneNode(true));
+		div_aprovate.appendChild(description_reviewed)
+		div_aprovate.appendChild(br.cloneNode(true));
+		div_aprovate.appendChild(date2);
+		
+		div.appendChild(div_aprovate)
+		//container.appendChild(div)
 		
 		WikiView.list_history.prepend(div);
 	}

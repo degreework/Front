@@ -31,9 +31,9 @@ VoteView.prototype.render_votes  = function(container, thread_id)
 	service.list(
 		url,
 		function(response){
-			var div = $("<div style='text-align:center'></div>");
-			var div_up = $("<h4> <span id='id_"+thread_id+"' class='glyphicon glyphicon-triangle-top up-vote'>"+response[0].up_votes+"</span><h4>");
-			var div_down = $("<h4><span id='id_"+thread_id+"' class='glyphicon glyphicon-triangle-bottom down-vote'>"+response[0].down_votes+"</span><h4>");
+			var div = $("<div class='col-md-12' style='text-align:center; padding-bottom:20px;'></div>");
+			var div_up = $("<div class='col-md-6' style='border-right:1px solid #ccc;padding:10px;'> <span class='glyphicon glyphicon-triangle-top'><br><span id='id_"+thread_id+"' class='up-vote'>"+response[0].up_votes+"</span></span></div>");
+			var div_down = $("<div class='col-md-6' style='padding:10px;'><span class='glyphicon glyphicon-triangle-bottom'><br><span id='id_"+thread_id+"' class='down-vote'>"+response[0].down_votes+"</span></span></div>");
 
 			$(div).append(div_up)
 			$(div).append(div_down)

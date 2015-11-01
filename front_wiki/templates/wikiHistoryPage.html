@@ -6,16 +6,14 @@
 	<h3 class="sub-section">Historial de la wiki</h3>
 {% endblock section_title %}
 
-{% block wiki_content %}
-	Muestreme la historia
+{% block module %}
 	<div class="pages"></div>	
-	<div class="col-md-12" id="list-history"></div>	
-{% endblock wiki_content %}
+	<div class="col-md-10" id="list-history"></div>	
+{% endblock module %}
 
 {% block scripts %}
 <script>
 jQuery(document).ready(function() {
-	console.log("Read")
 	WikiView.show_all_history($("#list-history"));
 });
 </script>

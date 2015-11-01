@@ -1,55 +1,58 @@
 {% extends 'template_evaluations_parent.html' %}
-{% block module %}
+{% comment %}
+	template when a user take a quiz
+{% endcomment %}
+
 {% load staticfiles %}
+{% block section_title %}
+	<h3 class="sub-section">Gana este quiz</h3>
+{% endblock section_title %}
+{% block module %}
 
-	<div class="col-md-12 ">
-		
-		<h3 class="titulos">Quizzes</h3>
-		<br>
-		<div class="col-md-12">
-			
-			<span class= 'pull-right' id="count_question"></span>
-			<span class= 'pull-left' id = 'current_score'></span>
-
-			<div class="col-md-8 col-sm-8 col-md-offset-2">
 				
-				<div class=" col-md-4 col-sm-4 col-md-offset-4">
-					<img id="img-question" class="img-responsive img-rounded" src="">		
-				</div>
+	<br><br>
+	<div class="col-md-12" >
+		
+		<span class= 'pull-right' id="count_question"></span>
+		<!--<span class= 'pull-left' id = 'current_score'></span>-->
 
-				<div class=" col-md-12">
+		<div class="col-md-8 col-md-offset-2">
+			
+			<div class=" col-md-4 -md-offset-4">
+				<img id="img-question" class="img-responsive img-rounded" src="">		
+			</div>
 
-					<h4 id="question_content"></h4>	
-					<br>	
-					<form id="question_form">
-						
-					</form>
-				</div>
+			<div class=" col-md-12">
+
+				<h4 id="question_content"></h4>	
+				<hr>
+				<br>	
+				<form id="question_form">
+					
+				</form>
 			</div>
 		</div>
-	
-		<!-- para verificar la pregunta -->		
-		<div class="col-md-12 " id="container-check">
-			<button class="btn btn-default pull-right" id="btn-check" style="margin-top: 10px" type="submit" form="question_form" name="action">Calificar</button>
-			<p id="essay_explication"></p>
-		</div>
-
-		<!-- para pasar a otra pregunta -->
-		<div class=" col-md-12 " id="container-continue">
-			<button class="btn btn-default pull-right" id="btn_continue" style="margin-top: 10px" type="submit">Continuar</button>
-			<strong id="question-status"></strong>
-			<p id="question-explication"></p>
-		</div>	
-
-		<!-- cuando el quiz no tiene preguntas -->
-		<div class=" col-md-12  bg-danger text-danger" id="without_questions" hidden style="padding: 20px;">
-			<strong >Lo sentimos</strong>
-			<p>Este quiz no tiene preguntas asociadas a él, no lo puedes hacer</p>
-		</div>			
-		
-		
 	</div>
 
+	<!-- para verificar la pregunta -->		
+	<div class="col-md-12 " id="container-check" style="padding-bottom:100px; text-align:center">
+		<button class="btn btn-default" id="btn-check" style="margin-top: 10px" type="submit" form="question_form" name="action">Calificar</button>
+		<p id="essay_explication"></p>
+	</div>
+
+	<!-- para pasar a otra pregunta -->
+	<div class=" col-md-12 " id="container-continue" style="padding-bottom:100px;">
+		<button class="btn btn-default pull-right" id="btn_continue" style="margin-top: 10px" type="submit">Continuar</button>
+		<strong id="question-status"></strong>
+		<p id="question-explication"></p>
+	</div>	
+
+	<!-- cuando el quiz no tiene preguntas -->
+	<div class=" col-md-12  bg-danger text-danger" id="without_questions" hidden style="padding: 20px;padding-bottom:100px;">
+		<strong >Lo sentimos</strong>
+		<p>Este quiz no tiene preguntas asociadas a él, no lo puedes hacer</p>
+	</div>			
+		
 {% endblock module %}
 
 {% block scripts %}

@@ -13,7 +13,7 @@ ActivitieParentView.prototype.handler_created_form = function(form){
 	
 	$(form).submit(function(e){
 		e.preventDefault();
-		
+		console.info($("#id_die_at").val())
 		var data = new FormData($(e.target).get(0));
 		var url = URL_CREATE_ACTIVITIE_MODULE.replace(/\%slug%/g, slug);
 		var activitieService = new ActivitieParentService();
@@ -98,14 +98,20 @@ ActivitieParentView.prototype.list = function(url)
 
 ActivitieParentView.prototype.render_list = function(response)
 {
-	console.log("lista")
-	console.log(response)
+	console.info("lista")
+	console.info(response)
+	if(response.count)
+	{
+		for (var i=0, len=response.results.length; i<len;i++) {
+			console.log(response.results[i])
+			ActivitieParentView.prototype.render_activite(response.results[i], true)
 
-	for (var i=0, len=response.results.length; i<len;i++) {
-		console.log(response.results[i])
-		ActivitieParentView.prototype.render_activite(response.results[i], true)
+		};
+	}else{
+		
+		$("#id_msg").text("Aún no hay actividades");
+	}
 
-	};
 }
 
 ActivitieParentView.prototype.render_activite = function(response, show_edit)
@@ -216,6 +222,28 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 
 ActivitieParentView.render_current_child = function(child, container){
 	$(container).append(ActivitieParentView.create_html_activitie(child));
+	ActivitieParentView.check_listener();
+}
+
+ActivitieParentView.check_listener = function()
+{
+
+	$(".action-aprove").click( function(e){
+		var id = $(this).attr("id");
+
+		ActivitieChildView.prototype.check(
+			response.id,
+				"approved");
+					
+	});
+
+	$(".action-disaprove").click( function(e){
+		var id = $(this).attr("id");
+		ActivitieChildView.prototype.check(
+					id,
+					"rejected");
+					
+	});
 }
 
 ActivitieParentView.create_html_activitie = function(child){
@@ -232,30 +260,11 @@ ActivitieParentView.create_html_activitie = function(child){
 		//dependiendo de los permisos de usuario se muesttra un boton para eliminar
 		var s = StorageClass.getInstance();
 		if(-1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
-			console.info("Check")
 
-			html +='<a class="action-remove"><span class="glyphicon glyphicon-remove"></span></a>';
+			html +='<a id="'+child.id+'" class="action-disaprove"><span class="glyphicon glyphicon-remove"></span></a>';
 			
-			html +='<a><span class="glyphicon glyphicon-ok"></span></a>';
-			
-			
-			
-			console.info(html)
-			
-			$(".action-remove").addEventListener('click', function(e){
-				console.info("click")
-				ActivitieChildView.prototype.check(
-					response.id,
-					"approved");
-				
-			}, false);
-			/*
-			reject.addEventListener('click', function(e){
-				ActivitieChildView.prototype.check(
-					response.id,
-					"rejected");
-				
-			}, false);*/
+			html +='<a id="'+child.id+'" class="action-aprove"><span class="glyphicon glyphicon-ok"></span></a>';
+
 		}
 
 		return html;

@@ -101,8 +101,9 @@ hr{
 	/*height: 55px;*/
     border: 1px solid #eee;
     /*padding: inherit;*/
-  	padding-top: 10px;
+  	padding: 10px;
   	margin-top: 10px;
+  	word-wrap: break-word;
 
 }
 
@@ -265,7 +266,9 @@ hr{
 .info_ask{
 	/*width: 227px;
 	margin-left: 10px;*/
-	box-shadow: 1px 1px 3px #888888;
+	margin-top: 20px;
+	box-shadow: 1px 2px 2px rgba(0,0,0,0.05);
+    border: 1px ridge #eee;
 	padding: 10px;
 }
 
@@ -274,11 +277,24 @@ hr{
 }
 /*answer*/
 
+.info_answer{
+	/*width: 227px;
+	margin-left: 10px;*/
+	margin-top: 20px;
+	box-shadow: 1px 2px 2px rgba(0,0,0,0.05);
+    border: 1px ridge #eee;
+	padding: 10px;
+}
+
 .titulos{
 	margin-top: 0px;
 	padding: 15px;
 	background-color: #eee;
 	border-bottom: 1px solid #ccc;
+}
+
+.content_ask{
+	min-height: 200px;
 }
 
 .content_answer{
@@ -294,15 +310,19 @@ hr{
 }
 
 .your_answer{
-	margin-top: 20px;
+	padding-bottom: 100px;
 }
 
 /*respuestas de las preguntas del foro*/
 .response{	
 	display:flex;
-	margin: 5px;
-	border-bottom: 3px double #ccc;	
-	padding: 10px 10px 10px 30px;
+	margin:  5px 5px 5px 0;
+	border-bottom: 1px solid #ccc;
+	padding: 0px 0px 30px 0px;
+}
+
+.content_answer{
+	margin-top: 20px;
 }
 
 
@@ -326,6 +346,21 @@ margin-top: 100px;
 	border-bottom: 1px solid #ccc;
 	padding: 10px;
 }
+
+.title{
+	border-top: 3px double #ccc;	
+	border-bottom: 3px double #ccc;	
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin-top: 0
+}
+
+.editaded_page{
+	margin-top: 45px;
+	padding: 10px;
+}
+
+
 
 /*----------------
 	EVALUATIONS
@@ -354,6 +389,13 @@ margin-top: 100px;
 
 #percent{
 	font-size: 33px
+}
+
+.header_answers{
+	border-bottom:1px solid #ccc; 
+	margin-bottom: 20px; 
+	background-color: #eee;
+	padding: 5px;
 }
 
 /*----------------

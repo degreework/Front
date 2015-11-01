@@ -5,9 +5,13 @@
 
 {% load staticfiles %}
 
+{% block section_title %}
+	<h3 class="sub-section">Selecciona un tipo de pregunta para ver la lista</h3>
+{% endblock section_title %}
+
 {% block module %}
 	<div class="col-md-12">
-		<h3>Selecciona un tipo de pregunta para ver la lista</h3>
+		<h3></h3>
 		<div class="col-md-4" style="text-align:center">
 			<button class="btn btn-default" id="Essay">Preguntas tipo ensayo</button>
 		</div>

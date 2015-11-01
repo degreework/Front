@@ -1,11 +1,13 @@
 .up-vote
 {
-	color: green;
+	color: #323A4D;
 	cursor: pointer;
+	font-size: 20px;
 }
 
 .down-vote
 {
-	color: red;
+	color: #323A4D;
 	cursor: pointer;
+	font-size: 20px;
 }
