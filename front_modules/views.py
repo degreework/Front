@@ -5,6 +5,7 @@ from decorators.ScopeRequired import ScopeRequired
 
 # Create your views here.
 
+@ScopeRequired(["module.can_view"])
 def detail(request, slug):
 	return render_to_response('moduleHome.html', {'title': 'module detail | Name App', 'mod_slug': slug}, context_instance=RequestContext(request) )
 

@@ -149,3 +149,6 @@ if DEBUG:
 
 #persisntent sessions 
 #SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+#here host server is specified
+API_SERVER = 'http://127.0.0.1:8080';

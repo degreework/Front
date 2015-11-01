@@ -30,7 +30,7 @@ WikiView.initialize = function(form, editor)
 
 WikiView.succes_create_form = function()
 {
-	debug_info("3 - WikiView.succes_create_form")
+	//debug_info("3 - WikiView.succes_create_form")
 	/*
 	* 1 - Load Markup editor
 	* 2 - add fields
@@ -39,16 +39,16 @@ WikiView.succes_create_form = function()
 	*/
     
     //1 - Load Markup editor
-    debug_info("3.1 - Load Markup editor")
+    //debug_info("3.1 - Load Markup editor")
 	//MarkdownEditor.load(WikiView.editor);
 	MarkupEditor.load(WikiView.editor);
 
 	//2 - hidde raw field
-	debug_info("3.2 - add extra fields")
+	//debug_info("3.2 - add extra fields")
 	WikiView.hidde_input_raw($("#id_raw"));
 
 	//3 - Set events handler
-	debug_info("3.3 - Set events handler")
+	//debug_info("3.3 - Set events handler")
 
 		// -> generate slug
 		$($("input[name=title]")[0]).keyup( function(){
@@ -74,7 +74,7 @@ WikiView.succes_create_form = function()
 
 
 	//4 - Show form
-	debug_info("3.4 - Show form")
+	//debug_info("3.4 - Show form")
 	WikiView.form_create.show();
 }
 
@@ -126,7 +126,7 @@ WikiView.hidde_input_raw = function(input)
 
 WikiView.load_page = function(slug)
 {
-	debug_info("Load Page")
+	//debug_info("Load Page")
 
 	var url = URL_DETAIL_ONE_PAGE + slug;
 	WikiService.get_page(url, WikiView.render_page);
@@ -135,7 +135,7 @@ WikiView.load_page = function(slug)
 
 WikiView.load_version = function(version, slug)
 {
-	debug_info("Load version")
+	//debug_info("Load version")
 
 	var url = URL_VERSION_PAGE.replace(/\%slug%/g, slug);
 	url = url.replace(/\%version%/g, version);
@@ -264,10 +264,18 @@ function call()
 
 	$("#form_create_wiki").submit(function(e){
 		e.preventDefault();
+
+		
+		if ( $("#id_raw").val() == $("#markdown").text())
+		{
+			//hack para evitar commit con igual id
+			$("#id_raw").val($("#id_raw").val()+' ');
+		}
+		
+
 		var url = URL_UPDATE_PAGE_WIKI.replace(/\%slug%/g, slug);
 		WikiService.edit_page(e.target, url,
 			function(response){
-				
 				$("#form_create_wiki").fadeOut();
 				var url = '';
 
@@ -355,7 +363,7 @@ WikiView.show_all_request = function(container)
 
 WikiView.render_request = function(list, global_container)
 {
-	console.log(list)
+	//console.log(list)
 	list = list.results;
 	for (i = 0; i < list.length; i++) {
 

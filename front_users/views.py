@@ -5,6 +5,9 @@ from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
+from django.conf import settings
+API_SERVER = settings.API_SERVER
+
 from decorators.ScopeRequired import ScopeRequired
 
 def index(request):
@@ -43,18 +46,17 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import PermissionDenied
 @csrf_exempt
 def permissions(request):
-  print("permissions")
-  print("POST", request.POST)
+  """
+  return a list of permissions given a User (Token)
+  """
   token = request.POST.get('Token', None)
   if None == token:
     raise PermissionDenied
 
-  p = requests.get('http://127.0.0.1:8080/API/users/permissions/'+token)
+  p = requests.get(API_SERVER+'/API/users/permissions/'+token)
   request.session['scope'] = p.content
   request.session.set_expiry(52560000)
   request.session.save()
-  print("session", request.session['scope'])
-  print("expire date", request.session.get_expiry_date())
   return HttpResponse(p)
 
 

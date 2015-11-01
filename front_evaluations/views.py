@@ -3,22 +3,25 @@
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 
+from decorators.ScopeRequired import ScopeRequired
+
 # Create your views here.
 #---------------
 # QESTIONS
 #---------------
+@ScopeRequired(["quiz.add_question"])
 def questions(request, mod_slug):
     return render_to_response('listQuestions.html', {'title': 'questions | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
-
+@ScopeRequired(["quiz.add_question"])
 def createEssay(request, mod_slug):
     return render_to_response('essayCreate.html', {'title': 'create essay | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
-
+@ScopeRequired(["quiz.add_question"])
 def createMultichoice(request, mod_slug):
     return render_to_response('multichoiceCreate.html', {'title': 'create multichoice | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
-
+@ScopeRequired(["quiz.add_question"])
 def createTrueFalse(request, mod_slug):
     return render_to_response('truefalseCreate.html', {'title': 'create truefalse | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
@@ -50,7 +53,7 @@ def createSubcategory(request, mod_slug):
 def quiz(request, mod_slug):
     return render_to_response('quiz.html', {'title': 'quiz | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
-
+@ScopeRequired(["quiz.add_quiz"])
 def quizAdmin(request, mod_slug):
     return render_to_response('listQuiz.html', {'title': 'quizAdmin | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
@@ -62,7 +65,7 @@ def detailQuiz(request, mod_slug,id):
 def take(request, mod_slug,id):
     return render_to_response('takeQuiz.html', {'title': 'quiz | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
-
+@ScopeRequired(["quiz.add_quiz"])
 def createQuiz(request, mod_slug):
     return render_to_response('quizCreate.html', {'title': 'Create quiz | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
