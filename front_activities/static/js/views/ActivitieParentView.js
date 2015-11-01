@@ -13,7 +13,16 @@ ActivitieParentView.prototype.handler_created_form = function(form){
 	
 	$(form).submit(function(e){
 		e.preventDefault();
-		console.info($("#id_die_at").val())
+		
+		var now = new Date($("#id_die_at").val())
+		var now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+		
+		$("#id_die_at").attr('type', 'text')
+		$("#id_die_at").val(now_utc.toISOString())
+		
+
+
+
 		var data = new FormData($(e.target).get(0));
 		var url = URL_CREATE_ACTIVITIE_MODULE.replace(/\%slug%/g, slug);
 		var activitieService = new ActivitieParentService();
@@ -48,7 +57,14 @@ ActivitieParentView.prototype.handler_edit_form = function(form){
 	//asigna los atributos al formulario
 	$($(form).find("#id_name")[0]).val(_activitie_name)
 	$($(form).find("#id_description")[0]).val(_activitie_desc)
-	console.log(_activitie_die.replace('Z', ''))	
+	
+	console.info(_activitie_die)
+	var now = new Date(_activitie_die)
+	console.info(now)
+	var now_utc = new Date(now.getFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+	console.info(now_utc)
+	//_activitie_die	= now_utc.replace('Z', '')
+
 	$($(form).find("#id_die_at")[0]).val(_activitie_die)
 	
 	$("#activitie").fadeOut();
@@ -162,10 +178,10 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 				url = url+'/'+response.id;
 				var activitieService = new ActivitieParentService();
 				activitieService.delete(url , function(e){
-					window.location.href = Site.geRootUrl()+"/activity"
+					//window.location.href = Site.geRootUrl()+"/activity"
 				});
-				console.log('handle_delete')
-				console.log(response.id)
+				//console.log('handle_delete')
+				//console.log(response.id)
 
 
 				notify.close()
@@ -202,12 +218,23 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		$("#list_activitie").append(list)
 	}
 
-	
+	//var die_at = response.die_at.replace('Z', '');
+	var die_at = new Date(response.die_at);
 	$("<a href='"+response.id+"' ><h4 id='id_name'>"+response.name+" </h4></a>" ).appendTo( "#activitie" );
 	$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
-	$("<p>Fecha de entrega: <span id='id_die_at'>"+response.die_at.replace('Z', '')+"</span></p>" ).appendTo( "#activitie" );
+	$("<p>Fecha de entrega: <span id='id_die_at'>"+die_at+"</span></p>" ).appendTo( "#activitie" );
 	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
 	$("<hr>" ).appendTo( "#activitie" );
+
+	if('close'==response.status)
+	{	
+		$("#id_send_activitie_msg").fadeIn();
+		$("#btn_active_send").remove();
+	}
+	else
+	{
+		$("#id_send_activitie").fadeIn();
+	}
 
 	ActivitieParentView.render_current_child(response.child, $("#id_current_activitie"));
 	
