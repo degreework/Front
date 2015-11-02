@@ -27,8 +27,8 @@
 {% block scripts %}
 	<script>
 		jQuery(document).ready(function($) {
-			$(".sections").fadeOut();
-			$("#nav_module").fadeOut();
+			$(".sections").hide();
+			$("#nav_module").hide();
 			var module = new ModuleView();
 			module.initialize($("#form_create_module"));
     });

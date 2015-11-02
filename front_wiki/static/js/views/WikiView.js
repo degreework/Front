@@ -316,7 +316,18 @@ WikiView.render_all_pages = function (response)
 
 WikiView.render_list = function(parent_container, response)
 {
+
 	response = response.results;
+	if (response.length === 0) {
+
+		var container = document.createElement("div");
+		container.className = 'col-md-12'
+		
+		$(container).text('No hay paginas creadas')
+		parent_container.prepend(container);
+		console.log('no hay paginas')
+	};
+
 	for (i = 0; i < response.length; i++) { 		
 		// se crea el html   
 		//console.log(response[i])  		

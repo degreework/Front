@@ -3,13 +3,14 @@
 {% block module %}
 		<div class="col-md-12" style="padding-bottom:100px" id="container_module_detail">
 			
-			<span id="module_actions"> editar</span>
+			
 			<!--Description is rendered here-->
-			<div class="col-md-6" style="padding:15px;margin-top:30px">
-				
-				<span id="module_description"></span>	
+			<div class="col-md-6 section-module">
+				<span class='pull-right glyphicon glyphicon-edit' id="module_actions" ></span>
+				<span id="module_description">
+				</span>	
 			</div>
-			<div class="col-md-6" style="border-left:1px solid #ccc;padding:15px;margin-top:30px">
+			<div class="col-md-6" style="padding:15px;margin-top:30px">
 				
 					<img id="module_image" class="img-responsive img-rounded" alt="Module" style="margin-left:auto; margin-right:auto ">		
 				
@@ -38,7 +39,7 @@
 		
 		var slug = "{{mod_slug}}";
 		var SLUG = slug;
-		
+		//$('#module_actions').show()
 		var module = new ModuleView();
 		module.render_module_detail(
 			slug,

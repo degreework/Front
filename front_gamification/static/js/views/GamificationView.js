@@ -219,10 +219,11 @@ GamificationView.prototype.setSession = function(response){
 	console.log(s.storage.get("badgeProgress"));
 
 	gamification = JSON.parse(localStorage.getItem('badgeProgress'))
-	$('.progress-bar').text(gamification.percent+'%')
-	$('.progress-bar').css('width',gamification.percent+'%')
-	$('#badge').text(gamification.badge.title)
-	$('#badge_pic').attr('src', 'http://127.0.0.1:8080'+gamification.badge.img)
+	
+	//$('.progress-bar').text(gamification.percent+'%')
+	//$('.progress-bar').css('width',gamification.percent+'%')
+	//$('#badge').text(gamification.badge.title)
+	//$('#badge_pic').attr('src', 'http://127.0.0.1:8080'+gamification.badge.img)
 }
 
 

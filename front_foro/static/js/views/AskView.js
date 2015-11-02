@@ -55,6 +55,16 @@ AskView.prototype.render_list = function (data){
 
 
 	var data_list_asks = data.results;
+
+	if (data_list_asks.length === 0) {
+
+		var container = document.createElement("div");
+		container.className = 'col-md-12'
+		
+		$(container).text('No hay discusiones creadas')
+		parent_container.prepend(container);
+		console.log('no hay discusiones')
+	};
 	
 	for (i = 0, len = data_list_asks.length; i < len; i++) { 
 		// se crea el html     		

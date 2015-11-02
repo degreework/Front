@@ -128,8 +128,8 @@ UserView.loginCallback = function ()
 
 	// progreso de la medalla del usuario 
 	user = JSON.parse(localStorage.getItem('user'))
-	//var gamificationView = new GamificationView();
-	//gamificationView.get_progress_user(user.id)
+	var gamificationView = new GamificationView();
+	gamificationView.get_progress_user(user.id)
 
 	// se conecta al servidor para el chat y agrega
 	chat_join();
@@ -264,7 +264,7 @@ UserView.render_activities = function (data, container) {
 
 	if(0 == data.count)
 	{
-		$( "<div class='bg-danger'>No hay actividad</div>" ).appendTo( $(container) );		
+		$( "<div class='activitie_user'>No hay actividad</div>" ).appendTo( $(container) );		
 	}
 
 	console.info("Stream")
