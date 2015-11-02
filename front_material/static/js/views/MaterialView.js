@@ -7,6 +7,7 @@ MaterialView.prototype.form_edit = "";
 
 
 MaterialView.prototype.handler_created_form = function(form){
+	
 	MaterialView.prototype.form_create = form;
 	$(MaterialView.prototype.form_create).fadeIn();
 	
@@ -19,7 +20,9 @@ MaterialView.prototype.handler_created_form = function(form){
 		//URL_CREATE_MATERIAL
 		activitieService.create(url, data, MaterialView.prototype.succes_create);
 		//Te Amo, Isabella
+		
 	});
+
 
 }
 /*
@@ -64,10 +67,12 @@ MaterialView.prototype.handler_edit_form = function(form){
 MaterialView.prototype.succes_create = function(response)
 {
 	$(MaterialView.prototype.form_create).fadeOut();
+
 	var url = Site.geRootUrl()+"/"+slug+MaterialModel.get_detail_url(response.id);
-	$("#msg_succes")
-	.append(
+	
+	$("#msg_succes").append(
 		"<span>El material ha sido publicado <a href='"+url+"'>aqui</a></span>")
+	
 	$("#msg_succes").fadeIn()
 
 }
@@ -75,9 +80,10 @@ MaterialView.prototype.succes_create = function(response)
 MaterialView.prototype.succes_update = function(response)
 {
 	$(MaterialView.prototype.form_edit).fadeOut();
-	$("#msg_succes")
-	.append(
+	
+	$("#msg_succes").append(
 		"<span>La actividad ha sido editada <a href='"+ActivitieParentModel.get_detail_url(response.id)+"'>aqui</a></span>")
+	
 	$("#msg_succes").fadeIn()
 
 }
@@ -253,6 +259,7 @@ MaterialView.prototype.render_material = function(response, global_container)
 
 var MaterialForm = function(form, hash ,callback){
 	var url = "";
+	
 	if("#link" == hash)
 	{
 		url = URL_CREATE_MATERIAL_LINK;
@@ -261,6 +268,7 @@ var MaterialForm = function(form, hash ,callback){
 	{
 		url = URL_CREATE_MATERIAL;
 	}
+
 	create_form(
 		url,
 		form,

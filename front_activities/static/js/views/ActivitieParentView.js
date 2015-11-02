@@ -48,7 +48,8 @@ ActivitieParentView.prototype.handler_edit_form = function(form){
 	var _activitie_id = $(cont_id).val()
 	var _activitie_name = $(cont_name).text()
 	var _activitie_desc = $(cont_desc).text()
-	var _activitie_die = $(cont_die).text()
+	//var _activitie_die = $(cont_die).text()
+	var _activitie_die = $(cont_die).attr('value')
 
 	//se crea la url
 	var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
@@ -58,12 +59,18 @@ ActivitieParentView.prototype.handler_edit_form = function(form){
 	$($(form).find("#id_name")[0]).val(_activitie_name)
 	$($(form).find("#id_description")[0]).val(_activitie_desc)
 	
-	console.info(_activitie_die)
-	var now = new Date(_activitie_die)
-	console.info(now)
-	var now_utc = new Date(now.getFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-	console.info(now_utc)
-	//_activitie_die	= now_utc.replace('Z', '')
+
+	//var now = new Date(_activitie_die)
+	//console.info(now)
+	//var now_utc = now.getFullYear()+'-'+ now.getMonth()+'-0'+now.getDate()+'T0'+now.getHours()+':0'+now.getMinutes()+':00';
+	_activitie_die = _activitie_die.replace('Z', '')
+	//console.info(_activitie_die)
+
+	//console.info(now_utc)
+	//_activitie_die	= now_utc.toLocaleDateString()
+	//console.info(_activitie_die)
+	//console.info(_activitie_die.toLocaleString())
+	//_activitie_die = "11/01/2015, 03:00 AM"
 
 	$($(form).find("#id_die_at")[0]).val(_activitie_die)
 	
@@ -219,10 +226,10 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 	}
 
 	//var die_at = response.die_at.replace('Z', '');
-	var die_at = new Date(response.die_at);
+	var die_at = new Date(response.die_at).toUTCString()
 	$("<a href='"+response.id+"' ><h4 id='id_name'>"+response.name+" </h4></a>" ).appendTo( "#activitie" );
 	$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
-	$("<p>Fecha de entrega: <span id='id_die_at'>"+die_at+"</span></p>" ).appendTo( "#activitie" );
+	$("<p>Fecha de entrega: <span id='id_die_at' value='"+response.die_at+"'>"+die_at+"</span></p>" ).appendTo( "#activitie" );
 	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
 	$("<hr>" ).appendTo( "#activitie" );
 

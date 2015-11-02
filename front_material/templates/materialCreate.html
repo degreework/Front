@@ -16,10 +16,12 @@
 		<!--formulario para subir material-->
 		<div class="col-md-12">
 			<div class="col-md-6 col-sm-offset-3">
+				
 				<form id="form_create_material" enctype="multipart/form-data" hidden>
 			    	{% csrf_token %}
 			    	<button class="btn btn-default pull-right" type="submit" name="action">Crear</button>
 				</form>	
+
 			</div>
 		</div>
 		
@@ -28,21 +30,44 @@
 
 {% block scripts %}
 <script>
+
+	function load_form(hash)
+	{
+	
+		//$("#form_create_material").find(".form-group").remove();
+		$("#form_create_material").find("div").fadeOut();
+		
+		var formMaterial = new MaterialForm(
+			$("#form_create_material"),
+			hash
+			//MaterialView.prototype.handler_created_form
+		)
+	}
+
 	var slug = "{{mod_slug}}";
 	var material = new MaterialView();
 
 	if(window.location.hash) {
 	  	// Fragment exists
-		var formMaterial = new MaterialForm(
-			$("#form_create_material"),
-			window.location.hash,
-			MaterialView.prototype.handler_created_form
-			)
+		load_form(window.location.hash);	
+		MaterialView.prototype.handler_created_form($("#form_create_material"))
+
 	} else {
 	  	// Fragment doesn't exist
 	  	console.info("no hast")
 	  	window.history.back();
 	}
+
+
+
+	$("#id_act_file").click(function(e){
+		load_form("#file");
+	})
+
+	$("#id_act_link").click(function(e){
+		load_form("#link");
+	})
+
 	
 	</script>
 {% endblock scripts %}
