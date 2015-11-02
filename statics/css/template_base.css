@@ -180,23 +180,28 @@ hr{
 }
 
 /*MODULOS*/
-/*
-.info-module{
-	min-height: 655px;
-	background-color: #b79350;
-	color: white;
-	padding: 20px;
 
-}*/
-
-.section-module{
-	min-height: 100px;
-	margin-top: 20px;
-	border-bottom: 1px solid #ccc;
+.module-nav{
+	border-right: 1px solid #eee;
+	text-align: center;
 }
 
-.section-module:hover{
+.section-module{
+	padding:15px;
+	margin-top:30px;
+	min-height: 260px;
+	/*border-right: 1px solid #ccc;*/
 	background-color: #eee;
+}
+
+/* % modulo */
+ 
+.progress-radial{
+    /*border: 1px solid #ccc;*/
+    /*border-radius: 100%;*/
+    /*font-size: 14px;*/
+    /*padding: 10px;*/
+
 }
 
 /* ::FORO:: */
@@ -528,3 +533,34 @@ margin-top: 100px;
 .tabs nav li.tab-current a {
 	color: #47a3da;
 }
+
+
+
+@media(max-width:767px){
+	.menu {
+    margin-top: 112px;
+    position: relative;
+  }	
+}
+
+@media(min-width:768px){
+	.menu {
+    margin-top: 112px;
+    position: relative;
+  }
+}
+
+@media(min-width:992px){
+	.menu {
+    margin-top: 112px;
+    position: relative;
+  }
+}
+
+@media(min-width:1200px){
+	.menu {
+    margin-top: 112px;
+    position: fixed;
+  }	
+}
+ 

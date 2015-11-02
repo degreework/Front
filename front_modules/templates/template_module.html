@@ -2,39 +2,21 @@
 {% block contenido %}
 {% load staticfiles %}
 
-<div class="col-md-9 capacity">
+<div class="col-md-12">
 			
 	<div class="col-md-12 sections">
 		
-		<!--Title is rendered here-->
-		<div class="col-md-3">
-			<a href="{% url 'front_modules:detail' mod_slug %}"><h1 id="module_name"></h1></a>
+		<!-- titulo del modulo -->
+		<div class="col-md-12">
+			<a href="{% url 'front_modules:detail' mod_slug %}">	
+				<h2 id="module_name"></h2>
+			</a>
+			<br>
 		</div>
-		<!--end title-->
-
-		<div class="col-md-6 ">
-
-			<div class="btn-group btn-group-justified" role="group" aria-label="...">
-				  <div class="btn-group" role="group">
-				    <button id="open_material" type="button" class="btn btn-sm btn-default">Material</button>
-				  </div>
-				  <div class="btn-group" role="group">
-				    <button id="open_wiki" type="button" class="btn btn-sm btn-default">Wiki</button>
-				  </div>
-				  <div class="btn-group" role="group">
-				    <button id="open_forum" type="button" class="btn btn-sm btn-default">Foro</button>
-				  </div>
-				  <div class="btn-group" role="group">
-				    <button id="open_activities" type="button" class="btn btn-sm btn-default">Actividades</button>
-				  </div>
-				  <div class="btn-group" role="group">
-				    <button id="open_evaluations" type="button" class="btn btn-sm btn-default">Evaluaciones</button>
-				  </div>
-			</div>
-
-		</div>
-		<div class="col-md-3">
-			progreso
+		
+		<!--barra con secciones del modulo -->
+		<div class="col-md-12">
+			{% include 'nav_modules.html' %}
 		</div>
 
 		<div class="col-md-12">
@@ -44,6 +26,7 @@
 	</div><!--end Info-->
 
 	<div class="col-md-12">
+		<!-- barra con las acciones que puede hacer en una seccion -->
 		<div class="navbar navbar-default" style="margin-left: 15px;margin-bottom: 0px;" id="nav_module">
 		
 			<div class="row">
@@ -60,7 +43,7 @@
 		
 		</div>
 
-		
+		<!-- contenido de la seccion -->
 		<div class="col-md-12">
 			<div class="page_content">
 				{% block module %}
@@ -74,26 +57,26 @@
 
 
 <script>
-	//initialize buttons events
-	$("#open_material").click(function (e) {
-		window.location.href = "{% url 'front_material:home' mod_slug %}";
-	});
 
-	$("#open_wiki").click(function (e) {
-		window.location.href = "{% url 'front_wiki:wiki' mod_slug %}";
-	});
+	gamification = JSON.parse(localStorage.getItem('badgeProgress'))
+	var progress = ''
+	
+	var slug = "{{mod_slug}}";
 
-	$("#open_forum").click(function (e) {
-		window.location.href = "{% url 'front_foro:foro' mod_slug %}";
-	})
+	for (var i = 0; i < gamification.length; i++) {
+		
+		//console.log(gamification[i].badge.slug.toLowerCase() +' === '+ slug.toLowerCase())
+		if (gamification[i].badge.slug.toLowerCase() === slug.toLowerCase()) {
+			progress = gamification[i]
+		};	
+	};
 
-	$("#open_activities").click(function (e) {
-		window.location.href = "{% url 'front_activities:activities' mod_slug %}";
-	})
+	//console.log('progress')
+	//console.log(progress)
+	//console.log(progress.percent+'%')
+	$('.progress-radial').text(progress.percent+' %')
+	$('#badge_pic').attr('src', 'http://127.0.0.1:8080'+progress.badge.img)
 
-	$("#open_evaluations").click(function (e) {
-		window.location.href = "{% url 'front_evaluations:quiz' mod_slug %}";
-	})
 </script>
 
 {% endblock %}

@@ -1,0 +1,74 @@
+<div class="navbar-header">
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+</div>
+
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-left: 0;">
+	<ul class="nav  nav-justified">
+	<li class="module-nav" role="presentation" style="border-left:1px solid #eee">
+		<a href="{% url 'front_material:home' mod_slug %}">
+			<span class="fa fa-archive fa-2x" aria-hidden="true"></span>
+			<br>Material
+		</a>
+	</li>
+
+	<li class="module-nav" role="presentation">
+		<a href="{% url 'front_wiki:wiki' mod_slug %}">
+			<span class="fa fa-wikipedia-w fa-2x" aria-hidden="true"></span>
+			<br>Wiki
+		</a>
+	</li>
+
+	<li class="module-nav" role="presentation">
+		<a href="{% url 'front_foro:foro' mod_slug %}">
+			<span class="fa fa-comments-o fa-2x" aria-hidden="true"></span>
+			<br>Foro
+		</a>
+	</li>
+
+	<li class="module-nav" role="presentation">
+		<a href="{% url 'front_activities:activities' mod_slug %}">
+			<span class="fa fa-puzzle-piece fa-2x" aria-hidden="true"></span>
+			<br>Actividades
+		</a>
+	</li>
+
+	<li class="module-nav" role="presentation">
+		<a href="{% url 'front_evaluations:quiz' mod_slug %}">
+			<span class="fa fa-list-ol fa-2x" aria-hidden="true"></span>
+			<br>Quices
+		</a>
+	</li>
+
+	<!-- progreso del modulo -->
+	<li class="module-nav" role="presentation" style="padding:0">
+		<a >
+			<span class="fa fa-trophy fa-2x" aria-hidden="true"></span>
+			<!--<span><img id="badge_pic"></span>-->
+			<br>
+			<span class="progress-radial"></span>
+		</a>
+		
+		
+	</li>
+	</ul>
+</div>
+
+		
+{% block items %}
+
+	
+
+
+{% endblock items %}
+	
+{% block scripts %}
+	<script>
+		active();
+	</script>
+{% endblock scripts %}
+
