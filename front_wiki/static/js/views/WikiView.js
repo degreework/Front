@@ -343,7 +343,7 @@ WikiView.render_list = function(parent_container, response)
 		$(link).attr('href', slug);
 
 		var title_page = document.createElement("span");
-		$(title_page).css('font-size','24px')
+		$(title_page).css('font-size','18px')
 		var date = document.createElement("span");
 		date.className = "time-ago";
 		//se asigna el texto 
