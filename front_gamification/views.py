@@ -6,6 +6,9 @@ from django.template.context import RequestContext
 from decorators.ScopeRequired import ScopeRequired
 
 
+def home_gamification(request):
+    return render_to_response('gamification_home.html', {'title': 'gamification | Name App'}, context_instance=RequestContext(request))
+
 
 def badge(request):
     return render_to_response('listBadges.html', {'title': 'gamification | Name App'}, context_instance=RequestContext(request))

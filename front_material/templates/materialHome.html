@@ -9,7 +9,9 @@
 {% endblock section_title %}
 
 {% block module %}
-	<div id="material" class="pages col-md-10" style="padding-bottom:100px"></div>
+
+	<div id="material" class="pages col-md-10" style="padding-bottom:100px">
+	</div>
 {% endblock module %}
 
 {% block scripts %}
@@ -18,6 +20,6 @@
 		
 		var material = new MaterialView();
 		material.list(url, $("#material"));
-		//URL_LIST_MATERIAL
+		
 	</script>
 {% endblock scripts %}

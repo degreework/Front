@@ -121,13 +121,13 @@ ActivitieParentView.prototype.list = function(url)
 
 ActivitieParentView.prototype.render_list = function(response)
 {
-	console.info("lista")
-	console.info(response)
+	//console.info("lista")
+	//console.info(response)
 	if(response.count)
 	{
 		for (var i=0, len=response.results.length; i<len;i++) {
-			console.log(response.results[i])
-			ActivitieParentView.prototype.render_activite(response.results[i], true)
+			//console.log(response.results[i])
+			ActivitieParentView.prototype.render_activite_list(response.results[i])
 
 		};
 	}else{
@@ -137,9 +137,30 @@ ActivitieParentView.prototype.render_list = function(response)
 
 }
 
+ActivitieParentView.prototype.render_activite_list = function(response){
+	var die_at = new Date(response.die_at).toUTCString()
+
+
+	// se renderiza la actividad
+	$("<a href='"+response.id+"' ><h3 classid='id_name'>"+response.name+" </h3></a>" ).appendTo( "#activitie" );
+	$("<p id='text_date'>Fecha de entrega: <span class='time-ago' id='id_die_at' value='"+response.die_at+"'>"+die_at+"</span></p>" ).appendTo( "#activitie" );
+	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
+	$("<hr id = 'horizontal-bar'>" ).appendTo( "#activitie" );
+}
+
+
 ActivitieParentView.prototype.render_activite = function(response, show_edit)
 {
-	
+	//var die_at = response.die_at.replace('Z', '');
+	var die_at = new Date(response.die_at).toUTCString()
+
+
+	// se renderiza la actividad
+	$("<h3 class='title' id='id_name'>"+response.name+" </h3>" ).appendTo( "#activitie" );
+	$("<p id='text_date'>Fecha de entrega: <span class='time-ago' id='id_die_at' value='"+response.die_at+"'>"+die_at+"</span></p>" ).appendTo( "#activitie" );
+	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
+	//$("<hr id = 'horizontal-bar'>" ).appendTo( "#activitie" );
+
 
 	//dependiendo de los permisos de usuario se muesttra un boton para eliminar
 	var s = StorageClass.getInstance();
@@ -148,7 +169,7 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		//buttom edit and event
 		if (!show_edit){
 		
-			var edit = document.createElement("a");
+			/*var edit = document.createElement("a");
 			edit.className = "pull-right"
 			var edit_msg = document.createElement("span");
 			edit_msg.className = "glyphicon glyphicon-edit"
@@ -164,10 +185,12 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 
 
 			}, false);
-			$("#activitie").append(edit)
+			$("#activitie").append(edit)*/
+			$("<p id='id_description'>"+response.description+"</p>" ).prependTo( "#text_date" );
 		}
 
 		//buttom delete and event
+		/*
 		var del = document.createElement("a");
 		del.className = "pull-right"
 		var del_msg = document.createElement("span");
@@ -198,10 +221,12 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 				notify.close()	
 			})
 		}, false);
-		$("#activitie").append(del)
+		$("#activitie").append(del)*/
 
 	}
 
+	// calificar la actividad 
+	/*
 	if(!show_edit && -1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
 
 		//buttom list child activities and event
@@ -212,7 +237,7 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		list_msg.className = "glyphicon glyphicon-list-alt pull-left"
 		list.appendChild(list_msg);
 		list.addEventListener('click', function(e){
-			console.log("listo todas las actividades de "+response.id)
+			//console.log("listo todas las actividades de "+response.id)
 			//URL_ALL_ACTIVITIE_CHILD
 			//window.location.href = ActivitieParentModel.get_list_child_url(response.id)
 			var activitie = new ActivitieChildView();
@@ -223,16 +248,10 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		
 		}, false);
 		$("#list_activitie").append(list)
-	}
+	}*/
 
-	//var die_at = response.die_at.replace('Z', '');
-	var die_at = new Date(response.die_at).toUTCString()
-	$("<a href='"+response.id+"' ><h4 id='id_name'>"+response.name+" </h4></a>" ).appendTo( "#activitie" );
-	$("<p id='id_description'>"+response.description+"</p>" ).appendTo( "#activitie" );
-	$("<p>Fecha de entrega: <span id='id_die_at' value='"+response.die_at+"'>"+die_at+"</span></p>" ).appendTo( "#activitie" );
-	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#activitie" );
-	$("<hr>" ).appendTo( "#activitie" );
-
+	
+	/*
 	if('close'==response.status)
 	{	
 		$("#id_send_activitie_msg").fadeIn();
@@ -241,15 +260,16 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 	else
 	{
 		$("#id_send_activitie").fadeIn();
-	}
+	}*/
 
-	ActivitieParentView.render_current_child(response.child, $("#id_current_activitie"));
+	//ActivitieParentView.render_current_child(response.child, $("#id_current_activitie"));
 	
 	$("#activitie").fadeIn();
 
 	$("#btn_active_send").click(function(e){
 		var form = new ActivitieChildForm($("#form_send_activitie"));
 		$(e.target).fadeOut();
+		ActivitieParentView.render_current_child(response.child, $("#id_current_activitie"));
 	})
 }
 

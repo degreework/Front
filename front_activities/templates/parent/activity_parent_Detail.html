@@ -6,6 +6,8 @@
 {% endblock section_title %}
 
 {% block module %}
+	<br><br>
+	<div class="col-md-12" style="padding-bottom:60px">
 	<!--aqui se renderiza la actividad-->
 		<div id="activitie" hidden></div>
 
@@ -24,15 +26,17 @@
 			<button id="btn_active_send" class="btn btn-default" type="button">Enviar Actividad</button>
 
 			<!--formulario para enviar una actividad (child)-->
-			<div id="send_activitie" hidden>
+			<div id="send_activitie" hidden style="text-align:left">
 				<form id="form_send_activitie">
+					<div class="form-group" style="text-align:center">
 					<button class="btn btn-default " type="submit" name="action">Enviar</button>
+					</div>
 				</form>
 			</div>
 
 		</div>
 
-		<div class="col-md-12"><hr></div>
+		<!--<div class="col-md-12"><hr></div>-->
 
 		<!--aqui se renderizan las actividades enviadas-->	
 		<div class="col-md-12">
@@ -47,25 +51,31 @@
 			</div>
 
 			<!--aqui se renderizan los mensajes de la lista de actividades (child)-->
-			<div id="msg_list_activitie"></div>
+			<!--<div id="msg_list_activitie"></div>
 		 
-		</div>
-		<div class="col-md-12">
+		</div>-->
+		<!--<div class="col-md-12">
 			<hr>
-		</div>
+		</div>-->
 	<!--aqui se muestran los mensajes de succes-->
-		<div id="msg_succes" hidden></div>
+		<!--<div id="msg_succes" hidden></div>-->
+	</div>
+		<div  class="col-md-12" style="padding-bottom:20px;">
+			<h4 class="titulos">Comentarios</h4>
+			<!--Aqui se pegan los comentarios-->
+			<div class="col-md-10 col-md-offset-1" id="list-comment-act">
+			</div>
 		
+		
+		</div>
+		<div class="load-comment-act" hidden><a>Ver más</a></div>
 	
-		<div class="col-md-8 col-md-offset-2">
-		<!--Aqui se pegan los comentarios-->
-			<div id="list-comment-act">	</div>
-
-		<!-- formulario para crear el comentario -->
-			
-			<form id="form-comment-act" >
+		<div class="col-md-6 col-md-offset-3 comment" style="padding-bottom:100px">
+		
+			<!-- formulario para crear el comentario -->
+			<form id="form-comment-act" hidden>
 				<div class="form-group">
-					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text">
+					<input class="form-control" autocomplete="off" type="text" id="id_text" name="text" placeholder="Escribe un comentario">
 				</div>
 				<div class="form-group">
 					<input type="hidden" id="id_parent" name="parent">

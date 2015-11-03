@@ -73,7 +73,6 @@ ActivitieChildView.prototype.succes_create = function(response)
 	$("#send_activitie").fadeOut();
 	$("#msg_succes").append("<span>La actividad ha sido enviada</span>");
 	$("#msg_succes").fadeIn()
-	ActivitieParentView.render_current_child(response);
 }
 
 /*
