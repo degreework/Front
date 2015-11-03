@@ -5,12 +5,18 @@
 
 {% load staticfiles %}
 
-{% block gamification_content %}
+{% block section_title %}	
+	<h3 class="sub-section">Mira las medallas creadas</h3>
+{% endblock section_title %}
+
+
+{% block gamification %}
+	<br><br><br>
 	<div class="col-md-12">
 		
 		<!-- tabla con la lista de las medallas -->
-		<h2>Medallas</h2>
-		<hr><br>
+		<!--<h2>Medallas</h2>
+		<hr><br>-->
 		
 		<div class="table-responsive" id="show_">
 			<table class="table table-hover">
@@ -27,7 +33,7 @@
 			</table>
 		</div>
 	</div>
-{% endblock gamification_content %}
+{% endblock gamification %}
 
 {% block scripts %}
 	<script>

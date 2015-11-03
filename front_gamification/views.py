@@ -22,5 +22,9 @@ def award(request):
     return render_to_response('listAwards.html', {'title': 'gamification | Name App'}, context_instance=RequestContext(request))
 
 
-def  scores(request):
-    return render_to_response('scores.html', {'title': 'gamification | Name App'}, context_instance=RequestContext(request))
+def scores_quiz(request):
+    return render_to_response('scores_quiz.html', {'title': 'gamification | Name App'}, context_instance=RequestContext(request))
+
+
+def scores_activitie(request):
+    return render_to_response('scores_activitie.html', {'title': 'gamification | Name App'}, context_instance=RequestContext(request))

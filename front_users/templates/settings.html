@@ -1,29 +1,29 @@
 {% extends 'template_base.html' %}
 {% block contenido %}
-	<div class="col-md-12">
-		
-		<h2>Configuración</h2>
-		<hr><br>
-		
-		<h4>Informacion Basica</h4>	
-		<p>Actualiza tu informacion personal</p>
+	<div class="col-md-9 col-md-offset-3 capacity">
 		<div class="col-md-12">
-			<div class="col-md-6 col-sm-offset-3">
+			<h2>Configuración</h2>
+			<hr><br>
+			
+			<h4>Informacion Basica</h4>	
+			<p>Actualiza tu informacion personal</p>
+			<div class="col-md-12">
+				<div class="col-md-6 col-sm-offset-3">
 
-				<form id="form_update_user" >      
-	        		<button class="btn btn-default pull-right" type="submit" name="action">Guardar Cambios</button>
-	     			<!--<a class="pull-right" href="{% url 'front_users:changePassword' %}">Cambiar contraseña</a>-->
-	      		</form>	
-			</div>	
+					<form id="form_update_user" >      
+		        		<button class="btn btn-default pull-right" type="submit" name="action">Guardar Cambios</button>
+		     			<!--<a class="pull-right" href="{% url 'front_users:changePassword' %}">Cambiar contraseña</a>-->
+		      		</form>	
+				</div>	
+			</div>
+			
+			<div class="col-md-12" style="padding:0">
+			<hr>
+			</div>
+
+			{% include 'changePassword.html' %}
+
 		</div>
-		
-		<div class="col-md-12" style="padding:0">
-		<hr>
-		</div>
-
-		{% include 'changePassword.html' %}
-
-
 	</div>
 {% endblock %}
 

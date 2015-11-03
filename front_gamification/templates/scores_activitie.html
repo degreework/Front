@@ -5,44 +5,17 @@
 
 {% load staticfiles %}
 
-{% block gamification_content %}
-<div class="col-md-12">
-		<h2>Selecciona para ver la lista</h2>
-		<hr><br>
+{% block section_title %}	
+	<h3 class="sub-section">Puntos</h3>
+{% endblock section_title %}
 
-		<div class="col-md-4" style="text-align:center">
-			<button class="btn btn-default" id="Essay">Puntos Quiz</button>
-		</div>
-		<div class="col-md-4" style="text-align:center">
-			<button class="btn btn-default" id="TF">Puntos Actividad</button>
-		</div>
-	</div>
-
-	<div class="col-md-12" id="show_">
+{% block gamification %}		
+	
+	<br><br>
+	<div class="col-md-12" id="show_" style="padding-bottom:100px">
 		
-		<!--div con tabla para puntos quiz-->
-		<div class="col-md-12" id="table-essay" hidden>
-			<h3 class="title">Puntos Quiz</h3>
-			<br>
-			<div class="table-responsive">
-				<table class="table table-hover">
-	  				<thead>
-						<tr>
-							<th>#</th>
-							<th>Quiz</th>
-							<th>Puntos</th>
-							<th>Editar</th>
-						</tr>
-					</thead>
-					<tbody id="list-equestion">
-						
-					</tbody>
-				</table>
-			</div>
-		</div>
-
 		<!--div con tabla para puntos actividad-->
-		<div class="col-md-12" id="table-tf" hidden>
+		<div class="col-md-12" id="table-tf" >
 			<h3 class="title">Puntos Actividad</h3>
 			<br>
 			<div class="table-responsive">
@@ -66,7 +39,7 @@
 	</div>
 	
 	<!-- editar -->
-	<div class="col-md-12" id="edit_" hidden>
+	<div class="col-md-12" id="edit_" hidden style="padding-bottom:100px">
 		<!-- formulario puntos quiz -->
 		<div class="col-md-12" id="edit_e">
 			<br><br>
@@ -75,15 +48,11 @@
 		      		<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
 		      	</form>
 			</div>
-			<!--<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
-				<h4>Puntos</h4>
-				<p>  ..bla bla bla</p>
-			</div>-->
 		</div>
 
 	</div>		
 
-{% endblock gamification_content %}
+{% endblock gamification %}
 
 {% block scripts %}
 	<script>

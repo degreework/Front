@@ -1,0 +1,45 @@
+{% extends "gamification_parent.html" %}
+{% comment %}
+	
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block gamification %}
+	<br><br><br><br>
+	<div class="col-md-12" style="padding-bottom:100px">
+		
+		<div class="col-md-12 section_gamificatio">
+			<div class="col-md-7">
+				<h3>Puntos</h3>
+				<p style="text-align:left">En la sección de puntos podras observar la lista de actividades y quices creados los cuales por defecto equivalen a 10 puntos en el progreso de la medalla, aqui podras acomodar los puntos de cada dependiendo de tus consideraciones en cuanto a dificultad. </p>
+			</div>
+			
+		</div>
+		<div class="col-md-12 section_gamificatio section-middle">
+			<div class="col-md-7 pull-right">
+				<h3>Medallas</h3>
+				<p style="text-align:left">En esta seccion podras observar las medallas que se han creado en la aplicacion, ten encuenta de que por cada módulo que se cree hay una medalla ligada con su mismo nombre, y a medida que crees actividades y evaluaciones se va a ir calculando el numero de puntos que se necesitan para ganar la medalla</p>	
+			</div>
+			
+		</div>
+		<div class="col-md-12 section_gamificatio">
+			<div class="col-md-7">
+				<h3>Premios</h3>
+				<p style="text-align:left">En esta seccion podras observas que usuarios han ganado medallas, es decir han completado el 100% de un modulo</p>	
+			</div>
+			
+		</div>
+
+	</div>
+{% endblock gamification %}
+
+
+{% block scripts %}
+	<script>
+        jQuery(document).ready(function($) {
+			
+		});
+	</script>
+	
+{% endblock scripts %}

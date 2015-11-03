@@ -1,0 +1,67 @@
+{% extends "gamification_parent.html" %}
+{% comment %}
+	template for create a quiz
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block section_title %}	
+	<h3 class="sub-section">Puntos</h3>
+{% endblock section_title %}
+
+{% block gamification %}
+
+	<br><br>
+	<div class="col-md-12" id="show_" style="padding-bottom:100px">
+		
+		<!--div con tabla para puntos quiz-->
+		<div class="col-md-12" id="table-essay" >
+			<h3 class="title">Puntos Quiz</h3>
+			<br>
+			<div class="table-responsive">
+				<table class="table table-hover">
+	  				<thead>
+						<tr>
+							<th>#</th>
+							<th>Quiz</th>
+							<th>Puntos</th>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody id="list-equestion">
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<!-- editar -->
+	<div class="col-md-12" id="edit_" hidden style="padding-bottom:100px">
+		<!-- formulario puntos quiz -->
+		<div class="col-md-12" id="edit_e">
+			<br><br>
+			<div class="col-md-7 col-sm-7 col-xs-7  ">
+				<form class="" id="form_update_e" hidden>
+		      		<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
+		      	</form>
+			</div>
+		</div>
+
+	</div>		
+
+{% endblock gamification %}
+
+{% block scripts %}
+	<script>
+        jQuery(document).ready(function($) {
+
+
+        	var gamificationView = new GamificationView();
+        	gamificationView.show_table_questions()
+        	gamificationView.get_scores()
+			
+		});
+	</script>
+	
+{% endblock scripts %}

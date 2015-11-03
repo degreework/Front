@@ -1,6 +1,6 @@
 {% extends 'template_base.html' %}
 {% comment %}
-	Parent for Wiki	
+	Parent for Gamification	
 {% endcomment %}
 
 {% comment %}
@@ -13,12 +13,48 @@
 
 {% block contenido %}
 
-<div class="col-md-12">
+<div class="col-md-9 col-md-offset-3 capacity">
 	
-	<div class="margen_contenido">
-			{% block gamification_content %}
+	<div>
+		<div class="col-md-12">
+		<h2>Gamification</h2>
+
+		<div>
+			<hr id="horizontal-bar">
+		</div>
+
+		<div class="col-md-12">
+			<!-- barra con las acciones que puede hacer en una seccion -->
+			<div class="navbar navbar-default" style="margin-left: 15px;margin-bottom: 0px;" id="nav_module">
+			
+				<div class="row">
+					<div class="col-md-5 col-xs-4">
+						{% block section_title %}
+	
+							<!--<h3 class="sub-section">Crea un módulo</h3>-->
+						{% endblock section_title %}
+					</div>
+					
+					<div class="col-md-7">
+
+						{% include 'nav_gamification.html' %}
+						
+					</div>
+				</div>
+			
+			</div>
+
+			<!-- contenido de la seccion -->
+			<div class="col-md-12">
+				<div class="page_content">
+					{% block gamification %}
+					{% endblock gamification %}
+				</div>
+			</div>
 		
-			{% endblock gamification_content %}		
+		</div>
+
+	</div>
 	</div>
 </div>
 {% endblock %}

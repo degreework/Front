@@ -1,0 +1,48 @@
+{% extends 'nav.html' %}
+
+
+{% block items %}
+	
+	<li class="section-nav" role="presentation">
+		<a href="{% url 'front_gamification:home_gamification'%}">
+			<span class="" aria-hidden="true">Home</span>
+		</a>
+	</li>
+
+	<li class="section-nav" role="presentation">
+		<a href="{% url 'front_gamification:badge'%}">
+			<span class="" aria-hidden="true">medallas</span>
+		</a>
+	</li>
+
+
+	<li class="section-nav" role="presentation">
+		<a href="{% url 'front_gamification:award'%}">
+			<span class="" aria-hidden="true">Premios</span>
+		</a>
+	</li>
+
+	<li class="section-nav" role="presentation">
+		<a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			<span class="" aria-hidden="true">Puntos</span>
+		</a>
+		
+		<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
+		  	
+		  	<li>
+		  		<a href="{% url 'front_gamification:scores_quiz'%}" id="Essay">Quiz</a>
+		  	</li>
+		  	<li>
+		  		<a href="{% url 'front_gamification:scores_activitie'%}" id="TF">Actividad</a>
+		  	</li>
+
+  		</ul>
+	</li>
+
+{% endblock items %}
+	
+{% block scripts %}
+	<script>
+		//active();
+	</script>
+{% endblock scripts %}
