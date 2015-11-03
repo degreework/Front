@@ -3,24 +3,24 @@
 {% load staticfiles %}
 
 
-<!-- sign-out-->
+<!-- Index no authenticated user -->
 	<div class="row" id="introduction">
 		{% include 'introduction.html' %}
 	</div>
+<!-- end Index no authenticated user -->
+
+
+<!-- Index authenticated user -->
+	<div class="row" id="introduction_auth" hidden>
+		{% include 'include_modules_index.html' %}
+	</div>
+<!-- end Index authenticated user -->
+
 	
 	<div class="row" style="margin-top: 60px;" id="register" hidden>
-		
-			{% include 'register.html' %}	
-	
-
+			{% include 'register.html' %}
 	</div>
 
-<!-- sign-in-->
-	<div class="col-md-9" id="index" hidden>
-		<div class="margen_contenido">
-			hola
-		</div>
-	</div>
 
 	
 {% endblock %}
