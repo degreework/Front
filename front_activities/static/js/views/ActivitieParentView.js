@@ -266,16 +266,16 @@ ActivitieParentView.check_listener = function()
 		var id = $(this).attr("id");
 
 		ActivitieChildView.prototype.check(
-			response.id,
-				"approved");
+			id,
+			"approved");
 					
 	});
 
 	$(".action-disaprove").click( function(e){
 		var id = $(this).attr("id");
 		ActivitieChildView.prototype.check(
-					id,
-					"rejected");
+			id,
+			"rejected");
 					
 	});
 }
