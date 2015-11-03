@@ -77,7 +77,7 @@ AskView.prototype.render_list = function (data){
 		
 
 		$(link).attr('href', AskModel.generate_url(mod_slug, id) );
-		var titles = document.createElement("h3");
+		var titles = document.createElement("h4");
 		var summarys = document.createElement("span");
 		summarys.className =  'time-ago'
 		var author = document.createElement("a");

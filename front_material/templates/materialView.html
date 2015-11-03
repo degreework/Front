@@ -5,27 +5,37 @@
 {% endcomment %}
 
 {% block section_title %}
-	<h3 class="sub-section">Ver</h3>
+	<h3 class="sub-section">Observa el material</h3>
 {% endblock section_title %}
 
 {% block module %}
+		
+		<br><br>
+		<div class="col-md-12" style="padding-bottom:100px">
+			<a class="pull-right" id="id_file" hidden style="font-size:24px; margin-top: 14px; margin-right: 14px;"><!--File link is rendered here-->
+				<span class='glyphicon glyphicon-download-alt' aria-hidden='true'></span>
+			</a>
 
-
-		<h4 id="id_title" hidden></h4><!--Title is rendered here-->
-		
-		<a id="id_file" hidden><!--File link is rendered here-->
-			<span class='glyphicon glyphicon-download-alt' aria-hidden='true'></span>
-		</a>
-		
-		<p id="id_description" hidden></p><!--Description is rendered here-->
-		
-		<div id="id_link" hidden>
-			 <a id="id_link_hyp" target="_blank" hidden>
+			<a class="pull-right" id="id_link_hyp" target="_blank" hidden style="font-size:24px; margin-top: 14px; margin-right: 14px;">
 			 	<span class="glyphicon glyphicon-link" aria-hidden="true"></span>
-			 </a>
+			</a>
 
-		</div><!--Link is rendered here-->
+			<h3 class="title" id="id_title" hidden></h3><!--Title is rendered here-->
+			
+			<div class="col-md-12">
+				<p id="id_description" hidden></p><!--Description is rendered here-->	
 
+				<div id="id_pic" class="col-md-6 col-sm-offset-3" hidden>
+				</div>
+				<div id="id_link" hidden>
+				</div><!--Link is rendered here-->
+			
+
+			</div>
+			
+			
+			
+		</div>
 
 
 {% endblock module %}

@@ -105,7 +105,8 @@ MaterialView.prototype.load_detail = function(url)
 				if("png" == ext || "jpg" == ext)
 				{
 					<!--IMPORTANTE: la url no puede estar quemada, durante el desarrollo debe estar asi, pero para producción debe quitarse-->
-					$("#id_file").append("<img src='http://127.0.0.1:8080"+response.content.url+"' class='img-responsive' alt='"+response.title+"'>")
+					$("#id_pic").append("<img src='http://127.0.0.1:8080"+response.content.url+"' class='img-responsive' alt='"+response.title+"'>")
+					$("#id_pic").fadeIn()
 				}
 				
 				$("#id_file").attr('href', response.content.url).fadeIn();
@@ -133,7 +134,8 @@ MaterialView.prototype.load_detail = function(url)
 				//if link is a video
 				if(index_vm != -1 || index_yt != -1)
 				{
-					var div = '<div id="id_video" class="video-wrapper"><div class="video-container">';
+					$("#id_link").text('')
+					var div = '<br><div id="id_video" class="video-wrapper col-md-6 col-sm-offset-2"><div class="video-container">';
 					div += '<iframe src="'+url+'" frameborder="0"></iframe>';
 					div += '</div>';
 					div += '</div><!-- /video-wrapper -->';
@@ -238,19 +240,18 @@ MaterialView.prototype.render_material = function(response, global_container)
 
 	}*/
 
-
-
 	var file = '';
 	var title = "<a href='"+response.id+"' ><h4 id='id_name'>"+response.title+"</h4></a>";
-	var description = "<p id='id_description'>"+response.description+"</p>";
+	//var description = "<p id='id_description'>"+response.description+"</p>";
 
+	/*
 	if( "file" == response.content.type)
 	{	
 		file = '<a href="'+response.content.url+'"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>';
-	}
+	}*/
 
 
-	var todo = file+title+description;
+	var todo = title;//+description;file+
 	
 	$( container ).append( todo );
 	$( global_container ).append(container );
