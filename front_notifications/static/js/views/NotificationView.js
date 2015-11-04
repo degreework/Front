@@ -39,12 +39,12 @@ NotificationView.render_notifications = function(notifications, saved)
 	/*when a notification es clicked this must be marked as readed*/
 	$(".a-noti").on("click",
 		function(e){
-			console.log($(e.currentTarget).closest("li"))
+
+			NotificationView.update_decrease_counter();
 			NotificationView.mark_readed_notification( $(e.currentTarget).closest("li") )
 
 			}
 		)
-
 
 }
 
@@ -152,7 +152,7 @@ NotificationView.mark_readed_notification = function(container)
 	var service = new NotificationService();
 	service.mark(url,
 		function(e){
-			console.log("echo");
+			//console.log("echo");
 			var counter = $($("#user-bell-notify").find("span")[0]);
 
 			$(counter).val($(counter).val()-1)
@@ -178,4 +178,14 @@ NotificationView.remove_all_rendered = function(count)
 	
 	//$("#a-noti").empty()
 	$("#user-notify").empty()
+}
+
+
+NotificationView.update_decrease_counter = function()
+{
+	var current_count = $("#user-bell-notify")[0].innerHTML;
+	current_count = current_count - 1;
+	
+	$("#user-bell-notify")[0].innerHTML = "";
+	$("#user-bell-notify").append(current_count);
 }
