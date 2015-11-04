@@ -11,6 +11,7 @@
 
 				
 	<br><br>
+	<div class="col-md-12" style="padding-bottom:100px">
 	<div class="col-md-12" >
 		
 		<span class= 'pull-right' id="count_question"></span>
@@ -35,23 +36,25 @@
 	</div>
 
 	<!-- para verificar la pregunta -->		
-	<div class="col-md-12 " id="container-check" style="padding-bottom:100px; text-align:center">
-		<button class="btn btn-default" id="btn-check" style="margin-top: 10px" type="submit" form="question_form" name="action">Calificar</button>
+	<div class="col-md-12 " id="container-check" style="">
+		<button class="btn btn-default pull-right" id="btn-check" style="margin-top: 10px" type="submit" form="question_form" name="action">Calificar</button>
 		<p id="essay_explication"></p>
 	</div>
 
 	<!-- para pasar a otra pregunta -->
-	<div class=" col-md-12 " id="container-continue" style="padding-bottom:100px;">
+	<div class=" col-md-12 " id="container-continue">
 		<button class="btn btn-default pull-right" id="btn_continue" style="margin-top: 10px" type="submit">Continuar</button>
 		<strong id="question-status"></strong>
 		<p id="question-explication"></p>
 	</div>	
 
 	<!-- cuando el quiz no tiene preguntas -->
-	<div class=" col-md-12  bg-danger text-danger" id="without_questions" hidden style="padding: 20px;padding-bottom:100px;">
+	<div class=" col-md-12  bg-danger text-danger" id="without_questions" hidden style="padding: 20px;">
 		<strong >Lo sentimos</strong>
 		<p>Este quiz no tiene preguntas asociadas a él, no lo puedes hacer</p>
-	</div>			
+	</div>	
+
+	</div>		
 		
 {% endblock module %}
 

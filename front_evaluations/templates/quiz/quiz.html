@@ -6,28 +6,8 @@
 
 {% block module %}
 		
-	
 	<br><br>
-	<div class="col-md-12">
-	<div class="col-md-4">
-	<p>Preguntas</p>
-	<a href="{% url 'front_evaluations:questions' mod_slug %}">lista de preguntas</a><br>
-	<a href="{% url 'front_evaluations:createEssay' mod_slug %}">crear pregunta ensayo</a><br>
-	<a href="{% url 'front_evaluations:createMultichoice' mod_slug %}">crear pregunta multiopcion</a><br>
-	<a href="{% url 'front_evaluations:createTrueFalse' mod_slug %}">crear pregunta verdadero/falso</a><br>
-	<br>	
-	</div>
-	
-	<div class="col-md-4">
-	<p>Quices</p>
-	<a href="{% url 'front_evaluations:quiz' mod_slug %}">quiz usuarios</a><br>
-	<a href="{% url 'front_evaluations:quizAdmin' mod_slug %}">quiz admin</a><br>
-	<a href="{% url 'front_evaluations:createQuiz' mod_slug %}">crear un quiz</a><br>
-	<a href="{% url 'front_evaluations:markingQuiz' mod_slug %}">quices terminado</a><br>
-	</div>
-	</div>
-	<div class=" col-md-12 container_quiz">
-		
+	<div class=" col-md-10 container_quiz" style="padding-bottom:100px;">
 	</div>
 		
 {% endblock module %}

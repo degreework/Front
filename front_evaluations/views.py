@@ -10,8 +10,16 @@ from decorators.ScopeRequired import ScopeRequired
 # QESTIONS
 #---------------
 @ScopeRequired(["quiz.add_question"])
-def questions(request, mod_slug):
-    return render_to_response('listQuestions.html', {'title': 'questions | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
+def questionsE(request, mod_slug):
+    return render_to_response('listQuestionsE.html', {'title': 'questions | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
+
+@ScopeRequired(["quiz.add_question"])
+def questionsM(request, mod_slug):
+    return render_to_response('listQuestionsM.html', {'title': 'questions | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
+
+@ScopeRequired(["quiz.add_question"])
+def questionsTF(request, mod_slug):
+    return render_to_response('listQuestionsTF.html', {'title': 'questions | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))    
 
 @ScopeRequired(["quiz.add_question"])
 def createEssay(request, mod_slug):

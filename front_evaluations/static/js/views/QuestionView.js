@@ -81,9 +81,6 @@ EvaluationsView.create_mc = function(form, id_list_answers)
 	
 }
 
-
-
-
 EvaluationsView.create_tf = function(form)
 {
 	form.submit(function (e) {
@@ -101,7 +98,7 @@ EvaluationsView.create_tf = function(form)
 }
 
 EvaluationsView.notifify_create_question = function(){
-	location.href =  Site.geRootUrl()+'/'+slug+"/evaluations/questions/"; 
+	//location.href =  Site.geRootUrl()+'/'+slug+"/evaluations/questions/"; 
 }
 
 
@@ -156,14 +153,6 @@ EvaluationsView.render_list_questions = function(parent_container, response)
 		var content = document.createElement("td");
 		$(content).text(response[i].content)
 
-
-		//var category = document.createElement("td");
-		//$(category).text(response[i].category.nombre)
-
-		//var subcategory = document.createElement("td");
-		//$(subcategory).text(response[i].sub_category.nombre)
-
-
 		var col_edit = document.createElement("td");
 		var link = document.createElement("a");
 		var icon = document.createElement("span")
@@ -200,69 +189,6 @@ EvaluationsView.render_list_questions = function(parent_container, response)
 		link2.addEventListener('click', function(e){ EvaluationsView.handle_delete(response, e.target.name, e.target.id, $(e.target).parents('.row_question-'+e.target.name)) }, false);	
 	}
 }
-
-EvaluationsView.show_table_questions = function(){
-
-
-	button = document.createElement('button')
-	$(button).attr('type','submit')
-	$(button).attr('name','action')
-	$(button).text('Actualizar')
-	button.className = 'btn btn-default pull-right' 
-
-	$('#Essay').click(function(){
-				$('#table-essay').show()
-				$('#table-tf').hide()
-				$('#table-mc').hide()
-
-				$('#show_').show()
-				$('#edit_tf').hide()
-				$('#edit_mc').hide()
-				$('#edit_e').hide()
-
-				$('#form_update_tf').empty()
-				$('#form_update_mc').empty()
-				$('#form_mc_answer').empty()
-				$('#form_update_e').empty()
-				$('#form_update_e').append(button)
-			})
-
-			$('#TF').click(function(){
-				$('#table-essay').hide()
-				$('#table-tf').show()
-				$('#table-mc').hide()
-
-				$('#show_').show()
-				$('#edit_tf').hide()
-				$('#edit_mc').hide()
-				$('#edit_e').hide()
-
-				$('#form_update_tf').empty()
-				$('#form_update_mc').empty()
-				$('#form_mc_answer').empty()
-				$('#form_update_e').empty()
-				$('#form_update_tf').append(button)
-			})
-
-			$('#MC').click(function(){
-				$('#table-essay').hide()
-				$('#table-tf').hide()
-				$('#table-mc').show()
-
-				$('#show_').show()
-				$('#edit_tf').hide()
-				$('#edit_mc').hide()
-				$('#edit_e').hide()
-
-				$('#form_update_tf').empty()
-				$('#form_update_mc').empty()
-				$('#form_mc_answer').empty()
-				$('#form_update_e').empty()
-				
-
-			})
-}
-
 
 EvaluationsView.update_question = function(form, id, id_list_answers)
 {
@@ -360,45 +286,3 @@ EvaluationsView.update_question = function(form, id, id_list_answers)
 			
 	});//end submit
 }
-
-/*
-EvaluationsView.update_tf = function(response){
-	$('#edit_tf').hide()
-	$('#list-tfquestion').empty()
-	$('#form_update_tf').empty()
-	$('#form_update_mc').empty()
-	$('#form_mc_answer').empty()
-	$('#form_update_e').empty()
-	$('#show_').show()
-	$('#table-tf').show()
-	//EvaluationsView.get_all_TFQuestions();
-}
-
-EvaluationsView.update_e = function(response){
-	$('#edit_e').hide()
-	$('#list-equestion').empty()
-	$('#form_update_tf').empty()
-	$('#form_update_mc').empty()
-	$('#form_mc_answer').empty()
-	$('#form_update_e').empty()
-	$('#show_').show()
-	$('#table-essay').show()
-	//EvaluationsView.get_all_EQuestions(); 
-	
-}
-
-EvaluationsView.update_mc = function(response){
-	
-	$('#edit_mc').hide()
-	$('#list-mcquestion').empty()
-	$('#form_mc_answer').empty()
-	$('#form_update_tf').empty()
-	$('#form_update_mc').empty()
-	$('#form_mc_answer').empty()
-	$('#form_update_e').empty()
-	
-	//EvaluationsView.get_all_MCQuestions();
-	$('#show_').show()
-	$('#table-mc').show()
-}
-*/

@@ -70,9 +70,12 @@ hr{
 }
 
 .btn-create{
-	padding: 10px;
-	border: 1px solid #ccc;
-	margin-right:5px;
+	cursor: pointer;
+    text-align: center;
+    padding: 5px;
+    margin-right:5px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
 }
 
 /*Profile*/
@@ -187,6 +190,10 @@ hr{
 .module-nav{
 	border-right: 1px solid #eee;
 	text-align: center;
+}
+
+.module-nav a{
+	color: #777777;
 }
 
 .section-module{
@@ -369,10 +376,46 @@ margin-top: 100px;
 }
 
 
-
 /*----------------
 	EVALUATIONS
 ------------------*/
+
+.results_msg{
+	word-wrap: break-word;
+	border:1px solid #ccc; 
+	text-align: center; 
+	padding: 10px; 
+	/*border-radius: 114px; */
+	margin-top: 25px;
+}
+
+.results{
+	border-right:1px solid #ccc; 
+	border-left:1px solid #ccc; 
+	border-bottom:1px solid #ccc; 
+	text-align: center;
+	padding: 10px;
+	min-height:97px
+}
+
+.quiz{
+	padding-bottom: 15px;
+	border-bottom: 1px solid #ccc;
+    /*padding: 10px;	
+    box-shadow: 1px 1px 0px 1px #eee;
+    margin-top: 17px;*/
+    
+}
+
+.start_link{
+	margin-left: 50%;
+    margin-right: 50%;
+}
+
+.description_quiz{
+	word-wrap: break-word;
+}
+
 
 #container-continue{
 	padding: 15px;
