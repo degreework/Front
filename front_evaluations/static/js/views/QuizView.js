@@ -704,7 +704,9 @@ EvaluationsView.call_render_marking = function(response){
 EvaluationsView.get_all_marking_quiz = function(){
 
 	var quizService = new QuizService();
-	quizService.retrieve(URL_MARKING_QUIZ, EvaluationsView.call_render_marking)
+	var url = URL_MARKING_QUIZ_MODULE.replace(/\%slug%/g, slug);
+	//URL_MARKING_QUIZ
+	quizService.retrieve(url, EvaluationsView.call_render_marking)
 }
 
 

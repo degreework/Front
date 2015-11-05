@@ -171,6 +171,7 @@ URL_ALL_ACTIVITIE_MODULE = host + ':8080/API/module/%slug%/activitie/all';
 //Evaluations
 URL_CREATE_QUIZ_MODULE = host + ':8080/API/module/%slug%/quiz/new';
 URL_ALL_QUIZ_MODULE = host + ':8080/API/module/%slug%/quiz/all';
+URL_MARKING_QUIZ_MODULE = host + ':8080/API/module/%slug%/quiz/marking';
 //Material
 URL_LIST_MATERIAL_MODULE = host + ":8080/API/module/%slug%/material/all";
 URL_CREATE_MATERIAL_MODULE = host + ":8080/API/module/%slug%/material/new";
