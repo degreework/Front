@@ -17,7 +17,7 @@
 <!-- end Index authenticated user -->
 
 	
-	<div class="row" style="margin-top: 60px;" id="register" hidden>
+	<div class="row" style="" id="register" hidden>
 			{% include 'register.html' %}
 	</div>
 
@@ -29,12 +29,14 @@
 <script>
 	
 	$('#btn-reg').click(function(){
-      $("body").animate({scrollTop:$('#register').offset().top}, 600);
+      $("body").animate({scrollTop:$('#register2').offset().top}, 600);
     });
+
+	
 
     jQuery(document).ready(function() {
 		UserView.initializeRegister($("#register"));
-
+		UserView.showRegisterForm();
 		$("#preloader_2").hide();
 		
     });

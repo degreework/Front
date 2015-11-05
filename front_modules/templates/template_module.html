@@ -75,9 +75,14 @@
 	//console.log('progress')
 	//console.log(progress)
 	//console.log(progress.percent+'%')
-	$('.progress-radial').text(progress.percent+' %')
-	$('#badge_pic').attr('src', 'http://127.0.0.1:8080'+progress.badge.img)
-
+	percent = progress.percent
+	if (percent != undefined) {
+	percent = percent.toFixed(2)
+		$('.progress-radial').text(percent+' %')
+		//$('#badge_pic').attr('src', 'http://127.0.0.1:8080'+progress.badge.img)
+	}else{
+		$('.progress-radial').text('0.00 %')
+	};
 </script>
 
 {% endblock %}

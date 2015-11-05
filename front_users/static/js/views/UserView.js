@@ -50,7 +50,7 @@ UserView.showIndexUser = function ()
 		$('.icon-menu').show();
 		$('.consult-user').show();
 		$('.menu').show();
-		$(".pic_profile").attr("src",'http://127.0.0.1:8080'+User.get_thumb(0));
+		$(".pic_profile").attr("src",'http://127.0.0.1:8080'+User.get_thumb(1));
 		$("#main").show()
 		$("#introduction_auth").show()
 		$('.footer').hide()
@@ -58,7 +58,8 @@ UserView.showIndexUser = function ()
 	}
 	else
 	{
-		UserView.showRegisterForm();
+
+		//UserView.showRegisterForm();
 	}
 }
 
@@ -67,7 +68,7 @@ UserView.showLoggedUser = function () {
 	$("#user_resume").show();
 	$(".resume_name").text(User.get_first_name() +" "+User.get_last_name() );
 	$(".resume_profile").text(User.get_first_name() +" "+User.get_last_name() );	
-	$(".pic_resume").attr("src",'http://127.0.0.1:8080'+User.get_thumb(0));
+	$(".pic_resume").attr("src",'http://127.0.0.1:8080'+User.get_thumb(1));
 
 	
 	

@@ -33,78 +33,15 @@ ActivitieParentView.prototype.handler_created_form = function(form){
 
 }
 
-ActivitieParentView.prototype.handler_edit_form = function(form){
-	ActivitieParentView.prototype.form_edit = form;
-	$(ActivitieParentView.prototype.form_edit).fadeIn();
-	$("#btn_active_send").fadeOut()
-
-	//obtiene los valores de los atributos de la atividad
-	var cont_id = $("#activitie").find("#activitie_id")[0];
-	var cont_name = $("#activitie").find("#id_name")[0];
-	var cont_desc = $("#activitie").find("#id_description")[0];
-	var cont_die = $("#activitie").find("#id_die_at")[0];
-
-
-	var _activitie_id = $(cont_id).val()
-	var _activitie_name = $(cont_name).text()
-	var _activitie_desc = $(cont_desc).text()
-	//var _activitie_die = $(cont_die).text()
-	var _activitie_die = $(cont_die).attr('value')
-
-	//se crea la url
-	var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
-	url = url+"/"+_activitie_id;
-
-	//asigna los atributos al formulario
-	$($(form).find("#id_name")[0]).val(_activitie_name)
-	$($(form).find("#id_description")[0]).val(_activitie_desc)
-	
-
-	//var now = new Date(_activitie_die)
-	//console.info(now)
-	//var now_utc = now.getFullYear()+'-'+ now.getMonth()+'-0'+now.getDate()+'T0'+now.getHours()+':0'+now.getMinutes()+':00';
-	_activitie_die = _activitie_die.replace('Z', '')
-	//console.info(_activitie_die)
-
-	//console.info(now_utc)
-	//_activitie_die	= now_utc.toLocaleDateString()
-	//console.info(_activitie_die)
-	//console.info(_activitie_die.toLocaleString())
-	//_activitie_die = "11/01/2015, 03:00 AM"
-
-	$($(form).find("#id_die_at")[0]).val(_activitie_die)
-	
-	$("#activitie").fadeOut();
-
-	$(form).submit(function(e){
-		e.preventDefault();
-		
-		var data = new FormData($(e.target).get(0));
-		var activitieService = new ActivitieParentService();
-		activitieService.update(url, data, ActivitieParentView.prototype.succes_update);
-	});
-
-}
 
 ActivitieParentView.prototype.succes_create = function(response)
 {
-	$(ActivitieParentView.prototype.form_create).fadeOut();
-	var url = Site.geRootUrl()+"/"+slug+ActivitieParentModel.get_detail_url(response.id);
-	$("#msg_succes")
-	.append(
-		"<span>La actividad ha sido publicada <a href='"+url+"'>aqui</a></span>")
-	$("#msg_succes").fadeIn()
-
+	window.location.href = Site.geRootUrl()+"/"+slug+"/activity"
 }
 
 ActivitieParentView.prototype.succes_update = function(response)
 {
-	$(ActivitieParentView.prototype.form_edit).fadeOut();
-	$("#msg_succes")
-	.append(
-		"<span>La actividad ha sido editada <a href='"+ActivitieParentModel.get_detail_url(response.id)+"'>aqui</a></span>")
-	$("#msg_succes").fadeIn()
-
+	location.reload();
 }
 
 ActivitieParentView.prototype.load_detail = function(url)
@@ -119,16 +56,202 @@ ActivitieParentView.prototype.list = function(url)
 	activitieService.list(url, this.render_list);
 }
 
+
+ActivitieParentView.prototype.listActivities = function(url)
+{
+	var activitieService = new ActivitieParentService();
+	activitieService.list(url, this.render_list_activities);
+}
+
+
+ActivitieParentView.prototype.render_list_activities = function(response)
+{
+
+	response = response.results;
+
+	for (i = response.length-1; i >= 0; i--) { 		
+		
+		// se crea el html     		
+		var container = document.createElement("tr");
+		container.className = 'row_quiz-'+i
+		
+		var number = document.createElement("td");
+		$(number).text(i+1)
+
+		var title_quiz = document.createElement("td");
+		$(title_quiz).text(response[i].name)
+
+		// para ver el detalle del quiz 
+		var col_link = document.createElement("td");
+		var link = document.createElement("a");
+		var id = response[i].id;
+	
+		$(link).attr('href', Site.geRootUrl()+"/"+slug+"/activity/"+id);
+		$(link).text('ver detalles')
+		col_link.appendChild(link)
+
+		// editar 
+		var col_edit = document.createElement("td");
+		var link = document.createElement("a");
+		var icon = document.createElement("span")
+		icon.className = 'glyphicon glyphicon-edit'
+		icon.name = i
+
+		link.addEventListener('click', function(e){ ActivitieParentView.prototype.handle_edit(response, e.target.name, 'quiz') }, false);
+		link.appendChild(icon)
+		col_edit.appendChild(link)
+		
+		//eliminar 
+		var col_del = document.createElement("td");
+		var link2 = document.createElement("a");
+		var icon2 = document.createElement("span")
+		icon2.className = 'glyphicon glyphicon-trash'
+		icon2.name = i
+
+		link2.appendChild(icon2)
+		col_del.appendChild(link2)
+
+		// evios 
+		var col_env = document.createElement("td");
+		var link3 = document.createElement("a");
+		$(link3).text('ver')
+		link3.name = i;
+		link3.addEventListener('click', function(e){ ActivitieParentView.prototype.render_change_qualify(response, e.target.name) }, false);
+
+		col_env.appendChild(link3)
+		
+		//console.log('entro')
+		//se pega a los contenedores 
+		container.appendChild(number);
+		container.appendChild(title_quiz);
+		container.appendChild(col_link);
+		container.appendChild(col_edit);
+		container.appendChild(col_del);
+		container.appendChild(col_env);
+		
+		$('#list-activities').prepend(container);
+
+		link2.addEventListener('click', function(e){ ActivitieParentView.prototype.handle_delete(response, e.target.name, 'quiz', $(e.target).parents('.row_quiz-'+e.target.name)) }, false);
+	}
+}
+
+ActivitieParentView.prototype.render_change_qualify = function(response, index){
+	console.log('CALIFICAR')
+	activity = response[index]
+
+	//title = document.createElement('h3')
+	//title.className = 'title'
+	$('.title').text('Actividad: '+activity.name)
+	//$(title).prependTo('#title')
+
+	// calificar la actividad 
+	
+	//if(!show_edit && -1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
+
+		//buttom list child activities and event
+		var list = document.createElement("a");
+		//list.className = "pull-right"
+		var list_msg = document.createElement("span");
+	//	$(list).text('Ver soluciones enviadas')
+		list_msg.className = "glyphicon glyphicon-list-alt pull-left"
+		list.appendChild(list_msg);
+		//list.addEventListener('click', function(e){
+			//console.log("listo todas las actividades de "+response.id)
+			//URL_ALL_ACTIVITIE_CHILD
+			//window.location.href = ActivitieParentModel.get_list_child_url(response.id)
+			var activitie = new ActivitieChildView();
+			var url = URL_ALL_ACTIVITIE_CHILD.replace(/\%id%/g, activity.id);
+			$("#title_list_activitie").fadeIn()
+			//$("#list_activitie").fadeIn()
+			activitie.list(url);
+
+		
+		//}, false);
+		$("#list_activitie").append(list)
+	//}
+
+	// muestra y oculta los divs 
+	$('#show_').hide()
+	$('#container_qualify').show()
+
+}
+
+ActivitieParentView.prototype.handle_delete = function(response, index, tipo, row){
+
+	console.log('handle_delete')
+	console.log(tipo)
+	
+	response = response[index]
+	notify = Notify.show_confirm('la '+ tipo);
+
+	var id = response.id
+
+	$('#erase').click(function(){
+		// se obtiene el id de la respuesta para colocarlo en la url 
+		var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
+		url = url+'/'+response.id;
+		var activitieService = new ActivitieParentService();
+		activitieService.delete(url , function(e){
+		//window.location.href = Site.geRootUrl()+"/activity"
+		});
+
+		notify.close()
+		row.fadeOut()
+
+	})
+	
+	$('#cancel').click(function(){
+		notify.close()	
+	})
+
+}
+
+ActivitieParentView.prototype.render_parametros = function(form, response){
+	
+	$.each(response, function(key, value) {	
+
+		console.log(key +'=='+ value)
+		if (key == 'die_at') {
+			value = value.replace('Z', '')
+		};
+		$('#id_'+key).val(value);
+	})
+
+	$(form).show()
+
+	var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
+	url = url+"/"+response.id;
+
+	$(form).submit(function(e){
+		e.preventDefault();
+		var data = new FormData($(e.target).get(0));
+		var activitieService = new ActivitieParentService();
+		activitieService.update(url, data, ActivitieParentView.prototype.succes_update);
+	});
+}
+
+
+ActivitieParentView.prototype.handle_edit = function(response, index, tipo){
+	
+	$('#edit_').fadeIn()
+	$('#show_').hide()
+
+	response = response[index]
+
+	form = $("#form_edit_activitie")
+	
+	console.log(response)
+	create_form(URL_CREATE_ACTIVITIE_PARENT2, form, 'OPTIONS', ActivitieParentView.prototype.render_parametros, response)
+}
+
+
 ActivitieParentView.prototype.render_list = function(response)
 {
-	//console.info("lista")
-	//console.info(response)
 	if(response.count)
 	{
 		for (var i=0, len=response.results.length; i<len;i++) {
-			//console.log(response.results[i])
-			ActivitieParentView.prototype.render_activite_list(response.results[i])
 
+			ActivitieParentView.prototype.render_activite_list(response.results[i])
 		};
 	}else{
 		
@@ -169,89 +292,11 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 		//buttom edit and event
 		if (!show_edit){
 		
-			/*var edit = document.createElement("a");
-			edit.className = "pull-right"
-			var edit_msg = document.createElement("span");
-			edit_msg.className = "glyphicon glyphicon-edit"
-			edit.appendChild(edit_msg);
-			edit.addEventListener('click', function(e){			
-				//console.log("edit")
-				var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
-				url = url+'/'+response.id;
-
-				var formActivitie = new ActivitieParentForm(
-					$("#form_edit_activitie"),
-					ActivitieParentView.prototype.handler_edit_form);
-
-
-			}, false);
-			$("#activitie").append(edit)*/
 			$("<p id='id_description'>"+response.description+"</p>" ).prependTo( "#text_date" );
 		}
-
-		//buttom delete and event
-		/*
-		var del = document.createElement("a");
-		del.className = "pull-right"
-		var del_msg = document.createElement("span");
-		del_msg.className = "glyphicon glyphicon-trash"
-		del.appendChild(del_msg);
-		del.addEventListener('click', function(e){
-			
-			//console.log("del")
-			notify = Notify.show_confirm('la actividad');
-			
-
-			$('#erase').click(function(){
-				// se obtiene el id de la respuesta para colocarlo en la url 
-				var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
-				url = url+'/'+response.id;
-				var activitieService = new ActivitieParentService();
-				activitieService.delete(url , function(e){
-					//window.location.href = Site.geRootUrl()+"/activity"
-				});
-				//console.log('handle_delete')
-				//console.log(response.id)
-
-
-				notify.close()
-			})
-
-			$('#cancel').click(function(){
-				notify.close()	
-			})
-		}, false);
-		$("#activitie").append(del)*/
-
 	}
 
-	// calificar la actividad 
-	/*
-	if(!show_edit && -1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
-
-		//buttom list child activities and event
-		var list = document.createElement("a");
-		//list.className = "pull-right"
-		var list_msg = document.createElement("span");
-		$(list).text('Ver soluciones enviadas')
-		list_msg.className = "glyphicon glyphicon-list-alt pull-left"
-		list.appendChild(list_msg);
-		list.addEventListener('click', function(e){
-			//console.log("listo todas las actividades de "+response.id)
-			//URL_ALL_ACTIVITIE_CHILD
-			//window.location.href = ActivitieParentModel.get_list_child_url(response.id)
-			var activitie = new ActivitieChildView();
-			var url = URL_ALL_ACTIVITIE_CHILD.replace(/\%id%/g, response.id);
-			$("#title_list_activitie").fadeIn()
-			//$("#list_activitie").fadeIn()
-			activitie.list(url);
-		
-		}, false);
-		$("#list_activitie").append(list)
-	}*/
-
 	
-	/*
 	if('close'==response.status)
 	{	
 		$("#id_send_activitie_msg").fadeIn();
@@ -260,15 +305,17 @@ ActivitieParentView.prototype.render_activite = function(response, show_edit)
 	else
 	{
 		$("#id_send_activitie").fadeIn();
-	}*/
+	}
 
-	//ActivitieParentView.render_current_child(response.child, $("#id_current_activitie"));
+	
 	
 	$("#activitie").fadeIn();
 
 	$("#btn_active_send").click(function(e){
+
 		var form = new ActivitieChildForm($("#form_send_activitie"));
 		$(e.target).fadeOut();
+		$('#list_activitie').fadeIn()
 		ActivitieParentView.render_current_child(response.child, $("#id_current_activitie"));
 	})
 }
@@ -304,23 +351,20 @@ ActivitieParentView.create_html_activitie = function(child){
 	var html = '';
 	if(child)
 	{
-		html = '<div id="id_activitie-'+child.id+'">';
-		html += '<a href="'+User.get_url(child.author.id)+'"><span>'+child.author.name+'</span></a>';
-		html += '<a id="id_activitie-'+child.id+'" href="'+child.file+'">';
-		html += '<span id="id_gly" class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>';
-		html += '<span>Entregado '+jQuery.timeago(child.sent_at)+'</span>';
-		html += '<span id="id_activitie_status" class="label label-default status-'+child.status[0]+'">'+child.status[1]+'</span></div>';
 
-		//dependiendo de los permisos de usuario se muesttra un boton para eliminar
-		var s = StorageClass.getInstance();
-		if(-1 != s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
-
-			html +='<a id="'+child.id+'" class="action-disaprove"><span class="glyphicon glyphicon-remove"></span></a>';
-			
-			html +='<a id="'+child.id+'" class="action-aprove"><span class="glyphicon glyphicon-ok"></span></a>';
-
-		}
-
+		//---------------------
+		html = '<div class="col-md-6" id="id_activitie-'+child.id+'"  style="border-right:1px solid #ccc">';
+		html += '<p> Has enviado un archivo </p>';
+		html += '<span class="time-ago pull-left">Entregado '+jQuery.timeago(child.sent_at)+'</span>'
+		html += '<div class="col-md-12" style="text-align:center">';
+		//html += '<a href="'+User.get_url(child.author.id)+'"><span>'+child.author.name+'</span></a>';
+		html += '<a id="id_activitie-'+child.id+'" href="'+child.file+'" style="font-size:24px">';
+		html += '<br><span id="id_gly" class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>';
+		html += '</div></div>';
+		html += '<div class="col-md-6"><p class="pull-left">Estado de la actividad</p>'
+		html += '<div class="col-md-12" style="text-align:center; font-size:24px">'
+		html += '<span id="id_activitie_status" class="label label-default status-'+child.status[0]+'">'+child.status[1]+'</span>'
+		html += '</div></div>';
 		return html;
 	}
 	else

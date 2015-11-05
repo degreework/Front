@@ -153,6 +153,23 @@ hr{
   
 
 /*introduccion*/
+/* al pasar el cursor por encima SE AMPLIA*/
+.intro:hover{
+	-webkit-transform:scale(1.1); /*Webkit:Modificamos tamaño a escala*/
+	-moz-transform:scale(1.1); /*Mozilla:Modificamos tamaño a escala*/
+	-o-transform:scale(1.1); /*Opera:Modificamos tamaño a escala*/
+	-webkit-transition-duration: 0.5s; /*Webkit:Duración de la animación*/
+	-moz-transition-duration: 0.5s; /*Mozilla:Duración de la animació*/
+	-o-transition-duration: 0.5s; /*Opera:Duración de la animació*/
+	opacity: 1;
+    color: white;
+    background: #D51B23;
+}
+.intro{
+	border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 100%;
+}
 
 .text-welcome
 {
@@ -186,6 +203,10 @@ hr{
 }
 
 /*MODULOS*/
+.add_module{
+	padding-right: 12px;
+    font-size: 18px;
+}
 
 .module-nav{
 	border-right: 1px solid #eee;
@@ -200,7 +221,8 @@ hr{
 	padding:15px;
 	margin-top:30px;
 	min-height: 260px;
-	/*border-right: 1px solid #ccc;*/
+	border-right: 7px solid #D51B23;
+	border-radius: 30px 0px 0px 30px;
 	background-color: #eee;
 }
 

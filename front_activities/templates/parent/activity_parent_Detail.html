@@ -12,21 +12,19 @@
 		<div id="activitie" hidden></div>
 
 
-		<div class="col-md-4 col-md-offset-4" style="text-align:center">
-
-			<!--formulario para editar actividad (parent)-->
-			<form id="form_edit_activitie" hidden>
-					<button class="btn btn-default pull-right" type="submit" name="action">Guardar</button>
-			</form>
+		<div class="col-md-4 col-md-offset-4" style="text-align:center; margin-bottom:40px">
 
 			<!--mensaje para cuando se ha excedido el limite de tiempo-->
 			<div id="id_send_activitie_msg" hidden><span>La actividad ha cerrado, ya no puedes hacer envíos</span></div>
+
+			<!--aqui se muestran los mensajes de succes-->
+			<div id="msg_succes" hidden></div>
 			
 			<!--boton para enviar una actividad (child)-->
 			<button id="btn_active_send" class="btn btn-default" type="button">Enviar Actividad</button>
 
 			<!--formulario para enviar una actividad (child)-->
-			<div id="send_activitie" hidden style="text-align:left">
+			<div id="send_activitie" hidden style="text-align:left;">
 				<form id="form_send_activitie">
 					<div class="form-group" style="text-align:center">
 					<button class="btn btn-default " type="submit" name="action">Enviar</button>
@@ -34,32 +32,23 @@
 				</form>
 			</div>
 
-		</div>
 
-		<!--<div class="col-md-12"><hr></div>-->
+
+		</div>
+		
+		
+
 
 		<!--aqui se renderizan las actividades enviadas-->	
-		<div class="col-md-12">
-
-			<div id="list_activitie" >
-				<div id="title_list_activitie" >Soluciones Enviadas</div>
-				
-				<div id="id_current_activitie"></div>
-
+		<div class="col-md-12" id="list_activitie" hidden style="margin-bottom:40px">
+			<h3 id="title_list_activitie" class="title">Solucion Enviadas</h3>
+			
+			<div id="id_current_activitie"></div>
+		</div>
 
 
-			</div>
+		<!-- comentarios -->
 
-			<!--aqui se renderizan los mensajes de la lista de actividades (child)-->
-			<!--<div id="msg_list_activitie"></div>
-		 
-		</div>-->
-		<!--<div class="col-md-12">
-			<hr>
-		</div>-->
-	<!--aqui se muestran los mensajes de succes-->
-		<!--<div id="msg_succes" hidden></div>-->
-	</div>
 		<div  class="col-md-12" style="padding-bottom:20px;">
 			<h4 class="titulos">Comentarios</h4>
 			<!--Aqui se pegan los comentarios-->

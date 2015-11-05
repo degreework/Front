@@ -17,7 +17,7 @@ ActivitieChildView.prototype.render_list = function(response)
 		$("<span>Aún no hay envíos</span>").appendTo( "#msg_list_activitie" );
 	}
 	for (var i=0, len=response.results.length; i<len;i++) {
-		console.log(response.results[i])
+		//console.log(response.results[i])
 		ActivitieChildView.prototype.render_activitie(response.results[i])
 		//$("<br>").appendTo( "#list_activitie" );
 	};
@@ -26,11 +26,35 @@ ActivitieChildView.prototype.render_list = function(response)
 
 ActivitieChildView.prototype.render_activitie = function(response)
 {
-	$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#list_activities" );
-	
-	var container = "<div class='col-md-12 result'>";
+	//$("<input id='activitie_id' value='"+response.id+"'' type='hidden'</input>" ).appendTo( "#list_activities" );
+	console.log("RENDER EVIOS")
+	console.log(response)
 
-	ActivitieParentView.render_current_child(response, $("#list_activitie"));
+	html = '<div class="col-md-12" style="border-bottom: 1px solid #ccc; padding:10px">'
+	html += '<div class="col-md-6" id="id_activitie-'+response.id+'"  style="">';
+	html += '<p> Enviada por: '+response.author.name+' </p>';
+	html += '<span class="time-ago pull-left">Entregado '+jQuery.timeago(response.sent_at)+'</span>'
+	html += '<div class="col-md-12" style="text-align:center">';
+	html += '<br><a id="id_activitie-'+response.id+'" href="'+response.file+'" style="font-size:24px">';
+	html += '<span id="id_gly" class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>';
+	html += '</div></div>';
+	html += '<div class="col-md-6">'
+	html += '<div class="col-md-12" style="text-align:center">'
+	console.log(response.status[1])
+	if (response.status[0] !== 4 && response.status[0] !== 3) {
+		html +='<p class="pull-left">Calificar</p><br><a style="margin-right: 70px; font-size:24px" id="'+response.id+'" class="action-aprove"><span class="glyphicon glyphicon-ok"></span></a>';
+		html +='<a style="font-size:24px" id="'+response.id+'" class="action-disaprove"><span class="glyphicon glyphicon-remove"></span></a>';		
+	}else{
+		html += '<p class="pull-left">Estado de la actividad:</p><br><span style="font-size:24px" id="id_activitie_status" class="label label-default status-'+response.status[0]+'">'+response.status[1]+'</span>'
+	}
+	
+	html += '</div></div></div>';
+	//var container = "<div class='col-md-12 result'>";
+
+	$('#container_request').prepend(html)
+	//ActivitieParentView.render_current_child(response, $("#list_activitie"));
+
+	ActivitieParentView.check_listener();
 
 }
 
@@ -48,6 +72,11 @@ ActivitieChildView.prototype.check = function(id, data)
 		data,
 		function(e){
 			Notify.show_success("Actividades", "Actividad "+e.msg);
+			
+			// se actualiza el progreso
+			user = JSON.parse(localStorage.getItem('user'))
+			var gamificationView = new GamificationView();
+			gamificationView.get_progress_user(user.id)
 		});
 
 }
@@ -73,6 +102,8 @@ ActivitieChildView.prototype.succes_create = function(response)
 	$("#send_activitie").fadeOut();
 	$("#msg_succes").append("<span>La actividad ha sido enviada</span>");
 	$("#msg_succes").fadeIn()
+	$("#id_current_activitie").empty()
+	ActivitieParentView.render_current_child(response, $("#id_current_activitie"));
 }
 
 /*

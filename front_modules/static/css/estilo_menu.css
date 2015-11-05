@@ -3,7 +3,13 @@
 
 
 /* Basic styling */
+
+#title_module{
+  padding-left: 40px;
+}
+
 .menu ul {
+  text-align: left;
   min-height: 300px;
   overflow: auto;
   border: 1px solid #ccc;
@@ -16,6 +22,7 @@
 }
 
 .menu li {
+
   border-bottom: 1px solid #ccc;
   line-height: 30px;
   padding-bottom: 3px;

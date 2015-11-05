@@ -267,8 +267,10 @@ EvaluationsView.get_Quiz = function(){
 
 EvaluationsView.render_quiz = function(response){
 	
-	$('.titulos').text(response.title)
-	//$('.category').text('Categoria: '+response.category.nombre)
+	console.log(response)
+	$('.title').text(response.title)
+	$('#pass-mark').text('Porcentaje para aprobar: '+response.pass_mark)
+	$('#count-questions').text('Número de preguntas: '+response.max_questions)
 	$('.description').text('Descripción: '+response.description)
 }
 

@@ -1,0 +1,77 @@
+{% extends 'template_activities_parent.html' %}
+{% load staticfiles %}
+
+{% block section_title %}
+	<h3 class="sub-section">Lista actividades</h3>
+{% endblock section_title %}
+
+{% block module %}
+	<br><br>
+	<div class="col-md-12" style="padding-bottom:100px">
+		
+		<h3 class="title">Actividades</h3>
+		<br>
+		<!-- tabla con la lista de las actividades -->
+		<div class="table-responsive" id="show_">
+			<table class="table table-hover">
+  				<thead>
+					<tr>
+						<th>#</th>
+						<th>Titulo</th>
+						<th></th>
+						<th>Editar</th>
+						<th>Eliminar</th>
+						<th>Envios</th>
+					</tr>
+				</thead>
+				<tbody id="list-activities">
+					
+				</tbody>
+			</table>
+		</div>
+
+		
+			
+
+		<!-- en caso tal de que quiera editar una actividad (parent)-->
+		<div class="col-md-12" id="edit_" hidden>
+
+			<br><br>
+			<div class="col-md-6 col-sm-offset-3">
+				<form id="form_edit_activitie" hidden>
+					<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
+				</form>
+			</div>
+		</div>
+
+		<!-- div para colocar las respuestas a calificar -->
+		<div class="col-md-12" id="container_qualify" hidden style="padding-bottom:100px">
+			<div class="col-md-12" id="container_request">
+				<!--aqui se renderizan los mensajes de la lista de actividades (child)-->
+				<div id="msg_list_activitie"></div>
+			</div>
+			<div class="col-md-12">
+				<br><br>
+				<button class="btn btn-default pull-right" id="back">Volver</button>
+			</div>
+			
+		</div>
+
+	</div>
+
+{% endblock module %}
+
+{% block scripts %}
+	<script>
+		//EvaluationsView.get_all_Quiz();
+
+		var url = URL_ALL_ACTIVITIE_MODULE.replace(/\%slug%/g, "{{mod_slug}}");
+		
+		var activitie = new ActivitieParentView();
+		activitie.listActivities(url);
+
+		$('#back').click(function (e){
+				location.reload();
+		})
+	</script>
+{% endblock scripts %}

@@ -72,7 +72,7 @@ NotificationView.render = function(notification)
 	{
 		url = Module.getURL_section_from_slug(notification.target.module.slug)+WikiModel.generate_url_request(notification.target.detail.page.slug, notification.target.detail.page.commit)
 		name = notification.actor.name;
-		verb = notification.verb;
+		verb = ', '+notification.verb;
 		detail = notification.target.detail.page.title;
 	}
 
@@ -80,50 +80,52 @@ NotificationView.render = function(notification)
 	{
 		url = AskModel.generate_url(notification.target.id)
 		name = notification.actor.name;
-		verb = notification.verb;
+		verb = ', '+notification.verb;
 		detail = notification.target.detail;
 	}
 
 	else if ('Badge' == notification.target.type) {
 		url = '';
 		name = notification.actor.name;
-		verb = notification.verb;
+		verb = ', '+notification.verb;
 		detail = notification.target.detail;
 	}
 	
 	else if ('Quiz' == notification.target.type) {
 		url = Module.getURL_section_from_slug(notification.target.module.slug)+Quiz.get_url(notification.target.id);
 		name = notification.actor.name;
-		verb = notification.verb;
+		verb = ', '+notification.verb;
 		detail = notification.target.detail;
-
-		// se acomoda el progreso al crease o eliminarse un quiz
-		user = JSON.parse(localStorage.getItem('user'))
-		var gamificationView = new GamificationView();
-		gamificationView.get_progress_user(user.id)
 	}
 
 	else if ('Activitie' == notification.target.type) {
 		url = Module.getURL_section_from_slug(notification.target.module.slug) + ActivitieParentModel.get_detail_url(notification.target.id);
 		name = notification.actor.name;
-		verb = notification.verb;
+		verb = ', '+notification.verb;
 		detail = notification.target.detail;
-
-		// se acomoda el progreso al crease o eliminarse una actividad
-		user = JSON.parse(localStorage.getItem('user'))
-		var gamificationView = new GamificationView();
-		gamificationView.get_progress_user(user.id)
 	}
 
 	else if ('Module' == notification.target.type) {
 		var url = Module.getURL_from_slug(notification.target.slug);
 		name = notification.actor.name;
-		verb = notification.verb;
+		verb = ', '+notification.verb;
 		detail = notification.target.detail;
+	}
+
+	if (notification.verb === 'modificar') {
+
+		name = notification.actor.name;
+		detail = notification.description;
+		verb = ''
+
+		// se acomoda el progreso al crease o eliminarse una actividad
+		user = JSON.parse(localStorage.getItem('user'))
+		var gamificationView = new GamificationView();
+		gamificationView.get_progress_user(user.id)
 	};
 
 	
-	$("<a href='"+url+"'><span><strong>"+name+"</strong></span><span>"+", "+verb+": <strong>"+detail+"</strong></span></a>" ).appendTo(container);
+	$("<a href='"+url+"'><span><strong>"+name+"</strong></span><span>"+verb+": <strong>"+detail+"</strong></span></a>" ).appendTo(container);
 	
 	$(container).appendTo(li)
 	$(li).appendTo($("#user-notify"))

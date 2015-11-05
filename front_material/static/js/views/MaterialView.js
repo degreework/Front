@@ -66,14 +66,15 @@ MaterialView.prototype.handler_edit_form = function(form){
 */
 MaterialView.prototype.succes_create = function(response)
 {
-	$(MaterialView.prototype.form_create).fadeOut();
+	window.location.href = Site.geRootUrl()+"/"+slug+MaterialModel.get_detail_url(response.id);
+	//$(MaterialView.prototype.form_create).fadeOut();
 
-	var url = Site.geRootUrl()+"/"+slug+MaterialModel.get_detail_url(response.id);
+	//var url = Site.geRootUrl()+"/"+slug+MaterialModel.get_detail_url(response.id);
 	
-	$("#msg_succes").append(
+	/*$("#msg_succes").append(
 		"<span>El material ha sido publicado <a href='"+url+"'>aqui</a></span>")
 	
-	$("#msg_succes").fadeIn()
+	$("#msg_succes").fadeIn()*/
 
 }
 

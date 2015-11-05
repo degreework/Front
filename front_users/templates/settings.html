@@ -55,13 +55,13 @@
 		
 		
 		//user = 
-		url_update = URL_UPDATE_USER_PASSWORD+JSON.parse(localStorage.getItem('user')).id;
+		url_update_password = URL_UPDATE_USER_PASSWORD+JSON.parse(localStorage.getItem('user')).id;
 
 		form_update_password.submit(function (e) {
 			e.preventDefault();
 			//UserService.confirmPassword(url_confirm, form_update_password);
 			ChangePasswordForm.udpate_password(
-				url_update,
+				url_update_password,
 				form_update_password,
 				succes_change)
 		});

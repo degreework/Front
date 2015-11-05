@@ -1,22 +1,25 @@
-{% extends "evaluations_parent.html" %}
+{% extends "template_evaluations_parent.html" %}
 {% comment %}
-	template for create a quiz
+	template for datail quiz 
 {% endcomment %}
 
 {% load staticfiles %}
 
-{% block evaluations_content %}
-	<div class="col-md-12">
-		<h3 class="titulos"></h3>
-		<p class="category"></p>
+{% block module %}
+	<br><br>
+
+	<div class="col-md-12" style="padding-bottom:100px">
+		<h3 class="title"></h3>
+		<p id="pass-mark"></p>
+		<p id="count-questions"></p>
 		<p class="description"></p>
 		<br>
-		<a class="btn-create" style="margin: 1em 45%;">empieza</a>
+		<!--<a class="btn-create" style="margin: 1em 45%;">empieza</a>-->
 
 		
 		
 	</div>
-{% endblock evaluations_content %}
+{% endblock module %}
 
 {% block scripts %}
 	<script>
