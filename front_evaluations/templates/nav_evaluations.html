@@ -17,51 +17,66 @@
 		<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
 		  	<li class="dropdown-header">Pregunta</li>
     		<li>
-    			<a href="{% url 'front_evaluations:createEssay' mod_slug %}#file">Abierta</a>
+    			<a href="{% url 'front_evaluations:createEssay' mod_slug %}">Abierta</a>
     		</li>
     		
     		<li>
-    			<a href="{% url 'front_evaluations:createMultichoice' mod_slug %}#file">Multiopción</a>
+    			<a href="{% url 'front_evaluations:createMultichoice' mod_slug %}">Multiopción</a>
     		</li>
 
     		<li>
-    			<a href="{% url 'front_evaluations:createTrueFalse' mod_slug %}#file">V/F</a>
+    			<a href="{% url 'front_evaluations:createTrueFalse' mod_slug %}">Verdadero/Falso</a>
     		</li>
 
 			<li class="dropdown-header">Quiz</li>
     		<li>
-    			<a href="{% url 'front_evaluations:createQuiz' mod_slug %}#link">Quiz</a>
+    			<a href="{% url 'front_evaluations:createQuiz' mod_slug %}">Quiz</a>
     		</li>
 
   		</ul>
 	</li>
 
-	<!--<li class="section-nav" role="presentation">
-		<a href="">Crea una nueva evaluacion</a>
+	<!-- -->
+
+	<li class="section-nav" role="presentation">
+		<a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+		</a>
+		
+		<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
+		  	<li class="dropdown-header">Lista de Preguntas</li>
+    		<li>
+    			<a href="{% url 'front_evaluations:questionsE' mod_slug %}">Abierta</a>
+    		</li>
+    		
+    		<li>
+    			<a href="{% url 'front_evaluations:questionsM' mod_slug %}">Multiopción</a>
+    		</li>
+
+    		<li>
+    			<a href="{% url 'front_evaluations:questionsTF' mod_slug %}">Verdadero/Falso</a>
+    		</li>
+
+			<li class="dropdown-header">Lista Quiz</li>
+    		<li>
+    			<a href="{% url 'front_evaluations:quizAdmin' mod_slug %}">Quices</a>
+    		</li>
+
+  		</ul>
 	</li>
 
 	<li class="section-nav" role="presentation">
-		<a href="">Crea Preguntas</a>
+		<a href="{% url 'front_evaluations:markingQuiz' mod_slug %}">
+			<span class="" aria-hidden="true">Resultados</span>
+		</a>
 	</li>
 
-	<li class="section-nav" role="presentation">
-		<a href="">Crea Categorias</a>
-	</li>
-
-	<li class="section-nav" role="presentation">
-		<a href="">Crea SubCategorias</a>
-	</li>
-
-	<li class="section-nav" role="presentation">
-		<a href="">resultados</a>
-	</li>-->
 
 {% endblock items %}
 	
 {% block scripts %}
 	<script>
-		active();
-
+		
 		var slug = "{{mod_slug}}";
 		var module = new ModuleView();
 		module.render_module_name(

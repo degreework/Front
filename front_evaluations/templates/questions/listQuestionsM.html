@@ -1,0 +1,82 @@
+{% extends "template_evaluations_parent.html" %}
+{% comment %}
+	template for list all questions
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block section_title %}
+	<h3 class="sub-section">Lista de preguntas</h3>
+{% endblock section_title %}
+
+{% block module %}
+	<br><br>
+	<div class="col-md-12" style="padding-bottom:100px">
+	
+		<div class="col-md-12" id="show_">
+		
+		<!--div con tabla para preguntas mc -->
+			<div class="col-md-12" id="table-mc">
+				<h3 class="title">Multichoice Questions</h3>
+				<br>
+				<div class="table-responsive">
+					<table class="table table-hover">
+		  				<thead>
+							<tr>
+								<th>#</th>
+								<th>Question</th>
+								<th>Editar</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody id="list-mcquestion">
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	
+	<!-- editar -->
+	<!-- formulario mc -->
+	<div id="edit_" class="col-md-12" hidden>
+		<div id="edit_mc" hidden>
+			<br><br>
+			<div class="col-md-6 col-sm-offset-3">
+				<form  id="form_update_mc" hidden>
+				</form>  	
+					<br>
+		      		<h3 class="title">Respuestas</h3>
+		      		<br>
+		      		<div class="col-md-12" style="border-bottom:1px solid #ccc; margin-bottom: 20px;">
+		      		<div class="col-md-8" style=" ">
+		    			Contenido
+					</div>
+					<div class="col-md-4" style="text-align:center">
+		    			Correcta
+					</div>
+					</div>
+					<br>
+					<div id="form_mc_answer" >
+					</div>
+					<div class="col-md-12">
+						<hr>
+						<button class="btn btn-default pull-right" type="submit" id="envia" form= "form_update_mc" name="action">Actualizar</button>	
+					</div>	
+				
+			</div>
+		
+		</div>
+	</div>
+
+{% endblock module %}
+
+{% block scripts %}
+	<script>
+        jQuery(document).ready(function($) {
+
+			EvaluationsView.get_all_MCQuestions();			
+		});
+	</script>
+	
+{% endblock scripts %}

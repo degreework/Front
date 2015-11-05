@@ -5,12 +5,17 @@
 
 {% load staticfiles %}
 
+{% block section_title %}
+	<h3 class="sub-section">Quices terminados</h3>
+{% endblock section_title %}
+
 {% block module %}
+	<br><br>
 	<div class="col-md-12">
-		
+
 		<!-- tabla con la lista de quices terminados -->
 		<div class="col-md-12" id="marking">
-			<h3 class="titulos">Quizzes completados</h3>
+			
 
 			<div class="table-responsive">
 				<table class="table table-hover">
@@ -18,7 +23,7 @@
 						<tr>
 							<th>Usuario</th>
 							<th>Quiz</th>
-							<th>Porcentaje</th>
+							<th>Porcentaje correcto</th>
 							<th>Preguntas pendientes</th>
 							<!--<th></th>-->
 
@@ -32,11 +37,11 @@
 		</div>
 
 		<!-- div para colocar las respuestas a calificar -->
-		<div class="col-md-12" id="container_qualify" hidden>
+		<div class="col-md-12" id="container_qualify" hidden style="padding-bottom:100px">
 			<div class="col-md-12" id="title"></div>
 			<div class="col-md-12" id="container_request"></div>
-			<div class="col-md-12" id="container_request">
-				<button class="btn btn-default" id="back">Volver</button>
+			<div class="col-md-12">
+				<button class="btn btn-default pull-right" id="back">Volver</button>
 			</div>
 			
 		</div>

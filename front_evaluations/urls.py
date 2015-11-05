@@ -4,7 +4,9 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns('',
 
 	#Questions
-	url(r'^(?P<mod_slug>.+)/evaluations/questions/$', 'front_evaluations.views.questions', name='questions'),
+	url(r'^(?P<mod_slug>.+)/evaluations/questions/essay$', 'front_evaluations.views.questionsE', name='questionsE'),
+        url(r'^(?P<mod_slug>.+)/evaluations/questions/multichoice$', 'front_evaluations.views.questionsM', name='questionsM'),
+        url(r'^(?P<mod_slug>.+)/evaluations/questions/truefalse$', 'front_evaluations.views.questionsTF', name='questionsTF'),
 
         url(r'^(?P<mod_slug>.+)/evaluations/questions/essay/create$', 'front_evaluations.views.createEssay', name='createEssay'),
         url(r'^(?P<mod_slug>.+)/evaluations/questions/multichoice/create$', 'front_evaluations.views.createMultichoice', name='createMultichoice'),

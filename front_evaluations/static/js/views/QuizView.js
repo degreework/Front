@@ -162,41 +162,49 @@ EvaluationsView.render_every_quiz = function(response)
 	for (i = response.length-1; i >= 0; i--) { 		
 		
 		var div_quiz = document.createElement('div')
-		div_quiz.className = 'col-md-4'
+		div_quiz.className = 'col-md-12 quiz'
 
-		var div_title = document.createElement('div')
-		div_title.className = 'col-md-12'
-		title = document.createElement('h2')
+		//var div_title = document.createElement('div')
+		//div_title.className = 'col-md-12'
+		title = document.createElement('h4')
 		$(title).text(response[i].title)
-		div_title.appendChild(title)
+		//div_title.appendChild(title)
 
 
 		var div_description = document.createElement('div')
-		div_description.className = 'col-md-12'
+		div_description.className = 'col-md-8  description_quiz'
+		//$(div_description).text('Descripcion')
 		description = document.createElement('p')
 		$(description).text(response[i].description)
 		div_description.appendChild(description)
 
+
 		var div_enlance = document.createElement('div')
-		div_enlance.className = 'col-md-12'
+		div_enlance.className = 'col-md-2'
+		//$(div_enlance).css('text-align','center')
 
 		var start_link = document.createElement('a')
-		start_link.className = 'btn-create'
+		start_link.className = 'pull-right  btn btn-create'
+		$(start_link).append('<span id="'+response[i].id+'" class="fa fa-arrow-circle-right fa-2x" aria-hidden="true"></span>')
 		start_link.id = 'btn-'+response[i].id
-		$(start_link).text('Empieza')
+		//$(start_link).text('Empieza')
 
 		div_enlance.appendChild(start_link)
 
-
-		div_quiz.appendChild(div_title)
+		//title.appendChild(start_link)
+		div_quiz.appendChild(title)
 		div_quiz.appendChild(div_description)
-		div_quiz.appendChild(div_enlance)
+		div_quiz.appendChild(start_link)
+		
+		
 		$('.container_quiz').prepend(div_quiz)
 		
 		$('#btn-'+response[i].id).click(function (e){
+			console.log('dio click')
+			console.log(e.target.id)
 			id = e.target.id
-			id = id.split("-");
-			id = id[1]
+			//id = id.split("-");
+			//id = id[1]
 
 			e.preventDefault();
 			var quizService = new QuizService();
@@ -424,8 +432,10 @@ EvaluationsView.render_question = function(question){
 	if (question.clase === 'Essay style question') {
 		
 		$('#btn-check').text('guardar')
+		//$('#essay_explication').addClass('text-success')
 		$('#essay_explication').text('Esta es una pregunta abierta, guarda tu respuesta para que la califique el docente')
 		$('#container-check').css('border', '1px solid #ccc')
+		//$('#container-check').addClass('bg-success')
 	};
 }
 
@@ -570,6 +580,11 @@ EvaluationsView.redirect_results = function(sitting){
 	//elimina la session del quiz 
 	$.session.remove('sitting');
 
+	// se pide el nuevo progreso 
+	user = JSON.parse(localStorage.getItem('user'))
+	var gamificationView = new GamificationView();
+	gamificationView.get_progress_user(user.id)
+
 	// redirige a mostrar los resultados 
 	location.href =  Site.geRootUrl()+"/"+slug+"/evaluations/marking/detail/"+sitting.id; 
 }
@@ -630,19 +645,27 @@ EvaluationsView.get_marking_detail = function(){
 	var id = location.pathname.split("/");
 	id = id[id.length-1];
 
+	console.log('marking')
+	console.log(id)
+
+	console.log(URL_MARKING_DETAIL_QUIZ)
 	var quizService = new QuizService();
 	quizService.retrieve(URL_MARKING_DETAIL_QUIZ+id+'/', EvaluationsView.render_results)
 }
 
 EvaluationsView.render_results = function(sitting){
-		
+	
+	console.log('render_results')
+	console.log(sitting)
+
 	if (sitting.check_if_passed) {
-		$('#titulo').text('Examen Aprobado: '+sitting.quiz)
+		$('#titulo').text('Examen Aprobado')
 		
 	}else{
-		$('#titulo').text('Examen Desaprobado '+sitting.quiz)
+		$('#titulo').text('Examen Desaprobado')
 	}
 
+	$('#name_quiz').text("Quiz: "+sitting.quiz)
 	$('#result_message').text(sitting.result_message)	
 	$('#percent').text(sitting.get_percent_correct+'%')
 	$('#score').text(sitting.current_score)
@@ -761,14 +784,16 @@ EvaluationsView.render_marking_quiz = function(parent_container, response)
 }
 
 EvaluationsView.render_change_qualify = function(response, index){
+	
 	sitting = response[index]
-	console.log(sitting.qualify)
+	//console.log(sitting.qualify)
 	preguntas = sitting.qualify
 	
 	user_answers = JSON.parse(sitting.user_answers)
 	answers = sitting.questions_with_user_answers
 
 	title_quiz = document.createElement('h3')
+	title_quiz.className = 'title'
 	$(title_quiz).text('Quiz: '+sitting.quiz)
 	$(title_quiz).prependTo('#title')
 
@@ -791,10 +816,15 @@ EvaluationsView.render_change_qualify = function(response, index){
 					question = document.createElement('p')
 					$(question).text(key)
 
+					hr = document.createElement('hr')
+					//hr.id = 'horizontal-bar'
+
 					label1 = document.createElement('h4')
 					$(label1).text('Respuesta de ' + sitting.user)
 					answer = document.createElement('p')
 					$(answer).text(value)
+
+					hr2 = document.createElement('hr')
 
 					label2 = document.createElement('h4')
 					$(label2).text('Calificar')
@@ -812,13 +842,19 @@ EvaluationsView.render_change_qualify = function(response, index){
 					$(btn_incorrect).text('incorrecta')
 					btn_incorrect.addEventListener('click', function(e){ EvaluationsView.change_qualify(sitting, e.target.name, 'incorrecta') }, false);
 
+					hr3 = document.createElement('hr')
+
 					div_question.appendChild(label)
 					div_question.appendChild(question)
+					div_question.appendChild(hr)
 					div_question.appendChild(label1)
 					div_question.appendChild(answer)
+					div_question.appendChild(hr2)
 					div_question.appendChild(label2)
 					div_question.appendChild(btn_correct)
 					div_question.appendChild(btn_incorrect)
+					div_question.appendChild(hr3)
+
 					$('#container_request').prepend(div_question)
 
 

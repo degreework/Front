@@ -1,0 +1,67 @@
+{% extends "template_evaluations_parent.html" %}
+{% comment %}
+	template for list all questions
+{% endcomment %}
+
+{% load staticfiles %}
+
+{% block section_title %}
+	<h3 class="sub-section">Lista de preguntas</h3>
+{% endblock section_title %}
+
+{% block module %}
+	<br><br>
+	<div class="col-md-12" style="padding-bottom:100px">
+		
+		<div class="col-md-12" id="show_">
+
+		<!--div con tabla para preguntas tf -->
+			<div class="col-md-12" id="table-tf">
+				<h3 class="title">Preguntas tipo verdadero-falso</h3>
+				<br>
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Question</th>
+								<th>Editar</th>
+								<th>Eliminar</th>	
+							</tr>
+						</thead>
+						<tbody id="list-tfquestion">
+
+						</tbody>
+		  
+					</table>
+				</div>
+			</div>
+
+		</div>
+	
+		<!-- editar -->
+		<!-- formulario tf -->
+		<div id="edit_" class="col-md-12" hidden>
+			<div id="edit_tf" hidden>
+				<br><br>
+				<div class="col-md-6 col-sm-offset-3">
+					<form class="" id="form_update_tf" hidden>
+			      		<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
+			      	</form>
+				</div>
+			</div>
+		</div>	
+
+	</div>
+
+{% endblock module %}
+
+{% block scripts %}
+	<script>
+        jQuery(document).ready(function($) {
+			
+			EvaluationsView.get_all_TFQuestions();		
+		});
+	</script>
+	
+{% endblock scripts %}

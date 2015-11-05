@@ -1,10 +1,15 @@
 {% extends 'template_evaluations_parent.html' %}
 {% load staticfiles %}
-{% block module %}
 
-	<div class="col-md-12 capacity">
+{% block section_title %}
+	<h3 class="sub-section">Lista quices</h3>
+{% endblock section_title %}
+
+{% block module %}
+	<br><br>
+	<div class="col-md-12" style="padding-bottom:100px">
 		
-		<h3 class="titulos">Quizzes</h3>
+		<h3 class="title">Quizzes</h3>
 		<br>
 		<!-- tabla con la lista de las quices -->
 		<div class="table-responsive" id="show_">
@@ -24,22 +29,16 @@
 			</table>
 		</div>
 
-
 		<!-- en caso tal de que quiera editar una quiz-->
 		<div class="col-md-12" id="edit_" hidden>
 
 			<br><br>
-			<div class="col-md-7 col-sm-7 col-xs-7  ">
+			<div class="col-md-6 col-sm-offset-3">
 				<form class="" id="form_update_quiz" hidden>
 		      		<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
 		      	</form>
 			</div>
-			<div class="col-md-4 col-sm-4 col-xs-3 col-sm-offset-1 base ">
-				<h4>¿Evaluations?</h4>
-				<p>Esto es sobre algoritmia
-				Se específico, detalla bien tu duda o inconveniente, la comunidad está para ayudarte y tu eres parte de ella...bla bla bla</p>
-			</div>
-	</div>
+		</div>
 
 	</div>
 

@@ -268,6 +268,7 @@ EvaluationsView.handle_edit = function(response, index, tipo){
 	};
 
 	if (tipo == 'Essay style question') {
+		console.log('entro al tipo Essay')
 		$('#edit_e').fadeIn()
 		form = $("#form_update_e")
 		create_form(URL_CREATE_QUESTION_ESSAY, form, 'OPTIONS', EvaluationsView.render_parametros, response)

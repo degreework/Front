@@ -100,6 +100,11 @@ NotificationView.render = function(notification)
 		name = notification.actor.name;
 		verb = notification.verb;
 		detail = notification.target.detail;
+
+		// se acomoda el progreso al crease o eliminarse un quiz
+		user = JSON.parse(localStorage.getItem('user'))
+		var gamificationView = new GamificationView();
+		gamificationView.get_progress_user(user.id)
 	}
 
 	else if ('Activitie' == notification.target.type) {
@@ -107,6 +112,11 @@ NotificationView.render = function(notification)
 		name = notification.actor.name;
 		verb = notification.verb;
 		detail = notification.target.detail;
+
+		// se acomoda el progreso al crease o eliminarse una actividad
+		user = JSON.parse(localStorage.getItem('user'))
+		var gamificationView = new GamificationView();
+		gamificationView.get_progress_user(user.id)
 	}
 
 	else if ('Module' == notification.target.type) {
