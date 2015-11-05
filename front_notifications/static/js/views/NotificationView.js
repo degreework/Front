@@ -44,7 +44,11 @@ NotificationView.render_notifications = function(notifications, saved)
 			NotificationView.mark_readed_notification( $(e.currentTarget).closest("li") )
 
 			}
-		)
+	)
+
+	$("#btn-all-readed").click(function(e){
+			NotificationView.do_mark_all_readed();
+	})
 
 }
 
@@ -190,4 +194,13 @@ NotificationView.update_decrease_counter = function()
 	
 	$("#user-bell-notify")[0].innerHTML = "";
 	$("#user-bell-notify").append(current_count);
+}
+
+
+NotificationView.do_mark_all_readed = function()
+{
+	var service = new NotificationService();
+	service.mark(URL_MARK_ALL_READ_NOTIFICATION, function(response){
+		NotificationView.remove_all_rendered(0)
+	})
 }
