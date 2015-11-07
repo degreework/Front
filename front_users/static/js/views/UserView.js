@@ -105,6 +105,14 @@ UserView.showLoggedUser = function () {
 		}
 	}catch(err){}
 
+	//Show create Quiz
+	try{
+		var s = StorageClass.getInstance();
+		if(-1 == s.storage.get("permissions").indexOf("quiz.change_quiz")){
+			$(".action-update-quiz").remove()
+		}
+	}catch(err){}
+
 	
 	
 
