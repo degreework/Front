@@ -116,14 +116,22 @@ AskView.prototype.render_ask = function (data){
 	
 	$(AskView.prototype.container_title_ask).text(data.title);
 	
-	//buttom edit and event
-	var edit = document.createElement("a");
-	edit.className = "pull-right"
-	var edit_msg = document.createElement("span");
-	edit_msg.className = "glyphicon glyphicon-edit"
-	edit.appendChild(edit_msg);
-	edit.addEventListener('click', AskView.prototype.handle_edit, false);
-	$(AskView.prototype.container_title_ask).append(edit)
+
+	//if authenticated user is Answer's author, then render options to edit and delete Answer
+	if (User.get_id() == data.author.id )
+	{
+		//buttom edit and event
+		var edit = document.createElement("a");
+		edit.className = "pull-right"
+		var edit_msg = document.createElement("span");
+		edit_msg.className = "glyphicon glyphicon-edit"
+		edit.appendChild(edit_msg);
+		edit.addEventListener('click', AskView.prototype.handle_edit, false);
+
+		$(AskView.prototype.container_title_ask).append(edit)
+		
+	}
+
 
 	$(AskView.prototype.container_content_ask).attr('id','a-'+data.id)
 
