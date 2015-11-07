@@ -39,7 +39,16 @@ Login.login = function (form, url, callback)
 			//console.log(s.get("permissions"))
 			var s = StorageClass.getInstance();
 			s.storage.set("permissions", response);
+
 			//console.log(s.storage.get("permissions"));
+
+			//this must be here and UserView.js due to LocalStorage is too slow
+			if(-1 != s.storage.get("permissions").indexOf("users.can_list")){
+				$(".action-list-users").show()
+			}
+			if(-1 != s.storage.get("permissions").indexOf("module.add_module")){
+				$(".action-create-module").show()
+			}
 
 			
 		})

@@ -30,7 +30,7 @@ def settings(request):
   return render_to_response('settings.html', {'title': 'Ajustes | Name App'}, context_instance=RequestContext(request))
   #return HttpResponseRedirect(reverse('front_users:authenticationRequiered'))
 
-
+@ScopeRequired(["users.can_list"])
 def listUsers(request):
     return render_to_response('listUsers.html', {'title': 'lista de Usuarios | Name App'}, context_instance=RequestContext(request))
     

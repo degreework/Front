@@ -54,6 +54,7 @@ UserView.showIndexUser = function ()
 		$("#main").show()
 		$("#introduction_auth").show()
 		$('.footer').hide()
+
 		UserView.showLoggedUser();
 	}
 	else
@@ -68,8 +69,34 @@ UserView.showLoggedUser = function () {
 	$("#user_resume").show();
 	$(".resume_name").text(User.get_first_name() +" "+User.get_last_name() );
 	$(".resume_profile").text(User.get_first_name() +" "+User.get_last_name() );	
-	$(".pic_resume").attr("src",'http://127.0.0.1:8080'+User.get_thumb(1));
+	$(".pic_resume").attr("src", Site.geRootUrl()+User.get_thumb(1));
 
+
+
+	//Show Usuarios option
+	try{
+		var s = StorageClass.getInstance();
+		if(-1 != s.storage.get("permissions").indexOf("users.can_list")){
+			$(".action-list-users").show()
+		}
+	}catch(err){}
+
+	//Show Usuarios option
+	try{
+		var s = StorageClass.getInstance();
+		if(-1 != s.storage.get("permissions").indexOf("module.add_module")){
+			$(".action-create-module").show()
+		}
+	}catch(err){}
+
+	//Show Usuarios option
+
+	try{
+		var s = StorageClass.getInstance();
+		if(-1 == s.storage.get("permissions").indexOf("material.add_materialfile")){
+			$(".action-create-material").remove()
+		}
+	}catch(err){}
 	
 	
 
