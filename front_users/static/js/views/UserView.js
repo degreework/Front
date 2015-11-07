@@ -89,14 +89,22 @@ UserView.showLoggedUser = function () {
 		}
 	}catch(err){}
 
-	//Show Usuarios option
-
+	//Show Create Material option
 	try{
 		var s = StorageClass.getInstance();
 		if(-1 == s.storage.get("permissions").indexOf("material.add_materialfile")){
 			$(".action-create-material").remove()
 		}
 	}catch(err){}
+
+	//Show create Quiz
+	try{
+		var s = StorageClass.getInstance();
+		if(-1 == s.storage.get("permissions").indexOf("quiz.add_quiz")){
+			$(".action-create-quiz").remove()
+		}
+	}catch(err){}
+
 	
 	
 
