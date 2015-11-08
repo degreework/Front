@@ -61,6 +61,7 @@ UserView.showIndexUser = function ()
 	{
 
 		//UserView.showRegisterForm();
+		$("#introduction").show();
 	}
 }
 
@@ -201,6 +202,10 @@ UserView.loginCallback = function ()
 	//crea sesion para guardar los chats abiertos
 	var s = StorageClass.getInstance();
 	s.storage.set('currentChats', '{"chats":[]}');
+
+
+	//login callback, redirecto to index
+	window.location = Site.geRootUrl();
 
 
 }
