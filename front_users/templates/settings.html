@@ -47,23 +47,22 @@
 
 		// cambio de contraseña
 		form_update_password = $("#form_update_password");
-
-		function succes_change()
-		{
-			$("#form_update_password").reset();	
-		}
-		
 		
 		//user = 
 		url_update_password = URL_UPDATE_USER_PASSWORD+JSON.parse(localStorage.getItem('user')).id;
 
 		form_update_password.submit(function (e) {
 			e.preventDefault();
+			var THIS = this;
 			//UserService.confirmPassword(url_confirm, form_update_password);
 			ChangePasswordForm.udpate_password(
 				url_update_password,
 				form_update_password,
-				succes_change)
+				function(response)
+				{
+					THIS.reset();	
+				}
+			)
 		});
 	});
 
