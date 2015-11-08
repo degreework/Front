@@ -9,7 +9,7 @@ from decorators.ScopeRequired import ScopeRequired
 def home(request, mod_slug):
     return render_to_response('materialHome.html', {'title': 'Material | Name App', 'mod_slug':mod_slug}, context_instance=RequestContext(request))
 
-@ScopeRequired(["material.add_material"])
+@ScopeRequired(["material.add_materialfile"])
 def create(request, mod_slug):
     return render_to_response('materialCreate.html', {'title': 'Material | Name App', 'mod_slug':mod_slug}, context_instance=RequestContext(request))
 

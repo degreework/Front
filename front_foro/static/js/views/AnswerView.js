@@ -40,7 +40,7 @@ AnswerView.prototype.set_scroll_list = function(url){
 }
 
 var NonPaginator = function (btn_next, view) {
-	console.log('Paginator:instance created');
+	//console.log('Paginator:instance created');
 	this.btn_next = btn_next;
 
 	$(this.btn_next).click(function(e){
@@ -93,14 +93,20 @@ AnswerView.prototype.render_list = function (data){
 		$(link).attr('href', UserView.getUrl(data_list_asks[i].author.id));
 		$(date).text(""+jQuery.timeago(data_list_asks[i].added_at))
 
-		// opciones editar y eliminar 
 		var options = document.createElement("div");
 		options.className = "col-md-1";
+
+		//if authenticated user is Answer's author, then render options to edit and delete Answer
+		if (User.get_id() == data_list_asks[i].author.id )
+		{
+			AnswerView.prototype.appentOptions(options);
+		}
+
 
 		link.appendChild(autor);
 		info_user.appendChild(link);
 		info_user.appendChild(date);
-		AnswerView.prototype.appentOptions(options);
+
 	
 		//repuesta como tal 
 		var summarys = document.createElement("div");

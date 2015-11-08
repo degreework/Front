@@ -49,9 +49,10 @@
           <li role="separator" class="divider"></li>
           <li><a href="{% url 'front_users:settings' %}">Configuración</a></li>
           <li id="gamification_di" role="separator" class="divider"></li>
-          <li id="gamification" ><a href="{% url 'front_gamification:home_gamification' %}">Gamification</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="{% url 'front_users:listUsers' %}">Usuarios</a></li>
+          <li><a href="{% url 'front_gamification:home_gamification' %}">Gamification</a></li>
+          <li role="separator" class="divider action-list-users" hidden></li>
+          <li class="action-list-users" hidden><a href="{% url 'front_users:listUsers' %}">Usuarios</a></li>
+
           <li role="separator" class="divider"></li>
           <li><a href="#" id="button_logout">Salir</a></li>
       </ul>

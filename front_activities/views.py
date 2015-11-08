@@ -11,6 +11,7 @@ def activities(request, mod_slug):
     return render_to_response('activitieList.html', {'title': 'activities | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 
 
+@ScopeRequired(["activitie.can_check_activitie"])
 def activitiesList(request, mod_slug):
     return render_to_response('listActivitie.html', {'title': 'activities | Name App', 'mod_slug':mod_slug }, context_instance=RequestContext(request))
 

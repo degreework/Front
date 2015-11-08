@@ -89,7 +89,7 @@ WikiView.create_succes = function(wiki)
 
 	//dependiendo de los permisos de usuario se muesttra un mensaje u otro
 	var s = StorageClass.getInstance();
-	if(-1 != s.storage.get("permissions").indexOf("wiki.delete_request")){
+	if(-1 != s.storage.get("permissions").indexOf("wiki.can_approve_request")){
 		$("#editaded_page_admin").fadeIn();
 		$("#url_wiki_request_admin").attr('href', "WikiModel.generate_url(wiki.page.slug)");
 
@@ -154,7 +154,7 @@ WikiView.render_version = function(page)
 	
 	//to approve a request
 	var s = StorageClass.getInstance();
-	if(-1 != s.storage.get("permissions").indexOf("wiki.delete_request")){
+	if(-1 != s.storage.get("permissions").indexOf("wiki.can_approve_request")){
 
 		var url_approv = URL_APPROVE_REQUEST.replace(/\%slug%/g, page.slug);
 		url_approv = url_approv.replace(/\%version%/g, page.version);
