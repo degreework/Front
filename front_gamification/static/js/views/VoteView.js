@@ -102,7 +102,11 @@ VoteView.prototype.do_vote  = function(data)
 				if(1 == response.previous)
 				{
 					var element = $("#id_"+response.thread+".down-vote")[0]
-					element.innerHTML = 1*element.innerHTML - 1;
+					console.log(element.innerHTML)
+					if (parseInt(element.innerHTML) > 0) {
+						element.innerHTML = 1*element.innerHTML - 1;	
+					};
+					
 				}
 				//aumenta el contador
 				var element = $("#id_"+response.thread+".up-vote")[0]
@@ -114,7 +118,11 @@ VoteView.prototype.do_vote  = function(data)
 				if(0 == response.previous)
 				{
 					var element = $("#id_"+response.thread+".up-vote")[0]
-					element.innerHTML = 1*element.innerHTML - 1;
+					console.log(element.innerHTML)
+					if (parseInt(element.innerHTML)>0) {
+						element.innerHTML = 1*element.innerHTML - 1;	
+					};
+					
 				}
 				//aumenta el contador
 				var element = $("#id_"+response.thread+".down-vote")[0]
