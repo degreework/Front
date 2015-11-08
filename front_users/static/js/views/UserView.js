@@ -27,6 +27,19 @@ UserView.verify = function ()
 		
 		main_chat_status( 'conectado' , "online" );
 		chatSocked.emmit('listChatUpdate',user);
+		
+	// seccion gamification 
+	var s = StorageClass.getInstance();
+
+
+    if(-1 === s.storage.get("permissions").indexOf("gamification.change_scores")){
+    
+      console.log('entro')
+      $('#gamification').hide()
+      $('#gamification_di').hide()
+    }
+
+
 		UserView.showLoggedUser();		
 	}
 	else
@@ -69,9 +82,6 @@ UserView.showLoggedUser = function () {
 	$(".resume_name").text(User.get_first_name() +" "+User.get_last_name() );
 	$(".resume_profile").text(User.get_first_name() +" "+User.get_last_name() );	
 	$(".pic_resume").attr("src",'http://127.0.0.1:8080'+User.get_thumb(1));
-
-	
-	
 
 	//action event to logout
 	$("#button_logout").click(function(e){
@@ -142,7 +152,6 @@ UserView.loginCallback = function ()
 	var s = StorageClass.getInstance();
 	s.storage.set('currentChats', '{"chats":[]}');
 
-
 }
 
 
@@ -206,11 +215,12 @@ UserView.renderListUsers = function (response){
 
 	// se pasa a arreglo la respuesta 
 	response = response.results;
+	user = JSON.parse(localStorage.getItem('user'))
 	
 	for (i = response.length-1; i >= 0; i--) { 
 
 		// para que no muestre al usuario q consulta
-		//if( JSON.parse($.session.get('user')).id != response[i].id){
+		
 			
 			// se crea el html     		
 			var container = document.createElement("tr");
@@ -221,7 +231,15 @@ UserView.renderListUsers = function (response){
 			var col_name = document.createElement("td");
 			var link = document.createElement("a");
 			var id = response[i].id;
-			$(link).attr('href', host+":"+location.port+"/users/detail/"+id);
+
+			
+			if( user.id != response[i].id){
+				$(link).attr('href', host+":"+location.port+"/users/detail/"+id);	
+			}else{
+				$(link).attr('href', host+":"+location.port+"/profile");	
+			}
+
+			
 			var name = document.createElement("p");
 			//se asigna el nombre
 			$(name).text(response[i].first_name + " " + response[i].last_name);
@@ -236,6 +254,15 @@ UserView.renderListUsers = function (response){
 
 			var col_plan = document.createElement("td");				
 			$(col_plan).text(response[i].plan)
+
+			var col_progres = document.createElement("td");				
+			var link2 = document.createElement('a')
+			$(link2).text('ver')
+			col_progres.appendChild(link2)
+
+			link2.name = i;
+			link2.addEventListener('click', function(e){ UserView.render_progress_user(response, e.target.name) }, false);
+
 			
 
 
@@ -245,10 +272,29 @@ UserView.renderListUsers = function (response){
 			container.appendChild(col_email);
 			container.appendChild(col_codigo);
 			container.appendChild(col_plan);
+			container.appendChild(col_progres);
 			$('#listUsers').prepend(container);
 		//}
 			
 	}
+
+}
+
+
+UserView.render_progress_user= function(response, index){
+	console.log('RENDER PROGRESS ')
+
+	 progess_user = response[index]
+	 console.log(progess_user)
+
+	 // Se pide el progreso del usuario seleccionado 	
+	var gamificationView = new GamificationView();
+	gamificationView.get_progress_user_admin(progess_user.id)
+
+	 $('.title').text('Progreso de '+' '+progess_user.first_name+' '+progess_user.last_name)
+	 $('#show_').hide()
+	 $('#user_progress').show()
+
 
 }
 

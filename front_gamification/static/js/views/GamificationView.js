@@ -206,6 +206,50 @@ GamificationView.prototype.render_awards_admin = function(response){
 // SCORES
 //---------------
 
+GamificationView.prototype.get_progress_user_admin = function(id_user){
+	console.log('get_progress_user_admin')
+	var gamificationService = new GamificationService();
+	gamificationService.retrieve(URL_GET_PROGRESS_GAMIFICATION+id_user, GamificationView.prototype.render_progess)
+}
+
+
+GamificationView.prototype.render_progess = function(response){
+	console.log('RENDER PROGRESS')
+	console.log(response)
+
+	if (response.length>0) {
+		console.log('aqui renderizamos el progreso que se tenga')
+
+		for (var i = 0; i < response.length; i++) {
+		
+		var container = document.createElement("tr");
+		container.className = 'row_award-'+i
+
+		var number = document.createElement("td");
+		$(number).text(i+1)
+
+		var medalla = document.createElement("td");
+		$(medalla).text(response[i].badge.title)
+
+		var percent = document.createElement("td");
+		$(percent).text(response[i].percent)
+
+		//se pega a los contenedores 
+		container.appendChild(number);
+		container.appendChild(medalla);
+		container.appendChild(percent);
+
+		$('#listProgess').append(container)
+	}
+
+
+	}else{
+		$('#table_progresss').hide()
+		$('#msg-progress').text('El usuario no tiene progresos en los modulos')
+	}
+}
+
+
 GamificationView.prototype.get_progress_user = function(id_user){
 	console.log('get_progress_user')
 	var gamificationService = new GamificationService();
@@ -283,41 +327,5 @@ GamificationView.prototype.render_scores = function(response){
 			$('#list-equestion').prepend(container);		
 		};
 	}
-
-}
-
-GamificationView.prototype.show_table_questions = function(){
-
-	button = document.createElement('button')
-	$(button).attr('type','submit')
-	$(button).attr('name','action')
-	$(button).text('Actualizar')
-	button.className = 'btn btn-default pull-right'  
-
-	$('#Essay').click(function(){
-								
-				$('#form_update_e').empty()
-				$('#form_update_e').append(button)
-				
-				$('#table-essay').show()
-				$('#table-tf').hide()
-
-				$('#show_').show()
-				$('#edit_').hide()
-	
-			})
-
-			$('#TF').click(function(){
-				
-				$('#form_update_e').empty()
-				$('#form_update_e').append(button)
-				
-				$('#table-essay').hide()
-				$('#table-tf').show()
-
-				$('#show_').show()
-				$('#edit_').hide()
-
-			})
 
 }

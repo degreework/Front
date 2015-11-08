@@ -7,29 +7,65 @@
 	    <h2>Lista de estudiantes</h2>
 		<hr>
 	   
-	    <div class="table-responsive" id="show_" style=>
+	    <div class="table-responsive" id="show_" style="padding-bottom:100px">
+			<table class="table table-hover">
+  				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>e-mail</th>
+						<th>Código</th>
+						<th>Plan</th>
+						<th>Progreso</th>
+					</tr>
+				</thead>
+				<tbody id="listUsers">
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-12" id="user_progress" hidden style="padding-bottom:100px">
+		<div class="col-md-12" id="container_progress">
+			
+			<br>
+			<h3 class="title"></h3>
+			<br>
+			<div class="table-responsive" id="table_progresss">
 				<table class="table table-hover">
 	  				<thead>
 						<tr>
 							<th>#</th>
-							<th>Nombre</th>
-							<th>e-mail</th>
-							<th>Código</th>
-							<th>plan</th>
+							<th>Medalla</th>
+							<th>Progreso</th>
 						</tr>
 					</thead>
-					<tbody id="listUsers">
-						
+					<tbody id="listProgess">			
 					</tbody>
 				</table>
 			</div>
+			<div id='msg-progress'></div>
+
+			
+		</div>
+		<div class="col-md-12">
+			<br><br>
+			<button class="btn btn-default pull-right" id="back">Volver</button>
+		</div>
+		
 	</div>
+
 </div>
 {% endblock %}
 {% block scripts %}
 <script>
 	//bring users 
-	UserService.get_users(UserView.renderListUsers);	
+	UserService.get_users(UserView.renderListUsers);
+
+	$('#back').click(function (e){
+				location.reload();
+		})	
 </script>
 
 {% endblock scripts %}
