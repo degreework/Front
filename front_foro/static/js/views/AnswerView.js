@@ -304,12 +304,14 @@ AnswerView.prototype.handle_edit = function(e)
 	*/
 	//get div parent
 	var parent = $(e.target).parents('.response');
-	//get id from div parent
+	//get id from div parent (Answer)
 	var target_id = parent.attr("id");
-	//console.log("target_id")
-	//console.log(target_id)
-	//get content of current comment
+	//console.info("target_id")
+	//console.info(target_id)
+	
+	//get content of current Answer
 	var current_answer = $("#textAnswer-"+target_id+">p").text();
+	
 	//remove all elements of parent
 	$(parent).children().hide();
 
@@ -393,7 +395,7 @@ AnswerForm.prototype.form = "#form_answer_foro";
 AnswerForm.prototype.editor = "#id_textarea_answer";
 
 AnswerForm.prototype.handler_created_form = function(created_form, id_ask){
-	//console.log('AnswerForm:handler_created_form');
+	//console.info('AnswerForm:handler_created_form');
 
 	var input_ask_id  = $(AnswerForm.prototype.form).find("#id_ask")[0];
 	$(input_ask_id).hide();
@@ -441,8 +443,8 @@ AnswerForm.prototype.succes_update = function (response, form){
 }
 
 AnswerForm.prototype.succes_create = function(response){
-	console.log('AnswerForm:succes_create');
-	console.log(response)
+	//console.log('AnswerForm:succes_create');
+	//console.log(response)
 	
 	$(AnswerForm.prototype.form).trigger("reset");
 	
