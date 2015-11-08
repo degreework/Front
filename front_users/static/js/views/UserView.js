@@ -73,34 +73,36 @@ UserView.showLoggedUser = function () {
 	$(".pic_resume").attr("src", Site.geRootUrl()+User.get_thumb(1));
 
 
+	var s = StorageClass.getInstance();
 
 	//Show Usuarios option
 	try{
-		var s = StorageClass.getInstance();
 		if(-1 != s.storage.get("permissions").indexOf("users.can_list")){
 			$(".action-list-users").show()
 		}
 	}catch(err){}
 
-	//Show Usuarios option
+	//Show Create Module option
 	try{
-		var s = StorageClass.getInstance();
-		if(-1 != s.storage.get("permissions").indexOf("module.add_module")){
+	//	var s = StorageClass.getInstance();
+		if(-1 != s.storage.get("permissions").indexOf("module.add_module") ){
 			$(".action-create-module").show()
 		}
 	}catch(err){}
+	
 
 	//Show Create Material option
 	try{
-		var s = StorageClass.getInstance();
+	//	var s = StorageClass.getInstance();
 		if(-1 == s.storage.get("permissions").indexOf("material.add_materialfile")){
-			$(".action-create-material").remove()
+			$(".action-create-material").show()
 		}
 	}catch(err){}
+	
 
 	//Show create Quiz
 	try{
-		var s = StorageClass.getInstance();
+	//	var s = StorageClass.getInstance();
 		if(-1 == s.storage.get("permissions").indexOf("quiz.add_quiz")){
 			$(".action-create-quiz").remove()
 		}
@@ -108,7 +110,7 @@ UserView.showLoggedUser = function () {
 
 	//Show create Quiz
 	try{
-		var s = StorageClass.getInstance();
+	//	var s = StorageClass.getInstance();
 		if(-1 == s.storage.get("permissions").indexOf("quiz.change_quiz")){
 			$(".action-update-quiz").remove()
 		}
@@ -117,7 +119,7 @@ UserView.showLoggedUser = function () {
 
 	//Show create Activitie
 	try{
-		var s = StorageClass.getInstance();
+	//	var s = StorageClass.getInstance();
 		if(-1 == s.storage.get("permissions").indexOf("activitie.add_activitieparent")){
 			$(".action-create-activitie").remove()
 		}
@@ -125,7 +127,7 @@ UserView.showLoggedUser = function () {
 
 	//Show update Activitie
 	try{
-		var s = StorageClass.getInstance();
+	//	var s = StorageClass.getInstance();
 		if(-1 == s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
 			$(".action-update-activitie").remove()
 		}
