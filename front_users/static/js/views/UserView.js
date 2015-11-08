@@ -113,6 +113,15 @@ UserView.showLoggedUser = function () {
 		}
 	}catch(err){}
 
+
+	//Show create Activitie
+	try{
+		var s = StorageClass.getInstance();
+		if(-1 == s.storage.get("permissions").indexOf("activitie.add_activitieparent")){
+			$(".action-create-activitie").remove()
+		}
+	}catch(err){}
+
 	
 	
 
