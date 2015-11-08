@@ -6,8 +6,8 @@
 .question{	
 	/*border-bottom: 3px double #ccc;*/
 	width: 80%;
-	border-bottom: 3px double #ccc;
-	border-radius: 25px 0px 0px 25px;	
+	border-bottom: 1px solid #ccc;
+	/*border-radius: 25px 0px 0px 25px;	*/
 	padding: 10px 10px 10px 30px;
 	text-decoration:none;
 }

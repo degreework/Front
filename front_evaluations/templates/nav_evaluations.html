@@ -19,15 +19,14 @@
     		<li>
     			<a href="{% url 'front_evaluations:createEssay' mod_slug %}">Abierta</a>
     		</li>
-    		
+    		<li role="separator" class="divider"></li>
     		<li>
     			<a href="{% url 'front_evaluations:createMultichoice' mod_slug %}">Multiopción</a>
     		</li>
-
+    		<li role="separator" class="divider"></li>
     		<li>
     			<a href="{% url 'front_evaluations:createTrueFalse' mod_slug %}">Verdadero/Falso</a>
     		</li>
-
 			<li class="dropdown-header">Quiz</li>
     		<li>
     			<a href="{% url 'front_evaluations:createQuiz' mod_slug %}">Quiz</a>
@@ -48,15 +47,15 @@
     		<li>
     			<a href="{% url 'front_evaluations:questionsE' mod_slug %}">Abierta</a>
     		</li>
-    		
+    		<li role="separator" class="divider"></li>
     		<li>
     			<a href="{% url 'front_evaluations:questionsM' mod_slug %}">Multiopción</a>
     		</li>
-
+    		<li role="separator" class="divider"></li>
     		<li>
     			<a href="{% url 'front_evaluations:questionsTF' mod_slug %}">Verdadero/Falso</a>
     		</li>
-
+    		
 			<li class="dropdown-header">Lista Quiz</li>
     		<li>
     			<a href="{% url 'front_evaluations:quizAdmin' mod_slug %}">Quices</a>

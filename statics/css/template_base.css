@@ -255,6 +255,17 @@ hr{
 
 
 /*nav sections*/
+.dropdown-header{
+	display: block;
+    padding: 11px 20px;
+    font-size: 14px;
+    line-height: 0.5;
+    color: white;
+    white-space: nowrap;
+    background-color: #D51B23;
+
+}
+
 .navigation{	
 	text-align: center;
 	border-bottom: 1px solid #ccc;
@@ -296,6 +307,7 @@ hr{
 	background-color: #D51B23;
 	color: white;
 }
+
 
 
 

@@ -16,6 +16,8 @@ var main = function(){
 		//(min) * (seconds) * (milliseconds)
 		//this case 5*60*1000 = 5 min
 
+		
+
 	}
 
 	/*//notifications every page reload
