@@ -630,6 +630,7 @@ EvaluationsView.take_quiz = function(btn_continue){
 
 	}else{
 
+		$('#container_form').hide()
 		$('#container-check').hide()
 		$('#without_questions').show()
 

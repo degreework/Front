@@ -69,6 +69,7 @@ CommentView.prototype.append_comment = function(response)
 			$(link).attr('href', UserView.getUrl(response[i].author.id));
 			container.id = 'cmt-'+id;
 			var text = document.createElement("span");
+			text.id = 'contenido'
 			var author = document.createElement("span");
 			var date = document.createElement("span");
 			text.className = "cmt-text";
@@ -132,7 +133,10 @@ CommentView.prototype.handler_edit = function(e)
 	//get id from div parent
 	var target_id = parent.attr("id");
 	//get content of current comment
-	var current_comment = $("#"+target_id+">p").text();
+	var current_comment = $("#"+target_id).find('#contenido').text();
+	current_comment = current_comment.split('-')
+	current_comment = current_comment[0]
+	console.log(current_comment)
 	//remove all elements of parent
 	$(parent).children().hide();
 
