@@ -2,8 +2,7 @@ function remove_all_errors (data) {
 	/*
 	Remove all error message divs from form
 	*/
-	fields = data.split('&');
-			
+
 	for (i=0, size=fields.length; i < size; i++) {
 		input = fields[i].split('=');
 		field = input[0];
@@ -17,7 +16,22 @@ function show_errors (data, response) {
 	/*
 	Create error message div for each field form, only there is any
 	*/
-	fields = data.split('&');
+	fields = []
+	try{	
+		fields = data.split('&');
+	}catch(err)
+	{
+		if (data instanceof FormData) {
+   			$.each(response, function(k, v){
+   				fields.push(k+'=')
+   			})
+		}
+	}
+
+	//remove error mesagges if there are
+	remove_all_errors(fields)
+
+
 			
 	for (i=0, size=fields.length; i < size; i++) {
 		input = fields[i].split('=');
