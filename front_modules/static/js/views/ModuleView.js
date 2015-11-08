@@ -40,7 +40,7 @@ ModuleView.succes_create_form = function(form)
     form.submit(function(e){
 		e.preventDefault();
 		//remove all empty fields from form
-		$(this).find(":input").filter(function(){ return !this.value; }).remove()
+		//$(this).find(":input").filter(function(){ return !this.value; }).remove()
 		//end remove
 		
 		var action = e.target.action.split("/");
