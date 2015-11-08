@@ -39,8 +39,7 @@ GamificationView.prototype.handle_edit = function(response, index, tipo){
 }
 
 GamificationView.prototype.redirect = function(response){
-	console.log(response)
-	//location.reload();
+	location.reload();
 }
 
 GamificationView.prototype.update_score = function(form, id){
@@ -124,10 +123,10 @@ GamificationView.prototype.render_list_badges = function(parent_container, respo
 	}
 }
 
-
+/*
 GamificationView.prototype.redirect_badges = function(response){
 	location.reload();
-}
+}*/
 
 //---------------
 // AWARD
@@ -280,13 +279,17 @@ GamificationView.prototype.get_scores = function()
 
 GamificationView.prototype.render_scores = function(response){
 	console.log(response)
+	
+	contador_quiz = 0;
+	contador_actividad = 0;
+
 	for (var i = 0; i < response.length; i++) {
 		
 		var container = document.createElement("tr");
 		container.className = 'row_award-'+i
 
 		var number = document.createElement("td");
-		$(number).text(i+1)
+		
 
 		var name = document.createElement("td");
 		$(name).text(response[i].id_event.name)
@@ -304,8 +307,15 @@ GamificationView.prototype.render_scores = function(response){
 		var tipo = ''
 		if (response[i].event === 'Activity') {
 			tipo = 'Activity'
+			contador_actividad++
+			$(number).text(contador_actividad)
+			//container.appendChild(contador_actividad);
+
 		}else{
 			tipo = 'Quiz'
+			contador_quiz++
+			$(number).text(contador_quiz)
+			//container.appendChild(contador_quiz);
 		}
 
 		link.addEventListener('click', function(e){ GamificationView.prototype.handle_edit(response, e.target.name, 'medalla') }, false);
