@@ -122,6 +122,14 @@ UserView.showLoggedUser = function () {
 		}
 	}catch(err){}
 
+	//Show update Activitie
+	try{
+		var s = StorageClass.getInstance();
+		if(-1 == s.storage.get("permissions").indexOf("activitie.can_check_activitie")){
+			$(".action-update-activitie").remove()
+		}
+	}catch(err){}
+
 	
 	
 
