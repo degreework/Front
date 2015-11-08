@@ -14,7 +14,6 @@ ChangePasswordForm.udpate_password = function(url, form, callback)
 		{
 			//passwords match
 
-			console.log("Match")
 			var data = {
 				'old': old_p,
 				'new': new_p
@@ -24,13 +23,13 @@ ChangePasswordForm.udpate_password = function(url, form, callback)
 		}
 		else
 		{
-			Notify.show_error("DATOS", "La contrasena nueva y la confirmacion no son iguales");
-			console.log("no match")
+			Notify.show_error("DATOS", "La contraseña nueva y la confirmación no son iguales");
+			$(form).trigger("reset");
 		}
 	}
 	else
 	{
-		Notify.show_error("DATOS", "Los campos no pueden ser vacios");
+		Notify.show_error("DATOS", "Los campos no pueden estar vacíos");
 	}
 
 	
