@@ -196,11 +196,7 @@ UserView.loginCallback = function ()
 	var module = new ModuleView();
 	module.render_modules($("#id_list_modules"))
 
-	// progreso de la medalla del usuario 
-	user = JSON.parse(localStorage.getItem('user'))
-	var gamificationView = new GamificationView();
-	gamificationView.get_progress_user(user.id)
-
+	
 	// se conecta al servidor para el chat y agrega
 	chat_join();
 	chatSocked.emmit('addUser', user)
@@ -212,7 +208,7 @@ UserView.loginCallback = function ()
 
 	// esto esta causando un problema con el localstorage del progreso 
 	//login callback, redirecto to index 
-	//window.location = Site.geRootUrl();
+	window.location = Site.geRootUrl();
 
 }
 
