@@ -319,18 +319,19 @@ GamificationView.prototype.render_scores = function(response){
 		col_edit.appendChild(link)
 		
 		//se pega a los contenedores 
-		container.appendChild(number);
-		container.appendChild(name);
-		container.appendChild(score);
-		container.appendChild(col_edit);
+		
+		$(container).append(number);
+		$(container).append(name);
+		$(container).append(score);
+		$(container).append(col_edit);
 		//container.appendChild(col_del);
 		
 		if (response[i].event === 'Activity') {
-			$('#list-tfquestion').prepend(container);		
+			$('#list-tfquestion').append(container);		
 		};
 
 		if (response[i].event === 'Quiz') {
-			$('#list-equestion').prepend(container);		
+			$('#list-equestion').append(container);		
 		};
 	}
 
