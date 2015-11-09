@@ -27,7 +27,7 @@ Notify.show_confirm = function(section)
 {
 
 	var notify = $.notify({
-		message: "<div class='col-md-4 col-md-offset-4 confirmation-delete'><div class='panel panel-default'><div class='panel-heading'><h3 class='panel-title'>Eliminar "+section+"</h3></div><div class='panel-body'>Seguro que quiere eliminar "+section+"<br><br><a id='cancel' class='btn btn-default pull-right' style='color:inherit; text-decoration:none' href='#'>cancelar</a><a id='erase' style='margin-right:5px; color:inherit; text-decoration:none' class='btn btn-default pull-right' href='#'>eliminar</a></div></div></div></div>"
+		message: "<div class='col-md-4 col-md-offset-4 confirmation-delete'><div class='panel panel-default'><div class='panel-heading'><h3 class='panel-title'>Eliminar "+section+"</h3></div><div class='panel-body'>Seguro que quiere eliminar "+section+"<br><br><a id='cancel' class='btn btn-default pull-right' style='color:inherit; text-decoration:none'>cancelar</a><a id='erase' style='margin-right:5px; color:inherit; text-decoration:none' class='btn btn-default pull-right'>eliminar</a></div></div></div></div>"
 	},{
 	// settings
 		type: 'none',

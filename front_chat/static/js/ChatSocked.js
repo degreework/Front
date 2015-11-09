@@ -74,6 +74,9 @@ ChatSocked.prototype.listen = function(){
 			//console.log('envio todos')
 			data = $(e.target).val()
 			ChatSocked.prototype.sentMessage('messageAll' ,data)
+			user = JSON.parse(localStorage.getItem('user'))
+
+			ChatSocked.prototype.addMessage(data, user.first_name+' '+user.last_name, new Date().toISOString(), '', false);
 			$(e.target).val('')
 		}
 	});
@@ -83,7 +86,7 @@ ChatSocked.prototype.listen = function(){
 	ChatSocked.prototype.socked.on('message', function(msg) {
 		
 		
-		//console.log('me llego el mensaje');
+		console.log('me llego el mensaje');
 		//console.log(msg);
 		
 		//pega el mini boton en la barra si no existe 
@@ -103,6 +106,10 @@ ChatSocked.prototype.listen = function(){
           main_chat_user_alert( msg['from'], 0 );
         }
 
+
+        // se verifica si el chat esta en la sesion de chats actuales 
+      	ChatSocked.prototype.add_current_chat(msg['to'], msg['from'], msg['pseudo'])
+       
         // se pega el mensaje 
         var main   = $( "#Dialog" + msg['from'] );
         append_msg_he( msg['message'], main, msg['pseudo'], new Date().toISOString(), msg['thumb'] );
@@ -110,8 +117,7 @@ ChatSocked.prototype.listen = function(){
       	//Set position
       	main.dialog( "option", "position", { my: "right bottom", at: "right top-3", of: "#user-button-"+msg['from'], collision: "flip, none" });
       	
-      	// se verifica si el chat esta en la sesion de chats actuales 
-      	ChatSocked.prototype.add_current_chat(msg['to'], msg['from'], msg['pseudo'])
+      	
       	
 		
 	});
@@ -124,6 +130,17 @@ ChatSocked.prototype.listen = function(){
 		
 		console.log('me llego el mensajeAll');
 		//console.log(msg);
+
+		// reproduce el sonido 
+        if( !$(document).is(document.activeElement) || !main.find( "#textarea_msg" ).is(document.activeElement) ) {
+          //Do sound effect
+          //if sounds has been disabled, dont do it
+          if ( conf_sound_active == true )
+            $( "#audio-popup" ).trigger( "play" );
+
+          //Notificacion del mensaje no leido 
+          main_chat_user_alert( msg['from'], 0 );
+        }
 		
 		ChatSocked.prototype.addMessage(msg['message'], msg['pseudo'], new Date().toISOString(), msg['thumb'][0], false);
 		

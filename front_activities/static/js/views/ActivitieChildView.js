@@ -39,7 +39,7 @@ ActivitieChildView.prototype.render_activitie = function(response)
 	html += '<span id="id_gly" class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>';
 	html += '</div></div>';
 	html += '<div class="col-md-6">'
-	html += '<div class="col-md-12" style="text-align:center">'
+	html += '<div class="col-md-12" id="qualify'+response.id+'" style="text-align:center">'
 	console.log(response.status[1])
 	if (response.status[0] !== 4 && response.status[0] !== 3) {
 		html +='<p class="pull-left">Calificar</p><br><a style="margin-right: 70px; font-size:24px" id="'+response.id+'" class="action-aprove"><span class="glyphicon glyphicon-ok"></span></a>';
@@ -77,7 +77,24 @@ ActivitieChildView.prototype.check = function(id, data)
 			user = JSON.parse(localStorage.getItem('user'))
 			var gamificationView = new GamificationView();
 			gamificationView.get_progress_user(user.id)
+			console.log(e)
+			$('#container_request').find('#qualify'+e.id).empty()
+			statu = ''
+			statu_number = 0
+			if ('approved' === e.msg) {
+				statu = 'Aprobado'
+				statu_number = 3
+			}else{
+				statu = 'Rechazado'
+				statu_number = 4
+			};
+			html = '<p class="pull-left">Estado de la actividad:</p><br><span style="font-size:24px" id="id_activitie_status" class="label label-default status-'+statu_number+'">'+statu+'</span>'
+			$('#container_request').find('#qualify'+e.id).append(html)
 		});
+
+	///////////////////////////////////////////////////////
+	//console.log(data.id)
+	//
 
 }
 

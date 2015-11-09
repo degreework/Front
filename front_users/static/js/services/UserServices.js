@@ -438,7 +438,6 @@ function getCookie(name) {
 UserService.recovery_password = function(url, csrftoken, form, callback)
 {
 	$("#preloader_2").show();
-
 	var data = $(form).serialize();
 
 	//var csrftoken = getCookie('csrftoken');
@@ -470,7 +469,6 @@ UserService.recovery_password = function(url, csrftoken, form, callback)
 		//if BAD REQUEST -> show error response in fields form
 		if(400 == error.status || 401 == error.status)
 		{
-
 		}
 		// if UNAUTHORIZED ->
 		else if(401 == error.status)

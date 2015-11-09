@@ -9,6 +9,7 @@
 }
 
 .menu ul {
+  
   text-align: left;
   min-height: 300px;
   overflow: auto;
@@ -22,7 +23,7 @@
 }
 
 .menu li {
-
+  
   border-bottom: 1px solid #ccc;
   line-height: 30px;
   padding-bottom: 3px;

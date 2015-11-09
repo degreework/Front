@@ -48,8 +48,8 @@
           <li><a href="{% url 'front_users:profile' %}">Perfil</a></li>
           <li role="separator" class="divider"></li>
           <li><a href="{% url 'front_users:settings' %}">Configuración</a></li>
-          <li id="gamification_di" role="separator" class="divider"></li>
-          <li><a href="{% url 'front_gamification:home_gamification' %}">Gamification</a></li>
+          <li  role="separator" class="divider gamification_di"></li>
+          <li><a class="gamification_di" href="{% url 'front_gamification:home_gamification' %}">Gamification</a></li>
           <li role="separator" class="divider action-list-users" hidden></li>
           <li class="action-list-users" hidden><a href="{% url 'front_users:listUsers' %}">Usuarios</a></li>
 
@@ -63,17 +63,5 @@
 </div>
 
 <script type="text/javascript">
-  
-  /*
-  jQuery(document).ready(function() {
-    var s = StorageClass.getInstance();
-
-    if(-1 === s.storage.get("permissions").indexOf("gamification.change_scores")){
-    
-      console.log('entro')
-      $('#gamification').hide()
-      $('#gamification_di').hide()
-    }
-  })*/
 
 </script>

@@ -97,7 +97,21 @@ EvaluationsView.create_tf = function(form)
 	
 }
 
-EvaluationsView.notifify_create_question = function(){
+EvaluationsView.notifify_create_question = function(response){
+	console.log(response)
+
+	if (response === undefined) {
+		console.log('tf')
+		location.href =  Site.geRootUrl()+'/'+slug+"/evaluations/questions/multichoice"; 
+	}else if(response.correct !== undefined){
+		console.log('mc')
+		location.href =  Site.geRootUrl()+'/'+slug+"/evaluations/questions/truefalse"; 		
+				
+	}else{
+		console.log('abierta')
+		location.href =  Site.geRootUrl()+'/'+slug+"/evaluations/questions/essay"; 		
+	};
+
 	//location.href =  Site.geRootUrl()+'/'+slug+"/evaluations/questions/"; 
 }
 
