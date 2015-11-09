@@ -161,14 +161,14 @@ GamificationView.prototype.render_awards = function(response){
 		var container = document.createElement('div')
 		container.className = 'col-md-1 award_user'
 
-		var title_award = document.createElement('h4')
-		$(title_award).text(response[i].badge.title)
+		//var title_award = document.createElement('h4')
+		//$(title_award).text(response[i].badge.title)
 		var pic_award = document.createElement('img')
 		$(pic_award).attr('src' , 'http://127.0.0.1:8080'+response[i].badge.img)
 		pic_award.className = 'img-circle img-responsive'
 		
 
-		container.appendChild(title_award)
+		//container.appendChild(title_award)
 		container.appendChild(pic_award)
 		$('.container_awards').append(container)
 	};

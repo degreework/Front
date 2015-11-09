@@ -78,6 +78,47 @@ ModuleView.succes_create_form = function(form)
 
 }
 
+ModuleView.prototype.list_modules = function(container){
+
+	this.service.list(
+		URL_ALL_MODULES,
+		function(response){
+			//console.log(response)
+			$.each(response.results, function(k,v){ModuleView._render_module_index(container, v)})
+		})
+
+}
+
+ModuleView._render_module_index = function(container, module){
+	console.log(module)
+	gamification = JSON.parse(localStorage.getItem('badgeProgress'))
+	progress = ''
+	
+	for (var i = 0; i < gamification.length; i++) {
+		if (gamification[i].badge.slug.toLowerCase() === module.slug.toLowerCase()) {
+			progress = gamification[i]
+		};	
+	}
+
+	percent = progress.percent
+
+	html = "<a href='"+Module.getURL_from_slug(module.slug)+"'><div class='col-md-5 module-render'>"
+	html += "<div class='col-md-4 img-module'> <img class='img-circle pic-module' src='"+module.photo+"'></div>"
+	html += "<div class='col-md-8 text-module'>"
+	html += "<h1>"+module.name+"</h1>"
+	
+	if (percent !== undefined) {
+		percent = percent.toFixed(2)
+		html += "<span>Progreso: <span>"+percent+"%</span></span>"	
+	}else{
+		html += "<span>Progreso: <span>0.00%</span></span>"	
+	}
+	
+	html += "</div> </div></a>"
+
+	$(container).append(html)
+}
+
 ModuleView.prototype.render_modules = function(container)
 {
 	//console.info(container)

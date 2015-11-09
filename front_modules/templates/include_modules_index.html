@@ -1,10 +1,24 @@
 {% load staticfiles %}
 <div class="col-md-9 col-md-offset-3 capacity">
 	<div class="col-md-12">
-		
-		
-
-
+		<!--<br>
+		<h3 class="title" style="margin-top: 4px;"></h3>-->
+		<h2>Módulos</h2>
+		<hr>
+		<br>
+		<div class="col-md-12" id="modules_container"></div>
 	</div>
 
 </div>
+
+{% block scripts %}
+<script>	
+	// trae los modulos creados
+	var module = new ModuleView();
+	module.list_modules($("#modules_container"))
+
+	$('#id_list_modules').hide()
+
+</script>
+
+{% endblock scripts %}
