@@ -7,28 +7,49 @@ ActivitieParentView.prototype.form_create = "";
 ActivitieParentView.prototype.form_edit = "";
 
 
+
+ActivitieParentView.launch_datepicker = function()
+{
+	/*this function initialize DatePicker*/
+	$(function () {
+		$("#id_die_at").datetimepicker({
+	        inline: true,
+	        sideBySide: true,
+	        format: 'YYYY-MM-DDTHH:mm Z',
+	        minDate: Date.now()
+	    });
+	});
+
+}
+
 ActivitieParentView.prototype.handler_created_form = function(form){
 	ActivitieParentView.prototype.form_create = form;
 	$(ActivitieParentView.prototype.form_create).fadeIn();
 	
+	ActivitieParentView.launch_datepicker();
+	
 	$(form).submit(function(e){
 		e.preventDefault();
 		
-		var now = new Date($("#id_die_at").val())
-		var now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-		
-		$("#id_die_at").attr('type', 'text')
-		$("#id_die_at").val(now_utc.toISOString())
-		
-
-
-
-		var data = new FormData($(e.target).get(0));
 		var url = URL_CREATE_ACTIVITIE_MODULE.replace(/\%slug%/g, slug);
-		var activitieService = new ActivitieParentService();
 		//URL_CREATE_ACTIVITIE_PARENT
-		activitieService.create(url, data, ActivitieParentView.prototype.succes_create);
-		//Te Amo, Isabella
+		var activitieService = new ActivitieParentService();
+
+			var now = new Date($("#id_die_at").val().split(' ')[0])
+			/*Ésta fecha me ha hecho crecer barba, Por un verdadero Tiempo Universal Coordinado. 2015, Sun Nov 8, 23:42, Día que perdí mi barba y probablemente a mi Amada. Memoria a los Time Lords. Update: mismo día 23:47, me he dado cuenta que aún hay un error, Update: día siguiente, 00:36, después de muchas horas he logrado terminar esto. Extraño el "Buena luna" de mi Amada.*/
+			//console.info("create")
+			//console.info('input: ', now)
+			var now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+			//console.info('utc: ', now_utc)
+			
+			$("#id_die_at").attr('type', 'text')
+			$("#id_die_at").val(now_utc.toISOString())
+			
+			
+			var data = new FormData($(e.target).get(0));
+			activitieService.create(url, data, ActivitieParentView.prototype.succes_create);
+			//Te Amo, Isabella
+
 	});
 
 }
@@ -36,7 +57,7 @@ ActivitieParentView.prototype.handler_created_form = function(form){
 
 ActivitieParentView.prototype.succes_create = function(response)
 {
-	window.location.href = Site.geRootUrl()+"/"+slug+"/activity"
+	window.location.href = Site.geRootUrl()+"/"+slug+"/activity";
 }
 
 ActivitieParentView.prototype.succes_update = function(response)
@@ -178,8 +199,8 @@ ActivitieParentView.prototype.render_change_qualify = function(response, index){
 
 ActivitieParentView.prototype.handle_delete = function(response, index, tipo, row){
 
-	console.log('handle_delete')
-	console.log(tipo)
+	//console.log('handle_delete')
+	//console.log(tipo)
 	
 	response = response[index]
 	notify = Notify.show_confirm('la '+ tipo);
@@ -208,14 +229,46 @@ ActivitieParentView.prototype.handle_delete = function(response, index, tipo, ro
 
 ActivitieParentView.prototype.render_parametros = function(form, response){
 	
+	//datepicker
+	ActivitieParentView.launch_datepicker();
+
 	$.each(response, function(key, value) {	
 
-		console.log(key +'=='+ value)
+		//console.log(key +'=='+ value)
+		
 		if (key == 'die_at') {
-			value = value.replace('Z', '')
+			//value = value.replace('Z', '')
+			//console.info("render form")
+			var now = new Date(value)
+			//console.info('value: ', value)
+			//console.info('input: ', now)
+			//var now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+			//console.info('utc: ', now_utc)
+			
+			
+			//value = now_utc.toISOString()
+			//value = now
+			//console.info('value: ', value)
+
+			var year = now.getFullYear();
+			var month = (now.getMonth() < 10 ? "0" : "") + (now.getMonth() + 1);
+			var day = (now.getDate() < 10 ? "0" : "") + now.getDate();
+			var hour = (now.getHours() < 10 ? "0" : "") + now.getHours()
+			var min = (now.getMinutes() < 10 ? "0" : "") + now.getMinutes()
+			
+			var formated = year+'-'+month+'-'+day+'T'+hour+':'+min;
+			value = formated
+
+			//console.info(formated);
+			//console.info(now.getTimezoneOffset())
+
+			
 		};
+
 		$('#id_'+key).val(value);
 	})
+
+
 
 	$(form).show()
 
@@ -224,6 +277,17 @@ ActivitieParentView.prototype.render_parametros = function(form, response){
 
 	$(form).submit(function(e){
 		e.preventDefault();
+
+		var now = new Date($("#id_die_at").val().split(' ')[0])
+		/*Ésta fecha me ha hecho crecer barba, Por un verdadero Tiempo Universal Coordinado. 2015, Sun Nov 8, 23:42, Día que perdí mi barba y probablemente a mi Amada. Memoria a los Time Lords. Update: mismo día 23:47, me he dado cuenta que aún hay un error*/
+		console.info("update")
+		console.info('input: ', now)
+		var now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+		console.info('utc: ', now_utc)
+			
+		$("#id_die_at").attr('type', 'text')
+		$("#id_die_at").val(now_utc.toISOString())
+
 		var data = new FormData($(e.target).get(0));
 		var activitieService = new ActivitieParentService();
 		activitieService.update(url, data, ActivitieParentView.prototype.succes_update);
@@ -261,8 +325,7 @@ ActivitieParentView.prototype.render_list = function(response)
 }
 
 ActivitieParentView.prototype.render_activite_list = function(response){
-	var die_at = new Date(response.die_at).toUTCString()
-
+	var die_at = new Date(response.die_at)
 
 	// se renderiza la actividad
 	$("<a href='"+response.id+"' ><h3 classid='id_name'>"+response.name+" </h3></a>" ).appendTo( "#activitie" );
@@ -275,7 +338,7 @@ ActivitieParentView.prototype.render_activite_list = function(response){
 ActivitieParentView.prototype.render_activite = function(response, show_edit)
 {
 	//var die_at = response.die_at.replace('Z', '');
-	var die_at = new Date(response.die_at).toUTCString()
+	var die_at = new Date(response.die_at)
 
 
 	// se renderiza la actividad

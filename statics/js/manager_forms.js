@@ -114,7 +114,8 @@ function render_form(method, form , response, callback, params)
 				}
 				else if( 'datetime' == value.type)
 				{
-					input.type = "datetime-local";
+					input.type = "text";
+					
 				}
 				else if('choice' == value.type || 'plan' == key )
 				{
