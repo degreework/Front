@@ -22,12 +22,20 @@
 {% endblock module %}
 
 {% block scripts %}
+
 	<script>
-	var slug = "{{mod_slug}}";
-	var activitie = new ActivitieParentView();
-	var formActivitie = new ActivitieParentForm(
-		$("#form_create_activitie"),
-		ActivitieParentView.prototype.handler_created_form)
-	
+	jQuery(document).ready(function($) {
+		var slug = "{{mod_slug}}";
+		var activitie = new ActivitieParentView();
+		var formActivitie = new ActivitieParentForm(
+			$("#form_create_activitie"),
+			ActivitieParentView.prototype.handler_created_form
+		)
+
+		$(function () {
+			$("#id_die_at").datepicker()
+		});
+	});
+		
 	</script>
 {% endblock scripts %}

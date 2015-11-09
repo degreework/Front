@@ -82,9 +82,7 @@ Service.prototype.doPOST = function(url, data, callback)
 		else if(400 == error.status)
 		{
 			Notify.show_error("DATOS", "Los datos ingresados están incompletos");
-			console.info("incompletos")
-			console.info(data)
-			console.info(error.responseJSON)
+			
 			show_errors(data, error.responseJSON);
 		}
 		//if UNAUTHORIZED -> show error response in fields form

@@ -7,8 +7,6 @@ CommentService.create =function(form, url, callback)
 	formSerialized = form.serialize()
 	formData = new FormData($(form).get(0))
 
-	//remove all errors from before
-	remove_all_errors(formSerialized);
 
 	$.ajax({
 		type: 'POST',
@@ -43,14 +41,14 @@ CommentService.create =function(form, url, callback)
 		//if BAD REQUEST -> show error response in fields form
 		else if(400 == error.status)
 		{
-			console.log(formSerialized)
-			show_errors(formSerialized, error.responseJSON);
+
 			Notify.show_error("DATOS", "Los datos ingresados están incompletos");
+			show_errors(formSerialized, error.responseJSON);
 		}
 		//if UNAUTHORIZED -> show error response in fields form
 		else if(401 == error.status)
 		{
-			show_errors(formSerialized, error.responseJSON);
+			show_errors(formData, error.responseJSON);
 			Error.UNAUTHORIZED();
 		}
 		//if INTERNAL SERVER ERROR
@@ -123,8 +121,6 @@ CommentService.update = function(form, url, callback)
 //	$("#loader").show();
 	formData = new FormData($(form).get(0))
 
-	//remove all errors from before
-	remove_all_errors($(form).serialize());
 
 	$.ajax({
 		type: 'PUT',

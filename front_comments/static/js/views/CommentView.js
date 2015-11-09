@@ -77,7 +77,7 @@ CommentView.prototype.append_comment = function(response)
 
 			
 			//se asigna el texto 
-			$(text).text(response[i].text+" - ")
+			$(text).text(response[i].text)
 			$(author).text(response[i].author.name +" | ")
 			$(date).text(jQuery.timeago(response[i].added_at));
 
@@ -111,10 +111,12 @@ CommentView.updated = function (response, form)
 	*/
 	var parent = $(form).parents('.comments');
 	var parent_id = parent.attr("id");
-	$("#"+parent_id+">p").text(response.text);
+	$($("#"+parent_id).find(".cmt-text")[0]).text(response.text);
 
 	$(form).remove();
 	$(parent).children().show();
+
+
 }
 
 /*
@@ -132,12 +134,10 @@ CommentView.prototype.handler_edit = function(e)
 	var parent = $(e.target).parents('.comments');
 	//get id from div parent
 	var target_id = parent.attr("id");
+	
 	//get content of current comment
-	var current_comment = $("#"+target_id).find('#contenido').text();
-	current_comment = current_comment.split('-')
-	current_comment = current_comment[0]
-	console.log(current_comment)
-	//remove all elements of parent
+	var current_comment = $($("#"+target_id).find(".cmt-text")[0]).text();
+
 	$(parent).children().hide();
 
 	//change comment form location
@@ -158,14 +158,19 @@ CommentView.prototype.handler_edit = function(e)
 	//set current content of comment to form
 	$($("#edit_comment_form_"+target_id+" input")[0]).val(current_comment);
 	//show form
-	$(new_form).fadeIn()
+	$(new_form).fadeIn();
+	var self = this;
 
 	new_form.submit(function(e)
 		{
 			e.preventDefault();
 			var splited = e.target.id.split('-');
 			var id = splited[splited.length-1]
-			CommentService.update(e.target, URL_CREATE_COMMENT+id, CommentView.updated);
+			CommentService.update(
+				e.target,
+				URL_CREATE_COMMENT+id,
+					CommentView.updated
+			);
 		});
 }
 
