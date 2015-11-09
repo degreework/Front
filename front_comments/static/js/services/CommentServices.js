@@ -4,7 +4,6 @@ var CommentService = {};
 CommentService.create =function(form, url, callback)
 {
 //	$("#loader").show();
-
 	formSerialized = form.serialize()
 	formData = new FormData($(form).get(0))
 
@@ -44,6 +43,7 @@ CommentService.create =function(form, url, callback)
 		//if BAD REQUEST -> show error response in fields form
 		else if(400 == error.status)
 		{
+			console.log(formSerialized)
 			show_errors(formSerialized, error.responseJSON);
 			Notify.show_error("DATOS", "Los datos ingresados están incompletos");
 		}

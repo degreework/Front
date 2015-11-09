@@ -215,8 +215,9 @@ UserView.loginCallback = function ()
 	var s = StorageClass.getInstance();
 	s.storage.set('currentChats', '{"chats":[]}');
 
-	//login callback, redirecto to index
-	window.location = Site.geRootUrl();
+	// esto esta causando un problema con el localstorage del progreso 
+	//login callback, redirecto to index 
+	//window.location = Site.geRootUrl();
 
 }
 

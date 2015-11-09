@@ -77,6 +77,8 @@ ActivitieChildView.prototype.check = function(id, data)
 			user = JSON.parse(localStorage.getItem('user'))
 			var gamificationView = new GamificationView();
 			gamificationView.get_progress_user(user.id)
+
+			///////////////////////////////////////////////////////
 		});
 
 }
