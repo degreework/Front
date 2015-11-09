@@ -84,7 +84,11 @@ ModuleView.prototype.list_modules = function(container){
 		URL_ALL_MODULES,
 		function(response){
 			//console.log(response)
-			$.each(response.results, function(k,v){ModuleView._render_module_index(container, v)})
+			if (response.results.length >0) {
+				$.each(response.results, function(k,v){ModuleView._render_module_index(container, v)})
+			}else{
+				$(container).append('<p>No hay módulos creados')
+			};
 		})
 
 }

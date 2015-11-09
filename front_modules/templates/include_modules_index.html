@@ -13,11 +13,21 @@
 
 {% block scripts %}
 <script>	
+	
+	// progreso de la medalla del usuario 
+	user = JSON.parse(localStorage.getItem('user'))
+	var gamificationView = new GamificationView();
+	gamificationView.get_progress_user(user.id)
+
+
 	// trae los modulos creados
+	
 	var module = new ModuleView();
 	module.list_modules($("#modules_container"))
-
 	$('#id_list_modules').hide()
+
+
+
 
 </script>
 
