@@ -28,18 +28,6 @@ UserView.verify = function ()
 		main_chat_status( 'conectado' , "online" );
 		chatSocked.emmit('listChatUpdate',user);
 		
-	// seccion gamification 
-	var s = StorageClass.getInstance();
-
-
-    if(-1 === s.storage.get("permissions").indexOf("gamification.change_scores")){
-    
-      console.log('entro')
-      $('#gamification').hide()
-      $('#gamification_di').hide()
-    }
-
-
 		UserView.showLoggedUser();		
 	}
 	else
@@ -93,6 +81,13 @@ UserView.showLoggedUser = function () {
 		if(-1 != s.storage.get("permissions").indexOf("users.can_list")){
 			$(".action-list-users").show()
 		}
+	}catch(err){}
+
+	//Show Gamification
+	try{
+		if(-1 === s.storage.get("permissions").indexOf("gamification.change_scores")){
+      		$('.gamification_di').hide()
+    }
 	}catch(err){}
 
 	//Show Create Module option
