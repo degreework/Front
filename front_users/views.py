@@ -8,6 +8,10 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 API_SERVER = settings.API_SERVER
 
+if not settings.DEBUG:
+  import requests_unixsocket
+  requests_unixsocket.monkeypatch()
+
 from decorators.ScopeRequired import ScopeRequired
 
 def index(request):
