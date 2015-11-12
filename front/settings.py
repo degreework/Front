@@ -25,7 +25,7 @@ SECRET_KEY = '4rwvcw%@pdto9$4@$+_%kno9mvrn)o0(@luoz86yl+@d&ne9#^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -136,18 +136,18 @@ AUTHENTICATION_BACKENDS = (
 """
 
 ##Testing
-if DEBUG:
+#if DEBUG:
     # Database
     # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}
 
 #persisntent sessions 
 #SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 #here host server is specified
-API_SERVER = 'http://127.0.0.1:8080';
+API_SERVER = 'http://127.0.0.1:8080'
