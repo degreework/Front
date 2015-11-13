@@ -1258,7 +1258,7 @@ $( document ).ready(function() {
 
     //Change theme function
     function main_set_theme( theme ) {
-      var theme_css = "http://127.0.0.1:8000/static/themes/" + theme + "/jquery-ui.min.css";    
+      var theme_css = "http://web.g4.local:8080/static/themes/" + theme + "/jquery-ui.min.css";    
       $( "#theme" ).attr( "href" , theme_css );
       return false;
     }
