@@ -2,7 +2,7 @@ var conf =
 {
     domain: 'domain.ltd',
     server_type: 'socket.io',
-    server: 'http://localhost',
+    server: 'http://chat.localhost',
     port: '4000',
     debug: true,
     auto_login: false,
