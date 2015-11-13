@@ -7,8 +7,7 @@ ChatSocked.prototype.socked = "";
 // se conecta al servidor donde se maneja el chat 
 ChatSocked.prototype.connect = function(){
 
-	console.log('connecting to '+conf.server+':'+conf.port);
-	ChatSocked.prototype.socked = io.connect(conf.server+':'+conf.port);
+	ChatSocked.prototype.socked = io.connect('127.0.0.1:4000');
 	
 	ChatSocked.prototype.socked.on('connect', function() {
 		console.log('connected');

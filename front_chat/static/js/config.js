@@ -2,8 +2,8 @@ var conf =
 {
     domain: 'domain.ltd',
     server_type: 'socket.io',
-    server: 'http://chat.g4.local',
-    port: '8080',
+    server: 'http://localhost',
+    port: '4000',
     debug: true,
     auto_login: false,
     sound_active: true,
