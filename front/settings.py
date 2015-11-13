@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4rwvcw%@pdto9$4@$+_%kno9mvrn)o0(@luoz86yl+@d&ne9#^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -150,4 +150,7 @@ DATABASES = {
 #SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 #here host server is specified
-API_SERVER = 'http://127.0.0.1:8080'
+if DEBUG:
+    API_SERVER = 'http://127.0.0.1:8080'
+else:
+    API_SERVER = 'http+unix://%2Fwebapps%2FServices%2Frun%2Fgunicorn.sock'

@@ -1,7 +1,7 @@
 var http = location.protocol;
 var slashes = http.concat("//");
 //var host = slashes.concat(window.location.hostname) + ':8080/';
-var host = slashes.concat('api.'+window.location.hostname) + '/';
+var host = slashes.concat('api.localhost') + ':8080/';
 console.info('api', host)
 
 //

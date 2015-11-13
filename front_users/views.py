@@ -8,7 +8,9 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 API_SERVER = settings.API_SERVER
 
-if not settings.DEBUG:
+import requests
+
+if 'unix:' in API_SERVER:
   import requests_unixsocket
   requests_unixsocket.monkeypatch()
 
@@ -44,7 +46,6 @@ def authentication_requiered(request):
 
 
 from django.http import HttpResponse
-import requests
 from django.views.decorators.csrf import csrf_exempt
 
 from django.core.exceptions import PermissionDenied
