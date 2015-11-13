@@ -56,7 +56,7 @@ UserView.showIndexUser = function ()
 		$("#introduction_auth").show()
 		$('.footer').hide()
 
-		$(".chat-section").fadeIn();
+		//$(".chat-section").fadeIn();
 
 		UserView.showLoggedUser();
 	}
