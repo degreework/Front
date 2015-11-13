@@ -80,7 +80,12 @@
 	<link rel="stylesheet" href="{% static 'css/tipsy.css' %}">
 	<link rel="stylesheet" href="{% static 'css/chat.css' %}">
 	
-	<script src="http://localhost:4000/socket.io/socket.io.js" ></script>
+	{% if DEBUG %}
+		<script src="http://localhost:4000/socket.io/socket.io.js" ></script>
+	{% else %}
+		<script src="//socket.io/socket.io.js" ></script>
+	{% endif %}
+
 	
 	
     <!--<script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>-->
@@ -123,6 +128,7 @@
 	
 </head>
 <body>
+
 <div class="col-md-12">
 	<nav class="navbar navbar-default head navbar-fixed-top">
 		<header class="page-header">
