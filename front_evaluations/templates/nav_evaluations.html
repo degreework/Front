@@ -15,7 +15,8 @@
 		</a>
 		
 		<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-		  	<li class="dropdown-header">Pregunta</li>
+		  	<li class="dropdown-header">Crear preguntas</li>
+		  	<li role="separator" class="divider"></li>
     		<li>
     			<a href="{% url 'front_evaluations:createEssay' mod_slug %}">Abierta</a>
     		</li>
@@ -27,7 +28,9 @@
     		<li>
     			<a href="{% url 'front_evaluations:createTrueFalse' mod_slug %}">Verdadero/Falso</a>
     		</li>
-			<li class="dropdown-header">Quiz</li>
+			<li role="separator" class="divider"></li>
+			<li class="dropdown-header">Crear quiz</li>
+			<li role="separator" class="divider"></li>
     		<li>
     			<a href="{% url 'front_evaluations:createQuiz' mod_slug %}">Quiz</a>
     		</li>
@@ -43,7 +46,9 @@
 		</a>
 		
 		<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-		  	<li class="dropdown-header">Lista de Preguntas</li>
+		 
+		  	<li class="dropdown-header">Lista de preguntas</li>
+		  	<li role="separator" class="divider"></li>
     		<li>
     			<a href="{% url 'front_evaluations:questionsE' mod_slug %}">Abierta</a>
     		</li>
@@ -55,8 +60,9 @@
     		<li>
     			<a href="{% url 'front_evaluations:questionsTF' mod_slug %}">Verdadero/Falso</a>
     		</li>
-    		
-			<li class="dropdown-header">Lista Quiz</li>
+    		<li role="separator" class="divider"></li>
+			<li class="dropdown-header">Lista quiz</li>
+			<li role="separator" class="divider"></li>
     		<li>
     			<a href="{% url 'front_evaluations:quizAdmin' mod_slug %}">Quices</a>
     		</li>
@@ -75,7 +81,7 @@
 	
 {% block scripts %}
 	<script>
-		
+		active()
 		var slug = "{{mod_slug}}";
 		var module = new ModuleView();
 		module.render_module_name(

@@ -30,7 +30,7 @@
             
           </span>
       </span>
-      <ul class="dropdown-menu" >
+      <ul class="dropdown-menu " >
         <div id="btn-mark-all">
           Notificaciones
           <a id="btn-all-readed" class="pull-right"><span>Marcar como leídos</span></a>
@@ -64,4 +64,15 @@
 
 <script type="text/javascript">
 
+var noti = new NotificationView()
+
+  $('#user-notify').scroll(function() {
+      console.log('entro scroll')
+      console.log($('#user-notify').scrollTop())
+      console.log($('.notifications').height() - $('#user-notify').height())
+
+    if($('#user-notify').scrollTop() == $('#user-notify').height()/2 ) {
+      NotificationView.scroll_list(URL_LIST_ASKS_FORO);          
+      }
+  });
 </script>

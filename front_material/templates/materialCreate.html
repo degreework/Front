@@ -39,7 +39,12 @@
 		
 		var formMaterial = new MaterialForm(
 			$("#form_create_material"),
-			hash
+			hash,
+			function(){
+				
+				$('li').removeClass('active')
+				active()
+			}
 			//MaterialView.prototype.handler_created_form
 		)
 	}

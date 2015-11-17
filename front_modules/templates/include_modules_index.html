@@ -3,7 +3,9 @@
 	<div class="col-md-12">
 		<!--<br>
 		<h3 class="title" style="margin-top: 4px;"></h3>-->
-		<h2>Módulos</h2>
+		<h2>Módulos
+		<a class="pull-right action-create-module" href="{% url 'front_modules:create' %}" hidden><span class='glyphicon glyphicon-plus-sign add_module' style="font-size:xx-large;"></span></a>
+		</h2>
 		<hr>
 		<br>
 		<div class="col-md-12" id="modules_container"></div>
@@ -13,18 +15,22 @@
 
 {% block scripts %}
 <script>	
+
+	if(User.exist())
+	{
 	
-	// progreso de la medalla del usuario 
-	user = JSON.parse(localStorage.getItem('user'))
-	var gamificationView = new GamificationView();
-	gamificationView.get_progress_user(user.id)
+		// progreso de la medalla del usuario 
+		user = JSON.parse(localStorage.getItem('user'))
+		var gamificationView = new GamificationView();
+		gamificationView.get_progress_user(user.id)
 
 
-	// trae los modulos creados
+		// trae los modulos creados
 	
-	var module = new ModuleView();
-	module.list_modules($("#modules_container"))
-	$('#id_list_modules').hide()
+		var module = new ModuleView();
+		module.list_modules($("#modules_container"))
+		$('#id_list_modules').hide()
+	}
 
 
 

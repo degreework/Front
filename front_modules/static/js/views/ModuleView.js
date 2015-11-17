@@ -94,7 +94,9 @@ ModuleView.prototype.list_modules = function(container){
 }
 
 ModuleView._render_module_index = function(container, module){
-	console.log(module)
+	//console.log(module)
+	
+
 	gamification = JSON.parse(localStorage.getItem('badgeProgress'))
 	progress = ''
 	

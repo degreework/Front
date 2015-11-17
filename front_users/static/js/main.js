@@ -29,10 +29,10 @@ var main = function(){
 
 
 
-	/*(function () {
+	(function () {
   		$('[data-toggle="popover"]').popover();
 	})
-	();*/
+	();
 	/*
 		CHAT
 	*/

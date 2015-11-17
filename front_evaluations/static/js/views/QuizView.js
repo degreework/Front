@@ -554,9 +554,10 @@ EvaluationsView.get_first_question = function(question_list){
 
 // elimina la pregunta de la lista para seguir con la proxima
 EvaluationsView.remove_first_question = function(question_list){
-
-	question_list =  question_list.replace(question_id[0]+',', "");
-	return question_list
+	console.log('remove_first_question')
+	question_list2 =  question_list.replace(question_id[0]+',', "");
+	console.log(question_list2)
+	return question_list2
 }
 
 //guarda el estado del quiz una vez temina

@@ -431,9 +431,35 @@ function create_form(url, form, method, callback, params)
 var active = function()
 {
 	var url = window.location;
+	var url2 = String(url)
+	console.log(url2)
     $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+
     $('ul.nav a').filter(function() {
+        
+        if ($(this).text().indexOf('Material') !== -1 && url2.indexOf('material') !== -1) {
+        	$(this).parent().addClass('active')
+        };
+
+        if ($(this).text().indexOf('Wiki') !== -1 && url2.indexOf('wiki') !== -1) {
+        	$(this).parent().addClass('active')
+        };
+
+        if ($(this).text().indexOf('Foro') !== -1 && url2.indexOf('forum') !== -1) {
+        	$(this).parent().addClass('active')
+        };
+
+        if ($(this).text().indexOf('Actividades') !== -1 && url2.indexOf('activity') !== -1) {
+        	$(this).parent().addClass('active')
+        };
+
+        if ($(this).text().indexOf('Quices') !== -1 && url2.indexOf('evaluations') !== -1) {
+        	$(this).parent().addClass('active')
+        };
+
         return this.href == url;
     }).parent().addClass('active');
+
+
 }
 

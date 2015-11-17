@@ -192,13 +192,22 @@ UserView.loginCallback = function ()
 	console.log("login Callback")
 	main();
 	UserService.get_mini_user(URL_CURRENT_USER);
-	UserView.showIndexUser();
+	//UserView.showIndexUser();
 
 	// trae los modulos creados
-	var module = new ModuleView();
-	module.render_modules($("#id_list_modules"))
+	//var module = new ModuleView();
+	//module.render_modules($("#id_list_modules"))
 
-	
+	//progreso en los modulos 
+	user = JSON.parse(localStorage.getItem('user'))
+	var gamificationView = new GamificationView();
+	gamificationView.get_progress_user(user.id)
+
+	var module = new ModuleView();
+	module.list_modules($("#modules_container"))	
+	$('#id_list_modules').hide()
+
+
 	// se conecta al servidor para el chat y agrega
 	chat_join();
 	chatSocked.emmit('addUser', user)

@@ -3,6 +3,22 @@ var NotificationView = function()
 	
 }
 
+NotificationView.prototype.next_page = null;
+
+NotificationView.scroll_list = function(url){
+	//console.log("AskView:scroll_list")
+		
+	if(NotificationView.prototype.next_page)
+	{
+		console.log(NotificationView.prototype.next_page);
+		var service = new NotificationService();
+		service.list( NotificationView.prototype.next_page , this.render_notifications)
+		
+	}
+}
+
+
+
 NotificationView.get_notifications = function()
 {
 	var service = new NotificationService();
@@ -26,8 +42,13 @@ NotificationView.render_notifications = function(notifications, saved)
 	if(notifications.count>0)
 	{
 		$("#btn-mark-all").fadeIn()
+	}else{
+		$('#user-notify').text('No hay notificaciones')
+		$('#user-notify').css('text-align','center')
+		$('#user-notify').css('height','40px')
 	}
 
+	console.log(notifications.results.length)
 
 	for (var i=0, len=notifications.results.length; i<len;i++) {
 		NotificationView.render(notifications.results[i]);
@@ -49,6 +70,9 @@ NotificationView.render_notifications = function(notifications, saved)
 	$("#btn-all-readed").click(function(e){
 			NotificationView.do_mark_all_readed();
 	})
+
+	NotificationView.prototype.next_page = notifications.next;
+	console.log(NotificationView.prototype.next_page)
 
 }
 
@@ -183,7 +207,7 @@ NotificationView.remove_all_rendered = function(count)
 	}
 	
 	//$("#a-noti").empty()
-	$("#user-notify").empty()
+	//$("#user-notify").empty()
 }
 
 
