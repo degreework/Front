@@ -73,10 +73,10 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             'templates',
-            os.path.join(BASE_DIR, 'front_evaluations', 'templates/quiz'),
-            os.path.join(BASE_DIR, 'front_evaluations', 'templates/questions'),
-            os.path.join(BASE_DIR, 'front_evaluations', 'templates/categories'),
-            os.path.join(BASE_DIR, 'front_notifications', 'templates')
+            #os.path.join(BASE_DIR, 'front_evaluations', 'templates/quiz'),
+            #os.path.join(BASE_DIR, 'front_evaluations', 'templates/questions'),
+            #os.path.join(BASE_DIR, 'front_evaluations', 'templates/categories'),
+            #os.path.join(BASE_DIR, 'front_notifications', 'templates')
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -117,7 +117,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'www/static')
+STATIC_ROOT = '/var/www/html/trabajodegrado/'
 """STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     #os.path.join(BASE_DIR, 'statics'),
@@ -141,16 +141,25 @@ AUTHENTICATION_BACKENDS = (
     # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'pruebas',                      # Or path to database file if using sqlite3.
+            # The following settings are not used with sqlite3:
+            'USER': 'admin',
+            'PASSWORD': 'Un1VaLL3*',
+            'HOST': '192.168.14.251',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
+            'PORT': '5432',                      # Set to empty string for default.
+        }
 }
 
 #persisntent sessions 
 #SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 #here host server is specified
+"""
 if DEBUG:
     API_SERVER = 'http://127.0.0.1:8080'
 else:
     API_SERVER = 'http+unix://%2Fwebapps%2FServices%2Frun%2Fgunicorn.sock'
+"""
+
+API_SERVER = 'http://127.0.0.1:8001'
