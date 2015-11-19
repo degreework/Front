@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -66,18 +67,24 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'front.urls'
-
+PROJECT_DIR = os.path.dirname(__file__)
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            'templates',
-            #os.path.join(BASE_DIR, 'front_evaluations', 'templates/quiz'),
-            #os.path.join(BASE_DIR, 'front_evaluations', 'templates/questions'),
-            #os.path.join(BASE_DIR, 'front_evaluations', 'templates/categories'),
-            #os.path.join(BASE_DIR, 'front_notifications', 'templates')
-            ],
+	'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+	    os.path.join(BASE_DIR, 'front_users/templates'),
+            os.path.join(BASE_DIR, 'front_activities/templates'),
+            os.path.join(BASE_DIR, 'front_chat/templates'),
+            os.path.join(BASE_DIR, 'front_evaluations/templates'),
+            os.path.join(BASE_DIR, 'front_foro/templates'),
+            os.path.join(BASE_DIR, 'front_gamification/templates'),
+            os.path.join(BASE_DIR, 'front_material/templates'),
+            os.path.join(BASE_DIR, 'front_modules/templates'),
+            os.path.join(BASE_DIR, 'front_wiki/templates'),
+
+	],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,11 +97,7 @@ TEMPLATES = [
         },
     },
 ]
-"""
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'front_users/templates'),
-)
-"""
+
 WSGI_APPLICATION = 'front.wsgi.application'
 
 
