@@ -51,7 +51,7 @@ UserView.showIndexUser = function ()
 		$('.icon-menu').show();
 		$('.consult-user').show();
 		$('.menu').show();
-		$(".pic_profile").attr("src",'http://127.0.0.1:8080'+User.get_thumb(1));
+		$(".pic_profile").attr("src", "http://192.168.14.231:8001"+User.get_thumb(1));
 		$("#main").show()
 		$("#introduction_auth").show()
 		$('.footer').hide()
