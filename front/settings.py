@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -66,18 +67,28 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'front.urls'
-
+PROJECT_DIR = os.path.dirname(__file__)
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            'templates',
-            os.path.join(BASE_DIR, 'front_evaluations', 'templates/quiz'),
+	'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+	    os.path.join(BASE_DIR, 'front_users/templates'),
+            os.path.join(BASE_DIR, 'front_activities/templates'),
+            os.path.join(BASE_DIR, 'front_chat/templates'),
+            os.path.join(BASE_DIR, 'front_evaluations/templates'),
+            os.path.join(BASE_DIR, 'front_foro/templates'),
+            os.path.join(BASE_DIR, 'front_gamification/templates'),
+            os.path.join(BASE_DIR, 'front_material/templates'),
+            os.path.join(BASE_DIR, 'front_modules/templates'),
+            os.path.join(BASE_DIR, 'front_wiki/templates'),
+	    
+	    os.path.join(BASE_DIR, 'front_evaluations', 'templates/quiz'),
             os.path.join(BASE_DIR, 'front_evaluations', 'templates/questions'),
             os.path.join(BASE_DIR, 'front_evaluations', 'templates/categories'),
-            os.path.join(BASE_DIR, 'front_notifications', 'templates')
-            ],
+
+	],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,11 +101,7 @@ TEMPLATES = [
         },
     },
 ]
-"""
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'front_users/templates'),
-)
-"""
+
 WSGI_APPLICATION = 'front.wsgi.application'
 
 
@@ -117,7 +124,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'www/static')
+STATIC_ROOT = '/var/www/html/trabajodegrado/'
 """STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     #os.path.join(BASE_DIR, 'statics'),
@@ -141,16 +148,32 @@ AUTHENTICATION_BACKENDS = (
     # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 DATABASES = {
     'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': '',                      # Or path to database file if using sqlite3.
+            # The following settings are not used with sqlite3:
+            'USER': '',
+            'PASSWORD': '',
+            'HOST': '',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
+            'PORT': '',                      # Set to empty string for default.
+        }
+}
+"""
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+"""
 #persisntent sessions 
 #SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 #here host server is specified
+"""
 if DEBUG:
     API_SERVER = 'http://127.0.0.1:8080'
 else:
     API_SERVER = 'http+unix://%2Fwebapps%2FServices%2Frun%2Fgunicorn.sock'
+"""
+
+API_SERVER = 'http://127.0.0.1:8002'
