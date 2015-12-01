@@ -143,11 +143,18 @@ AUTHENTICATION_BACKENDS = (
 """
 
 ##Testing
-#if DEBUG:
+if DEBUG:
     # Database
     # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-DATABASES = {
-    'default': {
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
             'NAME': '',                      # Or path to database file if using sqlite3.
             # The following settings are not used with sqlite3:
@@ -156,24 +163,14 @@ DATABASES = {
             'HOST': '',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
             'PORT': '',                      # Set to empty string for default.
         }
-}
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}
-"""
 #persisntent sessions 
 #SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 #here host server is specified
-"""
+
 if DEBUG:
     API_SERVER = 'http://127.0.0.1:8080'
 else:
-    API_SERVER = 'http+unix://%2Fwebapps%2FServices%2Frun%2Fgunicorn.sock'
-"""
-
-API_SERVER = 'http://127.0.0.1:8002'
+    #API_SERVER = 'http+unix://%2Fwebapps%2FServices%2Frun%2Fgunicorn.sock'
+    API_SERVER = 'http://127.0.0.1:8002'

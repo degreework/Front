@@ -1,8 +1,15 @@
+var DEBUG = true;
+
 var http = location.protocol;
 var slashes = http.concat("//");
-//var host = slashes.concat(window.location.hostname) + ':8080/';
+if (DEBUG) {
+	var host = slashes.concat(window.location.hostname) + ':8080/';
+}
+else
+{
+	var host = slashes.concat('192.168.14.231') + ':8002/';
+}
 //var host = slashes.concat('api.g4.local') + ':8080/';
-var host = slashes.concat('192.168.14.231') + ':8002/';
 
 console.info('api', host)
 

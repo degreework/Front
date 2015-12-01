@@ -39,7 +39,7 @@ UserView.verify = function ()
 
 UserView.showIndexUser = function ()
 {
-	console.log("UserView.showIndexUser")
+	//console.log("UserView.showIndexUser")
 	//si el usuario esta autenticado
 	if (UserService.isAutenticated())
 	{

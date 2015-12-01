@@ -1,7 +1,7 @@
 var StorageClass = (function(){
     function StorageClass() {
         //do stuff
-        console.log("StorageClass created")
+        //console.log("StorageClass created")
         this.storage=$.localStorage;
     }
     var instance;
