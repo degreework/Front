@@ -109,7 +109,7 @@ URL_DETAIL_QUIZ = host+'API/quiz/%slug%/detail/'; // se le pega el id del quiz a
 
 
 URL_QUALIFY_QUIZ = host+'API/quiz/qualify';
-URL_CHANGE_QUALIFY_QUIZ = host+'API/quiz/changeQualify'; 
+URL_CHANGE_QUALIFY_QUIZ = host+'API/quiz/%slug%/changeQualify'; 
 URL_CHECK_PASSED_QUIZ = host+'API/quiz/checkPassed';
 
 

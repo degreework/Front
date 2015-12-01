@@ -62,7 +62,7 @@ AskView.prototype.render_list = function (data){
 		container.className = 'col-md-12'
 		
 		$(container).text('No hay discusiones creadas')
-		parent_container.prepend(container);
+		$(AskView.prototype.container_list_ask).prepend(container);
 		console.log('no hay discusiones')
 	};
 	

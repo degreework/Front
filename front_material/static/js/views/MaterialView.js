@@ -168,7 +168,9 @@ MaterialView.prototype.list = function(url, container)
 MaterialView.prototype.render_list = function(response, container)
 {
 	console.log(response)
-
+	if (response.count <= 0) {
+		$(container).text('Aún no hay materiales')
+	};
 	for (var i=0, len=response.results.length; i<len;i++) {
 		MaterialView.prototype.render_material(response.results[i], container)
 

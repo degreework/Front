@@ -181,6 +181,6 @@ ModuleView.prototype.render_module_name = function(slug, container)
 		url,
 		function(response){
 			console.log(response)
-			$(container).text(response.name)
+			$(container).text('Módulo ' + response.name)
 		})
 }

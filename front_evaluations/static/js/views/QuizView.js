@@ -87,6 +87,8 @@ EvaluationsView.render_all_quiz = function (response)
 
 EvaluationsView.render_list_quiz = function(parent_container, response)
 {
+	console.log(response)
+	if(response.count >0){
 	response = response.results;
 
 	for (i = response.length-1; i >= 0; i--) { 		
@@ -143,6 +145,9 @@ EvaluationsView.render_list_quiz = function(parent_container, response)
 
 		link2.addEventListener('click', function(e){ EvaluationsView.handle_delete(response, e.target.name, 'quiz', $(e.target).parents('.row_quiz-'+e.target.name)) }, false);
 	}
+	}else{
+	parent_container.prepend('<br><p>Aún no hay quices<td></p>');	
+	}
 }
 
 EvaluationsView.get_all_Quiz_Users = function()
@@ -158,6 +163,10 @@ EvaluationsView.render_every_quiz = function(response)
 	//console.log('entro')
 	//console.log(response)
 	response = response.results;
+
+	if (response.length-1 <= 0) {
+		$('.page_content').text('Aún no hay quices')
+	};
 
 	for (i = response.length-1; i >= 0; i--) { 		
 		
@@ -881,12 +890,18 @@ EvaluationsView.change_qualify = function(sitting, div , qualify){
 	if (qualify === 'correcta') {
 		var quizService = new QuizService();
 		var data = JSON.parse('{ "id_sitting":'+sitting.id+', "id_question":'+id_question+' }')
+		var url = URL_CHANGE_QUALIFY_QUIZ.replace(/\%slug%/g, slug);
 		quizService.dispatch(
-			URL_CHANGE_QUALIFY_QUIZ ,
+			url,
 			data,
 			function(response)
 						{
+							//location.reload
 							$(div).fadeOut()
+							//console.log(response)
+							//user = JSON.parse(localStorage.getItem('user'))
+							//var gamificationView = new GamificationView();
+							//gamificationView.get_progress_user(user.id)
 						}
 			)
 

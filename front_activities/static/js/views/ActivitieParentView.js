@@ -87,8 +87,12 @@ ActivitieParentView.prototype.listActivities = function(url)
 
 ActivitieParentView.prototype.render_list_activities = function(response)
 {
+	
+	if(response.count >0){
 
 	response = response.results;
+
+
 
 	for (i = response.length-1; i >= 0; i--) { 		
 		
@@ -153,6 +157,9 @@ ActivitieParentView.prototype.render_list_activities = function(response)
 		$('#list-activities').prepend(container);
 
 		link2.addEventListener('click', function(e){ ActivitieParentView.prototype.handle_delete(response, e.target.name, 'quiz', $(e.target).parents('.row_quiz-'+e.target.name)) }, false);
+	}
+	}else{
+		$('#list-activities').prepend('<br><p>Aún no hay actividades<td></p>');
 	}
 }
 
