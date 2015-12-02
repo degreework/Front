@@ -1,0 +1,61 @@
+{% extends "template_material_parent.html" %}
+
+{% comment %}
+	template for listing wiki pages
+{% endcomment %}
+
+{% block section_title %}
+	<h3 class="sub-section">Lista Materiales</h3>
+{% endblock section_title %}
+
+{% block module %}
+	<br><br>
+	<div class="col-md-12" style="padding-bottom:100px">
+		
+		<h3 class="title">Materiales</h3>
+		<br>
+		<!-- tabla con la lista de las actividades -->
+		<div class="table-responsive" id="show_">
+			<table class="table table-hover">
+  				<thead>
+					<tr>
+						<th>#</th>
+						<th>Titulo</th>
+						<th>Descripción</th>
+						<th>Editar</th>
+						<th>Eliminar</th>
+					</tr>
+				</thead>
+				<tbody id="list-materiales">
+					
+				</tbody>
+			</table>
+		</div>
+
+		
+			
+
+		<!-- en caso tal de que quiera editar una actividad (parent)-->
+		<div class="col-md-12" id="edit_" hidden>
+
+			<br><br>
+			<div class="col-md-6 col-sm-offset-3">
+				<form id="form_edit_material" hidden>
+					<button class="btn btn-default pull-right" type="submit" name="action">Actualizar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock module %}
+
+{% block scripts %}
+<script>
+
+	var url = URL_LIST_MATERIAL_MODULE.replace(/\%slug%/g, "{{mod_slug}}");
+		
+	var material = new MaterialView();
+	material.list_table(url);
+
+</script>
+{% endblock scripts %}
