@@ -165,6 +165,183 @@ MaterialView.prototype.list = function(url, container)
 	});
 }
 
+MaterialView.prototype.list_table = function(url){
+
+	var THIS = this;
+	var materialService = new MaterialService();
+	materialService.list(
+		url,
+		function (response) {
+			console.log(response)
+			THIS.render_list_table(response);
+		
+	});
+
+}
+
+MaterialView.prototype.render_list_table = function(response){
+	if(response.count >0){
+
+		response = response.results;
+
+		for (i = response.length-1; i >= 0; i--) {
+			var container = document.createElement("tr");
+			container.className = 'row_quiz-'+i
+
+			var number = document.createElement("td");
+			$(number).text(i+1)
+
+			var title = document.createElement("td");
+			$(title).text(response[i].title)
+
+			var description = document.createElement("td");
+			$(description).text(response[i].description)
+
+			// editar
+			var col_edit = document.createElement("td");
+			var link = document.createElement("a");
+			var icon = document.createElement("span")
+			icon.className = 'glyphicon glyphicon-edit'
+			icon.name = i
+
+			link.addEventListener('click', function(e){ MaterialView.prototype.handle_edit(response, e.target.name, 'quiz') }, false);
+			link.appendChild(icon)
+			col_edit.appendChild(link)
+
+			//eliminar 
+			var col_del = document.createElement("td");
+			var link2 = document.createElement("a");
+			var icon2 = document.createElement("span")
+			icon2.className = 'glyphicon glyphicon-trash'
+			icon2.name = i
+
+			link2.appendChild(icon2)
+			col_del.appendChild(link2)
+
+			container.appendChild(number);
+			container.appendChild(title);
+			container.appendChild(description);
+			//container.appendChild(col_link);
+			container.appendChild(col_edit);
+			container.appendChild(col_del);
+			//container.appendChild(col_env);
+			
+			$('#list-materiales').prepend(container);
+
+			link2.addEventListener('click', function(e){ MaterialView.prototype.handle_delete(response, e.target.name, 'material', $(e.target).parents('.row_quiz-'+e.target.name)) }, false);
+
+
+		}
+
+	}else{
+		$('#list-materiales').prepend('<br><p>Aún no hay materiales<td></p>');
+	}
+}
+
+MaterialView.prototype.handle_edit = function(response, index, tipo){
+	
+	$('#edit_').fadeIn()
+	$('#show_').hide()
+
+	response = response[index]
+
+	form = $("#form_edit_material")	
+
+	if (response.content.type === 'file') {
+		
+		var formMaterial = new MaterialForm(
+			form,
+			"#file",
+			MaterialView.prototype.render_parametros,
+			response
+			)
+	}else{
+		var formMaterial = new MaterialForm(
+			form,
+			"#link",
+			MaterialView.prototype.render_parametros,
+			response
+			)
+	};
+}
+
+MaterialView.prototype.handle_delete = function(response, index, tipo, row){
+	console.log(tipo)
+
+	response = response[index]
+	notify = Notify.show_confirm('el '+ tipo);
+	var id = response.id
+
+	url = '';
+	
+	if (response.content.type === 'file') {
+		url = URL_CREATE_MATERIAL+"/"+response.id;
+
+	}else{
+		url = URL_CREATE_MATERIAL_LINK+"/"+response.id;
+	}
+
+	$('#erase').click(function(){
+		
+		var materialService = new MaterialService();
+		materialService.delete(url , function(e){
+		});
+
+		notify.close()
+		row.fadeOut()
+
+	})
+	
+	$('#cancel').click(function(){
+		notify.close()	
+	})
+}
+
+MaterialView.prototype.render_parametros = function(form, response){
+	console.log('render_parametros')
+	console.log(response)
+	$.each(response, function(key, value) {	
+
+		console.log(key +'=='+ value)
+
+		$('#id_'+key).val(value);
+
+		if (key === 'content' && value.type === 'link') {
+			console.log(value.url)
+			$('#id_url').val(value.url);
+		}
+	})
+
+	$(form).show()
+
+	//var url = URL_CREATE_ACTIVITIE_PARENT.replace(/\%slug%/g, slug);
+	url = '';
+	
+	if (response.content.type === 'file') {
+		url = URL_CREATE_MATERIAL+"/"+response.id;
+
+	}else{
+		url = URL_CREATE_MATERIAL_LINK+"/"+response.id;
+	}
+	
+	$(form).submit(function(e){
+		e.preventDefault();
+
+		if("" == $("#id_file").val()){
+			console.log('entro a remover')
+			$("#id_file").remove()  
+		}
+		
+		var data = new FormData($(e.target).get(0));
+		var materialService = new MaterialService();
+		materialService.update(url, data, MaterialView.prototype.succes_create);
+
+	});
+
+	/*
+	*/
+}
+
 MaterialView.prototype.render_list = function(response, container)
 {
 	console.log(response)
@@ -261,7 +438,7 @@ MaterialView.prototype.render_material = function(response, global_container)
 
 }
 
-var MaterialForm = function(form, hash ,callback){
+var MaterialForm = function(form, hash ,callback, parametros){
 	var url = "";
 	
 	if("#link" == hash)
@@ -277,6 +454,7 @@ var MaterialForm = function(form, hash ,callback){
 		url,
 		form,
 		'OPTIONS',
-		callback
+		callback, 
+		parametros
 	);
 }

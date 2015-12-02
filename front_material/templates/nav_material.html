@@ -21,6 +21,11 @@
     		<a id="id_act_link" href="{% url 'front_material:create' mod_slug %}#link">Enlace</a></li>
   		</ul>
 	</li>
+	<li class="section-nav" role="presentation">
+		<a href="{% url 'front_material:list' mod_slug %}">
+			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+		</a>
+	</li>
 
 {% endblock items %}
 	

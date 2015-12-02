@@ -16,3 +16,7 @@ def create(request, mod_slug):
 @ScopeRequired(["material.can_view"])
 def view(request, mod_slug, id):
     return render_to_response('materialView.html', {'title': 'Material | Name App', 'mod_slug':mod_slug}, context_instance=RequestContext(request))
+
+
+def list(request, mod_slug):
+    return render_to_response('listMaterial.html', {'title': 'Material | Name App', 'mod_slug':mod_slug}, context_instance=RequestContext(request))
