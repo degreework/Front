@@ -120,11 +120,12 @@ function render_form(method, form , response, callback, params)
 				else if('choice' == value.type || 'plan' == key )
 				{
 
+					console.log(key)
 					//creat label for input
 					var label = document.createElement("label");
 					//set text to label
-					label.appendChild(document.createTextNode('Selecciona un programa'));
-					field_div.appendChild(label);
+					
+					//field_div.appendChild(label);
 
 					//create a input select 
 					input = document.createElement("select");
@@ -134,13 +135,22 @@ function render_form(method, form , response, callback, params)
 					var option = document.createElement("option");
 					option.selected = "selected";
 					option.value = ''//option.disabled = true;
-					option.textContent = "Selecciona un programa";
+					
+
+					if(key === "answer_order"){
+						option.textContent = "Orden de las respuestas";
+						label.appendChild(document.createTextNode('Orden de las respuestas'));
+					}
+						
+					
 					
 					//add option to selectable
 					input.add(option);
 
 					if('plan' == key)
 					{
+						label.appendChild(document.createTextNode('Selecciona un programa'));
+						option.textContent = "Selecciona un programa";
 						//option = document.createElement("option");
 						//input.add(option);					
 						$.getJSON( URL_GET_DEGREE , function( data ) {
@@ -173,7 +183,8 @@ function render_form(method, form , response, callback, params)
 					var label = document.createElement("label");
 					label.id = 'imagen'
 					//set text to label
-					label.appendChild(document.createTextNode('Selecciona una foto de perfil'));
+					console.log(value)
+					label.appendChild(document.createTextNode('Selecciona una foto'));
 					field_div.appendChild(label);
 					
 					input.type = 'file';
