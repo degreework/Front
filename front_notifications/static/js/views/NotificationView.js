@@ -106,7 +106,7 @@ NotificationView.render = function(notification)
 
 	else if("Ask" == notification.target.type)
 	{
-		url = AskModel.generate_url(notification.target.id)
+		url = Module.getURL_section_from_slug(notification.target.module.slug)+AskModel.generate_url(notification.target.id);
 		name = notification.actor.name;
 		verb = ', '+notification.verb;
 		detail = notification.target.detail;

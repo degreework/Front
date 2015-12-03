@@ -323,9 +323,9 @@ WikiView.render_list = function(parent_container, response)
 		var container = document.createElement("div");
 		container.className = 'col-md-12'
 		
-		$(container).text('No hay paginas creadas')
+		$(container).text('No hay páginas creadas')
 		parent_container.prepend(container);
-		console.log('no hay paginas')
+		//console.log('no hay páginas')
 	};
 
 	for (i = 0; i < response.length; i++) { 		
@@ -419,7 +419,14 @@ WikiView.render_request = function(list, global_container)
 
 WikiView.approve_succes = function(response)
 {
-	location.href =  host+":"+location.port+"/"+mod_slug+"/wiki/"; 
+	if(response.slug)
+	{
+		location.href =  Module.getURL(mod_slug, "/wiki/", response.slug); 
+	}
+	else
+	{
+		window.history.back();
+	}
 	//Notify.show_success("Wiki", response.msg);
 }
 
