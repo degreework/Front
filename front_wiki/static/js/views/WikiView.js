@@ -41,11 +41,13 @@ WikiView.succes_create_form = function()
     //1 - Load Markup editor
     //debug_info("3.1 - Load Markup editor")
 	//MarkdownEditor.load(WikiView.editor);
-	MarkupEditor.load(WikiView.editor);
+	//MarkupEditor.load(WikiView.editor);
 
 	//2 - hidde raw field
 	//debug_info("3.2 - add extra fields")
-	WikiView.hidde_input_raw($("#id_raw"));
+	//WikiView.hidde_input_raw($("#id_raw"));
+	$("#id_raw").remove()
+	$('textarea').attr("name", "raw")
 
 	//3 - Set events handler
 	//debug_info("3.3 - Set events handler")
@@ -60,6 +62,7 @@ WikiView.succes_create_form = function()
 
 	    //-> onsubmit
 	    var url = URL_CREATE_PAGE_WIKI_MODULE.replace(/\%slug%/g, slug);
+
         WikiView.form_create.submit(function(e){
 			e.preventDefault();
 			
@@ -91,7 +94,8 @@ WikiView.create_succes = function(wiki)
 	var s = StorageClass.getInstance();
 	if(-1 != s.storage.get("permissions").indexOf("wiki.can_approve_request")){
 		$("#editaded_page_admin").fadeIn();
-		$("#url_wiki_request_admin").attr('href', "WikiModel.generate_url(wiki.page.slug)");
+		url = Module.getURL(SLUG, "wiki", wiki.page.slug);
+		$("#url_wiki_request_admin").attr('href', url );
 
 	}else
 	{
@@ -112,11 +116,13 @@ WikiView.slugter = function (str)
 
 WikiView.hidde_input_raw = function(input)
 {
+
 	//set listener
 	//append editor content to raw input
 	$('textarea').keyup(function(e){
 		$(input).val(WikiView.editor.val())
 		//console.log(WikiView.editor.val())
+		
     });
 	input.hide();
 }
@@ -193,6 +199,7 @@ WikiView.render_page = function(page)
 	$("#wiki_version").text(page.version);
 	$("#wiki_slug").text(page.slug)
 	$("#markdown").html(markdown.toHTML(page.raw));
+	$("#wiki_raw").html(page.raw);
 
 
 	/*Esto es para editarla*/
@@ -251,12 +258,15 @@ function call()
 	$("#id_title").val($("#wiki_title").text())
 
 	//asigna el valor del raw al editor
-	$("#id_textarea").val($("#markdown").text())
+	//$("#id_textarea").val($("#markdown").text())
+	$("#id_textarea").val( $("#wiki_raw").html() )
 
 	//asigna el valor del editor al raw
 	$('textarea').keyup(function(e){
 		$("#id_raw").val($(e.target).val());
     });
+
+    $('textarea').attr("name", "raw");
 
 	$("#form_create_wiki").show();
 	$("#wiki_title").fadeOut();
@@ -283,17 +293,20 @@ function call()
 				var s = StorageClass.getInstance();
 				if(-1 != s.storage.get("permissions").indexOf("wiki.delete_request")){
 					$("#editaded_page_admin").fadeIn();
-					url = WikiModel.generate_url(slug, response.page.slug)
+					//url = WikiModel.generate_url(slug, response.page.slug)
+					
+					url = Module.getURL(SLUG, "wiki", response.page.slug)
+					$("#url_wiki_request_admin").attr('href', url);
 
 				}else
 				{
 					$("#editaded_page").fadeIn();
 					url = response.page.slug+'..'+JSON.parse(response.page.extra_data).parent;
+					$("#url_wiki_request").attr('href', url);
 				}
 				
 
 
-				$("#url_wiki_request").attr('href', url);
 			})
 
 	});
