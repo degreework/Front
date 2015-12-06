@@ -48,7 +48,7 @@ NotificationView.render_notifications = function(notifications, saved)
 		$('#user-notify').css('height','40px')
 	}
 
-	console.log(notifications.results.length)
+	//console.log(notifications.results.length)
 
 	for (var i=0, len=notifications.results.length; i<len;i++) {
 		NotificationView.render(notifications.results[i]);
@@ -72,7 +72,7 @@ NotificationView.render_notifications = function(notifications, saved)
 	})
 
 	NotificationView.prototype.next_page = notifications.next;
-	console.log(NotificationView.prototype.next_page)
+	//console.log(NotificationView.prototype.next_page)
 
 }
 
