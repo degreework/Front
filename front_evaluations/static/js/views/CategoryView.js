@@ -53,6 +53,14 @@ EvaluationsView.render_form_answerMC = function(answers){
 
 EvaluationsView.render_parametros = function(form, response){
 
+	var input = $(form).find("#id_url");
+	input.hide();
+
+	var input2 = $(form).find("#id_single_attempt");
+	$(input2).prop("checked", "checked");
+	$(input2).siblings('label').hide();
+	$(input2).hide();
+
 	$.each(response, function(key, value) {	
 			
 			/*

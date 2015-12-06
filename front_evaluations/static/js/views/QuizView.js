@@ -11,7 +11,7 @@ EvaluationsView.initialize = function(form, url, callback)
 	* 1 - Set form name
 	* 2 - Get form from service
 	*/
-
+	console.log(callback)
 	// 1 - Set form name
 	debug_info("1 - Set form name")
 	EvaluationsView.form_create = form;
@@ -24,12 +24,36 @@ EvaluationsView.initialize = function(form, url, callback)
 		url,
 		EvaluationsView.form_create,
 		'OPTIONS',
-		callback
+		function(){
+			console.log('hola')
+			var input = $(EvaluationsView.form_create).find("#id_url");
+			var input2 = $(EvaluationsView.form_create).find("#id_single_attempt");
+			$(input2).prop("checked", "checked");
+
+			$(EvaluationsView.form_create).find("#id_title").keyup(function(e){
+				console.log('escribe')
+				$(input).val(EvaluationsView.slugter($(e.target).val()));
+				
+		    });
+
+		    input.hide();
+		    $(input2).siblings('label').hide();
+		    input2.hide();
+		}
 	);
 
 	debug_info("3.4 - Show form")
+
 	EvaluationsView.form_create.show();
 
+}
+
+EvaluationsView.slugter = function (str)
+{
+	str = str.replace(/\s/g,'-');
+	str = str.replace(/[^a-zA-Z0-9]/g,"");
+	str = str.toLowerCase();
+	return str;
 }
 
 
@@ -51,7 +75,6 @@ EvaluationsView.change_boolean = function(data){
 EvaluationsView.create_quiz = function(form)
 {
 	//console.info('create_quiz')
-
 	form.submit(function (e) {
 			e.preventDefault();
 			//Selecciona todas las opciones del contendor 
@@ -163,8 +186,9 @@ EvaluationsView.render_every_quiz = function(response)
 	//console.log('entro')
 	//console.log(response)
 	response = response.results;
-
-	if (response.length-1 <= 0) {
+	console.log(response.length)
+	
+	if (response.length <= 0) {
 		$('.page_content').text('Aún no hay quices')
 	};
 
@@ -250,9 +274,18 @@ EvaluationsView.update_quiz = function(form, id)
 }
 
 EvaluationsView.create_sitting_session = function(response){
-	//console.log(response)
-	sessionStorage.setItem('sitting', JSON.stringify(response));
-	$(location).attr('href', Site.geRootUrl()+"/"+slug+"/evaluations/take/"+response.quiz); 
+	console.log(response.sitting)
+
+	if (response.sitting === false) {
+		console.log('ya lo hizo')
+		notify = Notify.show_error('', 'Ya realizaste este quiz, no tienes mas intentos');
+
+	}else{
+		sessionStorage.setItem('sitting', JSON.stringify(response));
+		$(location).attr('href', Site.geRootUrl()+"/"+slug+"/evaluations/take/"+response.quiz); 	
+	};
+
+	
 }
 
 EvaluationsView.get_Quiz = function(){
