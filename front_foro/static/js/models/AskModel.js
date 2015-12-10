@@ -1,6 +1,6 @@
 var AskModel = {};
 
-AskModel.generate_url = function(id)
+AskModel.generate_url = function(slug, id)
 {
-	return '/forum/'+id;
+	return slug+'/forum/'+id;
 }
