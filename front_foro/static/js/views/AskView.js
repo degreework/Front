@@ -76,7 +76,8 @@ AskView.prototype.render_list = function (data){
 		var id = data_list_asks[i].id;
 		
 
-		$(link).attr('href', AskModel.generate_url(mod_slug, id) );
+		var href = Site.geRootUrl()+'/'+AskModel.generate_url(mod_slug, id);
+		$(link).attr('href', href);
 		var titles = document.createElement("h4");
 		var summarys = document.createElement("span");
 		summarys.className =  'time-ago'
@@ -262,7 +263,7 @@ AskForm.prototype.fill = function(){
 }
 
 AskForm.prototype.succes_update = function (response, form){
-	console.log('AskForm:succes_update');
+	//console.log('AskForm:succes_update');
 	location.reload();
 }
 
@@ -270,5 +271,5 @@ AskForm.prototype.succes_create = function(response){
 	//console.log('AskForm:succes_create');
 	//console.log(response)
 	var new_url = AskModel.generate_url(slug, response.id);
-	location.href =  new_url;
+	location =  new_url;
 }

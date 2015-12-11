@@ -15,13 +15,22 @@ ul #user-notify{
 }
 
 ul #btn-mark-all{
+  font-size: 13px;
 	color: black;
-	font-size: 13px;
-    padding: 5px;
+  padding: 5px;
 }
+
+
+#btn-mark-all > span{
+  font-weight: bold;
+  }
 
 #btn-all-readed{
 	color: black;
+}
+
+#btn-all-readed:hover{
+  cursor: pointer;
 }
 
 #noti_container{
